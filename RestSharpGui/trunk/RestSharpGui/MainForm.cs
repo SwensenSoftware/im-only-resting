@@ -43,27 +43,13 @@ namespace Swensen.RestSharpGui
             else {
                 var restRequest = requestModel.ToRestRequest();
                 var client = new RestClient();
-                var response = client.Execute(restRequest);
+                var restResponse = client.Execute(restRequest);
+                var responseVm = new ResponseViewModel(restResponse);
 
-                lblResponseStatusValue.Text = response.ResponseStatus == ResponseStatus.Completed ? string.Format("{0} {1}", (int) response.StatusCode, response.StatusDescription) : response.ResponseStatus.ToString();
-                rtResponseText.Text = prettyPrint(response.ContentType, response.Content);
-                txtResponseHeaders.Text = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
+                lblResponseStatusValue.Text = responseVm.ResponseStatus;
+                rtResponseText.Text = responseVm.PrettyPrintedContent;
+                txtResponseHeaders.Text = responseVm.Headers;
             }
-        }
-
-        /// <summary>
-        /// If contentType is an xml content type, then try to pretty print the rawContent. If that fails or otherwise, just return the rawContent
-        /// </summary>
-        private string prettyPrint(string contentType, string rawContent) {
-            //see http://stackoverflow.com/a/2965701/236255 for list of xml content types (credit to http://stackoverflow.com/users/18936/bobince)
-            if (contentType != null && (contentType == "text/xml" || contentType == "application/xml" || contentType.EndsWith("+xml"))) {
-                try {
-                    return XDocument.Parse(rawContent).ToString();
-                } catch {
-                    return rawContent;
-                }
-            } else
-                return rawContent;
         }
     }
 }
