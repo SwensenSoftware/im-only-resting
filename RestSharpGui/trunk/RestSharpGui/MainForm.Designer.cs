@@ -33,7 +33,7 @@
             this.btnSubmitRequest = new System.Windows.Forms.Button();
             this.grpRequest = new System.Windows.Forms.GroupBox();
             this.grpBody = new System.Windows.Forms.GroupBox();
-            this.txtBody = new System.Windows.Forms.TextBox();
+            this.txtRequestBody = new System.Windows.Forms.TextBox();
             this.grpHeaders = new System.Windows.Forms.GroupBox();
             this.txtRequestHeaders = new System.Windows.Forms.TextBox();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
@@ -109,7 +109,7 @@
             // 
             // grpBody
             // 
-            this.grpBody.Controls.Add(this.txtBody);
+            this.grpBody.Controls.Add(this.txtRequestBody);
             this.grpBody.Location = new System.Drawing.Point(12, 258);
             this.grpBody.Margin = new System.Windows.Forms.Padding(4);
             this.grpBody.Name = "grpBody";
@@ -119,19 +119,19 @@
             this.grpBody.TabStop = false;
             this.grpBody.Text = "Body";
             // 
-            // txtBody
+            // txtRequestBody
             // 
-            this.txtBody.AcceptsReturn = true;
-            this.txtBody.AcceptsTab = true;
-            this.txtBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBody.Location = new System.Drawing.Point(4, 19);
-            this.txtBody.Margin = new System.Windows.Forms.Padding(4);
-            this.txtBody.Multiline = true;
-            this.txtBody.Name = "txtBody";
-            this.txtBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtBody.Size = new System.Drawing.Size(1031, 263);
-            this.txtBody.TabIndex = 0;
-            this.txtBody.WordWrap = false;
+            this.txtRequestBody.AcceptsReturn = true;
+            this.txtRequestBody.AcceptsTab = true;
+            this.txtRequestBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestBody.Location = new System.Drawing.Point(4, 19);
+            this.txtRequestBody.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRequestBody.Multiline = true;
+            this.txtRequestBody.Name = "txtRequestBody";
+            this.txtRequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtRequestBody.Size = new System.Drawing.Size(1031, 263);
+            this.txtRequestBody.TabIndex = 0;
+            this.txtRequestBody.WordWrap = false;
             // 
             // grpHeaders
             // 
@@ -337,7 +337,7 @@
         private System.Windows.Forms.TextBox txtRequestHeaders;
         private System.Windows.Forms.RadioButton rbHttpGet;
         private System.Windows.Forms.GroupBox grpBody;
-        private System.Windows.Forms.TextBox txtBody;
+        private System.Windows.Forms.TextBox txtRequestBody;
         private System.Windows.Forms.GroupBox grpResponse;
         private System.Windows.Forms.Label lblResponseStatusValue;
         private System.Windows.Forms.Label lblStatus;

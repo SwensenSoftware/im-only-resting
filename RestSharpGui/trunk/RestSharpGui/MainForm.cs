@@ -28,56 +28,27 @@ namespace Swensen.RestSharpGui
 
         private void btnSubmitRequest_Click(object sender, EventArgs e)
         {
-            List<string> validationErrors = new List<string>();
-            if(String.IsNullOrWhiteSpace(txtUrl.Text))
-                validationErrors.Add("Request URL may not be empty");
+            var checkedHttpMethod = grpHttpMethod.Controls.OfType<RadioButton>().Where(x => x.Checked).FirstOrDefault();
+            var requestVm = new RequestViewModel() {
+                Url = txtUrl.Text,
+                Method = checkedHttpMethod == null ? null : ((Method?)checkedHttpMethod.Tag),
+                Headers = txtRequestHeaders.Lines.ToArray(),
+                Body = txtRequestBody.Text
+            };
 
-            var url = txtUrl.Text.Trim();
-
-            var rbHttpMethod = grpHttpMethod.Controls.OfType<RadioButton>().Where(x => x.Checked).FirstOrDefault();
-            Method? method = null;
-            if(rbHttpMethod == null)
-                validationErrors.Add("Request HTTP Method must be selected");
-            else
-                method = (Method)rbHttpMethod.Tag;
-
-            var requestHeaders = new Dictionary<string,string>();
-            foreach (var line in txtRequestHeaders.Lines) {
-                var kv = line.Split(':');
-                if (kv.Length != 2)
-                    validationErrors.Add("Invalid header line: " + line);
-                else {
-                    var key = kv[0].Trim();
-                    var value = kv[1].Trim();
-                    if (String.IsNullOrWhiteSpace(key) || String.IsNullOrWhiteSpace(value))
-                        validationErrors.Add("Invalid header line: " + line);
-                    else
-                        requestHeaders.Add(key, value);
-                }
-            }
-
-            var body = txtBody.Text;
-
+            RequestModel requestModel = null;
+            var validationErrors = RequestModel.TryCreate(requestVm, out requestModel);
             if (validationErrors.Count > 0)
                 MessageBox.Show(this, String.Join(Environment.NewLine, validationErrors), "Request Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                var response = submitRequest(url, method.Value, body, requestHeaders);
+                var restRequest = requestModel.ToRestRequest();
+                var client = new RestClient();
+                var response = client.Execute(restRequest);
+
                 lblResponseStatusValue.Text = response.ResponseStatus == ResponseStatus.Completed ? string.Format("{0} {1}", (int) response.StatusCode, response.StatusDescription) : response.ResponseStatus.ToString();
                 rtResponseText.Text = prettyPrint(response.ContentType, response.Content);
                 txtResponseHeaders.Text = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
             }
-        }
-
-        private IRestResponse submitRequest(string url, Method method, string body, Dictionary<string, string> requestHeaders) {
-            if (url.StartsWith("www.")) //give 'em a break, add protocal if only www. given
-                url = "http://" + url;
-
-            var request = new RestRequest(url, method);
-            foreach (var header in requestHeaders)
-                request.AddHeader(header.Key, header.Value);
-            
-            var client = new RestClient();
-            return client.Execute(request);
         }
 
         /// <summary>
