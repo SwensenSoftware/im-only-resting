@@ -41,15 +41,21 @@ namespace Swensen.RestSharpGui
             if (validationErrors.Count > 0)
                 MessageBox.Show(this, String.Join(Environment.NewLine, validationErrors), "Request Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
+                bind(new ResponseViewModel());//clear response view and show loading message status
+                grpResponse.Update();
                 var restRequest = requestModel.ToRestRequest();
                 var client = new RestClient();
                 var restResponse = client.Execute(restRequest);
                 var responseVm = new ResponseViewModel(restResponse);
-
-                lblResponseStatusValue.Text = responseVm.ResponseStatus;
-                rtResponseText.Text = responseVm.PrettyPrintedContent;
-                txtResponseHeaders.Text = responseVm.Headers;
+                bind(responseVm);
+                grpResponse.Update();
             }
+        }
+
+        private void bind(ResponseViewModel responseVm) {
+            lblResponseStatusValue.Text = responseVm.ResponseStatus;
+            rtResponseText.Text = responseVm.PrettyPrintedContent;
+            txtResponseHeaders.Text = responseVm.Headers;            
         }
     }
 }
