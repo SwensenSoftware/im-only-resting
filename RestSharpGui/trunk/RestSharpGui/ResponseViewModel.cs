@@ -22,7 +22,7 @@ namespace Swensen.RestSharpGui {
             }
         }
 
-        public bool IsXmlContentType {
+        private bool IsXmlContentType {
             get {
                 var contentType = response.ContentType;
                 return contentType != null && (contentType == "text/xml" || contentType == "application/xml" || contentType.EndsWith("+xml"));
@@ -46,7 +46,7 @@ namespace Swensen.RestSharpGui {
         /// </summary>
         private string prettyPrint(string contentType, string rawContent) {
             //see http://stackoverflow.com/a/2965701/236255 for list of xml content types (credit to http://stackoverflow.com/users/18936/bobince)
-            if (contentType != null && (contentType == "text/xml" || contentType == "application/xml" || contentType.EndsWith("+xml"))) {
+            if (this.IsXmlContentType) {
                 try {
                     return XDocument.Parse(rawContent).ToString();
                 } catch {
