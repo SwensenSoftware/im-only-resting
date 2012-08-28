@@ -8,7 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using RestSharp;
 using System.Net;
+using System.Xml.Linq;
 
+//example text/xml response: http://www.w3schools.com/xml/note.asp
 namespace Swensen.RestSharpGui
 {
     public partial class MainForm : Form
@@ -61,7 +63,7 @@ namespace Swensen.RestSharpGui
             else {
                 var response = submitRequest(url, method.Value, body, requestHeaders);
                 lblResponseStatusValue.Text = response.ResponseStatus == ResponseStatus.Completed ? string.Format("{0} - {1}", (int) response.StatusCode, response.StatusDescription) : response.ResponseStatus.ToString();
-                rtResponseText.Text = response.Content;
+                rtResponseText.Text = prettyPrint(response.ContentType, response.Content);
                 txtResponseHeaders.Text = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
             }
         }
@@ -76,6 +78,21 @@ namespace Swensen.RestSharpGui
             
             var client = new RestClient();
             return client.Execute(request);
+        }
+
+        /// <summary>
+        /// If contentType is an xml content type, then try to pretty print the rawContent. If that fails or otherwise, just return the rawContent
+        /// </summary>
+        private string prettyPrint(string contentType, string rawContent) {
+            //see http://stackoverflow.com/a/2965701/236255 for list of xml content types (credit to http://stackoverflow.com/users/18936/bobince)
+            if (contentType == "text/xml" || contentType == "application/xml" || contentType.EndsWith("+xml")) {
+                try {
+                    return XDocument.Parse(rawContent).ToString();
+                } catch {
+                    return rawContent;
+                }
+            } else
+                return rawContent;
         }
     }
 }
