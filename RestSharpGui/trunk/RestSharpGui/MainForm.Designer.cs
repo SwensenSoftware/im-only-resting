@@ -258,7 +258,7 @@
             this.tpResponseText.Padding = new System.Windows.Forms.Padding(4);
             this.tpResponseText.Size = new System.Drawing.Size(618, 469);
             this.tpResponseText.TabIndex = 0;
-            this.tpResponseText.Text = "Content";
+            this.tpResponseText.Text = "Body";
             this.tpResponseText.UseVisualStyleBackColor = true;
             // 
             // rtResponseText
