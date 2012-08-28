@@ -41,14 +41,14 @@
             this.lblUrl = new System.Windows.Forms.Label();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.grpResponse = new System.Windows.Forms.GroupBox();
-            this.pnlResponseStatus = new System.Windows.Forms.Panel();
-            this.lblResponseStatusValue = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.tcResponse = new System.Windows.Forms.TabControl();
             this.tpResponseText = new System.Windows.Forms.TabPage();
             this.rtResponseText = new System.Windows.Forms.RichTextBox();
             this.tpResponseHeaders = new System.Windows.Forms.TabPage();
             this.txtResponseHeaders = new System.Windows.Forms.TextBox();
+            this.pnlResponseStatus = new System.Windows.Forms.Panel();
+            this.lblResponseStatusValue = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -58,10 +58,10 @@
             this.grpHeaders.SuspendLayout();
             this.grpHttpMethod.SuspendLayout();
             this.grpResponse.SuspendLayout();
-            this.pnlResponseStatus.SuspendLayout();
             this.tcResponse.SuspendLayout();
             this.tpResponseText.SuspendLayout();
             this.tpResponseHeaders.SuspendLayout();
+            this.pnlResponseStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitterMain
@@ -237,41 +237,6 @@
             this.grpResponse.TabStop = false;
             this.grpResponse.Text = "Response";
             // 
-            // pnlResponseStatus
-            // 
-            this.pnlResponseStatus.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlResponseStatus.Controls.Add(this.lblResponseStatusValue);
-            this.pnlResponseStatus.Controls.Add(this.lblStatus);
-            this.pnlResponseStatus.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlResponseStatus.Location = new System.Drawing.Point(4, 19);
-            this.pnlResponseStatus.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlResponseStatus.Name = "pnlResponseStatus";
-            this.pnlResponseStatus.Padding = new System.Windows.Forms.Padding(4);
-            this.pnlResponseStatus.Size = new System.Drawing.Size(626, 30);
-            this.pnlResponseStatus.TabIndex = 5;
-            // 
-            // lblResponseStatusValue
-            // 
-            this.lblResponseStatusValue.AutoSize = true;
-            this.lblResponseStatusValue.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblResponseStatusValue.Location = new System.Drawing.Point(56, 4);
-            this.lblResponseStatusValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblResponseStatusValue.Name = "lblResponseStatusValue";
-            this.lblResponseStatusValue.Size = new System.Drawing.Size(0, 17);
-            this.lblResponseStatusValue.TabIndex = 3;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblStatus.Location = new System.Drawing.Point(4, 4);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(52, 17);
-            this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "Status:";
-            this.lblStatus.UseWaitCursor = true;
-            // 
             // tcResponse
             // 
             this.tcResponse.Controls.Add(this.tpResponseText);
@@ -317,7 +282,7 @@
             this.tpResponseHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.tpResponseHeaders.Name = "tpResponseHeaders";
             this.tpResponseHeaders.Padding = new System.Windows.Forms.Padding(4);
-            this.tpResponseHeaders.Size = new System.Drawing.Size(800, 669);
+            this.tpResponseHeaders.Size = new System.Drawing.Size(618, 469);
             this.tpResponseHeaders.TabIndex = 1;
             this.tpResponseHeaders.Text = "Headers";
             this.tpResponseHeaders.UseVisualStyleBackColor = true;
@@ -332,12 +297,48 @@
             this.txtResponseHeaders.Name = "txtResponseHeaders";
             this.txtResponseHeaders.ReadOnly = true;
             this.txtResponseHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResponseHeaders.Size = new System.Drawing.Size(792, 661);
+            this.txtResponseHeaders.Size = new System.Drawing.Size(610, 461);
             this.txtResponseHeaders.TabIndex = 0;
             this.txtResponseHeaders.WordWrap = false;
             // 
+            // pnlResponseStatus
+            // 
+            this.pnlResponseStatus.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlResponseStatus.Controls.Add(this.lblResponseStatusValue);
+            this.pnlResponseStatus.Controls.Add(this.lblStatus);
+            this.pnlResponseStatus.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlResponseStatus.Location = new System.Drawing.Point(4, 19);
+            this.pnlResponseStatus.Margin = new System.Windows.Forms.Padding(5);
+            this.pnlResponseStatus.Name = "pnlResponseStatus";
+            this.pnlResponseStatus.Padding = new System.Windows.Forms.Padding(4);
+            this.pnlResponseStatus.Size = new System.Drawing.Size(626, 30);
+            this.pnlResponseStatus.TabIndex = 5;
+            // 
+            // lblResponseStatusValue
+            // 
+            this.lblResponseStatusValue.AutoSize = true;
+            this.lblResponseStatusValue.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblResponseStatusValue.Location = new System.Drawing.Point(56, 4);
+            this.lblResponseStatusValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblResponseStatusValue.Name = "lblResponseStatusValue";
+            this.lblResponseStatusValue.Size = new System.Drawing.Size(0, 17);
+            this.lblResponseStatusValue.TabIndex = 3;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblStatus.Location = new System.Drawing.Point(4, 4);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(52, 17);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.Text = "Status:";
+            this.lblStatus.UseWaitCursor = true;
+            // 
             // MainForm
             // 
+            this.AcceptButton = this.btnSubmitRequest;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1703, 551);
@@ -359,12 +360,12 @@
             this.grpHttpMethod.ResumeLayout(false);
             this.grpHttpMethod.PerformLayout();
             this.grpResponse.ResumeLayout(false);
-            this.pnlResponseStatus.ResumeLayout(false);
-            this.pnlResponseStatus.PerformLayout();
             this.tcResponse.ResumeLayout(false);
             this.tpResponseText.ResumeLayout(false);
             this.tpResponseHeaders.ResumeLayout(false);
             this.tpResponseHeaders.PerformLayout();
+            this.pnlResponseStatus.ResumeLayout(false);
+            this.pnlResponseStatus.PerformLayout();
             this.ResumeLayout(false);
 
         }
