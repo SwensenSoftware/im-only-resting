@@ -22,6 +22,7 @@ namespace Swensen.RestSharpGui
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            //bind http method radio button groups
             rbHttpGet.Tag = Method.GET;
             rbHttpPost.Tag = Method.POST;
             rbHttpDelete.Tag = Method.DELETE;
