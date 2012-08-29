@@ -66,7 +66,7 @@ namespace Swensen.RestSharpGui
             var method = requestVm.Method ?? Method.GET;
             rbGrpHttpMethods.First(x => ((Method) x.Tag) == method).Checked = true;
 
-            txtRequestHeaders.Lines = requestVm.Headers.ToArray();
+            txtRequestHeaders.Lines = (requestVm.Headers ?? new string[0]).ToArray();
             txtRequestBody.Text = requestVm.Body;
         }
 
