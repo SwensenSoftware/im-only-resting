@@ -24,6 +24,11 @@ namespace Swensen.RestSharpGui
         {
             rbHttpGet.Tag = Method.GET;
             rbHttpPost.Tag = Method.POST;
+            rbHttpDelete.Tag = Method.DELETE;
+            rbHttpPut.Tag = Method.PUT;
+            rbHttpOptions.Tag = Method.OPTIONS;
+
+            ActiveControl = txtUrl;
         }
 
         private IEnumerable<RadioButton> rbGrpHttpMethods { get { return grpHttpMethod.Controls.OfType<RadioButton>(); } }
