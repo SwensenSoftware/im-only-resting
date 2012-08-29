@@ -37,6 +37,9 @@
             this.grpHeaders = new System.Windows.Forms.GroupBox();
             this.txtRequestHeaders = new System.Windows.Forms.TextBox();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
+            this.rbHttpDelete = new System.Windows.Forms.RadioButton();
+            this.rbHttpOptions = new System.Windows.Forms.RadioButton();
+            this.rbHttpPut = new System.Windows.Forms.RadioButton();
             this.rbHttpGet = new System.Windows.Forms.RadioButton();
             this.rbHttpPost = new System.Windows.Forms.RadioButton();
             this.pnlRequestUrlAndButtons = new System.Windows.Forms.Panel();
@@ -55,9 +58,6 @@
             this.pnlResponseStatus = new System.Windows.Forms.Panel();
             this.lblResponseStatusValue = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.rbHttpPut = new System.Windows.Forms.RadioButton();
-            this.rbHttpOptions = new System.Windows.Forms.RadioButton();
-            this.rbHttpDelete = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -154,9 +154,9 @@
             this.pnlRequestMethodAndHeaders.Controls.Add(this.grpHeaders);
             this.pnlRequestMethodAndHeaders.Controls.Add(this.grpHttpMethod);
             this.pnlRequestMethodAndHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRequestMethodAndHeaders.Location = new System.Drawing.Point(0, 48);
+            this.pnlRequestMethodAndHeaders.Location = new System.Drawing.Point(0, 41);
             this.pnlRequestMethodAndHeaders.Name = "pnlRequestMethodAndHeaders";
-            this.pnlRequestMethodAndHeaders.Size = new System.Drawing.Size(844, 177);
+            this.pnlRequestMethodAndHeaders.Size = new System.Drawing.Size(844, 184);
             this.pnlRequestMethodAndHeaders.TabIndex = 6;
             // 
             // grpHeaders
@@ -167,7 +167,7 @@
             this.grpHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.grpHeaders.Name = "grpHeaders";
             this.grpHeaders.Padding = new System.Windows.Forms.Padding(4);
-            this.grpHeaders.Size = new System.Drawing.Size(749, 177);
+            this.grpHeaders.Size = new System.Drawing.Size(749, 184);
             this.grpHeaders.TabIndex = 6;
             this.grpHeaders.TabStop = false;
             this.grpHeaders.Text = "Headers";
@@ -182,7 +182,7 @@
             this.txtRequestHeaders.Multiline = true;
             this.txtRequestHeaders.Name = "txtRequestHeaders";
             this.txtRequestHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtRequestHeaders.Size = new System.Drawing.Size(741, 154);
+            this.txtRequestHeaders.Size = new System.Drawing.Size(741, 161);
             this.txtRequestHeaders.TabIndex = 6;
             this.txtRequestHeaders.WordWrap = false;
             // 
@@ -199,10 +199,46 @@
             this.grpHttpMethod.Margin = new System.Windows.Forms.Padding(4);
             this.grpHttpMethod.Name = "grpHttpMethod";
             this.grpHttpMethod.Padding = new System.Windows.Forms.Padding(4);
-            this.grpHttpMethod.Size = new System.Drawing.Size(95, 177);
+            this.grpHttpMethod.Size = new System.Drawing.Size(95, 184);
             this.grpHttpMethod.TabIndex = 5;
             this.grpHttpMethod.TabStop = false;
             this.grpHttpMethod.Text = "Method";
+            // 
+            // rbHttpDelete
+            // 
+            this.rbHttpDelete.AutoSize = true;
+            this.rbHttpDelete.Location = new System.Drawing.Point(9, 81);
+            this.rbHttpDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.rbHttpDelete.Name = "rbHttpDelete";
+            this.rbHttpDelete.Size = new System.Drawing.Size(70, 21);
+            this.rbHttpDelete.TabIndex = 3;
+            this.rbHttpDelete.Tag = "";
+            this.rbHttpDelete.Text = "Delete";
+            this.rbHttpDelete.UseVisualStyleBackColor = true;
+            // 
+            // rbHttpOptions
+            // 
+            this.rbHttpOptions.AutoSize = true;
+            this.rbHttpOptions.Location = new System.Drawing.Point(8, 139);
+            this.rbHttpOptions.Margin = new System.Windows.Forms.Padding(4);
+            this.rbHttpOptions.Name = "rbHttpOptions";
+            this.rbHttpOptions.Size = new System.Drawing.Size(78, 21);
+            this.rbHttpOptions.TabIndex = 5;
+            this.rbHttpOptions.Tag = "";
+            this.rbHttpOptions.Text = "Options";
+            this.rbHttpOptions.UseVisualStyleBackColor = true;
+            // 
+            // rbHttpPut
+            // 
+            this.rbHttpPut.AutoSize = true;
+            this.rbHttpPut.Location = new System.Drawing.Point(8, 110);
+            this.rbHttpPut.Margin = new System.Windows.Forms.Padding(4);
+            this.rbHttpPut.Name = "rbHttpPut";
+            this.rbHttpPut.Size = new System.Drawing.Size(50, 21);
+            this.rbHttpPut.TabIndex = 4;
+            this.rbHttpPut.Tag = "";
+            this.rbHttpPut.Text = "Put";
+            this.rbHttpPut.UseVisualStyleBackColor = true;
             // 
             // rbHttpGet
             // 
@@ -236,7 +272,7 @@
             this.pnlRequestUrlAndButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlRequestUrlAndButtons.Location = new System.Drawing.Point(0, 0);
             this.pnlRequestUrlAndButtons.Name = "pnlRequestUrlAndButtons";
-            this.pnlRequestUrlAndButtons.Size = new System.Drawing.Size(844, 48);
+            this.pnlRequestUrlAndButtons.Size = new System.Drawing.Size(844, 41);
             this.pnlRequestUrlAndButtons.TabIndex = 5;
             // 
             // pnlUrl
@@ -249,7 +285,7 @@
             this.pnlUrl.Margin = new System.Windows.Forms.Padding(4);
             this.pnlUrl.Name = "pnlUrl";
             this.pnlUrl.Padding = new System.Windows.Forms.Padding(8);
-            this.pnlUrl.Size = new System.Drawing.Size(607, 48);
+            this.pnlUrl.Size = new System.Drawing.Size(697, 41);
             this.pnlUrl.TabIndex = 6;
             // 
             // txtUrl
@@ -260,7 +296,7 @@
             this.txtUrl.Location = new System.Drawing.Point(38, 8);
             this.txtUrl.Margin = new System.Windows.Forms.Padding(4);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(561, 22);
+            this.txtUrl.Size = new System.Drawing.Size(651, 22);
             this.txtUrl.TabIndex = 0;
             this.txtUrl.WordWrap = false;
             // 
@@ -280,17 +316,17 @@
             this.panel1.Controls.Add(this.btnClearRequest);
             this.panel1.Controls.Add(this.btnSubmitRequest);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(607, 0);
+            this.panel1.Location = new System.Drawing.Point(697, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(237, 48);
+            this.panel1.Size = new System.Drawing.Size(147, 41);
             this.panel1.TabIndex = 5;
             // 
             // btnClearRequest
             // 
             this.btnClearRequest.AutoSize = true;
-            this.btnClearRequest.Location = new System.Drawing.Point(115, 4);
+            this.btnClearRequest.Location = new System.Drawing.Point(79, 4);
             this.btnClearRequest.Name = "btnClearRequest";
-            this.btnClearRequest.Size = new System.Drawing.Size(112, 34);
+            this.btnClearRequest.Size = new System.Drawing.Size(61, 27);
             this.btnClearRequest.TabIndex = 9;
             this.btnClearRequest.Text = "Clear";
             this.btnClearRequest.UseVisualStyleBackColor = true;
@@ -302,7 +338,7 @@
             this.btnSubmitRequest.Location = new System.Drawing.Point(4, 4);
             this.btnSubmitRequest.Margin = new System.Windows.Forms.Padding(4);
             this.btnSubmitRequest.Name = "btnSubmitRequest";
-            this.btnSubmitRequest.Size = new System.Drawing.Size(104, 34);
+            this.btnSubmitRequest.Size = new System.Drawing.Size(68, 27);
             this.btnSubmitRequest.TabIndex = 8;
             this.btnSubmitRequest.Text = "Submit";
             this.btnSubmitRequest.UseVisualStyleBackColor = true;
@@ -421,42 +457,6 @@
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Status:";
             this.lblStatus.UseWaitCursor = true;
-            // 
-            // rbHttpPut
-            // 
-            this.rbHttpPut.AutoSize = true;
-            this.rbHttpPut.Location = new System.Drawing.Point(8, 110);
-            this.rbHttpPut.Margin = new System.Windows.Forms.Padding(4);
-            this.rbHttpPut.Name = "rbHttpPut";
-            this.rbHttpPut.Size = new System.Drawing.Size(50, 21);
-            this.rbHttpPut.TabIndex = 4;
-            this.rbHttpPut.Tag = "";
-            this.rbHttpPut.Text = "Put";
-            this.rbHttpPut.UseVisualStyleBackColor = true;
-            // 
-            // rbHttpOptions
-            // 
-            this.rbHttpOptions.AutoSize = true;
-            this.rbHttpOptions.Location = new System.Drawing.Point(8, 139);
-            this.rbHttpOptions.Margin = new System.Windows.Forms.Padding(4);
-            this.rbHttpOptions.Name = "rbHttpOptions";
-            this.rbHttpOptions.Size = new System.Drawing.Size(78, 21);
-            this.rbHttpOptions.TabIndex = 5;
-            this.rbHttpOptions.Tag = "";
-            this.rbHttpOptions.Text = "Options";
-            this.rbHttpOptions.UseVisualStyleBackColor = true;
-            // 
-            // rbHttpDelete
-            // 
-            this.rbHttpDelete.AutoSize = true;
-            this.rbHttpDelete.Location = new System.Drawing.Point(9, 81);
-            this.rbHttpDelete.Margin = new System.Windows.Forms.Padding(4);
-            this.rbHttpDelete.Name = "rbHttpDelete";
-            this.rbHttpDelete.Size = new System.Drawing.Size(70, 21);
-            this.rbHttpDelete.TabIndex = 3;
-            this.rbHttpDelete.Tag = "";
-            this.rbHttpDelete.Text = "Delete";
-            this.rbHttpDelete.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
