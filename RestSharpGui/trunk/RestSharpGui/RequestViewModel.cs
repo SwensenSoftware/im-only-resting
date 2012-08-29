@@ -6,6 +6,10 @@ using RestSharp;
 
 namespace Swensen.RestSharpGui {
     public class RequestViewModel {
+        public RequestViewModel() {
+            Headers = new string[0];
+        }
+
         public string Url { get; set; }
         public Method? Method { get; set; }
         public string[] Headers { get; set; }

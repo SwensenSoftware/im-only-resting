@@ -288,6 +288,7 @@
             this.btnClearRequest.TabIndex = 5;
             this.btnClearRequest.Text = "Clear";
             this.btnClearRequest.UseVisualStyleBackColor = true;
+            this.btnClearRequest.Click += new System.EventHandler(this.btnClearRequest_Click);
             // 
             // btnSubmitRequest
             // 

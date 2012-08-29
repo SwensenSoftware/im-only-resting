@@ -11,8 +11,8 @@ namespace Swensen.RestSharpGui {
         /// <summary>
         /// Create an empty ResponseViewModel with ResponseStatus set to a loading message.
         /// </summary>
-        public ResponseViewModel() {
-            ResponseStatus = "Loading...";
+        public ResponseViewModel(string responseStatus) {
+            ResponseStatus = responseStatus;
         }
 
         /// <summary>

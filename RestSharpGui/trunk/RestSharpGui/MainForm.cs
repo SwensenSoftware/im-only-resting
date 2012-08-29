@@ -26,9 +26,11 @@ namespace Swensen.RestSharpGui
             rbHttpPost.Tag = Method.POST;
         }
 
+        private IEnumerable<RadioButton> rbGrpHttpMethods { get { return grpHttpMethod.Controls.OfType<RadioButton>(); } }
+
         private void btnSubmitRequest_Click(object sender, EventArgs e)
         {
-            var checkedHttpMethod = grpHttpMethod.Controls.OfType<RadioButton>().Where(x => x.Checked).FirstOrDefault();
+            var checkedHttpMethod = rbGrpHttpMethods.Where(x => x.Checked).FirstOrDefault();
             var requestVm = new RequestViewModel() {
                 Url = txtUrl.Text,
                 Method = checkedHttpMethod == null ? null : ((Method?)checkedHttpMethod.Tag),
@@ -41,7 +43,7 @@ namespace Swensen.RestSharpGui
             if (validationErrors.Count > 0)
                 MessageBox.Show(this, String.Join(Environment.NewLine, validationErrors), "Request Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                bind(new ResponseViewModel());//clear response view and show loading message status
+                bind(new ResponseViewModel(responseStatus:"Loading..."));//clear response view and show loading message status
                 grpResponse.Update();
                 var restRequest = requestModel.ToRestRequest();
                 var client = new RestClient();
@@ -56,6 +58,22 @@ namespace Swensen.RestSharpGui
             lblResponseStatusValue.Text = responseVm.ResponseStatus;
             rtResponseText.Text = responseVm.PrettyPrintedContent;
             txtResponseHeaders.Text = responseVm.Headers;            
+        }
+
+        private void bind(RequestViewModel requestVm) {
+            txtUrl.Text = requestVm.Url;
+            
+            var method = requestVm.Method ?? Method.GET;
+            rbGrpHttpMethods.First(x => ((Method) x.Tag) == method).Checked = true;
+
+            txtRequestHeaders.Lines = requestVm.Headers.ToArray();
+            txtRequestBody.Text = requestVm.Body;
+        }
+
+        private void btnClearRequest_Click(object sender, EventArgs e)
+        {
+            bind(new RequestViewModel());
+            bind(new ResponseViewModel(responseStatus:""));
         }
     }
 }
