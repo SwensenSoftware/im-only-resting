@@ -31,7 +31,9 @@ namespace Swensen.RestSharpGui {
             var headers = new Dictionary<string,string>();
             foreach (var line in vm.Headers) {
                 var kv = line.Split(':');
-                if (kv.Length != 2)
+                if (kv.Length == 1 && String.IsNullOrWhiteSpace(kv[0]))
+                    continue;
+                else if (kv.Length != 2)
                     validationErrors.Add("Invalid header line: " + line);
                 else {
                     var key = kv[0].Trim();
