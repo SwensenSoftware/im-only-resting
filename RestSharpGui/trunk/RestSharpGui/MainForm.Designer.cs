@@ -67,6 +67,7 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -245,7 +246,6 @@
             this.rbHttpDelete.Name = "rbHttpDelete";
             this.rbHttpDelete.Size = new System.Drawing.Size(70, 21);
             this.rbHttpDelete.TabIndex = 3;
-            this.rbHttpDelete.Tag = "";
             this.rbHttpDelete.Text = "Delete";
             this.rbHttpDelete.UseVisualStyleBackColor = true;
             // 
@@ -257,7 +257,6 @@
             this.rbHttpOptions.Name = "rbHttpOptions";
             this.rbHttpOptions.Size = new System.Drawing.Size(78, 21);
             this.rbHttpOptions.TabIndex = 5;
-            this.rbHttpOptions.Tag = "";
             this.rbHttpOptions.Text = "Options";
             this.rbHttpOptions.UseVisualStyleBackColor = true;
             // 
@@ -269,7 +268,6 @@
             this.rbHttpPut.Name = "rbHttpPut";
             this.rbHttpPut.Size = new System.Drawing.Size(50, 21);
             this.rbHttpPut.TabIndex = 4;
-            this.rbHttpPut.Tag = "";
             this.rbHttpPut.Text = "Put";
             this.rbHttpPut.UseVisualStyleBackColor = true;
             // 
@@ -294,7 +292,6 @@
             this.rbHttpPost.Name = "rbHttpPost";
             this.rbHttpPost.Size = new System.Drawing.Size(57, 21);
             this.rbHttpPost.TabIndex = 2;
-            this.rbHttpPost.Tag = "";
             this.rbHttpPost.Text = "Post";
             this.rbHttpPost.UseVisualStyleBackColor = true;
             // 
@@ -425,7 +422,6 @@
             this.rtResponseText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
             this.rtResponseText.Size = new System.Drawing.Size(620, 469);
             this.rtResponseText.TabIndex = 10;
-            this.rtResponseText.Text = "";
             this.rtResponseText.WordWrap = false;
             // 
             // tpResponseHeaders
@@ -435,7 +431,7 @@
             this.tpResponseHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.tpResponseHeaders.Name = "tpResponseHeaders";
             this.tpResponseHeaders.Padding = new System.Windows.Forms.Padding(4);
-            this.tpResponseHeaders.Size = new System.Drawing.Size(628, 505);
+            this.tpResponseHeaders.Size = new System.Drawing.Size(628, 477);
             this.tpResponseHeaders.TabIndex = 1;
             this.tpResponseHeaders.Text = "Headers";
             this.tpResponseHeaders.UseVisualStyleBackColor = true;
@@ -450,7 +446,7 @@
             this.txtResponseHeaders.Name = "txtResponseHeaders";
             this.txtResponseHeaders.ReadOnly = true;
             this.txtResponseHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResponseHeaders.Size = new System.Drawing.Size(620, 497);
+            this.txtResponseHeaders.Size = new System.Drawing.Size(620, 469);
             this.txtResponseHeaders.TabIndex = 11;
             this.txtResponseHeaders.WordWrap = false;
             // 
@@ -492,7 +488,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1296, 28);
@@ -514,32 +511,39 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.openToolStripMenuItem.Text = "Open...";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -627,6 +631,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 
     }
 }

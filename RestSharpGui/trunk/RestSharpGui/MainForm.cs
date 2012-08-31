@@ -96,5 +96,13 @@ namespace Swensen.RestSharpGui
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+            using(var box = new AboutBox()) 
+            {
+                box.StartPosition = FormStartPosition.CenterParent;
+                box.ShowDialog(this);
+            }
+        }
     }
 }
