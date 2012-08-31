@@ -92,5 +92,9 @@ namespace Swensen.RestSharpGui
             bind(new RequestViewModel());
             bind(new ResponseViewModel(responseStatus:""));
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
     }
 }

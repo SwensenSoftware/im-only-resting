@@ -60,6 +60,13 @@
             this.pnlResponseStatus = new System.Windows.Forms.Panel();
             this.lblResponseStatusValue = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -78,12 +85,13 @@
             this.tpResponseText.SuspendLayout();
             this.tpResponseHeaders.SuspendLayout();
             this.pnlResponseStatus.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitterMain
             // 
             this.splitterMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitterMain.Location = new System.Drawing.Point(0, 0);
+            this.splitterMain.Location = new System.Drawing.Point(0, 28);
             this.splitterMain.Name = "splitterMain";
             // 
             // splitterMain.Panel1
@@ -93,7 +101,7 @@
             // splitterMain.Panel2
             // 
             this.splitterMain.Panel2.Controls.Add(this.grpResponse);
-            this.splitterMain.Size = new System.Drawing.Size(1296, 587);
+            this.splitterMain.Size = new System.Drawing.Size(1296, 559);
             this.splitterMain.SplitterDistance = 648;
             this.splitterMain.TabIndex = 3;
             // 
@@ -107,7 +115,7 @@
             this.grpRequest.Margin = new System.Windows.Forms.Padding(4);
             this.grpRequest.Name = "grpRequest";
             this.grpRequest.Padding = new System.Windows.Forms.Padding(4);
-            this.grpRequest.Size = new System.Drawing.Size(648, 587);
+            this.grpRequest.Size = new System.Drawing.Size(648, 559);
             this.grpRequest.TabIndex = 2;
             this.grpRequest.TabStop = false;
             this.grpRequest.Text = "Request";
@@ -121,7 +129,7 @@
             this.grpBody.Margin = new System.Windows.Forms.Padding(4);
             this.grpBody.Name = "grpBody";
             this.grpBody.Padding = new System.Windows.Forms.Padding(4);
-            this.grpBody.Size = new System.Drawing.Size(640, 295);
+            this.grpBody.Size = new System.Drawing.Size(640, 267);
             this.grpBody.TabIndex = 10;
             this.grpBody.TabStop = false;
             this.grpBody.Text = "Body";
@@ -136,7 +144,7 @@
             this.txtRequestBody.Multiline = true;
             this.txtRequestBody.Name = "txtRequestBody";
             this.txtRequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtRequestBody.Size = new System.Drawing.Size(632, 272);
+            this.txtRequestBody.Size = new System.Drawing.Size(632, 244);
             this.txtRequestBody.TabIndex = 7;
             this.txtRequestBody.WordWrap = false;
             // 
@@ -377,7 +385,7 @@
             this.grpResponse.Margin = new System.Windows.Forms.Padding(4);
             this.grpResponse.Name = "grpResponse";
             this.grpResponse.Padding = new System.Windows.Forms.Padding(4);
-            this.grpResponse.Size = new System.Drawing.Size(644, 587);
+            this.grpResponse.Size = new System.Drawing.Size(644, 559);
             this.grpResponse.TabIndex = 0;
             this.grpResponse.TabStop = false;
             this.grpResponse.Text = "Response";
@@ -391,7 +399,7 @@
             this.tcResponse.Margin = new System.Windows.Forms.Padding(4);
             this.tcResponse.Name = "tcResponse";
             this.tcResponse.SelectedIndex = 0;
-            this.tcResponse.Size = new System.Drawing.Size(636, 534);
+            this.tcResponse.Size = new System.Drawing.Size(636, 506);
             this.tcResponse.TabIndex = 6;
             // 
             // tpResponseText
@@ -401,7 +409,7 @@
             this.tpResponseText.Margin = new System.Windows.Forms.Padding(4);
             this.tpResponseText.Name = "tpResponseText";
             this.tpResponseText.Padding = new System.Windows.Forms.Padding(4);
-            this.tpResponseText.Size = new System.Drawing.Size(628, 505);
+            this.tpResponseText.Size = new System.Drawing.Size(628, 477);
             this.tpResponseText.TabIndex = 0;
             this.tpResponseText.Text = "Body";
             this.tpResponseText.UseVisualStyleBackColor = true;
@@ -415,7 +423,7 @@
             this.rtResponseText.Name = "rtResponseText";
             this.rtResponseText.ReadOnly = true;
             this.rtResponseText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.rtResponseText.Size = new System.Drawing.Size(620, 497);
+            this.rtResponseText.Size = new System.Drawing.Size(620, 469);
             this.rtResponseText.TabIndex = 10;
             this.rtResponseText.Text = "";
             this.rtResponseText.WordWrap = false;
@@ -427,7 +435,7 @@
             this.tpResponseHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.tpResponseHeaders.Name = "tpResponseHeaders";
             this.tpResponseHeaders.Padding = new System.Windows.Forms.Padding(4);
-            this.tpResponseHeaders.Size = new System.Drawing.Size(831, 469);
+            this.tpResponseHeaders.Size = new System.Drawing.Size(628, 505);
             this.tpResponseHeaders.TabIndex = 1;
             this.tpResponseHeaders.Text = "Headers";
             this.tpResponseHeaders.UseVisualStyleBackColor = true;
@@ -442,7 +450,7 @@
             this.txtResponseHeaders.Name = "txtResponseHeaders";
             this.txtResponseHeaders.ReadOnly = true;
             this.txtResponseHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResponseHeaders.Size = new System.Drawing.Size(823, 461);
+            this.txtResponseHeaders.Size = new System.Drawing.Size(620, 497);
             this.txtResponseHeaders.TabIndex = 11;
             this.txtResponseHeaders.WordWrap = false;
             // 
@@ -481,6 +489,58 @@
             this.lblStatus.Text = "Status:";
             this.lblStatus.UseWaitCursor = true;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1296, 28);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.openToolStripMenuItem.Text = "Open...";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.saveAsToolStripMenuItem.Text = "Save As...";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -488,6 +548,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 587);
             this.Controls.Add(this.splitterMain);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "RestSharp GUI";
@@ -517,7 +579,10 @@
             this.tpResponseHeaders.PerformLayout();
             this.pnlResponseStatus.ResumeLayout(false);
             this.pnlResponseStatus.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -555,6 +620,13 @@
         private System.Windows.Forms.RadioButton rbHttpPut;
         private System.Windows.Forms.RadioButton rbHttpPatch;
         private System.Windows.Forms.RadioButton rbHttpHead;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 
     }
 }
