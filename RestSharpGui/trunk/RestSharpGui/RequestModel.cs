@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using RestSharp;
+using System.Text.RegularExpressions;
 
 namespace Swensen.RestSharpGui {
     public class RequestModel {
@@ -30,14 +31,16 @@ namespace Swensen.RestSharpGui {
 
             var headers = new Dictionary<string,string>();
             foreach (var line in vm.Headers) {
-                var kv = line.Split(':');
-                if (kv.Length == 1 && String.IsNullOrWhiteSpace(kv[0]))
-                    continue;
-                else if (kv.Length != 2)
+                if (String.IsNullOrWhiteSpace(line))
+                    continue; //allow empty lines
+
+                var match = Regex.Match(line, @"^([^\:]+)\:(.+)$", RegexOptions.Compiled);
+
+                if (!match.Success)
                     validationErrors.Add("Invalid header line: " + line);
                 else {
-                    var key = kv[0].Trim();
-                    var value = kv[1].Trim();
+                    var key = match.Groups[1].Value.Trim();
+                    var value = match.Groups[2].Value.Trim();
                     if (String.IsNullOrWhiteSpace(key) || String.IsNullOrWhiteSpace(value))
                         validationErrors.Add("Invalid header line: " + line);
                     else

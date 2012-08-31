@@ -58,6 +58,8 @@
             this.pnlResponseStatus = new System.Windows.Forms.Panel();
             this.lblResponseStatusValue = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.rbHttpHead = new System.Windows.Forms.RadioButton();
+            this.rbHttpPatch = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -163,11 +165,11 @@
             // 
             this.grpHeaders.Controls.Add(this.txtRequestHeaders);
             this.grpHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpHeaders.Location = new System.Drawing.Point(95, 0);
+            this.grpHeaders.Location = new System.Drawing.Point(196, 0);
             this.grpHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.grpHeaders.Name = "grpHeaders";
             this.grpHeaders.Padding = new System.Windows.Forms.Padding(4);
-            this.grpHeaders.Size = new System.Drawing.Size(749, 184);
+            this.grpHeaders.Size = new System.Drawing.Size(648, 184);
             this.grpHeaders.TabIndex = 6;
             this.grpHeaders.TabStop = false;
             this.grpHeaders.Text = "Headers";
@@ -175,20 +177,21 @@
             // txtRequestHeaders
             // 
             this.txtRequestHeaders.AcceptsReturn = true;
-            this.txtRequestHeaders.AcceptsTab = true;
             this.txtRequestHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtRequestHeaders.Location = new System.Drawing.Point(4, 19);
             this.txtRequestHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.txtRequestHeaders.Multiline = true;
             this.txtRequestHeaders.Name = "txtRequestHeaders";
             this.txtRequestHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtRequestHeaders.Size = new System.Drawing.Size(741, 161);
+            this.txtRequestHeaders.Size = new System.Drawing.Size(640, 161);
             this.txtRequestHeaders.TabIndex = 6;
             this.txtRequestHeaders.WordWrap = false;
             // 
             // grpHttpMethod
             // 
             this.grpHttpMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.grpHttpMethod.Controls.Add(this.rbHttpPatch);
+            this.grpHttpMethod.Controls.Add(this.rbHttpHead);
             this.grpHttpMethod.Controls.Add(this.rbHttpDelete);
             this.grpHttpMethod.Controls.Add(this.rbHttpOptions);
             this.grpHttpMethod.Controls.Add(this.rbHttpPut);
@@ -199,7 +202,7 @@
             this.grpHttpMethod.Margin = new System.Windows.Forms.Padding(4);
             this.grpHttpMethod.Name = "grpHttpMethod";
             this.grpHttpMethod.Padding = new System.Windows.Forms.Padding(4);
-            this.grpHttpMethod.Size = new System.Drawing.Size(95, 184);
+            this.grpHttpMethod.Size = new System.Drawing.Size(196, 184);
             this.grpHttpMethod.TabIndex = 5;
             this.grpHttpMethod.TabStop = false;
             this.grpHttpMethod.Text = "Method";
@@ -219,7 +222,7 @@
             // rbHttpOptions
             // 
             this.rbHttpOptions.AutoSize = true;
-            this.rbHttpOptions.Location = new System.Drawing.Point(8, 139);
+            this.rbHttpOptions.Location = new System.Drawing.Point(110, 23);
             this.rbHttpOptions.Margin = new System.Windows.Forms.Padding(4);
             this.rbHttpOptions.Name = "rbHttpOptions";
             this.rbHttpOptions.Size = new System.Drawing.Size(78, 21);
@@ -458,6 +461,28 @@
             this.lblStatus.Text = "Status:";
             this.lblStatus.UseWaitCursor = true;
             // 
+            // rbHttpHead
+            // 
+            this.rbHttpHead.AutoSize = true;
+            this.rbHttpHead.Location = new System.Drawing.Point(110, 52);
+            this.rbHttpHead.Name = "rbHttpHead";
+            this.rbHttpHead.Size = new System.Drawing.Size(63, 21);
+            this.rbHttpHead.TabIndex = 6;
+            this.rbHttpHead.TabStop = true;
+            this.rbHttpHead.Text = "Head";
+            this.rbHttpHead.UseVisualStyleBackColor = true;
+            // 
+            // rbHttpPatch
+            // 
+            this.rbHttpPatch.AutoSize = true;
+            this.rbHttpPatch.Location = new System.Drawing.Point(110, 81);
+            this.rbHttpPatch.Name = "rbHttpPatch";
+            this.rbHttpPatch.Size = new System.Drawing.Size(65, 21);
+            this.rbHttpPatch.TabIndex = 7;
+            this.rbHttpPatch.TabStop = true;
+            this.rbHttpPatch.Text = "Patch";
+            this.rbHttpPatch.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -530,6 +555,8 @@
         private System.Windows.Forms.RadioButton rbHttpDelete;
         private System.Windows.Forms.RadioButton rbHttpOptions;
         private System.Windows.Forms.RadioButton rbHttpPut;
+        private System.Windows.Forms.RadioButton rbHttpPatch;
+        private System.Windows.Forms.RadioButton rbHttpHead;
 
     }
 }

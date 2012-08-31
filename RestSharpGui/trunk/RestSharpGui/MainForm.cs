@@ -23,11 +23,13 @@ namespace Swensen.RestSharpGui
         private void MainForm_Load(object sender, EventArgs e)
         {
             //bind http method radio button groups
-            rbHttpGet.Tag = Method.GET;
-            rbHttpPost.Tag = Method.POST;
             rbHttpDelete.Tag = Method.DELETE;
-            rbHttpPut.Tag = Method.PUT;
+            rbHttpGet.Tag = Method.GET;
+            rbHttpHead.Tag = Method.HEAD;
             rbHttpOptions.Tag = Method.OPTIONS;
+            rbHttpPatch.Tag = Method.PATCH;
+            rbHttpPost.Tag = Method.POST;
+            rbHttpPut.Tag = Method.PUT;
 
             ActiveControl = txtUrl;
         }
