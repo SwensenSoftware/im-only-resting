@@ -114,6 +114,7 @@ namespace Swensen.RestSharpGui
 
         private void save(string fileName) {
             if (fileName == null) {
+                requestSaveFileDialog.FileName = null;
                 if (requestSaveFileDialog.ShowDialog() == DialogResult.OK) {
                     fileName = requestSaveFileDialog.FileName;
                 } else {
@@ -140,12 +141,21 @@ namespace Swensen.RestSharpGui
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e) {
+            requestOpenFileDialog.FileName = null;
             if (requestOpenFileDialog.ShowDialog() == DialogResult.OK) {
                 var fileName = requestOpenFileDialog.FileName;
                 var requestVm = RequestViewModel.Open(fileName);
                 bind(new ResponseViewModel("")); // clear the response.
                 bind(requestVm);
                 updateLastOpenedRequestFile(fileName);
+            }
+        }
+
+        private void exportResponseBodyToolStripMenuItem_Click(object sender, EventArgs e) {
+            responseBodySaveFileDialog.FileName = null;
+            if (responseBodySaveFileDialog.ShowDialog() == DialogResult.OK) {
+                //todo: rtResponseText.Lines is sketchy; should grab the original content
+                File.WriteAllLines(responseBodySaveFileDialog.FileName, rtResponseText.Lines);
             }
         }
     }
