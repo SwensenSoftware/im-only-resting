@@ -9,12 +9,15 @@ using System.Windows.Forms;
 using RestSharp;
 using System.Net;
 using System.Xml.Linq;
+using System.IO;
 
 //example text/xml response: http://www.w3schools.com/xml/note.asp
 namespace Swensen.RestSharpGui
 {
     public partial class MainForm : Form
     {
+        private string lastOpenedRequestFile = null;
+
         public MainForm()
         {
             InitializeComponent();
@@ -38,16 +41,21 @@ namespace Swensen.RestSharpGui
 
         private IEnumerable<RadioButton> rbGrpHttpMethods { get { return grpHttpMethod.Controls.OfType<RadioButton>(); } }
 
-        private void btnSubmitRequest_Click(object sender, EventArgs e)
-        {
+        private RequestViewModel buildRequestViewModel() {
             //build the request view
             var checkedHttpMethod = rbGrpHttpMethods.Where(x => x.Checked).FirstOrDefault();
-            var requestVm = new RequestViewModel() {
+            return new RequestViewModel() {
                 Url = txtUrl.Text,
                 Method = checkedHttpMethod == null ? null : ((Method?)checkedHttpMethod.Tag),
                 Headers = txtRequestHeaders.Lines.ToArray(),
                 Body = txtRequestBody.Text
             };
+        }
+
+        private void btnSubmitRequest_Click(object sender, EventArgs e)
+        {
+            //build the request view
+            var requestVm = buildRequestViewModel();
 
             //attempt to build the request model from the request view: if we fail, show an error messages, else continue and make the request.
             RequestModel requestModel = null;
@@ -67,7 +75,6 @@ namespace Swensen.RestSharpGui
 
                 //bind the response view
                 bind(responseVm);
-                grpResponse.Update();
             }
         }
 
@@ -102,6 +109,43 @@ namespace Swensen.RestSharpGui
             {
                 box.StartPosition = FormStartPosition.CenterParent;
                 box.ShowDialog(this);
+            }
+        }
+
+        private void save(string fileName) {
+            if (fileName == null) {
+                if (requestSaveFileDialog.ShowDialog() == DialogResult.OK) {
+                    fileName = requestSaveFileDialog.FileName;
+                } else {
+                    return;
+                }
+            }
+
+            var requestVm = buildRequestViewModel();
+            requestVm.Save(fileName);
+            updateLastOpenedRequestFile(fileName);
+        }
+
+        private void updateLastOpenedRequestFile(string fileName) {
+            this.lastOpenedRequestFile = fileName;
+            this.Text = fileName + " - RestSharp GUI";
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+            save(lastOpenedRequestFile);
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
+            save(null);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (requestOpenFileDialog.ShowDialog() == DialogResult.OK) {
+                var fileName = requestOpenFileDialog.FileName;
+                var requestVm = RequestViewModel.Open(fileName);
+                bind(new ResponseViewModel("")); // clear the response.
+                bind(requestVm);
+                updateLastOpenedRequestFile(fileName);
             }
         }
     }
