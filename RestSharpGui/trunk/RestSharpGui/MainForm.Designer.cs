@@ -37,6 +37,8 @@
             this.grpHeaders = new System.Windows.Forms.GroupBox();
             this.txtRequestHeaders = new System.Windows.Forms.TextBox();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
+            this.rbHttpPatch = new System.Windows.Forms.RadioButton();
+            this.rbHttpHead = new System.Windows.Forms.RadioButton();
             this.rbHttpDelete = new System.Windows.Forms.RadioButton();
             this.rbHttpOptions = new System.Windows.Forms.RadioButton();
             this.rbHttpPut = new System.Windows.Forms.RadioButton();
@@ -46,7 +48,7 @@
             this.pnlUrl = new System.Windows.Forms.Panel();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.lblUrl = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRequestButtons = new System.Windows.Forms.Panel();
             this.btnClearRequest = new System.Windows.Forms.Button();
             this.btnSubmitRequest = new System.Windows.Forms.Button();
             this.grpResponse = new System.Windows.Forms.GroupBox();
@@ -58,8 +60,6 @@
             this.pnlResponseStatus = new System.Windows.Forms.Panel();
             this.lblResponseStatusValue = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.rbHttpHead = new System.Windows.Forms.RadioButton();
-            this.rbHttpPatch = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -72,7 +72,7 @@
             this.grpHttpMethod.SuspendLayout();
             this.pnlRequestUrlAndButtons.SuspendLayout();
             this.pnlUrl.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.btnRequestButtons.SuspendLayout();
             this.grpResponse.SuspendLayout();
             this.tcResponse.SuspendLayout();
             this.tpResponseText.SuspendLayout();
@@ -207,6 +207,28 @@
             this.grpHttpMethod.TabStop = false;
             this.grpHttpMethod.Text = "Method";
             // 
+            // rbHttpPatch
+            // 
+            this.rbHttpPatch.AutoSize = true;
+            this.rbHttpPatch.Location = new System.Drawing.Point(110, 81);
+            this.rbHttpPatch.Name = "rbHttpPatch";
+            this.rbHttpPatch.Size = new System.Drawing.Size(65, 21);
+            this.rbHttpPatch.TabIndex = 7;
+            this.rbHttpPatch.TabStop = true;
+            this.rbHttpPatch.Text = "Patch";
+            this.rbHttpPatch.UseVisualStyleBackColor = true;
+            // 
+            // rbHttpHead
+            // 
+            this.rbHttpHead.AutoSize = true;
+            this.rbHttpHead.Location = new System.Drawing.Point(110, 52);
+            this.rbHttpHead.Name = "rbHttpHead";
+            this.rbHttpHead.Size = new System.Drawing.Size(63, 21);
+            this.rbHttpHead.TabIndex = 6;
+            this.rbHttpHead.TabStop = true;
+            this.rbHttpHead.Text = "Head";
+            this.rbHttpHead.UseVisualStyleBackColor = true;
+            // 
             // rbHttpDelete
             // 
             this.rbHttpDelete.AutoSize = true;
@@ -271,7 +293,7 @@
             // pnlRequestUrlAndButtons
             // 
             this.pnlRequestUrlAndButtons.Controls.Add(this.pnlUrl);
-            this.pnlRequestUrlAndButtons.Controls.Add(this.panel1);
+            this.pnlRequestUrlAndButtons.Controls.Add(this.btnRequestButtons);
             this.pnlRequestUrlAndButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlRequestUrlAndButtons.Location = new System.Drawing.Point(0, 0);
             this.pnlRequestUrlAndButtons.Name = "pnlRequestUrlAndButtons";
@@ -314,15 +336,15 @@
             this.lblUrl.TabIndex = 0;
             this.lblUrl.Text = "Url:";
             // 
-            // panel1
+            // btnRequestButtons
             // 
-            this.panel1.Controls.Add(this.btnClearRequest);
-            this.panel1.Controls.Add(this.btnSubmitRequest);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(697, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(147, 41);
-            this.panel1.TabIndex = 5;
+            this.btnRequestButtons.Controls.Add(this.btnClearRequest);
+            this.btnRequestButtons.Controls.Add(this.btnSubmitRequest);
+            this.btnRequestButtons.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnRequestButtons.Location = new System.Drawing.Point(697, 0);
+            this.btnRequestButtons.Name = "btnRequestButtons";
+            this.btnRequestButtons.Size = new System.Drawing.Size(147, 41);
+            this.btnRequestButtons.TabIndex = 5;
             // 
             // btnClearRequest
             // 
@@ -461,28 +483,6 @@
             this.lblStatus.Text = "Status:";
             this.lblStatus.UseWaitCursor = true;
             // 
-            // rbHttpHead
-            // 
-            this.rbHttpHead.AutoSize = true;
-            this.rbHttpHead.Location = new System.Drawing.Point(110, 52);
-            this.rbHttpHead.Name = "rbHttpHead";
-            this.rbHttpHead.Size = new System.Drawing.Size(63, 21);
-            this.rbHttpHead.TabIndex = 6;
-            this.rbHttpHead.TabStop = true;
-            this.rbHttpHead.Text = "Head";
-            this.rbHttpHead.UseVisualStyleBackColor = true;
-            // 
-            // rbHttpPatch
-            // 
-            this.rbHttpPatch.AutoSize = true;
-            this.rbHttpPatch.Location = new System.Drawing.Point(110, 81);
-            this.rbHttpPatch.Name = "rbHttpPatch";
-            this.rbHttpPatch.Size = new System.Drawing.Size(65, 21);
-            this.rbHttpPatch.TabIndex = 7;
-            this.rbHttpPatch.TabStop = true;
-            this.rbHttpPatch.Text = "Patch";
-            this.rbHttpPatch.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -510,8 +510,8 @@
             this.pnlRequestUrlAndButtons.ResumeLayout(false);
             this.pnlUrl.ResumeLayout(false);
             this.pnlUrl.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.btnRequestButtons.ResumeLayout(false);
+            this.btnRequestButtons.PerformLayout();
             this.grpResponse.ResumeLayout(false);
             this.tcResponse.ResumeLayout(false);
             this.tpResponseText.ResumeLayout(false);
@@ -547,7 +547,7 @@
         private System.Windows.Forms.Panel pnlUrl;
         private System.Windows.Forms.TextBox txtUrl;
         private System.Windows.Forms.Label lblUrl;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel btnRequestButtons;
         private System.Windows.Forms.Button btnClearRequest;
         private System.Windows.Forms.Button btnSubmitRequest;
         private System.Windows.Forms.GroupBox grpBody;
