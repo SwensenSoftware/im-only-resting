@@ -22,7 +22,11 @@ namespace Swensen.RestSharpGui
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //bind http method radio button groups
+            bindHttpMethods();            
+            ActiveControl = txtUrl;
+        }
+
+        private void bindHttpMethods() {
             rbHttpDelete.Tag = Method.DELETE;
             rbHttpGet.Tag = Method.GET;
             rbHttpHead.Tag = Method.HEAD;
@@ -30,14 +34,13 @@ namespace Swensen.RestSharpGui
             rbHttpPatch.Tag = Method.PATCH;
             rbHttpPost.Tag = Method.POST;
             rbHttpPut.Tag = Method.PUT;
-
-            ActiveControl = txtUrl;
         }
 
         private IEnumerable<RadioButton> rbGrpHttpMethods { get { return grpHttpMethod.Controls.OfType<RadioButton>(); } }
 
         private void btnSubmitRequest_Click(object sender, EventArgs e)
         {
+            //build the request view
             var checkedHttpMethod = rbGrpHttpMethods.Where(x => x.Checked).FirstOrDefault();
             var requestVm = new RequestViewModel() {
                 Url = txtUrl.Text,
@@ -46,17 +49,23 @@ namespace Swensen.RestSharpGui
                 Body = txtRequestBody.Text
             };
 
+            //attempt to build the request model from the request view: if we fail, show an error messages, else continue and make the request.
             RequestModel requestModel = null;
             var validationErrors = RequestModel.TryCreate(requestVm, out requestModel);
             if (validationErrors.Count > 0)
                 MessageBox.Show(this, String.Join(Environment.NewLine, validationErrors), "Request Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                bind(new ResponseViewModel(responseStatus:"Loading..."));//clear response view and show loading message status
+                //clear response view and show loading message status
+                bind(new ResponseViewModel(responseStatus:"Loading..."));
                 grpResponse.Update();
+
+                //execute the request and get the response
                 var restRequest = requestModel.ToRestRequest();
                 var client = new RestClient();
                 var restResponse = client.Execute(restRequest);
                 var responseVm = new ResponseViewModel(restResponse);
+
+                //bind the response view
                 bind(responseVm);
                 grpResponse.Update();
             }
