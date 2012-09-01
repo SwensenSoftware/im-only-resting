@@ -28,7 +28,7 @@ namespace Swensen.RestSharpGui {
 
             this.Content = response.Content;
             this.ContentBytes = response.RawBytes;
-            this.ContentType = response.ContentType;
+            this.ContentType = response.ContentType.Split(';')[0].Trim(); //exclude charset to right if it is present.
             this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
         }
 

@@ -16,7 +16,9 @@ namespace Swensen.RestSharpGui
 {
     public partial class MainForm : Form
     {
-        private string lastOpenedRequestFile = null;
+        private string lastOpenedRequestFile;
+
+        private ResponseViewModel lastResponseViewModel;
 
         public MainForm()
         {
@@ -28,6 +30,7 @@ namespace Swensen.RestSharpGui
             bindHttpMethods();            
             ActiveControl = txtUrl;
             splitterMain.SplitterDistance = this.Width / 2; //start off at 50% of main window splitter distance (todo: make app persist user preference).
+            lastResponseViewModel = new ResponseViewModel(); //to avoid null pointer exceptions
         }
 
         private void bindHttpMethods() {
@@ -82,7 +85,9 @@ namespace Swensen.RestSharpGui
         private void bind(ResponseViewModel responseVm) {
             lblResponseStatusValue.Text = responseVm.Status;
             rtResponseText.Text = responseVm.PrettyPrintedContent;
-            txtResponseHeaders.Text = responseVm.Headers;            
+            txtResponseHeaders.Text = responseVm.Headers;
+
+            this.lastResponseViewModel = responseVm;
         }
 
         private void bind(RequestViewModel requestVm) {
@@ -154,9 +159,18 @@ namespace Swensen.RestSharpGui
 
         private void exportResponseBodyToolStripMenuItem_Click(object sender, EventArgs e) {
             responseBodySaveFileDialog.FileName = null;
+            
+            //set filter based on inferred content type
+            string filter = "All files|*.*";
+            if(lastResponseViewModel.InferredContentType != InferredContentType.Other) {
+                string ctExt = InferredContentTypeUtils.FileExtension(lastResponseViewModel.InferredContentType);
+                filter = string.Format("{0}|*.{0}|{1}", ctExt, filter);
+            }
+            responseBodySaveFileDialog.Filter = filter;
+            responseBodySaveFileDialog.FilterIndex = 1;
+            
             if (responseBodySaveFileDialog.ShowDialog() == DialogResult.OK) {
-                //todo: rtResponseText.Lines is sketchy; should grab the original content
-                File.WriteAllLines(responseBodySaveFileDialog.FileName, rtResponseText.Lines);
+                File.WriteAllBytes(responseBodySaveFileDialog.FileName, lastResponseViewModel.ContentBytes);
             }
         }
     }
