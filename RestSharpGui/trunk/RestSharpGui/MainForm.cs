@@ -227,13 +227,13 @@ namespace Swensen.RestSharpGui
             setIsLastOpenedRequestFileDirtyToTrue();
         }
 
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e) {
-            saveToolStripMenuItem.Enabled = this.isLastOpenedRequestFileDirty;
-            exportResponseBodyToolStripMenuItem.Enabled = !(lastResponseViewModel.ContentBytes == null || lastResponseViewModel.ContentBytes.Length == 0);
-        }
-
         private void rtResponseText_LinkClicked(object sender, LinkClickedEventArgs e) {
             System.Diagnostics.Process.Start(e.LinkText);
+        }
+
+        private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
+            saveToolStripMenuItem.Enabled = this.isLastOpenedRequestFileDirty;
+            exportResponseBodyToolStripMenuItem.Enabled = !(lastResponseViewModel.ContentBytes == null || lastResponseViewModel.ContentBytes.Length == 0);
         }
     }
 }
