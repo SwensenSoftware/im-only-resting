@@ -32,8 +32,23 @@ namespace Swensen.RestSharpGui {
             this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
         }
 
+        private string extractCharsetlessContentType(string contentType) {
+            //ContentType spec: http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7
+            //media-type     = type "/" subtype *( ";" parameter )
+            //type           = token
+            //subtype        = token
+            
+            if (String.IsNullOrWhiteSpace(contentType))
+                return contentType;
+
+            return contentType.Split(';')[0].Trim();
+        }
+
         public string Status { get; private set; }
 
+        /// <summary>
+        /// The content type with charset excluded if it was present on the header.
+        /// </summary>
         public string ContentType { get; private set; }
         public InferredContentType InferredContentType { get { return InferredContentTypeUtils.FromContentType(ContentType); } }
 
