@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+Copyright 2012 Stephen Swensen
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,25 +89,25 @@ namespace Swensen.RestSharpGui {
                             dynamic parsedJson = JsonConvert.DeserializeObject(content);
                             return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
                         }
-                    //case InferredContentType.Html: {
-                    //        using (var doc = Document.FromString(content)) {
-                    //            doc.ShowWarnings = false;
-                    //            doc.Quiet = true;
-                    //            doc.OutputXhtml = false;
-                    //            doc.OutputXml = false;
-                    //            doc.OutputHtml = true;
-                    //            doc.IndentBlockElements = AutoBool.Yes;
-                    //            doc.IndentSpaces = 4;
-                    //            //doc.IndentAttributes = true;
-                    //            //doc.IndentCdata = true;
-                    //            //doc.AddVerticalSpace = true;
-                    //            doc.AddTidyMetaElement = false;
-                    //            doc.WrapAt = 0;
-                    //            doc.CleanAndRepair();
-                    //            string output = doc.Save();
-                    //            return output;
-                    //        }
-                    //    }
+                    case InferredContentType.Html: {
+                            using (var doc = Document.FromString(content)) {
+                                doc.ShowWarnings = false;
+                                doc.Quiet = true;
+                                doc.OutputXhtml = false;
+                                doc.OutputXml = false;
+                                doc.OutputHtml = false;
+                                doc.IndentBlockElements = AutoBool.Yes;
+                                doc.IndentSpaces = 4;
+                                doc.IndentAttributes = false;
+                                //doc.IndentCdata = true;
+                                doc.AddVerticalSpace = true;
+                                doc.AddTidyMetaElement = false;
+                                doc.WrapAt = 120;
+                                doc.CleanAndRepair();
+                                string output = doc.Save();
+                                return output;
+                            }
+                        }
                     default:
                         return content;
                 }
