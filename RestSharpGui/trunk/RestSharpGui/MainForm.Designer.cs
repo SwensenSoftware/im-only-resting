@@ -436,6 +436,7 @@
             this.rtResponseText.TabIndex = 10;
             this.rtResponseText.Text = "";
             this.rtResponseText.WordWrap = false;
+            this.rtResponseText.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtResponseText_LinkClicked);
             // 
             // tpResponseHeaders
             // 

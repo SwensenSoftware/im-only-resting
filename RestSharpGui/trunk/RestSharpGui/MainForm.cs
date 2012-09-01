@@ -231,5 +231,9 @@ namespace Swensen.RestSharpGui
             saveToolStripMenuItem.Enabled = this.isLastOpenedRequestFileDirty;
             exportResponseBodyToolStripMenuItem.Enabled = !(lastResponseViewModel.ContentBytes == null || lastResponseViewModel.ContentBytes.Length == 0);
         }
+
+        private void rtResponseText_LinkClicked(object sender, LinkClickedEventArgs e) {
+            System.Diagnostics.Process.Start(e.LinkText);
+        }
     }
 }
