@@ -5,6 +5,7 @@ using System.Text;
 using RestSharp;
 using System.Net;
 using System.Xml.Linq;
+using Newtonsoft.Json;
 
 namespace Swensen.RestSharpGui {
     public class ResponseViewModel {
@@ -63,15 +64,18 @@ namespace Swensen.RestSharpGui {
         /// </summary>
         private static string prettyPrint(InferredContentType contentType, string content) {
             //see http://stackoverflow.com/a/2965701/236255 for list of xml content types (credit to http://stackoverflow.com/users/18936/bobince)
-            switch (contentType) {
-                case InferredContentType.Xml :
-                    try {
+            try {
+                switch (contentType) {
+                    case InferredContentType.Xml :                    
                         return XDocument.Parse(content).ToString();
-                    } catch {
+                    case InferredContentType.Json:
+                        dynamic parsedJson = JsonConvert.DeserializeObject(content);
+                        return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                    default:
                         return content;
-                    }
-                default:
-                    return content;
+                }
+            } catch {
+                return content;
             }
         }
     }

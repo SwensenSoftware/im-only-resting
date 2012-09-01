@@ -11,7 +11,9 @@ using System.Net;
 using System.Xml.Linq;
 using System.IO;
 
-//example text/xml response: http://www.w3schools.com/xml/note.asp
+//examples response types:
+//xml: http://www.w3schools.com/xml/note.asp
+//json: http://api.geonames.org/postalCodeLookupJSON?postalcode=6600&country=AT&username=demo
 namespace Swensen.RestSharpGui
 {
     public partial class MainForm : Form
