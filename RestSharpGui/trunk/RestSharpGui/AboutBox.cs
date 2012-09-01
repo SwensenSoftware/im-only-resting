@@ -29,11 +29,9 @@ namespace Swensen.RestSharpGui {
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            //this.labelDescription.Text = AssemblyCompany;
+            this.linkDescription.Text = AssemblyDescription; //should be home page link
         }
-
-        #region Assembly Attribute Accessors
 
         public string AssemblyTitle {
             get {
@@ -84,19 +82,22 @@ namespace Swensen.RestSharpGui {
             }
         }
 
-        public string AssemblyCompany {
-            get {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-                if (attributes.Length == 0) {
-                    return "";
-                }
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
-            }
-        }
-        #endregion
+        //public string AssemblyCompany {
+        //    get {
+        //        object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+        //        if (attributes.Length == 0) {
+        //            return "";
+        //        }
+        //        return ((AssemblyCompanyAttribute)attributes[0]).Company;
+        //    }
+        //}
 
         private void okButton_Click(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void linkDescription_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            System.Diagnostics.Process.Start(linkDescription.Text);
         }
     }
 }
