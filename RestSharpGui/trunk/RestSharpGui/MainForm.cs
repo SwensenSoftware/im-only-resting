@@ -223,5 +223,10 @@ namespace Swensen.RestSharpGui
         private void txtRequestHeaders_TextChanged(object sender, EventArgs e) {
             setIsLastOpenedRequestFileDirtyToTrue();
         }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e) {
+            saveToolStripMenuItem.Enabled = this.isLastOpenedRequestFileDirty;
+            exportResponseBodyToolStripMenuItem.Enabled = !(lastResponseViewModel.ContentBytes == null || lastResponseViewModel.ContentBytes.Length == 0);
+        }
     }
 }
