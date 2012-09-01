@@ -165,6 +165,7 @@ namespace Swensen.RestSharpGui
 
         private void updateLastOpenedRequestFile(string fileName) {
             this.lastOpenedRequestFile = fileName;
+            this.isLastOpenedRequestFileDirty = false;
             this.Text = fileName + " - RestSharp GUI";
         }
 
