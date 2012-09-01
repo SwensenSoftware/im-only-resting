@@ -31,6 +31,19 @@ namespace Swensen.RestSharpGui
             ActiveControl = txtUrl;
             splitterMain.SplitterDistance = this.Width / 2; //start off at 50% of main window splitter distance (todo: make app persist user preference).
             lastResponseViewModel = new ResponseViewModel(); //to avoid null pointer exceptions
+            setUpFileDialogs();
+        }
+
+        //todo: persist directory restore upon app start.
+        private void setUpFileDialogs() {
+            var initialSavedRequestsDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Saved Requests";
+            Directory.CreateDirectory(initialSavedRequestsDir);
+            requestSaveFileDialog.InitialDirectory = initialSavedRequestsDir;
+            requestOpenFileDialog.InitialDirectory = initialSavedRequestsDir;
+
+            var initalExportedResponsesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Exported Responses";
+            Directory.CreateDirectory(initalExportedResponsesDir);
+            responseBodySaveFileDialog.InitialDirectory = initalExportedResponsesDir; 
         }
 
         private void bindHttpMethods() {
