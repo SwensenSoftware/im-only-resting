@@ -6,6 +6,7 @@ using RestSharp;
 using System.Net;
 using System.Xml.Linq;
 using Newtonsoft.Json;
+using TidyManaged;
 
 namespace Swensen.RestSharpGui {
     public class ResponseViewModel {
@@ -66,11 +67,32 @@ namespace Swensen.RestSharpGui {
             //see http://stackoverflow.com/a/2965701/236255 for list of xml content types (credit to http://stackoverflow.com/users/18936/bobince)
             try {
                 switch (contentType) {
-                    case InferredContentType.Xml :                    
-                        return XDocument.Parse(content).ToString();
-                    case InferredContentType.Json:
-                        dynamic parsedJson = JsonConvert.DeserializeObject(content);
-                        return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                    case InferredContentType.Xml: {
+                            return XDocument.Parse(content).ToString();
+                        }
+                    case InferredContentType.Json: {
+                            dynamic parsedJson = JsonConvert.DeserializeObject(content);
+                            return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                        }
+                    //case InferredContentType.Html: {
+                    //        using (var doc = Document.FromString(content)) {
+                    //            doc.ShowWarnings = false;
+                    //            doc.Quiet = true;
+                    //            doc.OutputXhtml = false;
+                    //            doc.OutputXml = false;
+                    //            doc.OutputHtml = true;
+                    //            doc.IndentBlockElements = AutoBool.Yes;
+                    //            doc.IndentSpaces = 4;
+                    //            //doc.IndentAttributes = true;
+                    //            //doc.IndentCdata = true;
+                    //            //doc.AddVerticalSpace = true;
+                    //            doc.AddTidyMetaElement = false;
+                    //            doc.WrapAt = 0;
+                    //            doc.CleanAndRepair();
+                    //            string output = doc.Save();
+                    //            return output;
+                    //        }
+                    //    }
                     default:
                         return content;
                 }
