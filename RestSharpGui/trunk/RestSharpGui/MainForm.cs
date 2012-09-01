@@ -65,7 +65,7 @@ namespace Swensen.RestSharpGui
                 MessageBox.Show(this, String.Join(Environment.NewLine, validationErrors), "Request Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
                 //clear response view and show loading message status
-                bind(new ResponseViewModel(responseStatus:"Loading..."));
+                bind(new ResponseViewModel("Loading..."));
                 grpResponse.Update();
 
                 //execute the request and get the response
@@ -80,7 +80,7 @@ namespace Swensen.RestSharpGui
         }
 
         private void bind(ResponseViewModel responseVm) {
-            lblResponseStatusValue.Text = responseVm.ResponseStatus;
+            lblResponseStatusValue.Text = responseVm.Status;
             rtResponseText.Text = responseVm.PrettyPrintedContent;
             txtResponseHeaders.Text = responseVm.Headers;            
         }
@@ -98,7 +98,7 @@ namespace Swensen.RestSharpGui
         private void btnClearRequest_Click(object sender, EventArgs e)
         {
             bind(new RequestViewModel());
-            bind(new ResponseViewModel(responseStatus:""));
+            bind(new ResponseViewModel());
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {

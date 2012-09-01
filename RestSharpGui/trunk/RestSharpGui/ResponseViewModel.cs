@@ -11,8 +11,8 @@ namespace Swensen.RestSharpGui {
         /// <summary>
         /// Create an empty ResponseViewModel with ResponseStatus set to a loading message.
         /// </summary>
-        public ResponseViewModel(string responseStatus) {
-            ResponseStatus = responseStatus;
+        public ResponseViewModel(string status="") {
+            this.Status = status;
         }
 
         /// <summary>
@@ -22,40 +22,42 @@ namespace Swensen.RestSharpGui {
             if (response == null)
                 throw new ArgumentNullException("response");
 
-            ResponseStatus = response.ResponseStatus == RestSharp.ResponseStatus.Completed ?
-                             string.Format("{0} {1}", (int)response.StatusCode, response.StatusDescription) :
-                             response.ResponseStatus.ToString();
+            this.Status = response.ResponseStatus == RestSharp.ResponseStatus.Completed ?
+                          string.Format("{0} {1}", (int)response.StatusCode, response.StatusDescription) :
+                          response.ResponseStatus.ToString();
 
-            var contentType = response.ContentType;
-            IsXmlContentType = contentType != null && (contentType == "text/xml" || contentType == "application/xml" || contentType.EndsWith("+xml"));
-
-            PrettyPrintedContent = prettyPrint(response.ContentType, response.Content); //depends on IsXmlContentType
-
-            Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
-
+            this.Content = response.Content;
+            this.ContentBytes = response.RawBytes;
+            this.ContentType = response.ContentType;
+            this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
         }
 
-        public string ResponseStatus { get; set; }
+        public string Status { get; private set; }
 
-        private bool IsXmlContentType { get; set; }
+        public string ContentType { get; private set; }
+        public InferredContentType InferredContentType { get { return InferredContentTypeUtils.FromContentType(ContentType); } }
 
-        public string PrettyPrintedContent { get; set; }
+        public byte[] ContentBytes { get; private set; }
+        public string Content { get; private set; }
+        public string PrettyPrintedContent { get { return prettyPrint(InferredContentType, Content); } }
 
         public string Headers { get; set; }
 
         /// <summary>
         /// If contentType is an xml content type, then try to pretty print the rawContent. If that fails or otherwise, just return the rawContent
         /// </summary>
-        private string prettyPrint(string contentType, string rawContent) {
+        private static string prettyPrint(InferredContentType contentType, string content) {
             //see http://stackoverflow.com/a/2965701/236255 for list of xml content types (credit to http://stackoverflow.com/users/18936/bobince)
-            if (this.IsXmlContentType) {
-                try {
-                    return XDocument.Parse(rawContent).ToString();
-                } catch {
-                    return rawContent;
-                }
-            } else
-                return rawContent;
+            switch (contentType) {
+                case InferredContentType.Xml :
+                    try {
+                        return XDocument.Parse(content).ToString();
+                    } catch {
+                        return content;
+                    }
+                default:
+                    return content;
+            }
         }
     }
 }
