@@ -78,7 +78,7 @@ namespace Swensen.RestSharpGui
             RequestModel requestModel = null;
             var validationErrors = RequestModel.TryCreate(requestVm, out requestModel);
             if (validationErrors.Count > 0)
-                MessageBox.Show(this, String.Join(Environment.NewLine, validationErrors), "Request Validation Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                showError("Request Validation Errors", String.Join(Environment.NewLine, validationErrors));
             else {
                 //clear response view and show loading message status
                 bind(new ResponseViewModel("Loading..."));
@@ -163,7 +163,13 @@ namespace Swensen.RestSharpGui
             requestOpenFileDialog.FileName = null;
             if (requestOpenFileDialog.ShowDialog() == DialogResult.OK) {
                 var fileName = requestOpenFileDialog.FileName;
-                var requestVm = RequestViewModel.Open(fileName);
+                RequestViewModel requestVm;
+                try {
+                    requestVm = RequestViewModel.Open(fileName);
+                } catch {
+                    showError("File Open Error", "Error opening request file");
+                    return;
+                }
                 bind(new ResponseViewModel("")); // clear the response.
                 bind(requestVm);
                 updateLastOpenedRequestFile(fileName);
@@ -185,6 +191,10 @@ namespace Swensen.RestSharpGui
             if (responseBodySaveFileDialog.ShowDialog() == DialogResult.OK) {
                 File.WriteAllBytes(responseBodySaveFileDialog.FileName, lastResponseViewModel.ContentBytes);
             }
+        }
+
+        private void showError(string title, string text) {
+            MessageBox.Show(this, text, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
