@@ -27,6 +27,7 @@ namespace Swensen.RestSharpGui
         {
             bindHttpMethods();            
             ActiveControl = txtUrl;
+            splitterMain.SplitterDistance = this.Width / 2; //start off at 50% of main window splitter distance (todo: make app persist user preference).
         }
 
         private void bindHttpMethods() {
