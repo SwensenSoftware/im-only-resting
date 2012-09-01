@@ -16,9 +16,10 @@ namespace Swensen.RestSharpGui
 {
     public partial class MainForm : Form
     {
-        private string lastOpenedRequestFile;
+        private string lastOpenedRequestFile = null;
+        private bool isLastOpenedRequestFileDirty = false;
 
-        private ResponseViewModel lastResponseViewModel;
+        private ResponseViewModel lastResponseViewModel = new ResponseViewModel(); //to avoid null pointer exceptions
 
         public MainForm()
         {
@@ -30,8 +31,13 @@ namespace Swensen.RestSharpGui
             bindHttpMethods();            
             ActiveControl = txtUrl;
             splitterMain.SplitterDistance = this.Width / 2; //start off at 50% of main window splitter distance (todo: make app persist user preference).
-            lastResponseViewModel = new ResponseViewModel(); //to avoid null pointer exceptions
             setUpFileDialogs();
+        }
+
+        private void setIsLastOpenedRequestFileDirtyToTrue() {
+            isLastOpenedRequestFileDirty = true;
+            if(!this.Text.StartsWith("*"))
+                this.Text = "*" + this.Text;
         }
 
         //todo: persist directory restore upon app start.
@@ -54,6 +60,14 @@ namespace Swensen.RestSharpGui
             rbHttpPatch.Tag = Method.PATCH;
             rbHttpPost.Tag = Method.POST;
             rbHttpPut.Tag = Method.PUT;
+
+            foreach (var rb in rbGrpHttpMethods) {
+                rb.Click += new EventHandler(rbGrpHttp_Click);
+            }
+        }
+
+        void rbGrpHttp_Click(object sender, EventArgs e) {
+            setIsLastOpenedRequestFileDirtyToTrue();
         }
 
         private IEnumerable<RadioButton> rbGrpHttpMethods { get { return grpHttpMethod.Controls.OfType<RadioButton>(); } }
@@ -115,6 +129,7 @@ namespace Swensen.RestSharpGui
 
         private void btnClearRequest_Click(object sender, EventArgs e)
         {
+            setIsLastOpenedRequestFileDirtyToTrue();
             bind(new RequestViewModel());
             bind(new ResponseViewModel());
         }
@@ -195,6 +210,18 @@ namespace Swensen.RestSharpGui
 
         private void showError(string title, string text) {
             MessageBox.Show(this, text, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void txtUrl_TextChanged(object sender, EventArgs e) {
+            setIsLastOpenedRequestFileDirtyToTrue();
+        }
+
+        private void txtRequestBody_TextChanged(object sender, EventArgs e) {
+            setIsLastOpenedRequestFileDirtyToTrue();
+        }
+
+        private void txtRequestHeaders_TextChanged(object sender, EventArgs e) {
+            setIsLastOpenedRequestFileDirtyToTrue();
         }
     }
 }

@@ -157,6 +157,7 @@
             this.txtRequestBody.Size = new System.Drawing.Size(704, 369);
             this.txtRequestBody.TabIndex = 7;
             this.txtRequestBody.WordWrap = false;
+            this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
             // 
             // pnlTopHalfOfRequest
             // 
@@ -204,6 +205,7 @@
             this.txtRequestHeaders.Size = new System.Drawing.Size(517, 130);
             this.txtRequestHeaders.TabIndex = 6;
             this.txtRequestHeaders.WordWrap = false;
+            this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
             // 
             // grpHttpMethod
             // 
@@ -336,6 +338,7 @@
             this.txtUrl.Size = new System.Drawing.Size(519, 22);
             this.txtUrl.TabIndex = 0;
             this.txtUrl.WordWrap = false;
+            this.txtUrl.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
             // 
             // lblUrl
             // 
@@ -441,7 +444,7 @@
             this.tpResponseHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.tpResponseHeaders.Name = "tpResponseHeaders";
             this.tpResponseHeaders.Padding = new System.Windows.Forms.Padding(4);
-            this.tpResponseHeaders.Size = new System.Drawing.Size(688, 527);
+            this.tpResponseHeaders.Size = new System.Drawing.Size(675, 527);
             this.tpResponseHeaders.TabIndex = 1;
             this.tpResponseHeaders.Text = "Headers";
             this.tpResponseHeaders.UseVisualStyleBackColor = true;
@@ -456,7 +459,7 @@
             this.txtResponseHeaders.Name = "txtResponseHeaders";
             this.txtResponseHeaders.ReadOnly = true;
             this.txtResponseHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResponseHeaders.Size = new System.Drawing.Size(680, 519);
+            this.txtResponseHeaders.Size = new System.Drawing.Size(667, 519);
             this.txtResponseHeaders.TabIndex = 11;
             this.txtResponseHeaders.WordWrap = false;
             // 
