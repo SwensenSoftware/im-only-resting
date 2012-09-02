@@ -285,7 +285,7 @@ namespace Swensen.RestSharpGui
         private void updateSplitterDistance() {
             var pct = (Settings.Default.SplitterDistancePercent / 100.0);
             splitterMain.SplitterDistance =
-                (int)(pct * (splitterMain.Orientation == Orientation.Vertical ? this.ClientSize.Width : this.ClientSize.Height));
+                (int)Math.Round(pct * (splitterMain.Orientation == Orientation.Vertical ? this.ClientSize.Width : this.ClientSize.Height));
         }
 
         private void persistGuiSettings() {
