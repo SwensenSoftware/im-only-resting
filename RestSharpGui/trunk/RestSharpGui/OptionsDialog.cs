@@ -33,14 +33,15 @@ namespace Swensen.RestSharpGui {
             this.Close();
         }
 
+        //todo this validation is adhoc, get plugged in with TypeConverters etc.
         void pgridOptions_PropertyValueChanged(object s, PropertyValueChangedEventArgs e) {
             var settings = Settings.Default;
             switch(e.ChangedItem.PropertyDescriptor.Name) {
                 case "SplitterDistancePercent": {
                     var value = (ushort)e.ChangedItem.Value;
                     if (value > 100) {
-                        settings.SplitterDistancePercent = (ushort) e.OldValue;
                         showPropertyValidationError(string.Format("SplitterDistancePercent must be between 0 and 100 inclusive but was {0}", value));
+                        settings.SplitterDistancePercent = (ushort)e.OldValue; //so user can see it in background, wait to change till after dialog shown
                         goto Cancel;
                     }
                     return;
@@ -48,8 +49,8 @@ namespace Swensen.RestSharpGui {
                 case "DefaultRequestFilePath": {
                     var value = (string)e.ChangedItem.Value;
                     if (!String.IsNullOrWhiteSpace(value) && !File.Exists(value)) {
-                        settings.DefaultRequestFilePath = (string)e.OldValue;
                         showPropertyValidationError(string.Format("DefaultRequestFilePath does not exist"));
+                        settings.DefaultRequestFilePath = (string)e.OldValue;
                         goto Cancel;
                     }
                     return;
