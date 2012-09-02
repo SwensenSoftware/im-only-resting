@@ -21,7 +21,7 @@ namespace Swensen.RestSharpGui
         private string lastOpenedRequestFile = null;
         private bool isLastOpenedRequestFileDirty = false;
 
-        private ResponseViewModel lastResponseViewModel = new ResponseViewModel(); //to avoid null pointer exceptions
+        private ResponseViewModel lastResponseViewModel;
 
         public MainForm()
         {
@@ -34,6 +34,7 @@ namespace Swensen.RestSharpGui
             ActiveControl = txtUrl;
             splitterMain.SplitterDistance = this.Width / 2; //start off at 50% of main window splitter distance (todo: make app persist user preference).
             setUpFileDialogs();
+            bind(new ResponseViewModel());
         }
 
         private void setIsLastOpenedRequestFileDirtyToTrue() {
@@ -103,8 +104,10 @@ namespace Swensen.RestSharpGui
                 //execute the request and get the response
                 var restRequest = requestModel.ToRestRequest();
                 var client = new RestClient();
+                var start = DateTime.Now;
                 var restResponse = client.Execute(restRequest);
-                var responseVm = new ResponseViewModel(restResponse);
+                var end = DateTime.Now;
+                var responseVm = new ResponseViewModel(restResponse, start, end);
 
                 //bind the response view
                 bind(responseVm);

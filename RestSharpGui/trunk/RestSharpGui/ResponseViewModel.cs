@@ -35,7 +35,7 @@ namespace Swensen.RestSharpGui {
         /// <summary>
         /// Create a ResponseViewModel populated from an IRestResonse
         /// </summary>
-        public ResponseViewModel(IRestResponse response) {
+        public ResponseViewModel(IRestResponse response, DateTime start, DateTime end) {
             if (response == null)
                 throw new ArgumentNullException("response");
 
@@ -43,10 +43,14 @@ namespace Swensen.RestSharpGui {
                           string.Format("{0} {1}", (int)response.StatusCode, response.StatusDescription) :
                           response.ResponseStatus.ToString();
 
+            if (start != null && end != null)
+                this.Status = this.Status + "    Time: " + (end - start);
+
             this.Content = response.Content;
             this.ContentBytes = response.RawBytes;
-            this.ContentType = response.ContentType.Split(';')[0].Trim(); //exclude charset to right if it is present.
+            this.ContentType = extractCharsetlessContentType(response.ContentType);
             this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
+
         }
 
         private string extractCharsetlessContentType(string contentType) {

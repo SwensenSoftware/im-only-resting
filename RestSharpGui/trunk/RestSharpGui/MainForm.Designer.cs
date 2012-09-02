@@ -484,8 +484,9 @@
             this.lblResponseStatusValue.Location = new System.Drawing.Point(56, 4);
             this.lblResponseStatusValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblResponseStatusValue.Name = "lblResponseStatusValue";
-            this.lblResponseStatusValue.Size = new System.Drawing.Size(0, 17);
+            this.lblResponseStatusValue.Size = new System.Drawing.Size(73, 17);
             this.lblResponseStatusValue.TabIndex = 3;
+            this.lblResponseStatusValue.Text = "statusText";
             // 
             // lblStatus
             // 
