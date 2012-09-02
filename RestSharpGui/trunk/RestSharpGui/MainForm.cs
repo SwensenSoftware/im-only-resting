@@ -176,6 +176,7 @@ namespace Swensen.RestSharpGui
         private void save(string fileName) {
             if (fileName == null) {
                 requestSaveFileDialog.FileName = null;
+                setUpFileDialogs();
                 if (requestSaveFileDialog.ShowDialog() == DialogResult.OK) {
                     fileName = requestSaveFileDialog.FileName;
                     Settings.Default.SaveRequestFileDialogFolder = requestOpenFileDialog.InitialDirectory;
@@ -210,6 +211,7 @@ namespace Swensen.RestSharpGui
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e) {
             requestOpenFileDialog.FileName = null;
+            setUpFileDialogs();
             if (requestOpenFileDialog.ShowDialog() == DialogResult.OK) {
                 var fileName = requestOpenFileDialog.FileName;
                 openRequestFile(fileName);
