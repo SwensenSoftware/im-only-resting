@@ -115,38 +115,48 @@ namespace Swensen.RestSharpGui
         void rbGrpResponseBodyOutput_Click(object sender, EventArgs e) {
             Settings.Default.ResponseBodyOutput = (ResponseBodyOutput)((RadioButton)sender).Tag;
             Settings.Default.Save();
+            updateResponseBodyOutputDisplay();
             updateResponseBodyOutput(lastResponseViewModel);
         }
 
         private void setCheckedResponseBodyOutputRb() {
             rbGrpResponseBodyOutputs.First(x => (ResponseBodyOutput)x.Tag == Settings.Default.ResponseBodyOutput).Checked = true;
+            updateResponseBodyOutputDisplay();
             updateResponseBodyOutput(lastResponseViewModel);
         }
 
-        private void updateResponseBodyOutput(ResponseViewModel responseVm) {
+        private void updateResponseBodyOutputDisplay() {
             switch (Settings.Default.ResponseBodyOutput) {
                 case ResponseBodyOutput.Raw:
                     rtResponseText.Visible = true;
                     rtResponseText.Dock = DockStyle.Fill;
                     wbResponseBody.Visible = false;
                     wbResponseBody.Dock = DockStyle.None;
-
-                    rtResponseText.Text = responseVm.Content;
                     break;
                 case ResponseBodyOutput.Pretty:
                     rtResponseText.Visible = true;
                     rtResponseText.Dock = DockStyle.Fill;
                     wbResponseBody.Visible = false;
                     wbResponseBody.Dock = DockStyle.None;
-
-                    rtResponseText.Text = responseVm.PrettyPrintedContent;
                     break;
                 case ResponseBodyOutput.Browser:
                     wbResponseBody.Visible = true;
                     wbResponseBody.Dock = DockStyle.Fill;
                     rtResponseText.Visible = false;
                     rtResponseText.Dock = DockStyle.None;
+                    break;
+            }
+        }
 
+        private void updateResponseBodyOutput(ResponseViewModel responseVm) {
+            switch (Settings.Default.ResponseBodyOutput) {
+                case ResponseBodyOutput.Raw:
+                    rtResponseText.Text = responseVm.Content;
+                    break;
+                case ResponseBodyOutput.Pretty:
+                    rtResponseText.Text = responseVm.PrettyPrintedContent;
+                    break;
+                case ResponseBodyOutput.Browser:
                     wbResponseBody.DocumentText = responseVm.Content;
                     break;
             }
@@ -175,8 +185,8 @@ namespace Swensen.RestSharpGui
                 showError("Request Validation Errors", String.Join(Environment.NewLine, validationErrors));
             else {
                 //clear response view and show loading message status
-                //bind(new ResponseViewModel("Loading..."));
-                //grpResponse.Update();
+                bind(new ResponseViewModel("Loading..."));
+                grpResponse.Update();
 
                 //execute the request and get the response
                 var restRequest = requestModel.ToRestRequest();
@@ -188,7 +198,7 @@ namespace Swensen.RestSharpGui
 
                 //bind the response view
                 bind(responseVm);
-                //grpResponse.Update();
+                grpResponse.Update();
             }
         }
 
