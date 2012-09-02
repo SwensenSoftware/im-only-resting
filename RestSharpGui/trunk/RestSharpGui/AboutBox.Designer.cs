@@ -31,8 +31,8 @@
             this.labelProductName = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();
-            this.okButton = new System.Windows.Forms.Button();
             this.linkDescription = new System.Windows.Forms.LinkLabel();
+            this.okButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +65,7 @@
             // 
             this.labelProductName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelProductName.AutoSize = true;
-            this.labelProductName.Location = new System.Drawing.Point(108, 6);
+            this.labelProductName.Location = new System.Drawing.Point(108, 7);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
             this.labelProductName.MaximumSize = new System.Drawing.Size(0, 21);
             this.labelProductName.Name = "labelProductName";
@@ -78,7 +78,7 @@
             // 
             this.labelVersion.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(129, 35);
+            this.labelVersion.Location = new System.Drawing.Point(129, 39);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
             this.labelVersion.MaximumSize = new System.Drawing.Size(0, 21);
             this.labelVersion.Name = "labelVersion";
@@ -91,7 +91,7 @@
             // 
             this.labelCopyright.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelCopyright.AutoSize = true;
-            this.labelCopyright.Location = new System.Drawing.Point(123, 64);
+            this.labelCopyright.Location = new System.Drawing.Point(123, 71);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 21);
             this.labelCopyright.Name = "labelCopyright";
@@ -99,6 +99,18 @@
             this.labelCopyright.TabIndex = 21;
             this.labelCopyright.Text = "Copyright";
             this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // linkDescription
+            // 
+            this.linkDescription.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.linkDescription.AutoSize = true;
+            this.linkDescription.Location = new System.Drawing.Point(78, 103);
+            this.linkDescription.Name = "linkDescription";
+            this.linkDescription.Size = new System.Drawing.Size(153, 17);
+            this.linkDescription.TabIndex = 25;
+            this.linkDescription.TabStop = true;
+            this.linkDescription.Text = "Description (home link)";
+            this.linkDescription.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDescription_LinkClicked);
             // 
             // okButton
             // 
@@ -112,18 +124,6 @@
             this.okButton.Text = "&OK";
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
-            // linkDescription
-            // 
-            this.linkDescription.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.linkDescription.AutoSize = true;
-            this.linkDescription.Location = new System.Drawing.Point(78, 93);
-            this.linkDescription.Name = "linkDescription";
-            this.linkDescription.Size = new System.Drawing.Size(153, 17);
-            this.linkDescription.TabIndex = 25;
-            this.linkDescription.TabStop = true;
-            this.linkDescription.Text = "Description (home link)";
-            this.linkDescription.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDescription_LinkClicked);
-            // 
             // AboutBox
             // 
             this.AcceptButton = this.okButton;
@@ -132,6 +132,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(334, 201);
+            this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);

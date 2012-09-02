@@ -10,6 +10,7 @@ using RestSharp;
 using System.Net;
 using System.Xml.Linq;
 using System.IO;
+using Swensen.RestSharpGui.Properties;
 
 //examples response types:
 //xml: http://www.w3schools.com/xml/note.asp
@@ -30,11 +31,33 @@ namespace Swensen.RestSharpGui
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            bindHttpMethods();            
-            ActiveControl = txtUrl;
-            splitterMain.SplitterDistance = this.Width / 2; //start off at 50% of main window splitter distance (todo: make app persist user preference).
+            bindHttpMethods();
+            bindRuntimeSettings();
+            bindStartupSettings();
             setUpFileDialogs();
             bind(new ResponseViewModel());
+            ActiveControl = txtUrl;
+        }
+
+        private void bindRuntimeSettings() {
+            var settings = Settings.Default;
+
+            this.Width = settings.FormWidth == 0 ? 1450 : settings.FormWidth;
+            this.Height = settings.FormHeight == 0 ? 690 : settings.FormHeight;
+            
+            splitterMain.Orientation = Settings.Default.SplitterOrientation;
+            if (settings.SplitterDistance > 0)
+                splitterMain.SplitterDistance = settings.SplitterDistance;
+            else { //todo: scale splitter distance on save
+                splitterMain.SplitterDistance = 
+                    splitterMain.Orientation == Orientation.Horizontal ? this.Width / 2 : this.Height / 2;
+            }
+        }
+
+        private void bindStartupSettings() {
+            var settings = Settings.Default;
+            if (!String.IsNullOrWhiteSpace(settings.DefaultRequestFilePath))
+                openRequestFile(settings.DefaultRequestFilePath);
         }
 
         private void setIsLastOpenedRequestFileDirtyToTrue() {
@@ -162,6 +185,11 @@ namespace Swensen.RestSharpGui
                 }
             }
 
+            if (fileName.ToUpper() == Settings.Default.DefaultRequestFilePath.ToUpper() && 
+                DialogResult.No == showChallenge("Overwrite Default Request File", "Are you sure you want to overwrite the default request file?")) {
+                return;                
+            }
+
             var requestVm = buildRequestViewModel();
             requestVm.Save(fileName);
             updateLastOpenedRequestFile(fileName);
@@ -185,17 +213,21 @@ namespace Swensen.RestSharpGui
             requestOpenFileDialog.FileName = null;
             if (requestOpenFileDialog.ShowDialog() == DialogResult.OK) {
                 var fileName = requestOpenFileDialog.FileName;
-                RequestViewModel requestVm;
-                try {
-                    requestVm = RequestViewModel.Open(fileName);
-                } catch {
-                    showError("File Open Error", "Error opening request file");
-                    return;
-                }
-                bind(new ResponseViewModel("")); // clear the response.
-                bind(requestVm);
-                updateLastOpenedRequestFile(fileName);
+                openRequestFile(fileName);    
             }
+        }
+
+        private void openRequestFile(string fileName) {
+            RequestViewModel requestVm;
+            try {
+                requestVm = RequestViewModel.Open(fileName);
+            } catch {
+                showError("File Open Error", "Error opening request file");
+                return;
+            }
+            bind(new ResponseViewModel("")); // clear the response.
+            bind(requestVm);
+            updateLastOpenedRequestFile(fileName);
         }
 
         private void exportResponseBodyToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -219,6 +251,10 @@ namespace Swensen.RestSharpGui
             MessageBox.Show(this, text, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private DialogResult showChallenge(string title, string text) {
+            return MessageBox.Show(this, text, title, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        }
+
         private void txtUrl_TextChanged(object sender, EventArgs e) {
             setIsLastOpenedRequestFileDirtyToTrue();
         }
@@ -238,6 +274,24 @@ namespace Swensen.RestSharpGui
         private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
             saveToolStripMenuItem.Enabled = this.isLastOpenedRequestFileDirty;
             exportResponseBodyToolStripMenuItem.Enabled = !(lastResponseViewModel.ContentBytes == null || lastResponseViewModel.ContentBytes.Length == 0);
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e) {
+            using(var options = new OptionsDialog()) {
+                if(DialogResult.OK == options.ShowDialog(this))
+                    bindRuntimeSettings();
+            }
+        }
+
+        private void MainForm_ResizeEnd(object sender, EventArgs e) {
+            Settings.Default.FormWidth = (ushort) this.Width;
+            Settings.Default.FormHeight = (ushort) this.Height;
+            Settings.Default.Save();
+        }
+
+        private void splitterMain_SplitterMoved(object sender, SplitterEventArgs e) {
+            Settings.Default.SplitterDistance = (ushort) splitterMain.SplitterDistance;
+            Settings.Default.Save();
         }
     }
 }
