@@ -26,5 +26,8 @@
     <Setting Name="ExportResponseFileDialogFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ResponseBodyOutput" Type="Swensen.RestSharpGui.ResponseBodyOutput" Scope="User">
+      <Value Profile="(Default)">Raw</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

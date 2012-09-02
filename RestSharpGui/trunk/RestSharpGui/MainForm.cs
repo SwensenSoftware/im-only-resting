@@ -32,11 +32,12 @@ namespace Swensen.RestSharpGui
         private void MainForm_Load(object sender, EventArgs e)
         {
             try {
+                lastResponseViewModel = new ResponseViewModel(); //just to avoid np exceptions.
+                bindResponseBodyOutputs();
                 bindHttpMethods();
                 bindRuntimeSettings();
                 bindStartupSettings();
                 setUpFileDialogs();
-                bind(new ResponseViewModel());
                 ActiveControl = txtUrl;
             } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
                 showError("Error", "Unknown error, shutting down: " + Environment.NewLine + Environment.NewLine + ex.ToString());
@@ -45,16 +46,14 @@ namespace Swensen.RestSharpGui
         }
 
         private void bindRuntimeSettings() {
-            //this.SuspendLayout(); //if we don't suspend, then setting the orientation will cause splitter moved event to fire and overwrite our splitter percent
             var settings = Settings.Default;
 
             this.Width = settings.FormWidth;
             this.Height = settings.FormHeight;
-            //this.Update(); //we need new client regions
             
             splitterMain.Orientation = Settings.Default.SplitterOrientation;
             updateSplitterDistance(); //must come after width and height and orientation updates
-            //this.ResumeLayout();
+            setCheckedResponseBodyOutputRb();
         }
 
         private void bindStartupSettings() {
@@ -81,6 +80,8 @@ namespace Swensen.RestSharpGui
             responseBodySaveFileDialog.InitialDirectory = initalExportedResponsesDir; 
         }
 
+        private IEnumerable<RadioButton> rbGrpHttpMethods { get { return grpHttpMethod.Controls.OfType<RadioButton>(); } }
+
         private void bindHttpMethods() {
             rbHttpDelete.Tag = Method.DELETE;
             rbHttpGet.Tag = Method.GET;
@@ -99,7 +100,57 @@ namespace Swensen.RestSharpGui
             setIsLastOpenedRequestFileDirtyToTrue();
         }
 
-        private IEnumerable<RadioButton> rbGrpHttpMethods { get { return grpHttpMethod.Controls.OfType<RadioButton>(); } }
+        private IEnumerable<RadioButton> rbGrpResponseBodyOutputs { get { return grpResponseBodyOutput.Controls.OfType<RadioButton>(); } }
+
+        private void bindResponseBodyOutputs() {
+            rbResponseBodyOutputRaw.Tag = ResponseBodyOutput.Raw;
+            rbResponseBodyOutputPretty.Tag = ResponseBodyOutput.Pretty;
+            rbResponseBodyOutputBrowser.Tag = ResponseBodyOutput.Browser;
+
+            foreach (var rb in rbGrpResponseBodyOutputs) {
+                rb.Click += new EventHandler(rbGrpResponseBodyOutput_Click);
+            }
+        }
+
+        void rbGrpResponseBodyOutput_Click(object sender, EventArgs e) {
+            Settings.Default.ResponseBodyOutput = (ResponseBodyOutput)((RadioButton)sender).Tag;
+            Settings.Default.Save();
+            updateResponseBodyOutput();
+        }
+
+        private void setCheckedResponseBodyOutputRb() {
+            rbGrpResponseBodyOutputs.First(x => (ResponseBodyOutput)x.Tag == Settings.Default.ResponseBodyOutput).Checked = true;
+            updateResponseBodyOutput();
+        }
+
+        private void updateResponseBodyOutput() {
+            switch (Settings.Default.ResponseBodyOutput) {
+                case ResponseBodyOutput.Raw:
+                    rtResponseText.Visible = true;
+                    rtResponseText.Dock = DockStyle.Fill;
+                    wbResponseBody.Visible = false;
+                    wbResponseBody.Dock = DockStyle.None;
+
+                    rtResponseText.Text = lastResponseViewModel.Content;
+                    break;
+                case ResponseBodyOutput.Pretty:
+                    rtResponseText.Visible = true;
+                    rtResponseText.Dock = DockStyle.Fill;
+                    wbResponseBody.Visible = false;
+                    wbResponseBody.Dock = DockStyle.None;
+
+                    rtResponseText.Text = lastResponseViewModel.PrettyPrintedContent;
+                    break;
+                case ResponseBodyOutput.Browser:
+                    wbResponseBody.Visible = true;
+                    wbResponseBody.Dock = DockStyle.Fill;
+                    rtResponseText.Visible = false;
+                    rtResponseText.Dock = DockStyle.None;
+
+                    wbResponseBody.DocumentText = lastResponseViewModel.Content;
+                    break;
+            }
+        }
 
         private RequestViewModel buildRequestViewModel() {
             //build the request view
@@ -142,7 +193,7 @@ namespace Swensen.RestSharpGui
 
         private void bind(ResponseViewModel responseVm) {
             lblResponseStatusValue.Text = responseVm.Status;
-            rtResponseText.Text = responseVm.PrettyPrintedContent;
+            updateResponseBodyOutput();
             txtResponseHeaders.Text = responseVm.Headers;
             lblResponseTimeValue.Text = responseVm.ElapsedTime;
 

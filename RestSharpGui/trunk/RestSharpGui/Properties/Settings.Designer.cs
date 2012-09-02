@@ -118,5 +118,17 @@ namespace Swensen.RestSharpGui.Properties {
                 this["ExportResponseFileDialogFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Raw")]
+        public global::Swensen.RestSharpGui.ResponseBodyOutput ResponseBodyOutput {
+            get {
+                return ((global::Swensen.RestSharpGui.ResponseBodyOutput)(this["ResponseBodyOutput"]));
+            }
+            set {
+                this["ResponseBodyOutput"] = value;
+            }
+        }
     }
 }
