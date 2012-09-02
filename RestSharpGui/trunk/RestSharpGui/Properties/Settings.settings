@@ -5,14 +5,14 @@
     <Setting Name="SplitterOrientation" Type="System.Windows.Forms.Orientation" Scope="User">
       <Value Profile="(Default)">Vertical</Value>
     </Setting>
-    <Setting Name="SplitterDistance" Type="System.UInt16" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="SplitterDistancePercent" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="FormWidth" Type="System.UInt16" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1450</Value>
     </Setting>
     <Setting Name="FormHeight" Type="System.UInt16" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">690</Value>
     </Setting>
     <Setting Name="ProxyServer" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

@@ -37,19 +37,19 @@ namespace Swensen.RestSharpGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public ushort SplitterDistance {
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public ushort SplitterDistancePercent {
             get {
-                return ((ushort)(this["SplitterDistance"]));
+                return ((ushort)(this["SplitterDistancePercent"]));
             }
             set {
-                this["SplitterDistance"] = value;
+                this["SplitterDistancePercent"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1450")]
         public ushort FormWidth {
             get {
                 return ((ushort)(this["FormWidth"]));
@@ -61,7 +61,7 @@ namespace Swensen.RestSharpGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("690")]
         public ushort FormHeight {
             get {
                 return ((ushort)(this["FormHeight"]));

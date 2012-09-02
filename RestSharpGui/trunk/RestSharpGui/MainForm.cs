@@ -42,16 +42,11 @@ namespace Swensen.RestSharpGui
         private void bindRuntimeSettings() {
             var settings = Settings.Default;
 
-            this.Width = settings.FormWidth == 0 ? 1450 : settings.FormWidth;
-            this.Height = settings.FormHeight == 0 ? 690 : settings.FormHeight;
+            this.Width = settings.FormWidth;
+            this.Height = settings.FormHeight;
             
             splitterMain.Orientation = Settings.Default.SplitterOrientation;
-            if (settings.SplitterDistance > 0)
-                splitterMain.SplitterDistance = settings.SplitterDistance;
-            else { //todo: scale splitter distance on save
-                splitterMain.SplitterDistance = 
-                    splitterMain.Orientation == Orientation.Horizontal ? this.Width / 2 : this.Height / 2;
-            }
+            updateSplitterDistance(); //must come after width and height and orientation updates
         }
 
         private void bindStartupSettings() {
@@ -284,14 +279,27 @@ namespace Swensen.RestSharpGui
         }
 
         private void MainForm_ResizeEnd(object sender, EventArgs e) {
+            //updateSplitterDistance();
+
             Settings.Default.FormWidth = (ushort) this.Width;
             Settings.Default.FormHeight = (ushort) this.Height;
             Settings.Default.Save();
         }
 
         private void splitterMain_SplitterMoved(object sender, SplitterEventArgs e) {
-            Settings.Default.SplitterDistance = (ushort) splitterMain.SplitterDistance;
-            Settings.Default.Save();
+            var pct = (splitterMain.SplitterDistance / (double)(splitterMain.Orientation == Orientation.Vertical ? this.Width : this.Height)) * 100;
+            var pctRound = (ushort) pct;
+            //this event gets called a lot of times, let's not do too much work if we don't have to.
+            if(Math.Abs((int)Settings.Default.SplitterDistancePercent - pctRound) > 3) {
+                Settings.Default.SplitterDistancePercent = pctRound; 
+                Settings.Default.Save();
+            }
+        }
+
+        private void updateSplitterDistance() {
+            var pct = (Settings.Default.SplitterDistancePercent / 100.0);
+            splitterMain.SplitterDistance =
+                (int)(pct * (splitterMain.Orientation == Orientation.Vertical ? this.Width : this.Height));
         }
     }
 }

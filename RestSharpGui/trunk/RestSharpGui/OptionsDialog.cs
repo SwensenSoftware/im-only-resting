@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using Swensen.RestSharpGui.Properties;
+using System.IO;
 
 namespace Swensen.RestSharpGui {
     public partial class OptionsDialog : Form {
@@ -16,6 +17,7 @@ namespace Swensen.RestSharpGui {
         }
 
         private void frmOptionsDialog_Load(object sender, EventArgs e) {
+            this.pgridOptions.PropertyValueChanged += new PropertyValueChangedEventHandler(pgridOptions_PropertyValueChanged);
             pgridOptions.SelectedObject = Settings.Default;
         }
 
@@ -29,6 +31,39 @@ namespace Swensen.RestSharpGui {
             Settings.Default.Reload();
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        void pgridOptions_PropertyValueChanged(object s, PropertyValueChangedEventArgs e) {
+            var settings = Settings.Default;
+            switch(e.ChangedItem.PropertyDescriptor.Name) {
+                case "SplitterDistancePercent": {
+                    var value = (ushort)e.ChangedItem.Value;
+                    if (value > 100) {
+                        settings.SplitterDistancePercent = (ushort) e.OldValue;
+                        showPropertyValidationError(string.Format("SplitterDistancePercent must be between 0 and 100 inclusive but was {0}", value));
+                        goto Cancel;
+                    }
+                    return;
+                }
+                case "DefaultRequestFilePath": {
+                    var value = (string)e.ChangedItem.Value;
+                    if (!String.IsNullOrWhiteSpace(value) && !File.Exists(value)) {
+                        settings.DefaultRequestFilePath = (string)e.OldValue;
+                        showPropertyValidationError(string.Format("DefaultRequestFilePath does not exist"));
+                        goto Cancel;
+                    }
+                    return;
+                }
+                default: return;
+            }
+
+            Cancel: {
+                pgridOptions.Refresh();
+            }
+        }
+
+        private void showPropertyValidationError(string msg) {
+            MessageBox.Show(this, msg, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
