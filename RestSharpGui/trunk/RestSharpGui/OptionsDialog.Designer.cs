@@ -35,7 +35,7 @@
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnSave);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(0, 359);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 268);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(534, 35);
             this.pnlButtons.TabIndex = 0;
@@ -71,14 +71,16 @@
             this.pgridOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgridOptions.Location = new System.Drawing.Point(0, 0);
             this.pgridOptions.Name = "pgridOptions";
-            this.pgridOptions.Size = new System.Drawing.Size(534, 359);
+            this.pgridOptions.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
+            this.pgridOptions.Size = new System.Drawing.Size(534, 268);
             this.pgridOptions.TabIndex = 1;
+            this.pgridOptions.ToolbarVisible = false;
             // 
             // OptionsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 394);
+            this.ClientSize = new System.Drawing.Size(534, 303);
             this.ControlBox = false;
             this.Controls.Add(this.pgridOptions);
             this.Controls.Add(this.pnlButtons);
