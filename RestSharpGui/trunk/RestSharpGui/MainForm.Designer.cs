@@ -158,6 +158,7 @@
             this.txtRequestBody.AcceptsReturn = true;
             this.txtRequestBody.AcceptsTab = true;
             this.txtRequestBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestBody.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRequestBody.Location = new System.Drawing.Point(4, 19);
             this.txtRequestBody.Margin = new System.Windows.Forms.Padding(4);
             this.txtRequestBody.Multiline = true;
@@ -206,6 +207,7 @@
             // 
             this.txtRequestHeaders.AcceptsReturn = true;
             this.txtRequestHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestHeaders.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRequestHeaders.Location = new System.Drawing.Point(4, 19);
             this.txtRequestHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.txtRequestHeaders.Multiline = true;
@@ -436,6 +438,7 @@
             // 
             this.rtResponseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtResponseText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtResponseText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtResponseText.Location = new System.Drawing.Point(4, 4);
             this.rtResponseText.Margin = new System.Windows.Forms.Padding(4);
             this.rtResponseText.Name = "rtResponseText";
@@ -463,6 +466,7 @@
             // 
             this.txtResponseHeaders.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtResponseHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtResponseHeaders.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtResponseHeaders.Location = new System.Drawing.Point(4, 4);
             this.txtResponseHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.txtResponseHeaders.Multiline = true;
