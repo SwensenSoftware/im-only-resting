@@ -118,6 +118,7 @@ namespace Swensen.RestSharpGui
             lblResponseStatusValue.Text = responseVm.Status;
             rtResponseText.Text = responseVm.PrettyPrintedContent;
             txtResponseHeaders.Text = responseVm.Headers;
+            lblResponseTimeValue.Text = responseVm.ElapsedTime;
 
             this.lastResponseViewModel = responseVm;
         }

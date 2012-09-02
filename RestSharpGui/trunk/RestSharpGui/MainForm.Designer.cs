@@ -57,9 +57,7 @@
             this.rtResponseText = new System.Windows.Forms.RichTextBox();
             this.tpResponseHeaders = new System.Windows.Forms.TabPage();
             this.txtResponseHeaders = new System.Windows.Forms.TextBox();
-            this.pnlResponseStatus = new System.Windows.Forms.Panel();
-            this.lblResponseStatusValue = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
+            this.pnlResponseStatusAndTime = new System.Windows.Forms.Panel();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +71,13 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlResponseStatus = new System.Windows.Forms.Panel();
+            this.pnlResponseTime = new System.Windows.Forms.Panel();
+            this.lblResponseStatus = new System.Windows.Forms.Label();
+            this.lblResponseStatusValue = new System.Windows.Forms.Label();
+            this.lblResponseTime = new System.Windows.Forms.Label();
+            this.lblResponseTimeValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -90,8 +95,11 @@
             this.tcResponse.SuspendLayout();
             this.tpResponseText.SuspendLayout();
             this.tpResponseHeaders.SuspendLayout();
-            this.pnlResponseStatus.SuspendLayout();
+            this.pnlResponseStatusAndTime.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.pnlResponseStatus.SuspendLayout();
+            this.pnlResponseTime.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitterMain
@@ -388,7 +396,7 @@
             // 
             this.grpResponse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.grpResponse.Controls.Add(this.tcResponse);
-            this.grpResponse.Controls.Add(this.pnlResponseStatus);
+            this.grpResponse.Controls.Add(this.pnlResponseStatusAndTime);
             this.grpResponse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpResponse.Location = new System.Drawing.Point(4, 4);
             this.grpResponse.Margin = new System.Windows.Forms.Padding(6);
@@ -404,11 +412,11 @@
             this.tcResponse.Controls.Add(this.tpResponseText);
             this.tcResponse.Controls.Add(this.tpResponseHeaders);
             this.tcResponse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcResponse.Location = new System.Drawing.Point(4, 49);
+            this.tcResponse.Location = new System.Drawing.Point(4, 50);
             this.tcResponse.Margin = new System.Windows.Forms.Padding(4);
             this.tcResponse.Name = "tcResponse";
             this.tcResponse.SelectedIndex = 0;
-            this.tcResponse.Size = new System.Drawing.Size(683, 556);
+            this.tcResponse.Size = new System.Drawing.Size(683, 555);
             this.tcResponse.TabIndex = 6;
             // 
             // tpResponseText
@@ -418,7 +426,7 @@
             this.tpResponseText.Margin = new System.Windows.Forms.Padding(4);
             this.tpResponseText.Name = "tpResponseText";
             this.tpResponseText.Padding = new System.Windows.Forms.Padding(4);
-            this.tpResponseText.Size = new System.Drawing.Size(675, 527);
+            this.tpResponseText.Size = new System.Drawing.Size(675, 526);
             this.tpResponseText.TabIndex = 0;
             this.tpResponseText.Text = "Body";
             this.tpResponseText.UseVisualStyleBackColor = true;
@@ -432,7 +440,7 @@
             this.rtResponseText.Name = "rtResponseText";
             this.rtResponseText.ReadOnly = true;
             this.rtResponseText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.rtResponseText.Size = new System.Drawing.Size(667, 519);
+            this.rtResponseText.Size = new System.Drawing.Size(667, 518);
             this.rtResponseText.TabIndex = 10;
             this.rtResponseText.Text = "";
             this.rtResponseText.WordWrap = false;
@@ -464,41 +472,16 @@
             this.txtResponseHeaders.TabIndex = 11;
             this.txtResponseHeaders.WordWrap = false;
             // 
-            // pnlResponseStatus
+            // pnlResponseStatusAndTime
             // 
-            this.pnlResponseStatus.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlResponseStatus.Controls.Add(this.lblResponseStatusValue);
-            this.pnlResponseStatus.Controls.Add(this.lblStatus);
-            this.pnlResponseStatus.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlResponseStatus.Location = new System.Drawing.Point(4, 19);
-            this.pnlResponseStatus.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlResponseStatus.Name = "pnlResponseStatus";
-            this.pnlResponseStatus.Padding = new System.Windows.Forms.Padding(4);
-            this.pnlResponseStatus.Size = new System.Drawing.Size(683, 30);
-            this.pnlResponseStatus.TabIndex = 5;
-            // 
-            // lblResponseStatusValue
-            // 
-            this.lblResponseStatusValue.AutoSize = true;
-            this.lblResponseStatusValue.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblResponseStatusValue.Location = new System.Drawing.Point(56, 4);
-            this.lblResponseStatusValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblResponseStatusValue.Name = "lblResponseStatusValue";
-            this.lblResponseStatusValue.Size = new System.Drawing.Size(73, 17);
-            this.lblResponseStatusValue.TabIndex = 3;
-            this.lblResponseStatusValue.Text = "statusText";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblStatus.Location = new System.Drawing.Point(4, 4);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(52, 17);
-            this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "Status:";
-            this.lblStatus.UseWaitCursor = true;
+            this.pnlResponseStatusAndTime.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlResponseStatusAndTime.Controls.Add(this.tableLayoutPanel1);
+            this.pnlResponseStatusAndTime.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlResponseStatusAndTime.Location = new System.Drawing.Point(4, 19);
+            this.pnlResponseStatusAndTime.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlResponseStatusAndTime.Name = "pnlResponseStatusAndTime";
+            this.pnlResponseStatusAndTime.Size = new System.Drawing.Size(683, 31);
+            this.pnlResponseStatusAndTime.TabIndex = 5;
             // 
             // mainMenuStrip
             // 
@@ -593,6 +576,85 @@
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.pnlResponseStatus, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pnlResponseTime, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(683, 31);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // pnlResponseStatus
+            // 
+            this.pnlResponseStatus.Controls.Add(this.lblResponseStatusValue);
+            this.pnlResponseStatus.Controls.Add(this.lblResponseStatus);
+            this.pnlResponseStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlResponseStatus.Location = new System.Drawing.Point(3, 3);
+            this.pnlResponseStatus.Name = "pnlResponseStatus";
+            this.pnlResponseStatus.Size = new System.Drawing.Size(335, 25);
+            this.pnlResponseStatus.TabIndex = 0;
+            // 
+            // pnlResponseTime
+            // 
+            this.pnlResponseTime.Controls.Add(this.lblResponseTimeValue);
+            this.pnlResponseTime.Controls.Add(this.lblResponseTime);
+            this.pnlResponseTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlResponseTime.Location = new System.Drawing.Point(344, 3);
+            this.pnlResponseTime.Name = "pnlResponseTime";
+            this.pnlResponseTime.Size = new System.Drawing.Size(336, 25);
+            this.pnlResponseTime.TabIndex = 1;
+            // 
+            // lblResponseStatus
+            // 
+            this.lblResponseStatus.AutoSize = true;
+            this.lblResponseStatus.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblResponseStatus.Location = new System.Drawing.Point(0, 0);
+            this.lblResponseStatus.Name = "lblResponseStatus";
+            this.lblResponseStatus.Size = new System.Drawing.Size(52, 17);
+            this.lblResponseStatus.TabIndex = 0;
+            this.lblResponseStatus.Text = "Status:";
+            // 
+            // lblResponseStatusValue
+            // 
+            this.lblResponseStatusValue.AutoSize = true;
+            this.lblResponseStatusValue.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblResponseStatusValue.Location = new System.Drawing.Point(52, 0);
+            this.lblResponseStatusValue.Name = "lblResponseStatusValue";
+            this.lblResponseStatusValue.Size = new System.Drawing.Size(82, 17);
+            this.lblResponseStatusValue.TabIndex = 1;
+            this.lblResponseStatusValue.Text = "statusValue";
+            // 
+            // lblResponseTime
+            // 
+            this.lblResponseTime.AutoSize = true;
+            this.lblResponseTime.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblResponseTime.Location = new System.Drawing.Point(0, 0);
+            this.lblResponseTime.Name = "lblResponseTime";
+            this.lblResponseTime.Size = new System.Drawing.Size(43, 17);
+            this.lblResponseTime.TabIndex = 0;
+            this.lblResponseTime.Text = "Time:";
+            // 
+            // lblResponseTimeValue
+            // 
+            this.lblResponseTimeValue.AutoSize = true;
+            this.lblResponseTimeValue.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblResponseTimeValue.Location = new System.Drawing.Point(43, 0);
+            this.lblResponseTimeValue.Name = "lblResponseTimeValue";
+            this.lblResponseTimeValue.Size = new System.Drawing.Size(70, 17);
+            this.lblResponseTimeValue.TabIndex = 1;
+            this.lblResponseTimeValue.Text = "timeValue";
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -629,10 +691,14 @@
             this.tpResponseText.ResumeLayout(false);
             this.tpResponseHeaders.ResumeLayout(false);
             this.tpResponseHeaders.PerformLayout();
-            this.pnlResponseStatus.ResumeLayout(false);
-            this.pnlResponseStatus.PerformLayout();
+            this.pnlResponseStatusAndTime.ResumeLayout(false);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.pnlResponseStatus.ResumeLayout(false);
+            this.pnlResponseStatus.PerformLayout();
+            this.pnlResponseTime.ResumeLayout(false);
+            this.pnlResponseTime.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -648,9 +714,7 @@
         private System.Windows.Forms.RichTextBox rtResponseText;
         private System.Windows.Forms.TabPage tpResponseHeaders;
         private System.Windows.Forms.TextBox txtResponseHeaders;
-        private System.Windows.Forms.Panel pnlResponseStatus;
-        private System.Windows.Forms.Label lblResponseStatusValue;
-        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Panel pnlResponseStatusAndTime;
         private System.Windows.Forms.Panel pnlTopHalfOfRequest;
         private System.Windows.Forms.Panel pnlRequestMethodAndHeaders;
         private System.Windows.Forms.GroupBox grpHeaders;
@@ -685,6 +749,13 @@
         private System.Windows.Forms.ToolStripMenuItem exportResponseBodyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.SaveFileDialog responseBodySaveFileDialog;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel pnlResponseStatus;
+        private System.Windows.Forms.Panel pnlResponseTime;
+        private System.Windows.Forms.Label lblResponseStatus;
+        private System.Windows.Forms.Label lblResponseStatusValue;
+        private System.Windows.Forms.Label lblResponseTimeValue;
+        private System.Windows.Forms.Label lblResponseTime;
 
     }
 }

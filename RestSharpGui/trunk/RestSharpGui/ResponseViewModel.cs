@@ -44,14 +44,15 @@ namespace Swensen.RestSharpGui {
                           response.ResponseStatus.ToString();
 
             if (start != null && end != null)
-                this.Status = this.Status + "    Time: " + (end - start);
+                ElapsedTime = (end - start).Milliseconds + " ms";
 
             this.Content = response.Content;
             this.ContentBytes = response.RawBytes;
             this.ContentType = extractCharsetlessContentType(response.ContentType);
             this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
-
         }
+
+        public string ElapsedTime { get; private set; }
 
         private string extractCharsetlessContentType(string contentType) {
             //ContentType spec: http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7
