@@ -66,12 +66,12 @@ namespace Swensen.RestSharpGui
 
         //todo: persist directory restore upon app start.
         private void setUpFileDialogs() {
-            var initialSavedRequestsDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Saved Requests";
+            var initialSavedRequestsDir = Settings.Default.SaveRequestFileDialogFolder;
             Directory.CreateDirectory(initialSavedRequestsDir);
             requestSaveFileDialog.InitialDirectory = initialSavedRequestsDir;
             requestOpenFileDialog.InitialDirectory = initialSavedRequestsDir;
 
-            var initalExportedResponsesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Exported Responses";
+            var initalExportedResponsesDir = Settings.Default.ExportResponseFileDialogFolder;
             Directory.CreateDirectory(initalExportedResponsesDir);
             responseBodySaveFileDialog.InitialDirectory = initalExportedResponsesDir; 
         }
@@ -178,6 +178,7 @@ namespace Swensen.RestSharpGui
                 requestSaveFileDialog.FileName = null;
                 if (requestSaveFileDialog.ShowDialog() == DialogResult.OK) {
                     fileName = requestSaveFileDialog.FileName;
+                    Settings.Default.SaveRequestFileDialogFolder = requestOpenFileDialog.InitialDirectory;
                 } else {
                     return;
                 }
@@ -211,7 +212,8 @@ namespace Swensen.RestSharpGui
             requestOpenFileDialog.FileName = null;
             if (requestOpenFileDialog.ShowDialog() == DialogResult.OK) {
                 var fileName = requestOpenFileDialog.FileName;
-                openRequestFile(fileName);    
+                openRequestFile(fileName);
+                Settings.Default.SaveRequestFileDialogFolder = requestOpenFileDialog.InitialDirectory;
             }
         }
 
@@ -242,6 +244,7 @@ namespace Swensen.RestSharpGui
             
             if (responseBodySaveFileDialog.ShowDialog() == DialogResult.OK) {
                 File.WriteAllBytes(responseBodySaveFileDialog.FileName, lastResponseViewModel.ContentBytes);
+                Settings.Default.ExportResponseFileDialogFolder = responseBodySaveFileDialog.InitialDirectory;
             }
         }
 
@@ -295,6 +298,8 @@ namespace Swensen.RestSharpGui
             //splitter percent
             var pct = Math.Round((splitterMain.SplitterDistance / (double)(splitterMain.Orientation == Orientation.Vertical ? this.ClientSize.Width : this.ClientSize.Height)) * 100);
             Settings.Default.SplitterDistancePercent = (ushort)pct;
+
+            //directories are set at time of dialog OK closing
 
             Settings.Default.Save();
         }

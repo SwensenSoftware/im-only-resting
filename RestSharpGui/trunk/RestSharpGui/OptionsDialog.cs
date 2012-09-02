@@ -49,8 +49,26 @@ namespace Swensen.RestSharpGui {
                 case "DefaultRequestFilePath": {
                     var value = (string)e.ChangedItem.Value;
                     if (!String.IsNullOrWhiteSpace(value) && !File.Exists(value)) {
-                        showPropertyValidationError(string.Format("DefaultRequestFilePath does not exist"));
+                        showPropertyValidationError(string.Format("DefaultRequestFilePath specified file does not exist"));
                         settings.DefaultRequestFilePath = (string)e.OldValue;
+                        goto Cancel;
+                    }
+                    return;
+                }
+                case "SaveRequestFileDialogFolder": {
+                    var value = (string)e.ChangedItem.Value;
+                    if (!String.IsNullOrWhiteSpace(value) && !Directory.Exists(value)) {
+                        showPropertyValidationError(string.Format("SaveRequestFileDialogFolder specified directory does not exist"));
+                        settings.SaveRequestFileDialogFolder = (string)e.OldValue;
+                        goto Cancel;
+                    }
+                    return;
+                }
+                case "ExportResponseFileDialogFolder": {
+                    var value = (string)e.ChangedItem.Value;
+                    if (!String.IsNullOrWhiteSpace(value) && !Directory.Exists(value)) {
+                        showPropertyValidationError(string.Format("ExportResponseFileDialogFolder specified directory does not exist"));
+                        settings.ExportResponseFileDialogFolder = (string)e.OldValue;
                         goto Cancel;
                     }
                     return;

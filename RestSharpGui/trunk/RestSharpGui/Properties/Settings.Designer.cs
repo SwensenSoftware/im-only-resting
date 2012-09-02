@@ -94,5 +94,29 @@ namespace Swensen.RestSharpGui.Properties {
                 this["DefaultRequestFilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SaveRequestFileDialogFolder {
+            get {
+                return ((string)(this["SaveRequestFileDialogFolder"]));
+            }
+            set {
+                this["SaveRequestFileDialogFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExportResponseFileDialogFolder {
+            get {
+                return ((string)(this["ExportResponseFileDialogFolder"]));
+            }
+            set {
+                this["ExportResponseFileDialogFolder"] = value;
+            }
+        }
     }
 }

@@ -35,9 +35,9 @@
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnSave);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(0, 268);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 206);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(534, 35);
+            this.pnlButtons.Size = new System.Drawing.Size(911, 35);
             this.pnlButtons.TabIndex = 0;
             // 
             // btnSave
@@ -45,7 +45,7 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.AutoSize = true;
             this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSave.Location = new System.Drawing.Point(414, 3);
+            this.btnSave.Location = new System.Drawing.Point(791, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(50, 27);
             this.btnSave.TabIndex = 0;
@@ -58,7 +58,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.AutoSize = true;
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCancel.Location = new System.Drawing.Point(470, 3);
+            this.btnCancel.Location = new System.Drawing.Point(847, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(61, 27);
             this.btnCancel.TabIndex = 1;
@@ -68,11 +68,13 @@
             // 
             // pgridOptions
             // 
+            this.pgridOptions.CommandsVisibleIfAvailable = false;
             this.pgridOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgridOptions.HelpVisible = false;
             this.pgridOptions.Location = new System.Drawing.Point(0, 0);
             this.pgridOptions.Name = "pgridOptions";
             this.pgridOptions.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
-            this.pgridOptions.Size = new System.Drawing.Size(534, 268);
+            this.pgridOptions.Size = new System.Drawing.Size(911, 206);
             this.pgridOptions.TabIndex = 1;
             this.pgridOptions.ToolbarVisible = false;
             // 
@@ -80,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 303);
+            this.ClientSize = new System.Drawing.Size(911, 241);
             this.ControlBox = false;
             this.Controls.Add(this.pgridOptions);
             this.Controls.Add(this.pnlButtons);
