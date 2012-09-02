@@ -299,8 +299,11 @@ namespace Swensen.RestSharpGui
         }
 
         private void persistGuiSettings() {
-            Settings.Default.FormWidth = (ushort)this.Width;
-            Settings.Default.FormHeight = (ushort)this.Height;
+            //gets wacky if we allow min or max
+            if (this.WindowState == FormWindowState.Normal) {
+                Settings.Default.FormWidth = (ushort)this.Width;
+                Settings.Default.FormHeight = (ushort)this.Height;
+            }
             
             //splitter percent
             var pct = Math.Round((splitterMain.SplitterDistance / (double)(splitterMain.Orientation == Orientation.Vertical ? this.ClientSize.Width : this.ClientSize.Height)) * 100);
