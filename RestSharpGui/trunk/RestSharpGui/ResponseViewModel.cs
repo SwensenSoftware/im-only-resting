@@ -30,6 +30,7 @@ namespace Swensen.RestSharpGui {
         /// </summary>
         public ResponseViewModel(string status="") {
             this.Status = status;
+            initLazyFields();
         }
 
         /// <summary>
@@ -48,8 +49,15 @@ namespace Swensen.RestSharpGui {
 
             this.Content = response.Content;
             this.ContentBytes = response.RawBytes;
-            this.ContentType = extractCharsetlessContentType(response.ContentType);
+            this.ContentTypeWithoutCharset = extractCharsetlessContentType(response.ContentType);
             this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
+
+            initLazyFields();            
+        }
+
+        private void initLazyFields() {
+            this.inferredContentType = new Lazy<InferredContentType>(() => InferredContentTypeUtils.FromContentType(this.ContentTypeWithoutCharset));
+            this.prettyPrintedContent = new Lazy<string>(() => prettyPrint(this.InferredContentType, this.Content));
         }
 
         public string ElapsedTime { get; private set; }
@@ -71,12 +79,16 @@ namespace Swensen.RestSharpGui {
         /// <summary>
         /// The content type with charset excluded if it was present on the header.
         /// </summary>
-        public string ContentType { get; private set; }
-        public InferredContentType InferredContentType { get { return InferredContentTypeUtils.FromContentType(ContentType); } }
+        public string ContentTypeWithoutCharset { get; private set; }
+
+        private Lazy<InferredContentType> inferredContentType;
+        public InferredContentType InferredContentType { get { return inferredContentType.Value; } }
 
         public byte[] ContentBytes { get; private set; }
         public string Content { get; private set; }
-        public string PrettyPrintedContent { get { return prettyPrint(InferredContentType, Content); } }
+        
+        private Lazy<string> prettyPrintedContent;
+        public string PrettyPrintedContent { get { return prettyPrintedContent.Value; } }
 
         public string Headers { get; set; }
 
@@ -88,31 +100,41 @@ namespace Swensen.RestSharpGui {
             try {
                 switch (contentType) {
                     case InferredContentType.Xml: {
-                            return XDocument.Parse(content).ToString();
-                        }
+                        return XDocument.Parse(content).ToString();
+                    }
                     case InferredContentType.Json: {
-                            dynamic parsedJson = JsonConvert.DeserializeObject(content);
-                            return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
-                        }
+                        dynamic parsedJson = JsonConvert.DeserializeObject(content);
+                        return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                    }
                     case InferredContentType.Html: {
-                            using (var doc = Document.FromString(content)) {
-                                doc.ShowWarnings = false;
-                                doc.Quiet = true;
-                                doc.OutputXhtml = false;
-                                doc.OutputXml = false;
-                                doc.OutputHtml = false;
-                                doc.IndentBlockElements = AutoBool.Yes;
-                                doc.IndentSpaces = 4;
-                                doc.IndentAttributes = false;
-                                //doc.IndentCdata = true;
-                                doc.AddVerticalSpace = true;
-                                doc.AddTidyMetaElement = false;
-                                doc.WrapAt = 120;
-                                doc.CleanAndRepair();
-                                string output = doc.Save();
-                                return output;
-                            }
+                        //need to convert to utf16-little endian stream and set Document input/output encoding since Document.FromString screws up encoding.
+                        var stream = new System.IO.MemoryStream(Encoding.Unicode.GetBytes(content));
+                        using (var doc = Document.FromStream(stream)) {
+                            doc.InputCharacterEncoding = EncodingType.Utf16LittleEndian;
+                            doc.OutputCharacterEncoding = EncodingType.Utf16LittleEndian;
+                            doc.ShowWarnings = false;
+                            doc.Quiet = true;
+                            doc.OutputXhtml = false;
+                            doc.OutputXml = false;
+                            doc.OutputHtml = false;
+                            doc.IndentBlockElements = AutoBool.Yes;
+                            doc.IndentSpaces = 4;
+                            doc.IndentAttributes = false;
+                            //doc.IndentCdata = true;
+                            doc.AddVerticalSpace = true;
+                            doc.AddTidyMetaElement = false;
+                            doc.WrapAt = 120;
+
+                            doc.MergeDivs = AutoBool.No;
+                            doc.MergeSpans = AutoBool.No;
+                            doc.JoinStyles = false;
+                            doc.ForceOutput = true;
+                            doc.CleanAndRepair();
+                            
+                            string output = doc.Save();
+                            return output;
                         }
+                    }
                     default:
                         return content;
                 }

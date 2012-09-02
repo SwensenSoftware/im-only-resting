@@ -31,12 +31,17 @@ namespace Swensen.RestSharpGui
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            bindHttpMethods();
-            bindRuntimeSettings();
-            bindStartupSettings();
-            setUpFileDialogs();
-            bind(new ResponseViewModel());
-            ActiveControl = txtUrl;
+            try {
+                bindHttpMethods();
+                bindRuntimeSettings();
+                bindStartupSettings();
+                setUpFileDialogs();
+                bind(new ResponseViewModel());
+                ActiveControl = txtUrl;
+            } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
+                showError("Error", "Unknown error, shutting down: " + Environment.NewLine + Environment.NewLine + ex.ToString());
+                this.Close();
+            }
         }
 
         private void bindRuntimeSettings() {
