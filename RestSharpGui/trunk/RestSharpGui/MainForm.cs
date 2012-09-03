@@ -424,5 +424,15 @@ namespace Swensen.RestSharpGui
 
             pnlResponseContent.Controls.Add(wbResponseBody);
         }
+
+        private void splitterMain_DoubleClick(object sender, EventArgs e) {
+            persistGuiSettings();
+
+            Settings.Default.SplitterOrientation = splitterMain.Orientation == Orientation.Vertical ? Orientation.Horizontal : Orientation.Vertical;
+            splitterMain.Orientation = Settings.Default.SplitterOrientation;
+            updateSplitterDistance();
+
+            Settings.Default.Save();
+        }
     }
 }
