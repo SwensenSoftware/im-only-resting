@@ -100,7 +100,12 @@ namespace Swensen.RestSharpGui {
             try {
                 switch (contentType) {
                     case InferredContentType.Xml: {
-                        return XDocument.Parse(content).ToString();
+                        var doc = XDocument.Parse(content);
+                        var xml = doc.ToString();
+                        if (doc.Declaration != null)
+                            return doc.Declaration.ToString() + Environment.NewLine + xml;
+                        else
+                            return xml;
                     }
                     case InferredContentType.Json: {
                         dynamic parsedJson = JsonConvert.DeserializeObject(content);
