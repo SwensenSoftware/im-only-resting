@@ -438,6 +438,7 @@
             this.pnlResponseContent.Location = new System.Drawing.Point(3, 44);
             this.pnlResponseContent.Margin = new System.Windows.Forms.Padding(2);
             this.pnlResponseContent.Name = "pnlResponseContent";
+            this.pnlResponseContent.Padding = new System.Windows.Forms.Padding(3);
             this.pnlResponseContent.Size = new System.Drawing.Size(298, 377);
             this.pnlResponseContent.TabIndex = 15;
             // 
@@ -446,11 +447,11 @@
             this.rtResponseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtResponseText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtResponseText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtResponseText.Location = new System.Drawing.Point(0, 0);
+            this.rtResponseText.Location = new System.Drawing.Point(3, 3);
             this.rtResponseText.Name = "rtResponseText";
             this.rtResponseText.ReadOnly = true;
             this.rtResponseText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.rtResponseText.Size = new System.Drawing.Size(298, 377);
+            this.rtResponseText.Size = new System.Drawing.Size(292, 371);
             this.rtResponseText.TabIndex = 13;
             this.rtResponseText.Text = "";
             this.rtResponseText.WordWrap = false;
