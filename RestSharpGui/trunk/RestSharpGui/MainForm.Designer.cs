@@ -444,7 +444,6 @@
             // 
             // wbResponseBody
             // 
-            this.wbResponseBody.AllowNavigation = false;
             this.wbResponseBody.AllowWebBrowserDrop = false;
             this.wbResponseBody.Location = new System.Drawing.Point(2, 300);
             this.wbResponseBody.MinimumSize = new System.Drawing.Size(20, 20);

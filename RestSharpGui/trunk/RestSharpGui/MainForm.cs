@@ -33,7 +33,6 @@ namespace Swensen.RestSharpGui
         {
             try {
                 wbResponseBody.ScriptErrorsSuppressed = true;
-                wbResponseBody.Navigate("about:none"); //load the initial document
 
                 lastResponseViewModel = new ResponseViewModel(); //just to avoid np exceptions.
                 bindResponseBodyOutputs();
@@ -160,21 +159,28 @@ namespace Swensen.RestSharpGui
                     rtResponseText.Text = responseVm.PrettyPrintedContent;
                     break;
                 case ResponseBodyOutput.Browser:
-                    //http://stackoverflow.com/a/8592117/236255
-                    HtmlDocument doc = wbResponseBody.Document.OpenNew(true);
+                    if (responseVm.InferredContentType == InferredContentType.Xml && responseVm.ContentBytes != null && responseVm.ContentBytes.Length > 0) {
+                        var path = Path.GetTempPath();
+                        var fileName = Guid.NewGuid().ToString() + ".xml";
+                        var fullFileName = Path.Combine(path, fileName);
+                        File.WriteAllBytes(fullFileName, responseVm.ContentBytes);
+                        wbResponseBody.Navigate(fullFileName);
+                    } else {
+                        wbResponseBody.Navigate("about:blank");
+                        HtmlDocument doc = wbResponseBody.Document.OpenNew(true);
 
-                    switch (responseVm.InferredContentType) {
-                        case InferredContentType.Html:
-                            doc.Write(responseVm.Content);
-                            break;
-                        case InferredContentType.Xml:
-                            doc.Write(String.Format("<html><body><xmp>{0}</xmp></body></html>", responseVm.PrettyPrintedContent));
-                            break;
-                        default:
-                            doc.Write(String.Format("<html><body><pre>{0}</pre></body></html>", responseVm.PrettyPrintedContent));
-                            break;
+                        switch (responseVm.InferredContentType) {
+                            case InferredContentType.Html:
+                                doc.Write(responseVm.Content);
+                                break;
+                            default:
+                                doc.Write(String.Format("<html><body>{0}</body></html>", RestSharp.Extensions.StringExtensions.HtmlEncode(responseVm.PrettyPrintedContent)));
+                                break;
+                        }
                     }
-                    break;
+
+                    wbResponseBody.Refresh();
+                    break;                    
             }
         }
 
