@@ -57,7 +57,7 @@ namespace Swensen.RestSharpGui
             
             splitterMain.Orientation = Settings.Default.SplitterOrientation;
             updateSplitterDistance(); //must come after width and height and orientation updates
-            setCheckedResponseBodyOutputRb();
+            rbGrpResponseBodyOutputs.First(x => (ResponseBodyOutput)x.Tag == Settings.Default.ResponseBodyOutput).Checked = true;
         }
 
         private void bindStartupSettings() {
@@ -94,14 +94,17 @@ namespace Swensen.RestSharpGui
             rbHttpPatch.Tag = Method.PATCH;
             rbHttpPost.Tag = Method.POST;
             rbHttpPut.Tag = Method.PUT;
-
+            
             foreach (var rb in rbGrpHttpMethods) {
-                rb.Click += new EventHandler(rbGrpHttp_Click);
+                rb.CheckedChanged += new EventHandler(rbGrpHttp_CheckedChanged);
             }
         }
 
-        void rbGrpHttp_Click(object sender, EventArgs e) {
-            setIsLastOpenedRequestFileDirtyToTrue();
+        void rbGrpHttp_CheckedChanged(object sender, EventArgs e) {
+            var rb = sender as RadioButton;
+            if (rb.Checked) {
+                setIsLastOpenedRequestFileDirtyToTrue();
+            }
         }
 
         private IEnumerable<RadioButton> rbGrpResponseBodyOutputs { get { return grpResponseBodyOutput.Controls.OfType<RadioButton>(); } }
@@ -112,67 +115,52 @@ namespace Swensen.RestSharpGui
             rbResponseBodyOutputBrowser.Tag = ResponseBodyOutput.Browser;
 
             foreach (var rb in rbGrpResponseBodyOutputs) {
-                rb.Click += new EventHandler(rbGrpResponseBodyOutput_Click);
+                rb.CheckedChanged += new EventHandler(rbGrpResponseBodyOutput_CheckedChanged);
             }
         }
 
-        void rbGrpResponseBodyOutput_Click(object sender, EventArgs e) {
-            Settings.Default.ResponseBodyOutput = (ResponseBodyOutput)((RadioButton)sender).Tag;
-            Settings.Default.Save();
-            updateResponseBodyOutputDisplay();
-            updateResponseBodyOutput(lastResponseViewModel);
+        void rbGrpResponseBodyOutput_CheckedChanged(object sender, EventArgs e) {
+            var rb = sender as RadioButton;
+            if (rb.Checked) {
+                Settings.Default.ResponseBodyOutput = (ResponseBodyOutput)rb.Tag;
+                Settings.Default.Save();
+                updateResponseBodyOutput();
+            }
         }
 
-        private void setCheckedResponseBodyOutputRb() {
-            rbGrpResponseBodyOutputs.First(x => (ResponseBodyOutput)x.Tag == Settings.Default.ResponseBodyOutput).Checked = true;
-            updateResponseBodyOutputDisplay();
-            updateResponseBodyOutput(lastResponseViewModel);
-        }
-
-        private void updateResponseBodyOutputDisplay() {
+        private void updateResponseBodyOutput() {
             switch (Settings.Default.ResponseBodyOutput) {
                 case ResponseBodyOutput.Raw:
                     rtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
+                    rtResponseText.Text = lastResponseViewModel.Content;
                     break;
                 case ResponseBodyOutput.Pretty:
                     rtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
-                    break;
-                case ResponseBodyOutput.Browser:
-                    wbResponseBody.Visible = true;
-                    rtResponseText.Visible = false;
-                    break;
-            }
-        }
-
-        private void updateResponseBodyOutput(ResponseViewModel responseVm) {
-            switch (Settings.Default.ResponseBodyOutput) {
-                case ResponseBodyOutput.Raw:
-                    rtResponseText.Text = responseVm.Content;
-                    break;
-                case ResponseBodyOutput.Pretty:
-                    rtResponseText.Text = responseVm.PrettyPrintedContent;
+                    rtResponseText.Text = lastResponseViewModel.PrettyPrintedContent;
                     break;
                 case ResponseBodyOutput.Browser:
                     rebuildWebBrowser();
+                    wbResponseBody.Visible = true;
+                    rtResponseText.Visible = false;
 
-                    if (responseVm.InferredContentType == InferredContentType.Xml && responseVm.ContentBytes != null && responseVm.ContentBytes.Length > 0) {
+                    if (lastResponseViewModel.InferredContentType == InferredContentType.Xml && lastResponseViewModel.ContentBytes != null && lastResponseViewModel.ContentBytes.Length > 0) {
                         var path = Path.GetTempPath();
                         var fileName = Guid.NewGuid().ToString() + ".xml";
                         var fullFileName = Path.Combine(path, fileName);
-                        File.WriteAllBytes(fullFileName, responseVm.ContentBytes);
+                        File.WriteAllBytes(fullFileName, lastResponseViewModel.ContentBytes);
                         wbResponseBody.Navigate(fullFileName);
                     } else {
                         wbResponseBody.Navigate("about:blank");
                         HtmlDocument doc = wbResponseBody.Document.OpenNew(true);
 
-                        switch (responseVm.InferredContentType) {
+                        switch (lastResponseViewModel.InferredContentType) {
                             case InferredContentType.Html:
-                                doc.Write(responseVm.Content);
+                                doc.Write(lastResponseViewModel.Content);
                                 break;
                             default:
-                                doc.Write(String.Format("<html><body>{0}</body></html>", RestSharp.Extensions.StringExtensions.HtmlEncode(responseVm.PrettyPrintedContent)));
+                                doc.Write(String.Format("<html><body>{0}</body></html>", RestSharp.Extensions.StringExtensions.HtmlEncode(lastResponseViewModel.PrettyPrintedContent)));
                                 break;
                         }
                     }
@@ -231,7 +219,8 @@ namespace Swensen.RestSharpGui
             lblResponseStatusValue.Text = responseVm.Status;
             txtResponseHeaders.Text = responseVm.Headers;
             lblResponseTimeValue.Text = responseVm.ElapsedTime;
-            updateResponseBodyOutput(lastResponseViewModel);
+            
+            updateResponseBodyOutput();
         }
 
         private void bind(RequestViewModel requestVm) {
