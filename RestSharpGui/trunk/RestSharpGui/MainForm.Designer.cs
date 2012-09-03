@@ -201,9 +201,9 @@
             // 
             this.grpHeaders.Controls.Add(this.txtRequestHeaders);
             this.grpHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpHeaders.Location = new System.Drawing.Point(140, 0);
+            this.grpHeaders.Location = new System.Drawing.Point(131, 0);
             this.grpHeaders.Name = "grpHeaders";
-            this.grpHeaders.Size = new System.Drawing.Size(188, 125);
+            this.grpHeaders.Size = new System.Drawing.Size(197, 125);
             this.grpHeaders.TabIndex = 6;
             this.grpHeaders.TabStop = false;
             this.grpHeaders.Text = "Headers";
@@ -217,7 +217,7 @@
             this.txtRequestHeaders.Multiline = true;
             this.txtRequestHeaders.Name = "txtRequestHeaders";
             this.txtRequestHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtRequestHeaders.Size = new System.Drawing.Size(182, 106);
+            this.txtRequestHeaders.Size = new System.Drawing.Size(191, 106);
             this.txtRequestHeaders.TabIndex = 6;
             this.txtRequestHeaders.WordWrap = false;
             this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
@@ -236,7 +236,7 @@
             this.grpHttpMethod.Dock = System.Windows.Forms.DockStyle.Left;
             this.grpHttpMethod.Location = new System.Drawing.Point(0, 0);
             this.grpHttpMethod.Name = "grpHttpMethod";
-            this.grpHttpMethod.Size = new System.Drawing.Size(140, 125);
+            this.grpHttpMethod.Size = new System.Drawing.Size(131, 125);
             this.grpHttpMethod.TabIndex = 5;
             this.grpHttpMethod.TabStop = false;
             this.grpHttpMethod.Text = "Method";
@@ -244,7 +244,7 @@
             // rbHttpPatch
             // 
             this.rbHttpPatch.AutoSize = true;
-            this.rbHttpPatch.Location = new System.Drawing.Point(75, 19);
+            this.rbHttpPatch.Location = new System.Drawing.Point(67, 19);
             this.rbHttpPatch.Margin = new System.Windows.Forms.Padding(2);
             this.rbHttpPatch.Name = "rbHttpPatch";
             this.rbHttpPatch.Size = new System.Drawing.Size(53, 17);
@@ -256,7 +256,7 @@
             // rbHttpHead
             // 
             this.rbHttpHead.AutoSize = true;
-            this.rbHttpHead.Location = new System.Drawing.Point(75, 66);
+            this.rbHttpHead.Location = new System.Drawing.Point(67, 64);
             this.rbHttpHead.Margin = new System.Windows.Forms.Padding(2);
             this.rbHttpHead.Name = "rbHttpHead";
             this.rbHttpHead.Size = new System.Drawing.Size(51, 17);
@@ -268,7 +268,7 @@
             // rbHttpDelete
             // 
             this.rbHttpDelete.AutoSize = true;
-            this.rbHttpDelete.Location = new System.Drawing.Point(7, 66);
+            this.rbHttpDelete.Location = new System.Drawing.Point(6, 64);
             this.rbHttpDelete.Name = "rbHttpDelete";
             this.rbHttpDelete.Size = new System.Drawing.Size(56, 17);
             this.rbHttpDelete.TabIndex = 3;
@@ -278,7 +278,7 @@
             // rbHttpOptions
             // 
             this.rbHttpOptions.AutoSize = true;
-            this.rbHttpOptions.Location = new System.Drawing.Point(75, 42);
+            this.rbHttpOptions.Location = new System.Drawing.Point(67, 41);
             this.rbHttpOptions.Name = "rbHttpOptions";
             this.rbHttpOptions.Size = new System.Drawing.Size(61, 17);
             this.rbHttpOptions.TabIndex = 5;
@@ -288,7 +288,7 @@
             // rbHttpPut
             // 
             this.rbHttpPut.AutoSize = true;
-            this.rbHttpPut.Location = new System.Drawing.Point(6, 89);
+            this.rbHttpPut.Location = new System.Drawing.Point(6, 87);
             this.rbHttpPut.Name = "rbHttpPut";
             this.rbHttpPut.Size = new System.Drawing.Size(41, 17);
             this.rbHttpPut.TabIndex = 4;
@@ -310,7 +310,7 @@
             // rbHttpPost
             // 
             this.rbHttpPost.AutoSize = true;
-            this.rbHttpPost.Location = new System.Drawing.Point(6, 42);
+            this.rbHttpPost.Location = new System.Drawing.Point(6, 41);
             this.rbHttpPost.Name = "rbHttpPost";
             this.rbHttpPost.Size = new System.Drawing.Size(46, 17);
             this.rbHttpPost.TabIndex = 2;
@@ -355,6 +355,7 @@
             this.lblUrl.AutoSize = true;
             this.lblUrl.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblUrl.Location = new System.Drawing.Point(6, 6);
+            this.lblUrl.Margin = new System.Windows.Forms.Padding(3);
             this.lblUrl.Name = "lblUrl";
             this.lblUrl.Size = new System.Drawing.Size(23, 13);
             this.lblUrl.TabIndex = 0;
