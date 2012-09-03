@@ -30,14 +30,19 @@ namespace Swensen.RestSharpGui {
         public string Body { get; set; }
 
         public void Save(string fileName) {
-            using (var sw = File.Create(fileName)) {
+            var ws = new XmlWriterSettings();
+            ws.NewLineHandling = NewLineHandling.Entitize;
+
+            using (var sw = XmlWriter.Create(File.Create(fileName), ws)) {
                 var serializer = new XmlSerializer(typeof(RequestViewModel));
                 serializer.Serialize(sw, this);
             }
         }
 
         public static RequestViewModel Open(string fileName) {
-            using (var file = File.Open(fileName, FileMode.Open)) {
+            var rs = new XmlReaderSettings();
+            rs.IgnoreWhitespace = false;
+            using (var file = XmlReader.Create(File.Open(fileName, FileMode.Open), rs)) {
                 var serializer = new XmlSerializer(typeof(RequestViewModel));
                 return serializer.Deserialize(file) as RequestViewModel;
             }
