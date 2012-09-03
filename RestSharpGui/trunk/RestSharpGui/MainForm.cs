@@ -211,6 +211,9 @@ namespace Swensen.RestSharpGui
                 //execute the request and get the response
                 var restRequest = requestModel.ToRestRequest();
                 var client = new RestClient();
+                if(!String.IsNullOrWhiteSpace(Settings.Default.ProxyServer))
+                    client.Proxy = new WebProxy(Settings.Default.ProxyServer, false); //make second arg a config option.
+
                 var start = DateTime.Now;
                 var restResponse = client.Execute(restRequest);
                 var end = DateTime.Now;
