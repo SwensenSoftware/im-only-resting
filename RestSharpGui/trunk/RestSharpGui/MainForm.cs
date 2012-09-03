@@ -160,7 +160,7 @@ namespace Swensen.RestSharpGui
                                 doc.Write(lastResponseViewModel.Content);
                                 break;
                             default:
-                                doc.Write(String.Format("<html><body>{0}</body></html>", RestSharp.Extensions.StringExtensions.HtmlEncode(lastResponseViewModel.PrettyPrintedContent)));
+                                doc.Write(String.Format("<html><body><pre>{0}</pre></body></html>", RestSharp.Extensions.StringExtensions.HtmlEncode(lastResponseViewModel.PrettyPrintedContent)));
                                 break;
                         }
                     }
