@@ -453,8 +453,8 @@
             this.rtResponseText.Size = new System.Drawing.Size(298, 377);
             this.rtResponseText.TabIndex = 13;
             this.rtResponseText.Text = "";
-            this.rtResponseText.Visible = false;
             this.rtResponseText.WordWrap = false;
+            this.rtResponseText.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtResponseText_LinkClicked);
             // 
             // grpResponseBodyOutput
             // 
