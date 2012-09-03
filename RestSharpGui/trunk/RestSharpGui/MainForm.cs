@@ -19,6 +19,8 @@ namespace Swensen.RestSharpGui
 {
     public partial class MainForm : Form
     {
+        WebBrowser wbResponseBody;
+
         private string lastOpenedRequestFile = null;
         private bool isLastOpenedRequestFileDirty = false;
 
@@ -32,7 +34,7 @@ namespace Swensen.RestSharpGui
         private void MainForm_Load(object sender, EventArgs e)
         {
             try {
-                wbResponseBody.ScriptErrorsSuppressed = true;
+                rebuildWebBrowser();
 
                 lastResponseViewModel = new ResponseViewModel(); //just to avoid np exceptions.
                 bindResponseBodyOutputs();
@@ -131,21 +133,15 @@ namespace Swensen.RestSharpGui
             switch (Settings.Default.ResponseBodyOutput) {
                 case ResponseBodyOutput.Raw:
                     rtResponseText.Visible = true;
-                    rtResponseText.Dock = DockStyle.Fill;
                     wbResponseBody.Visible = false;
-                    wbResponseBody.Dock = DockStyle.None;
                     break;
                 case ResponseBodyOutput.Pretty:
                     rtResponseText.Visible = true;
-                    rtResponseText.Dock = DockStyle.Fill;
                     wbResponseBody.Visible = false;
-                    wbResponseBody.Dock = DockStyle.None;
                     break;
                 case ResponseBodyOutput.Browser:
                     wbResponseBody.Visible = true;
-                    wbResponseBody.Dock = DockStyle.Fill;
                     rtResponseText.Visible = false;
-                    rtResponseText.Dock = DockStyle.None;
                     break;
             }
         }
@@ -159,6 +155,8 @@ namespace Swensen.RestSharpGui
                     rtResponseText.Text = responseVm.PrettyPrintedContent;
                     break;
                 case ResponseBodyOutput.Browser:
+                    rebuildWebBrowser();
+
                     if (responseVm.InferredContentType == InferredContentType.Xml && responseVm.ContentBytes != null && responseVm.ContentBytes.Length > 0) {
                         var path = Path.GetTempPath();
                         var fileName = Guid.NewGuid().ToString() + ".xml";
@@ -400,6 +398,28 @@ namespace Swensen.RestSharpGui
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             persistGuiSettings();
+        }
+
+        //hack!
+        private void rebuildWebBrowser() {
+            if (wbResponseBody != null) {
+                pnlResponseContent.Controls.Remove(wbResponseBody);
+                wbResponseBody.Dispose();
+            }
+
+            wbResponseBody = new WebBrowser();
+            wbResponseBody.ScriptErrorsSuppressed = true;
+            wbResponseBody.AllowNavigation = false;
+            wbResponseBody.AllowWebBrowserDrop = false;
+            wbResponseBody.Location = new System.Drawing.Point(2, 300);
+            wbResponseBody.MinimumSize = new System.Drawing.Size(20, 20);
+            wbResponseBody.Name = "wbResponseBody";
+            wbResponseBody.Size = new System.Drawing.Size(398, 208);
+            wbResponseBody.TabIndex = 14;
+            wbResponseBody.Visible = true;
+            wbResponseBody.Dock = DockStyle.Fill;
+
+            pnlResponseContent.Controls.Add(wbResponseBody);
         }
     }
 }
