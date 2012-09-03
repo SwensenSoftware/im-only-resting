@@ -32,6 +32,9 @@ namespace Swensen.RestSharpGui
         private void MainForm_Load(object sender, EventArgs e)
         {
             try {
+                wbResponseBody.ScriptErrorsSuppressed = true;
+                wbResponseBody.Navigate("about:none"); //load the initial document
+
                 lastResponseViewModel = new ResponseViewModel(); //just to avoid np exceptions.
                 bindResponseBodyOutputs();
                 bindHttpMethods();
@@ -157,7 +160,11 @@ namespace Swensen.RestSharpGui
                     rtResponseText.Text = responseVm.PrettyPrintedContent;
                     break;
                 case ResponseBodyOutput.Browser:
-                    wbResponseBody.DocumentText = responseVm.Content;
+                    //http://stackoverflow.com/a/8592117/236255
+                    HtmlDocument doc = wbResponseBody.Document.OpenNew(true);
+                    doc.Write(responseVm.Content);
+                    //wbResponseBody.Invalidate();
+                    //wbResponseBody.Update();
                     break;
             }
         }

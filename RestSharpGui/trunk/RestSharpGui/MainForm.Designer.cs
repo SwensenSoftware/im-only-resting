@@ -54,6 +54,12 @@
             this.grpResponse = new System.Windows.Forms.GroupBox();
             this.tcResponse = new System.Windows.Forms.TabControl();
             this.tpResponseText = new System.Windows.Forms.TabPage();
+            this.wbResponseBody = new System.Windows.Forms.WebBrowser();
+            this.rtResponseText = new System.Windows.Forms.RichTextBox();
+            this.grpResponseBodyOutput = new System.Windows.Forms.GroupBox();
+            this.rbResponseBodyOutputBrowser = new System.Windows.Forms.RadioButton();
+            this.rbResponseBodyOutputPretty = new System.Windows.Forms.RadioButton();
+            this.rbResponseBodyOutputRaw = new System.Windows.Forms.RadioButton();
             this.tpResponseHeaders = new System.Windows.Forms.TabPage();
             this.txtResponseHeaders = new System.Windows.Forms.TextBox();
             this.pnlResponseStatusAndTime = new System.Windows.Forms.Panel();
@@ -78,12 +84,6 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.grpResponseBodyOutput = new System.Windows.Forms.GroupBox();
-            this.rbResponseBodyOutputRaw = new System.Windows.Forms.RadioButton();
-            this.rbResponseBodyOutputPretty = new System.Windows.Forms.RadioButton();
-            this.rbResponseBodyOutputBrowser = new System.Windows.Forms.RadioButton();
-            this.rtResponseText = new System.Windows.Forms.RichTextBox();
-            this.wbResponseBody = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -100,13 +100,13 @@
             this.grpResponse.SuspendLayout();
             this.tcResponse.SuspendLayout();
             this.tpResponseText.SuspendLayout();
+            this.grpResponseBodyOutput.SuspendLayout();
             this.tpResponseHeaders.SuspendLayout();
             this.pnlResponseStatusAndTime.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlResponseStatus.SuspendLayout();
             this.pnlResponseTime.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
-            this.grpResponseBodyOutput.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitterMain
@@ -442,6 +442,80 @@
             this.tpResponseText.TabIndex = 0;
             this.tpResponseText.Text = "Body";
             // 
+            // wbResponseBody
+            // 
+            this.wbResponseBody.AllowNavigation = false;
+            this.wbResponseBody.AllowWebBrowserDrop = false;
+            this.wbResponseBody.Location = new System.Drawing.Point(2, 300);
+            this.wbResponseBody.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbResponseBody.Name = "wbResponseBody";
+            this.wbResponseBody.Size = new System.Drawing.Size(398, 208);
+            this.wbResponseBody.TabIndex = 14;
+            this.wbResponseBody.Visible = false;
+            // 
+            // rtResponseText
+            // 
+            this.rtResponseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtResponseText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtResponseText.Location = new System.Drawing.Point(4, 62);
+            this.rtResponseText.Margin = new System.Windows.Forms.Padding(4);
+            this.rtResponseText.Name = "rtResponseText";
+            this.rtResponseText.ReadOnly = true;
+            this.rtResponseText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
+            this.rtResponseText.Size = new System.Drawing.Size(398, 211);
+            this.rtResponseText.TabIndex = 13;
+            this.rtResponseText.Text = "";
+            this.rtResponseText.Visible = false;
+            this.rtResponseText.WordWrap = false;
+            // 
+            // grpResponseBodyOutput
+            // 
+            this.grpResponseBodyOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputBrowser);
+            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputPretty);
+            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputRaw);
+            this.grpResponseBodyOutput.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpResponseBodyOutput.Location = new System.Drawing.Point(4, 4);
+            this.grpResponseBodyOutput.Name = "grpResponseBodyOutput";
+            this.grpResponseBodyOutput.Size = new System.Drawing.Size(402, 51);
+            this.grpResponseBodyOutput.TabIndex = 11;
+            this.grpResponseBodyOutput.TabStop = false;
+            this.grpResponseBodyOutput.Text = "Output";
+            // 
+            // rbResponseBodyOutputBrowser
+            // 
+            this.rbResponseBodyOutputBrowser.AutoSize = true;
+            this.rbResponseBodyOutputBrowser.Location = new System.Drawing.Point(140, 21);
+            this.rbResponseBodyOutputBrowser.Name = "rbResponseBodyOutputBrowser";
+            this.rbResponseBodyOutputBrowser.Size = new System.Drawing.Size(80, 21);
+            this.rbResponseBodyOutputBrowser.TabIndex = 2;
+            this.rbResponseBodyOutputBrowser.TabStop = true;
+            this.rbResponseBodyOutputBrowser.Text = "Browser";
+            this.rbResponseBodyOutputBrowser.UseVisualStyleBackColor = true;
+            // 
+            // rbResponseBodyOutputPretty
+            // 
+            this.rbResponseBodyOutputPretty.AutoSize = true;
+            this.rbResponseBodyOutputPretty.Location = new System.Drawing.Point(68, 21);
+            this.rbResponseBodyOutputPretty.Name = "rbResponseBodyOutputPretty";
+            this.rbResponseBodyOutputPretty.Size = new System.Drawing.Size(66, 21);
+            this.rbResponseBodyOutputPretty.TabIndex = 1;
+            this.rbResponseBodyOutputPretty.TabStop = true;
+            this.rbResponseBodyOutputPretty.Text = "Pretty";
+            this.rbResponseBodyOutputPretty.UseVisualStyleBackColor = true;
+            // 
+            // rbResponseBodyOutputRaw
+            // 
+            this.rbResponseBodyOutputRaw.AutoSize = true;
+            this.rbResponseBodyOutputRaw.Checked = true;
+            this.rbResponseBodyOutputRaw.Location = new System.Drawing.Point(6, 21);
+            this.rbResponseBodyOutputRaw.Name = "rbResponseBodyOutputRaw";
+            this.rbResponseBodyOutputRaw.Size = new System.Drawing.Size(56, 21);
+            this.rbResponseBodyOutputRaw.TabIndex = 0;
+            this.rbResponseBodyOutputRaw.TabStop = true;
+            this.rbResponseBodyOutputRaw.Text = "Raw";
+            this.rbResponseBodyOutputRaw.UseVisualStyleBackColor = true;
+            // 
             // tpResponseHeaders
             // 
             this.tpResponseHeaders.BackColor = System.Drawing.SystemColors.Control;
@@ -658,80 +732,6 @@
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
             // 
-            // grpResponseBodyOutput
-            // 
-            this.grpResponseBodyOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputBrowser);
-            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputPretty);
-            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputRaw);
-            this.grpResponseBodyOutput.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpResponseBodyOutput.Location = new System.Drawing.Point(4, 4);
-            this.grpResponseBodyOutput.Name = "grpResponseBodyOutput";
-            this.grpResponseBodyOutput.Size = new System.Drawing.Size(402, 51);
-            this.grpResponseBodyOutput.TabIndex = 11;
-            this.grpResponseBodyOutput.TabStop = false;
-            this.grpResponseBodyOutput.Text = "Output";
-            // 
-            // rbResponseBodyOutputRaw
-            // 
-            this.rbResponseBodyOutputRaw.AutoSize = true;
-            this.rbResponseBodyOutputRaw.Checked = true;
-            this.rbResponseBodyOutputRaw.Location = new System.Drawing.Point(6, 21);
-            this.rbResponseBodyOutputRaw.Name = "rbResponseBodyOutputRaw";
-            this.rbResponseBodyOutputRaw.Size = new System.Drawing.Size(56, 21);
-            this.rbResponseBodyOutputRaw.TabIndex = 0;
-            this.rbResponseBodyOutputRaw.TabStop = true;
-            this.rbResponseBodyOutputRaw.Text = "Raw";
-            this.rbResponseBodyOutputRaw.UseVisualStyleBackColor = true;
-            // 
-            // rbResponseBodyOutputPretty
-            // 
-            this.rbResponseBodyOutputPretty.AutoSize = true;
-            this.rbResponseBodyOutputPretty.Location = new System.Drawing.Point(68, 21);
-            this.rbResponseBodyOutputPretty.Name = "rbResponseBodyOutputPretty";
-            this.rbResponseBodyOutputPretty.Size = new System.Drawing.Size(66, 21);
-            this.rbResponseBodyOutputPretty.TabIndex = 1;
-            this.rbResponseBodyOutputPretty.TabStop = true;
-            this.rbResponseBodyOutputPretty.Text = "Pretty";
-            this.rbResponseBodyOutputPretty.UseVisualStyleBackColor = true;
-            // 
-            // rbResponseBodyOutputBrowser
-            // 
-            this.rbResponseBodyOutputBrowser.AutoSize = true;
-            this.rbResponseBodyOutputBrowser.Location = new System.Drawing.Point(140, 21);
-            this.rbResponseBodyOutputBrowser.Name = "rbResponseBodyOutputBrowser";
-            this.rbResponseBodyOutputBrowser.Size = new System.Drawing.Size(80, 21);
-            this.rbResponseBodyOutputBrowser.TabIndex = 2;
-            this.rbResponseBodyOutputBrowser.TabStop = true;
-            this.rbResponseBodyOutputBrowser.Text = "Browser";
-            this.rbResponseBodyOutputBrowser.UseVisualStyleBackColor = true;
-            // 
-            // rtResponseText
-            // 
-            this.rtResponseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtResponseText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtResponseText.Location = new System.Drawing.Point(4, 62);
-            this.rtResponseText.Margin = new System.Windows.Forms.Padding(4);
-            this.rtResponseText.Name = "rtResponseText";
-            this.rtResponseText.ReadOnly = true;
-            this.rtResponseText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.rtResponseText.Size = new System.Drawing.Size(398, 211);
-            this.rtResponseText.TabIndex = 13;
-            this.rtResponseText.Text = "";
-            this.rtResponseText.Visible = false;
-            this.rtResponseText.WordWrap = false;
-            // 
-            // wbResponseBody
-            // 
-            this.wbResponseBody.AllowNavigation = false;
-            this.wbResponseBody.AllowWebBrowserDrop = false;
-            this.wbResponseBody.Location = new System.Drawing.Point(2, 300);
-            this.wbResponseBody.MinimumSize = new System.Drawing.Size(20, 20);
-            this.wbResponseBody.Name = "wbResponseBody";
-            this.wbResponseBody.Size = new System.Drawing.Size(398, 208);
-            this.wbResponseBody.TabIndex = 14;
-            this.wbResponseBody.Visible = false;
-            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -767,6 +767,8 @@
             this.grpResponse.ResumeLayout(false);
             this.tcResponse.ResumeLayout(false);
             this.tpResponseText.ResumeLayout(false);
+            this.grpResponseBodyOutput.ResumeLayout(false);
+            this.grpResponseBodyOutput.PerformLayout();
             this.tpResponseHeaders.ResumeLayout(false);
             this.tpResponseHeaders.PerformLayout();
             this.pnlResponseStatusAndTime.ResumeLayout(false);
@@ -777,8 +779,6 @@
             this.pnlResponseTime.PerformLayout();
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
-            this.grpResponseBodyOutput.ResumeLayout(false);
-            this.grpResponseBodyOutput.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
