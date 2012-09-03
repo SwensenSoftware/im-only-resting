@@ -162,9 +162,18 @@ namespace Swensen.RestSharpGui
                 case ResponseBodyOutput.Browser:
                     //http://stackoverflow.com/a/8592117/236255
                     HtmlDocument doc = wbResponseBody.Document.OpenNew(true);
-                    doc.Write(responseVm.Content);
-                    //wbResponseBody.Invalidate();
-                    //wbResponseBody.Update();
+
+                    switch (responseVm.InferredContentType) {
+                        case InferredContentType.Html:
+                            doc.Write(responseVm.Content);
+                            break;
+                        case InferredContentType.Xml:
+                            doc.Write(String.Format("<html><body><xmp>{0}</xmp></body></html>", responseVm.PrettyPrintedContent));
+                            break;
+                        default:
+                            doc.Write(String.Format("<html><body><pre>{0}</pre></body></html>", responseVm.PrettyPrintedContent));
+                            break;
+                    }
                     break;
             }
         }
