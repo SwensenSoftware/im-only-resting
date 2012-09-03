@@ -33,18 +33,21 @@ namespace Swensen.RestSharpGui {
             var ws = new XmlWriterSettings();
             ws.NewLineHandling = NewLineHandling.Entitize;
 
-            using (var sw = XmlWriter.Create(File.Create(fileName), ws)) {
+            using (var file = File.Create(fileName))
+            using (var writer = XmlWriter.Create(file, ws)) {
                 var serializer = new XmlSerializer(typeof(RequestViewModel));
-                serializer.Serialize(sw, this);
+                serializer.Serialize(writer, this);
             }
         }
 
         public static RequestViewModel Open(string fileName) {
             var rs = new XmlReaderSettings();
             rs.IgnoreWhitespace = false;
-            using (var file = XmlReader.Create(File.Open(fileName, FileMode.Open), rs)) {
+            
+            using (var file = File.Open(fileName, FileMode.Open))
+            using (var reader = XmlReader.Create(file, rs)) {
                 var serializer = new XmlSerializer(typeof(RequestViewModel));
-                return serializer.Deserialize(file) as RequestViewModel;
+                return serializer.Deserialize(reader) as RequestViewModel;
             }
         }
     }
