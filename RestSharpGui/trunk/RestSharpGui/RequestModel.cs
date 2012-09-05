@@ -82,7 +82,8 @@ namespace Swensen.RestSharpGui {
             foreach (var header in Headers)
                 rr.AddHeader(header.Key, header.Value);
 
-            var ct = Headers.FirstOrDefault(header => header.Key.ToUpper() == "CONTENT-TYPE").Value ?? "text/plain";
+            //default content-type: http://mattryall.net/blog/2008/03/default-content-type
+            var ct = Headers.FirstOrDefault(header => header.Key.ToUpper() == "CONTENT-TYPE").Value ?? "application/octet-stream";
             if(!String.IsNullOrWhiteSpace(Body))
                 rr.AddParameter(ct, Body, ParameterType.RequestBody); //http://stackoverflow.com/questions/5095692/how-to-add-text-to-request-body-in-restsharp
 
