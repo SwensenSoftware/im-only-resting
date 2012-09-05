@@ -352,7 +352,7 @@
             this.pnlUrl.Margin = new System.Windows.Forms.Padding(4);
             this.pnlUrl.Name = "pnlUrl";
             this.pnlUrl.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.pnlUrl.Size = new System.Drawing.Size(309, 41);
+            this.pnlUrl.Size = new System.Drawing.Size(316, 41);
             this.pnlUrl.TabIndex = 6;
             // 
             // txtUrl
@@ -361,7 +361,7 @@
             this.txtUrl.Location = new System.Drawing.Point(38, 7);
             this.txtUrl.Margin = new System.Windows.Forms.Padding(4);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(263, 22);
+            this.txtUrl.Size = new System.Drawing.Size(270, 22);
             this.txtUrl.TabIndex = 0;
             this.txtUrl.WordWrap = false;
             this.txtUrl.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
@@ -382,17 +382,17 @@
             this.btnRequestButtons.Controls.Add(this.btnClearRequest);
             this.btnRequestButtons.Controls.Add(this.btnSubmitRequest);
             this.btnRequestButtons.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnRequestButtons.Location = new System.Drawing.Point(309, 0);
+            this.btnRequestButtons.Location = new System.Drawing.Point(316, 0);
             this.btnRequestButtons.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRequestButtons.Name = "btnRequestButtons";
-            this.btnRequestButtons.Size = new System.Drawing.Size(128, 41);
+            this.btnRequestButtons.Size = new System.Drawing.Size(121, 41);
             this.btnRequestButtons.TabIndex = 5;
             // 
             // btnClearRequest
             // 
             this.btnClearRequest.AutoSize = true;
             this.btnClearRequest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClearRequest.Location = new System.Drawing.Point(72, 5);
+            this.btnClearRequest.Location = new System.Drawing.Point(68, 5);
             this.btnClearRequest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClearRequest.Name = "btnClearRequest";
             this.btnClearRequest.Size = new System.Drawing.Size(51, 27);
@@ -405,7 +405,7 @@
             // 
             this.btnSubmitRequest.AutoSize = true;
             this.btnSubmitRequest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSubmitRequest.Location = new System.Drawing.Point(8, 5);
+            this.btnSubmitRequest.Location = new System.Drawing.Point(0, 5);
             this.btnSubmitRequest.Margin = new System.Windows.Forms.Padding(4);
             this.btnSubmitRequest.Name = "btnSubmitRequest";
             this.btnSubmitRequest.Size = new System.Drawing.Size(61, 27);
