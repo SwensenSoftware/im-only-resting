@@ -25,7 +25,7 @@ using System.Xml.Serialization;
 namespace Swensen.RestSharpGui {
     public class RequestViewModel {
         public string Url { get; set; }
-        public Method? Method { get; set; }
+        public Method Method { get; set; }
         public string[] Headers { get; set; }
         public string Body { get; set; }
 

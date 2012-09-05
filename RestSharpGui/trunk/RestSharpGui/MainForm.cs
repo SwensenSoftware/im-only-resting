@@ -172,10 +172,10 @@ namespace Swensen.RestSharpGui
 
         private RequestViewModel buildRequestViewModel() {
             //build the request view
-            var checkedHttpMethod = rbGrpHttpMethods.Where(x => x.Checked).FirstOrDefault();
+            var checkedHttpMethod = rbGrpHttpMethods.Where(x => x.Checked).First();
             return new RequestViewModel() {
                 Url = txtUrl.Text,
-                Method = checkedHttpMethod == null ? null : ((Method?)checkedHttpMethod.Tag),
+                Method = (Method)checkedHttpMethod.Tag,
                 Headers = txtRequestHeaders.Lines.ToArray(),
                 Body = txtRequestBody.Text
             };
@@ -226,7 +226,7 @@ namespace Swensen.RestSharpGui
         private void bind(RequestViewModel requestVm) {
             txtUrl.Text = requestVm.Url;
             
-            var method = requestVm.Method ?? Method.GET;
+            var method = requestVm.Method;
             rbGrpHttpMethods.First(x => ((Method) x.Tag) == method).Checked = true;
 
             txtRequestHeaders.Lines = (requestVm.Headers ?? new string[0]).ToArray();

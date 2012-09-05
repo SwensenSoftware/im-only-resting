@@ -68,7 +68,7 @@ namespace Swensen.RestSharpGui {
             else {
                 requestModel = new RequestModel() {
                     Url = url,
-                    Method = vm.Method.Value,
+                    Method = vm.Method,
                     Headers = headers,
                     Body = vm.Body
                 };
