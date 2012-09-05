@@ -126,8 +126,8 @@
             // 
             this.splitterMain.Panel2.Controls.Add(this.grpResponse);
             this.splitterMain.Panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.splitterMain.Size = new System.Drawing.Size(896, 617);
-            this.splitterMain.SplitterDistance = 453;
+            this.splitterMain.Size = new System.Drawing.Size(968, 617);
+            this.splitterMain.SplitterDistance = 489;
             this.splitterMain.SplitterWidth = 11;
             this.splitterMain.TabIndex = 3;
             this.splitterMain.DoubleClick += new System.EventHandler(this.splitterMain_DoubleClick);
@@ -142,7 +142,7 @@
             this.grpRequest.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.grpRequest.Name = "grpRequest";
             this.grpRequest.Padding = new System.Windows.Forms.Padding(4);
-            this.grpRequest.Size = new System.Drawing.Size(445, 609);
+            this.grpRequest.Size = new System.Drawing.Size(481, 609);
             this.grpRequest.TabIndex = 2;
             this.grpRequest.TabStop = false;
             this.grpRequest.Text = "Request";
@@ -156,7 +156,7 @@
             this.grpBody.Margin = new System.Windows.Forms.Padding(4);
             this.grpBody.Name = "grpBody";
             this.grpBody.Padding = new System.Windows.Forms.Padding(4);
-            this.grpBody.Size = new System.Drawing.Size(437, 392);
+            this.grpBody.Size = new System.Drawing.Size(473, 392);
             this.grpBody.TabIndex = 10;
             this.grpBody.TabStop = false;
             this.grpBody.Text = "Body";
@@ -172,7 +172,7 @@
             this.txtRequestBody.Multiline = true;
             this.txtRequestBody.Name = "txtRequestBody";
             this.txtRequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtRequestBody.Size = new System.Drawing.Size(429, 369);
+            this.txtRequestBody.Size = new System.Drawing.Size(465, 369);
             this.txtRequestBody.TabIndex = 7;
             this.txtRequestBody.WordWrap = false;
             this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
@@ -187,7 +187,7 @@
             this.pnlTopHalfOfRequest.Location = new System.Drawing.Point(4, 19);
             this.pnlTopHalfOfRequest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlTopHalfOfRequest.Name = "pnlTopHalfOfRequest";
-            this.pnlTopHalfOfRequest.Size = new System.Drawing.Size(437, 194);
+            this.pnlTopHalfOfRequest.Size = new System.Drawing.Size(473, 194);
             this.pnlTopHalfOfRequest.TabIndex = 9;
             // 
             // pnlRequestMethodAndHeaders
@@ -198,7 +198,7 @@
             this.pnlRequestMethodAndHeaders.Location = new System.Drawing.Point(0, 41);
             this.pnlRequestMethodAndHeaders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlRequestMethodAndHeaders.Name = "pnlRequestMethodAndHeaders";
-            this.pnlRequestMethodAndHeaders.Size = new System.Drawing.Size(437, 153);
+            this.pnlRequestMethodAndHeaders.Size = new System.Drawing.Size(473, 153);
             this.pnlRequestMethodAndHeaders.TabIndex = 6;
             // 
             // grpHeaders
@@ -209,7 +209,7 @@
             this.grpHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.grpHeaders.Name = "grpHeaders";
             this.grpHeaders.Padding = new System.Windows.Forms.Padding(4);
-            this.grpHeaders.Size = new System.Drawing.Size(262, 153);
+            this.grpHeaders.Size = new System.Drawing.Size(298, 153);
             this.grpHeaders.TabIndex = 6;
             this.grpHeaders.TabStop = false;
             this.grpHeaders.Text = "Headers";
@@ -224,7 +224,7 @@
             this.txtRequestHeaders.Multiline = true;
             this.txtRequestHeaders.Name = "txtRequestHeaders";
             this.txtRequestHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtRequestHeaders.Size = new System.Drawing.Size(254, 130);
+            this.txtRequestHeaders.Size = new System.Drawing.Size(290, 130);
             this.txtRequestHeaders.TabIndex = 6;
             this.txtRequestHeaders.WordWrap = false;
             this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
@@ -339,7 +339,7 @@
             this.pnlRequestUrlAndButtons.Location = new System.Drawing.Point(0, 0);
             this.pnlRequestUrlAndButtons.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlRequestUrlAndButtons.Name = "pnlRequestUrlAndButtons";
-            this.pnlRequestUrlAndButtons.Size = new System.Drawing.Size(437, 41);
+            this.pnlRequestUrlAndButtons.Size = new System.Drawing.Size(473, 41);
             this.pnlRequestUrlAndButtons.TabIndex = 5;
             // 
             // pnlUrl
@@ -352,7 +352,7 @@
             this.pnlUrl.Margin = new System.Windows.Forms.Padding(4);
             this.pnlUrl.Name = "pnlUrl";
             this.pnlUrl.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.pnlUrl.Size = new System.Drawing.Size(316, 41);
+            this.pnlUrl.Size = new System.Drawing.Size(348, 41);
             this.pnlUrl.TabIndex = 6;
             // 
             // txtUrl
@@ -361,7 +361,7 @@
             this.txtUrl.Location = new System.Drawing.Point(38, 7);
             this.txtUrl.Margin = new System.Windows.Forms.Padding(4);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(270, 22);
+            this.txtUrl.Size = new System.Drawing.Size(302, 22);
             this.txtUrl.TabIndex = 0;
             this.txtUrl.WordWrap = false;
             this.txtUrl.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
@@ -382,10 +382,10 @@
             this.btnRequestButtons.Controls.Add(this.btnClearRequest);
             this.btnRequestButtons.Controls.Add(this.btnSubmitRequest);
             this.btnRequestButtons.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnRequestButtons.Location = new System.Drawing.Point(316, 0);
+            this.btnRequestButtons.Location = new System.Drawing.Point(348, 0);
             this.btnRequestButtons.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRequestButtons.Name = "btnRequestButtons";
-            this.btnRequestButtons.Size = new System.Drawing.Size(121, 41);
+            this.btnRequestButtons.Size = new System.Drawing.Size(125, 41);
             this.btnRequestButtons.TabIndex = 5;
             // 
             // btnClearRequest
@@ -424,7 +424,7 @@
             this.grpResponse.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.grpResponse.Name = "grpResponse";
             this.grpResponse.Padding = new System.Windows.Forms.Padding(4);
-            this.grpResponse.Size = new System.Drawing.Size(424, 609);
+            this.grpResponse.Size = new System.Drawing.Size(460, 609);
             this.grpResponse.TabIndex = 0;
             this.grpResponse.TabStop = false;
             this.grpResponse.Text = "Response";
@@ -438,7 +438,7 @@
             this.tcResponse.Margin = new System.Windows.Forms.Padding(4);
             this.tcResponse.Name = "tcResponse";
             this.tcResponse.SelectedIndex = 0;
-            this.tcResponse.Size = new System.Drawing.Size(416, 555);
+            this.tcResponse.Size = new System.Drawing.Size(452, 555);
             this.tcResponse.TabIndex = 6;
             // 
             // tpResponseText
@@ -450,7 +450,7 @@
             this.tpResponseText.Margin = new System.Windows.Forms.Padding(4);
             this.tpResponseText.Name = "tpResponseText";
             this.tpResponseText.Padding = new System.Windows.Forms.Padding(4);
-            this.tpResponseText.Size = new System.Drawing.Size(408, 526);
+            this.tpResponseText.Size = new System.Drawing.Size(444, 526);
             this.tpResponseText.TabIndex = 0;
             this.tpResponseText.Text = "Body";
             // 
@@ -462,7 +462,7 @@
             this.pnlResponseContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlResponseContent.Name = "pnlResponseContent";
             this.pnlResponseContent.Padding = new System.Windows.Forms.Padding(4);
-            this.pnlResponseContent.Size = new System.Drawing.Size(400, 468);
+            this.pnlResponseContent.Size = new System.Drawing.Size(436, 468);
             this.pnlResponseContent.TabIndex = 15;
             // 
             // rtResponseText
@@ -475,7 +475,7 @@
             this.rtResponseText.Name = "rtResponseText";
             this.rtResponseText.ReadOnly = true;
             this.rtResponseText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.rtResponseText.Size = new System.Drawing.Size(392, 460);
+            this.rtResponseText.Size = new System.Drawing.Size(428, 460);
             this.rtResponseText.TabIndex = 13;
             this.rtResponseText.Text = "";
             this.rtResponseText.WordWrap = false;
@@ -492,7 +492,7 @@
             this.grpResponseBodyOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpResponseBodyOutput.Name = "grpResponseBodyOutput";
             this.grpResponseBodyOutput.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpResponseBodyOutput.Size = new System.Drawing.Size(400, 50);
+            this.grpResponseBodyOutput.Size = new System.Drawing.Size(436, 50);
             this.grpResponseBodyOutput.TabIndex = 11;
             this.grpResponseBodyOutput.TabStop = false;
             this.grpResponseBodyOutput.Text = "Output";
@@ -569,7 +569,7 @@
             this.pnlResponseStatusAndTime.Location = new System.Drawing.Point(4, 19);
             this.pnlResponseStatusAndTime.Margin = new System.Windows.Forms.Padding(0);
             this.pnlResponseStatusAndTime.Name = "pnlResponseStatusAndTime";
-            this.pnlResponseStatusAndTime.Size = new System.Drawing.Size(416, 31);
+            this.pnlResponseStatusAndTime.Size = new System.Drawing.Size(452, 31);
             this.pnlResponseStatusAndTime.TabIndex = 5;
             // 
             // tableLayoutPanel1
@@ -588,7 +588,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(416, 31);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(452, 31);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // pnlResponseStatus
@@ -599,7 +599,7 @@
             this.pnlResponseStatus.Location = new System.Drawing.Point(3, 2);
             this.pnlResponseStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlResponseStatus.Name = "pnlResponseStatus";
-            this.pnlResponseStatus.Size = new System.Drawing.Size(202, 27);
+            this.pnlResponseStatus.Size = new System.Drawing.Size(220, 27);
             this.pnlResponseStatus.TabIndex = 0;
             // 
             // lblResponseStatusValue
@@ -626,10 +626,10 @@
             this.pnlResponseTime.Controls.Add(this.lblResponseTimeValue);
             this.pnlResponseTime.Controls.Add(this.lblResponseTime);
             this.pnlResponseTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlResponseTime.Location = new System.Drawing.Point(211, 2);
+            this.pnlResponseTime.Location = new System.Drawing.Point(229, 2);
             this.pnlResponseTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlResponseTime.Name = "pnlResponseTime";
-            this.pnlResponseTime.Size = new System.Drawing.Size(202, 27);
+            this.pnlResponseTime.Size = new System.Drawing.Size(220, 27);
             this.pnlResponseTime.TabIndex = 1;
             // 
             // lblResponseTimeValue
@@ -660,7 +660,7 @@
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.mainMenuStrip.Size = new System.Drawing.Size(896, 28);
+            this.mainMenuStrip.Size = new System.Drawing.Size(968, 28);
             this.mainMenuStrip.TabIndex = 4;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -758,7 +758,7 @@
             this.AcceptButton = this.btnSubmitRequest;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 645);
+            this.ClientSize = new System.Drawing.Size(968, 645);
             this.Controls.Add(this.splitterMain);
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
