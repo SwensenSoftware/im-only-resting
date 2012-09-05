@@ -130,5 +130,17 @@ namespace Swensen.RestSharpGui.Properties {
                 this["ResponseBodyOutput"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("application/octet-stream")]
+        public string DefaultRequestContentType {
+            get {
+                return ((string)(this["DefaultRequestContentType"]));
+            }
+            set {
+                this["DefaultRequestContentType"] = value;
+            }
+        }
     }
 }

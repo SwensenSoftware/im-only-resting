@@ -29,5 +29,8 @@
     <Setting Name="ResponseBodyOutput" Type="Swensen.RestSharpGui.ResponseBodyOutput" Scope="User">
       <Value Profile="(Default)">Raw</Value>
     </Setting>
+    <Setting Name="DefaultRequestContentType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">application/octet-stream</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

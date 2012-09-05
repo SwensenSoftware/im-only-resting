@@ -77,15 +77,16 @@ namespace Swensen.RestSharpGui {
             return validationErrors;                
         }
 
-        public RestRequest ToRestRequest() {
+        public RestRequest ToRestRequest(string defaultRequestContentType) {
             var rr = new RestRequest(Url.ToString(), Method);            
             foreach (var header in Headers)
                 rr.AddHeader(header.Key, header.Value);
 
             //default content-type: http://mattryall.net/blog/2008/03/default-content-type
-            var ct = Headers.FirstOrDefault(header => header.Key.ToUpper() == "CONTENT-TYPE").Value ?? "application/octet-stream";
-            if(!String.IsNullOrWhiteSpace(Body))
-                rr.AddParameter(ct, Body, ParameterType.RequestBody); //http://stackoverflow.com/questions/5095692/how-to-add-text-to-request-body-in-restsharp
+            var ct = Headers.FirstOrDefault(header => header.Key.ToUpper() == "CONTENT-TYPE").Value; //first try user supplied
+            ct = String.IsNullOrWhiteSpace(ct) ? defaultRequestContentType : ct; //then try settings supplied
+            ct = String.IsNullOrWhiteSpace(ct) ? "application/octet-stream" : ct; // then try w3 spec default
+            rr.AddParameter(ct, Body, ParameterType.RequestBody); //http://stackoverflow.com/questions/5095692/how-to-add-text-to-request-body-in-restsharp
 
             return rr;
         }
