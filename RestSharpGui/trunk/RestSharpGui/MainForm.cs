@@ -112,7 +112,7 @@ namespace Swensen.RestSharpGui
         private void bindResponseBodyOutputs() {
             rbResponseBodyOutputRaw.Tag = ResponseBodyOutput.Raw;
             rbResponseBodyOutputPretty.Tag = ResponseBodyOutput.Pretty;
-            rbResponseBodyOutputBrowser.Tag = ResponseBodyOutput.Browser;
+            rbResponseBodyOutputBrowser.Tag = ResponseBodyOutput.Rendered;
 
             foreach (var rb in rbGrpResponseBodyOutputs) {
                 rb.CheckedChanged += new EventHandler(rbGrpResponseBodyOutput_CheckedChanged);
@@ -140,7 +140,7 @@ namespace Swensen.RestSharpGui
                     wbResponseBody.Visible = false;
                     rtResponseText.Text = lastResponseViewModel.PrettyPrintedContent;
                     break;
-                case ResponseBodyOutput.Browser:
+                case ResponseBodyOutput.Rendered:
                     rebuildWebBrowser();
                     wbResponseBody.Visible = true;
                     rtResponseText.Visible = false;

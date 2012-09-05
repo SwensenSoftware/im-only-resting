@@ -1,5 +1,5 @@
 ﻿namespace Swensen.RestSharpGui {
     public enum ResponseBodyOutput {
-        Raw, Pretty, Browser
+        Raw, Pretty, Rendered
     }
 }
