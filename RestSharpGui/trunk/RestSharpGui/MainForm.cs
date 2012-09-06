@@ -145,18 +145,16 @@ namespace Swensen.RestSharpGui
                     wbResponseBody.Visible = true;
                     rtResponseText.Visible = false;
 
-                    if (lastResponseViewModel.InferredContentType == InferredContentType.Xml && lastResponseViewModel.ContentBytes != null && lastResponseViewModel.ContentBytes.Length > 0) {
-                        var path = Path.GetTempPath();
-                        var fileName = Guid.NewGuid().ToString() + ".xml";
-                        var fullFileName = Path.Combine(path, fileName);
+                    if (lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Xml && lastResponseViewModel.ContentBytes != null && lastResponseViewModel.ContentBytes.Length > 0) {
+                        var fullFileName = lastResponseViewModel.TemporaryFile;
                         File.WriteAllBytes(fullFileName, lastResponseViewModel.ContentBytes);
                         wbResponseBody.Navigate(fullFileName);
                     } else {
                         wbResponseBody.Navigate("about:blank");
                         HtmlDocument doc = wbResponseBody.Document.OpenNew(true);
 
-                        switch (lastResponseViewModel.InferredContentType) {
-                            case InferredContentType.Html:
+                        switch (lastResponseViewModel.ContentType.MediaTypeCategory) {
+                            case HttpMediaTypeCategory.Html:
                                 doc.Write(lastResponseViewModel.Content);
                                 break;
                             default:
@@ -316,8 +314,8 @@ namespace Swensen.RestSharpGui
             
             //set filter based on inferred content type
             string filter = "All files|*.*";
-            if(lastResponseViewModel.InferredContentType != InferredContentType.Other) {
-                string ctExt = InferredContentTypeUtils.FileExtension(lastResponseViewModel.InferredContentType);
+            if (!String.IsNullOrWhiteSpace(lastResponseViewModel.ContentFileExtension)) {
+                string ctExt = lastResponseViewModel.ContentFileExtension;
                 filter = string.Format("{0}|*.{0}|{1}", ctExt, filter);
             }
             responseBodySaveFileDialog.Filter = filter;

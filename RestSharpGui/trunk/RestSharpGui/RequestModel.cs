@@ -40,10 +40,6 @@ namespace Swensen.RestSharpGui {
                     validationErrors.Add("Request URL is invalid");    
             }
 
-
-            if(vm.Method == null)
-                validationErrors.Add("Request HTTP Method must be selected");
-
             var headers = new Dictionary<string,string>();
             foreach (var line in vm.Headers) {
                 if (String.IsNullOrWhiteSpace(line))
