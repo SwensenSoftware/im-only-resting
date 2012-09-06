@@ -25,6 +25,7 @@ namespace Swensen.RestSharpGui {
 
         public HttpContentType(string contentType) {
             try {
+                contentType = contentType.Split(',')[0]; //though illegal, we've since comma separated content-types
                 this.ct = new ContentType(contentType);
             } catch {
                 this.ct = new ContentType("application/octet-stream");
