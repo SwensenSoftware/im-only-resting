@@ -145,9 +145,8 @@ namespace Swensen.RestSharpGui
                     wbResponseBody.Visible = true;
                     rtResponseText.Visible = false;
 
-                    if (lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Xml && lastResponseViewModel.ContentBytes != null && lastResponseViewModel.ContentBytes.Length > 0) {
+                    if ((lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Xml || lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Application) && lastResponseViewModel.ContentBytes != null && lastResponseViewModel.ContentBytes.Length > 0) {
                         var fullFileName = lastResponseViewModel.TemporaryFile;
-                        File.WriteAllBytes(fullFileName, lastResponseViewModel.ContentBytes);
                         wbResponseBody.Navigate(fullFileName);
                     } else {
                         wbResponseBody.Navigate("about:blank");
