@@ -82,5 +82,8 @@ namespace Swensen.RestSharpGui {
 
         private Lazy<string> temporaryFile;
         public string TemporaryFile { get { return temporaryFile.Value; } }
+
+        public static ResponseViewModel Loading = new ResponseViewModel(status:"Loading...");
+        public static ResponseViewModel Empty = new ResponseViewModel();
     }
 }

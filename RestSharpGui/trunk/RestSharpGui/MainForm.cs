@@ -36,7 +36,7 @@ namespace Swensen.RestSharpGui
             try {
                 rebuildWebBrowser();
 
-                lastResponseViewModel = new ResponseViewModel(); //just to avoid np exceptions.
+                lastResponseViewModel = ResponseViewModel.Empty; //just to avoid np exceptions.
                 bindResponseBodyOutputs();
                 bindHttpMethods();
                 bindRuntimeSettings();
@@ -190,7 +190,7 @@ namespace Swensen.RestSharpGui
                 showError("Request Validation Errors", String.Join(Environment.NewLine, validationErrors));
             else {
                 //clear response view and show loading message status
-                bind(new ResponseViewModel("Loading..."));
+                bind(ResponseViewModel.Loading);
                 grpResponse.Update();
 
                 //execute the request and get the response
@@ -234,7 +234,7 @@ namespace Swensen.RestSharpGui
         {
             setIsLastOpenedRequestFileDirtyToTrue();
             bind(new RequestViewModel());
-            bind(new ResponseViewModel());
+            bind(ResponseViewModel.Empty);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -303,7 +303,7 @@ namespace Swensen.RestSharpGui
                 showError("File Open Error", "Error opening request file");
                 return;
             }
-            bind(new ResponseViewModel("")); // clear the response.
+            bind(ResponseViewModel.Empty); // clear the response.
             bind(requestVm);
             updateLastOpenedRequestFile(fileName);
         }
