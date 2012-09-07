@@ -35,7 +35,8 @@ namespace Swensen.RestSharpGui {
             if(String.IsNullOrWhiteSpace(vm.Url))
                 validationErrors.Add("Request URL may not be empty");
             else {
-                var forgivingUrl = !(vm.Url.StartsWith("http://") || vm.Url.StartsWith("https://")) ? "http://" + vm.Url : vm.Url;
+                var knownProtocals = new[] { "http://", "https://", "ftp://", "ftps://", "file:///" };
+                var forgivingUrl = knownProtocals.Any(x => vm.Url.StartsWith(x)) ? vm.Url : "http://" + vm.Url;
                 if(!Uri.TryCreate(forgivingUrl, UriKind.Absolute, out url))
                     validationErrors.Add("Request URL is invalid");    
             }
