@@ -336,6 +336,10 @@ namespace Swensen.RestSharpGui
             return MessageBox.Show(this, text, title, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
         }
 
+        private DialogResult showYesNoCancel(string title, string text) {
+            return MessageBox.Show(this, text, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+        }
+
         private void txtUrl_TextChanged(object sender, EventArgs e) {
             setIsLastOpenedRequestFileDirtyToTrue();
         }
@@ -388,6 +392,20 @@ namespace Swensen.RestSharpGui
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            if (this.isLastOpenedRequestFileDirty) {
+                var msg = String.IsNullOrWhiteSpace(lastOpenedRequestFile) ? 
+                            "Save changes to new request?" : 
+                            String.Format("Save changes to {0}?", lastOpenedRequestFile);
+
+                var result = showYesNoCancel("Save Changes", msg);
+                if (result == DialogResult.Yes) {
+                    save(lastOpenedRequestFile);
+                } else if (result == DialogResult.Cancel) {
+                    e.Cancel = true;
+                    return;
+                } //else is No; follow through to the end
+            }
+
             persistGuiSettings();
         }
 
@@ -411,7 +429,7 @@ namespace Swensen.RestSharpGui
             wbResponseBody.Dock = DockStyle.Fill;
 
             pnlResponseContent.Controls.Add(wbResponseBody);
-        }
+        }                                                                                      
 
         private void splitterMain_DoubleClick(object sender, EventArgs e) {
             persistGuiSettings();
