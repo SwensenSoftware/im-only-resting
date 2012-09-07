@@ -84,6 +84,7 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.lnkResponseStatusInfo = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -542,7 +543,7 @@
             this.tpResponseHeaders.Margin = new System.Windows.Forms.Padding(4);
             this.tpResponseHeaders.Name = "tpResponseHeaders";
             this.tpResponseHeaders.Padding = new System.Windows.Forms.Padding(4);
-            this.tpResponseHeaders.Size = new System.Drawing.Size(408, 526);
+            this.tpResponseHeaders.Size = new System.Drawing.Size(444, 526);
             this.tpResponseHeaders.TabIndex = 1;
             this.tpResponseHeaders.Text = "Headers";
             // 
@@ -557,7 +558,7 @@
             this.txtResponseHeaders.Name = "txtResponseHeaders";
             this.txtResponseHeaders.ReadOnly = true;
             this.txtResponseHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResponseHeaders.Size = new System.Drawing.Size(400, 518);
+            this.txtResponseHeaders.Size = new System.Drawing.Size(436, 518);
             this.txtResponseHeaders.TabIndex = 11;
             this.txtResponseHeaders.WordWrap = false;
             // 
@@ -593,6 +594,7 @@
             // 
             // pnlResponseStatus
             // 
+            this.pnlResponseStatus.Controls.Add(this.lnkResponseStatusInfo);
             this.pnlResponseStatus.Controls.Add(this.lblResponseStatusValue);
             this.pnlResponseStatus.Controls.Add(this.lblResponseStatus);
             this.pnlResponseStatus.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -753,6 +755,19 @@
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
             // 
+            // lnkResponseStatusInfo
+            // 
+            this.lnkResponseStatusInfo.AutoSize = true;
+            this.lnkResponseStatusInfo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lnkResponseStatusInfo.Location = new System.Drawing.Point(52, 0);
+            this.lnkResponseStatusInfo.Name = "lnkResponseStatusInfo";
+            this.lnkResponseStatusInfo.Size = new System.Drawing.Size(16, 17);
+            this.lnkResponseStatusInfo.TabIndex = 2;
+            this.lnkResponseStatusInfo.TabStop = true;
+            this.lnkResponseStatusInfo.Text = "?";
+            this.lnkResponseStatusInfo.Visible = false;
+            this.lnkResponseStatusInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkResponseStatusInfo_LinkClicked);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -864,6 +879,7 @@
         private System.Windows.Forms.RadioButton rbResponseBodyOutputRaw;
         private System.Windows.Forms.RichTextBox rtResponseText;
         private System.Windows.Forms.Panel pnlResponseContent;
+        private System.Windows.Forms.LinkLabel lnkResponseStatusInfo;
 
     }
 }

@@ -57,6 +57,8 @@ namespace Swensen.RestSharpGui {
 
             this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
 
+            this.ErrorMessage = response.ErrorMessage;
+
             initLazyFields();            
         }
 
@@ -65,6 +67,8 @@ namespace Swensen.RestSharpGui {
             this.contentFileExtension = new Lazy<string>(() => HttpContentType.GetFileExtension(this.ContentType.MediaTypeCategory, this.ContentType.MediaType));
             this.temporaryFile = new Lazy<string>(() => HttpContentType.GetTemporaryFile(this.ContentBytes, this.ContentFileExtension));
         }
+
+        public string ErrorMessage { get; private set; }
 
         public string ElapsedTime { get; private set; }
 
