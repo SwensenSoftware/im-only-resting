@@ -63,6 +63,7 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="HttpClient.cs" />
     <Compile Include="HttpContentType.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

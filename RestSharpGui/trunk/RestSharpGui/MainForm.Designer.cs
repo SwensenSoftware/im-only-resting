@@ -65,6 +65,7 @@
             this.pnlResponseStatusAndTime = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlResponseStatus = new System.Windows.Forms.Panel();
+            this.lnkCancelRequest = new System.Windows.Forms.LinkLabel();
             this.lnkResponseStatusInfo = new System.Windows.Forms.LinkLabel();
             this.lblResponseStatusValue = new System.Windows.Forms.Label();
             this.lblResponseStatus = new System.Windows.Forms.Label();
@@ -85,7 +86,6 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.lnkCancelRequest = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -606,6 +606,19 @@
             this.pnlResponseStatus.Size = new System.Drawing.Size(220, 27);
             this.pnlResponseStatus.TabIndex = 0;
             // 
+            // lnkCancelRequest
+            // 
+            this.lnkCancelRequest.AutoSize = true;
+            this.lnkCancelRequest.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lnkCancelRequest.Location = new System.Drawing.Point(68, 0);
+            this.lnkCancelRequest.Name = "lnkCancelRequest";
+            this.lnkCancelRequest.Size = new System.Drawing.Size(51, 17);
+            this.lnkCancelRequest.TabIndex = 3;
+            this.lnkCancelRequest.TabStop = true;
+            this.lnkCancelRequest.Text = "Cancel";
+            this.lnkCancelRequest.Visible = false;
+            this.lnkCancelRequest.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCancelRequest_LinkClicked);
+            // 
             // lnkResponseStatusInfo
             // 
             this.lnkResponseStatusInfo.AutoSize = true;
@@ -769,19 +782,6 @@
             // 
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
-            // 
-            // lnkCancelRequest
-            // 
-            this.lnkCancelRequest.AutoSize = true;
-            this.lnkCancelRequest.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lnkCancelRequest.Location = new System.Drawing.Point(68, 0);
-            this.lnkCancelRequest.Name = "lnkCancelRequest";
-            this.lnkCancelRequest.Size = new System.Drawing.Size(51, 17);
-            this.lnkCancelRequest.TabIndex = 3;
-            this.lnkCancelRequest.TabStop = true;
-            this.lnkCancelRequest.Text = "Cancel";
-            this.lnkCancelRequest.Visible = false;
-            this.lnkCancelRequest.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCancelRequest_LinkClicked);
             // 
             // MainForm
             // 

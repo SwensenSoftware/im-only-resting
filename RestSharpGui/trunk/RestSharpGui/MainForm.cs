@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using RestSharp;
-using System.Net;
 using System.Xml.Linq;
 using System.IO;
 using Swensen.RestSharpGui.Properties;
@@ -171,7 +170,10 @@ namespace Swensen.RestSharpGui
                     wbResponseBody.Visible = true;
                     rtResponseText.Visible = false;
 
-                    if ((lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Xml || lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Application) && lastResponseViewModel.ContentBytes != null && lastResponseViewModel.ContentBytes.Length > 0) {
+                    if ((lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Xml || 
+                        lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Application) && 
+                        lastResponseViewModel.ContentBytes != null && 
+                        lastResponseViewModel.ContentBytes.Length > 0) {
                         var fullFileName = lastResponseViewModel.TemporaryFile;
                         wbResponseBody.Navigate(fullFileName);
                     } else {
@@ -228,23 +230,12 @@ namespace Swensen.RestSharpGui
                 bind(ResponseViewModel.Loading);
                 grpResponse.Update();
 
-                //execute the request and get the response
-                var restRequest = requestModel.ToRestRequest(Settings.Default.DefaultRequestContentType);
-                var client = new RestClient();
-                if(!String.IsNullOrWhiteSpace(Settings.Default.ProxyServer))
-                    client.Proxy = new WebProxy(Settings.Default.ProxyServer, false); //make second arg a config option.
-
-                var start = DateTime.Now;
-                requestAsyncHandle = client.ExecuteAsync(restRequest, restResponse => {
-                    //switch to UI thread
+                var client = new HttpClient(Settings.Default.DefaultRequestContentType, Settings.Default.ProxyServer);
+                this.requestAsyncHandle = client.ExecuteAsync(requestModel, responseViewModel => {
                     this.Invoke((MethodInvoker) delegate {
                         this.requestAsyncHandle = null;
-
-                        var end = DateTime.Now;
-                        var responseVm = new ResponseViewModel(restResponse, start, end);
-
                         //bind the response view
-                        bind(responseVm);
+                        bind(responseViewModel);
                         grpResponse.Update();
                     });
                 });
