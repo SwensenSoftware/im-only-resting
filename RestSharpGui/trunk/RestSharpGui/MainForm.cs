@@ -417,7 +417,10 @@ namespace Swensen.RestSharpGui
                 } //else is No; follow through to the end
             }
 
-            persistGuiSettings();
+            //swallow
+            try {
+                persistGuiSettings();
+            } catch { }
         }
 
         //hack!
