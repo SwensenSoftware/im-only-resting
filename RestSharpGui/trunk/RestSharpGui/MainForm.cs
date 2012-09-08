@@ -19,9 +19,15 @@ namespace Swensen.RestSharpGui
 {
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// We dynamically create and add a webbrowser object each time due to quirky behavior otherwise (only works first Navigate in some cases).
+        /// </summary>
         WebBrowser wbResponseBody;
 
         private string lastOpenedRequestFileName = null;
+        /// <summary>
+        /// The derived "short" lastOpenedRequestFileName (i.e. the file name without the path).
+        /// </summary>
         private string lastOpenedRequestShortFileName {
             get {
                 if (String.IsNullOrEmpty(lastOpenedRequestFileName))
@@ -33,9 +39,20 @@ namespace Swensen.RestSharpGui
             }
         }
 
+        /// <summary>
+        /// Track whether there have been any modifications to the request since opening a request file.
+        /// </summary>
         private bool isLastOpenedRequestFileDirty = false;
 
-        private ResponseViewModel lastResponseViewModel;
+        /// <summary>
+        /// Hold on to the last ResponseViewModel so we can do things like Export Response Body and toggle between response body output modes.
+        /// </summary>
+        private ResponseViewModel lastResponseViewModel = ResponseViewModel.Empty; //just to avoid np exceptions.
+
+        /// <summary>
+        /// Handel on the currently executing async request, allows us to cancel. null if no currently executing request.
+        /// </summary>
+        private RestRequestAsyncHandle requestAsyncHandle = null;
 
         public MainForm()
         {
@@ -43,11 +60,9 @@ namespace Swensen.RestSharpGui
         }
 
         private void MainForm_Load(object sender, EventArgs e)
-        {
+        {                                                          
             try {
                 rebuildWebBrowser();
-
-                lastResponseViewModel = ResponseViewModel.Empty; //just to avoid np exceptions.
                 bindResponseBodyOutputs();
                 bindHttpMethods();
                 bindRuntimeSettings();
@@ -189,6 +204,14 @@ namespace Swensen.RestSharpGui
             };
         }
 
+        private void cancelAsyncRequest() {
+            if (requestAsyncHandle != null) {
+                requestAsyncHandle.Abort();
+                requestAsyncHandle = null;
+                bind(ResponseViewModel.Empty);
+            }
+        }
+
         private void btnSubmitRequest_Click(object sender, EventArgs e)
         {
             //build the request view
@@ -200,6 +223,7 @@ namespace Swensen.RestSharpGui
             if (validationErrors.Count > 0)
                 showError("Request Validation Errors", String.Join(Environment.NewLine, validationErrors));
             else {
+                cancelAsyncRequest();
                 //clear response view and show loading message status
                 bind(ResponseViewModel.Loading);
                 grpResponse.Update();
@@ -211,13 +235,19 @@ namespace Swensen.RestSharpGui
                     client.Proxy = new WebProxy(Settings.Default.ProxyServer, false); //make second arg a config option.
 
                 var start = DateTime.Now;
-                var restResponse = client.Execute(restRequest);
-                var end = DateTime.Now;
-                var responseVm = new ResponseViewModel(restResponse, start, end);
+                requestAsyncHandle = client.ExecuteAsync(restRequest, restResponse => {
+                    //switch to UI thread
+                    this.Invoke((MethodInvoker) delegate {
+                        this.requestAsyncHandle = null;
 
-                //bind the response view
-                bind(responseVm);
-                grpResponse.Update();
+                        var end = DateTime.Now;
+                        var responseVm = new ResponseViewModel(restResponse, start, end);
+
+                        //bind the response view
+                        bind(responseVm);
+                        grpResponse.Update();
+                    });
+                });
             }
         }
 
