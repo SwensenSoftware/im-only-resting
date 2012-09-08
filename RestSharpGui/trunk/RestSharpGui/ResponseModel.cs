@@ -24,22 +24,22 @@ using Newtonsoft.Json;
 using TidyManaged;
 
 namespace Swensen.RestSharpGui {
-    public class ResponseViewModel {
+    public class ResponseModel {
         public HttpContentType ContentType { get; private set;}
 
         /// <summary>
-        /// Create an empty ResponseViewModel with ResponseStatus set to a loading message.
+        /// Create an empty ResponseModel with ResponseStatus set to a loading message.
         /// </summary>
-        public ResponseViewModel(string status="") {
+        public ResponseModel(string status="") {
             this.Status = status;
             this.ContentType = new HttpContentType();
             initLazyFields();
         }
 
         /// <summary>
-        /// Create a ResponseViewModel populated from an IRestResonse
+        /// Create a ResponseModel populated from an IRestResonse
         /// </summary>
-        public ResponseViewModel(IRestResponse response, DateTime start, DateTime end) {
+        public ResponseModel(IRestResponse response, DateTime start, DateTime end) {
             if (response == null)
                 throw new ArgumentNullException("response");
 
@@ -87,7 +87,7 @@ namespace Swensen.RestSharpGui {
         private Lazy<string> temporaryFile;
         public string TemporaryFile { get { return temporaryFile.Value; } }
 
-        public static ResponseViewModel Loading = new ResponseViewModel(status:"Loading...");
-        public static ResponseViewModel Empty = new ResponseViewModel();
+        public static ResponseModel Loading = new ResponseModel(status:"Loading...");
+        public static ResponseModel Empty = new ResponseModel();
     }
 }

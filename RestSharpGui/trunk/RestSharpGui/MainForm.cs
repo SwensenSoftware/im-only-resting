@@ -44,9 +44,9 @@ namespace Swensen.RestSharpGui
         private bool isLastOpenedRequestFileDirty = false;
 
         /// <summary>
-        /// Hold on to the last ResponseViewModel so we can do things like Export Response Body and toggle between response body output modes.
+        /// Hold on to the last responseModel so we can do things like Export Response Body and toggle between response body output modes.
         /// </summary>
-        private ResponseViewModel lastResponseViewModel = ResponseViewModel.Empty; //just to avoid np exceptions.
+        private ResponseModel lastResponseModel = ResponseModel.Empty; //just to avoid np exceptions.
 
         /// <summary>
         /// Handel on the currently executing async request, allows us to cancel. null if no currently executing request.
@@ -158,34 +158,34 @@ namespace Swensen.RestSharpGui
                 case ResponseBodyOutput.Raw:
                     rtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
-                    rtResponseText.Text = lastResponseViewModel.Content;
+                    rtResponseText.Text = lastResponseModel.Content;
                     break;
                 case ResponseBodyOutput.Pretty:
                     rtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
-                    rtResponseText.Text = lastResponseViewModel.PrettyPrintedContent;
+                    rtResponseText.Text = lastResponseModel.PrettyPrintedContent;
                     break;
                 case ResponseBodyOutput.Rendered:
                     rebuildWebBrowser();
                     wbResponseBody.Visible = true;
                     rtResponseText.Visible = false;
 
-                    if ((lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Xml || 
-                        lastResponseViewModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Application) && 
-                        lastResponseViewModel.ContentBytes != null && 
-                        lastResponseViewModel.ContentBytes.Length > 0) {
-                        var fullFileName = lastResponseViewModel.TemporaryFile;
+                    if ((lastResponseModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Xml || 
+                        lastResponseModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Application) && 
+                        lastResponseModel.ContentBytes != null && 
+                        lastResponseModel.ContentBytes.Length > 0) {
+                        var fullFileName = lastResponseModel.TemporaryFile;
                         wbResponseBody.Navigate(fullFileName);
                     } else {
                         wbResponseBody.Navigate("about:blank");
                         HtmlDocument doc = wbResponseBody.Document.OpenNew(true);
 
-                        switch (lastResponseViewModel.ContentType.MediaTypeCategory) {
+                        switch (lastResponseModel.ContentType.MediaTypeCategory) {
                             case HttpMediaTypeCategory.Html:
-                                doc.Write(lastResponseViewModel.Content);
+                                doc.Write(lastResponseModel.Content);
                                 break;
                             default:
-                                doc.Write(String.Format("<html><body><pre>{0}</pre></body></html>", RestSharp.Extensions.StringExtensions.HtmlEncode(lastResponseViewModel.PrettyPrintedContent)));
+                                doc.Write(String.Format("<html><body><pre>{0}</pre></body></html>", RestSharp.Extensions.StringExtensions.HtmlEncode(lastResponseModel.PrettyPrintedContent)));
                                 break;
                         }
                     }
@@ -210,7 +210,7 @@ namespace Swensen.RestSharpGui
             if (requestAsyncHandle != null) {
                 requestAsyncHandle.Abort();
                 requestAsyncHandle = null;
-                bind(ResponseViewModel.Empty);
+                bind(ResponseModel.Empty);
             }
         }
 
@@ -227,27 +227,27 @@ namespace Swensen.RestSharpGui
             else {
                 cancelAsyncRequest();
                 //clear response view and show loading message status
-                bind(ResponseViewModel.Loading);
+                bind(ResponseModel.Loading);
                 grpResponse.Update();
 
                 var client = new HttpClient(Settings.Default.DefaultRequestContentType, Settings.Default.ProxyServer);
-                this.requestAsyncHandle = client.ExecuteAsync(requestModel, responseViewModel => {
+                this.requestAsyncHandle = client.ExecuteAsync(requestModel, responseModel => {
                     this.Invoke((MethodInvoker) delegate {
                         this.requestAsyncHandle = null;
                         //bind the response view
-                        bind(responseViewModel);
+                        bind(responseModel);
                         grpResponse.Update();
                     });
                 });
             }
         }
 
-        private void bind(ResponseViewModel responseVm) {
-            this.lastResponseViewModel = responseVm;
+        private void bind(ResponseModel responseVm) {
+            this.lastResponseModel = responseVm;
 
             lblResponseStatusValue.Text = responseVm.Status;
             lnkResponseStatusInfo.Visible = !String.IsNullOrWhiteSpace(responseVm.ErrorMessage);
-            lnkCancelRequest.Visible = responseVm.Status == ResponseViewModel.Loading.Status;
+            lnkCancelRequest.Visible = responseVm.Status == ResponseModel.Loading.Status;
 
             txtResponseHeaders.Text = responseVm.Headers;
             lblResponseTimeValue.Text = responseVm.ElapsedTime;
@@ -269,7 +269,7 @@ namespace Swensen.RestSharpGui
         {
             setIsLastOpenedRequestFileDirtyToTrue();
             bind(new RequestViewModel());
-            bind(ResponseViewModel.Empty);
+            bind(ResponseModel.Empty);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -338,7 +338,7 @@ namespace Swensen.RestSharpGui
                 showError("File Open Error", "Error opening request file");
                 return;
             }
-            bind(ResponseViewModel.Empty); // clear the response.
+            bind(ResponseModel.Empty); // clear the response.
             bind(requestVm);
             updateLastOpenedRequestFile(fileName);
         }
@@ -348,15 +348,15 @@ namespace Swensen.RestSharpGui
             
             //set filter based on inferred content type
             string filter = "All files|*.*";
-            if (!String.IsNullOrWhiteSpace(lastResponseViewModel.ContentFileExtension)) {
-                string ctExt = lastResponseViewModel.ContentFileExtension;
+            if (!String.IsNullOrWhiteSpace(lastResponseModel.ContentFileExtension)) {
+                string ctExt = lastResponseModel.ContentFileExtension;
                 filter = string.Format("{0}|*.{0}|{1}", ctExt, filter);
             }
             responseBodySaveFileDialog.Filter = filter;
             responseBodySaveFileDialog.FilterIndex = 1;
             
             if (responseBodySaveFileDialog.ShowDialog() == DialogResult.OK) {
-                File.WriteAllBytes(responseBodySaveFileDialog.FileName, lastResponseViewModel.ContentBytes);
+                File.WriteAllBytes(responseBodySaveFileDialog.FileName, lastResponseModel.ContentBytes);
                 Settings.Default.ExportResponseFileDialogFolder = responseBodySaveFileDialog.InitialDirectory;
             }
         }
@@ -391,7 +391,7 @@ namespace Swensen.RestSharpGui
 
         private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
             saveToolStripMenuItem.Enabled = this.isLastOpenedRequestFileDirty;
-            exportResponseBodyToolStripMenuItem.Enabled = !(lastResponseViewModel.ContentBytes == null || lastResponseViewModel.ContentBytes.Length == 0);
+            exportResponseBodyToolStripMenuItem.Enabled = !(lastResponseModel.ContentBytes == null || lastResponseModel.ContentBytes.Length == 0);
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -487,7 +487,7 @@ namespace Swensen.RestSharpGui
         }
 
         private void lnkResponseStatusInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            showError("Response Error", lastResponseViewModel.ErrorMessage);
+            showError("Response Error", lastResponseModel.ErrorMessage);
         }
 
         private void lnkCancelRequest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {

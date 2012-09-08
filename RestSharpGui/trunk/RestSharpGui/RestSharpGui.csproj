@@ -82,7 +82,7 @@
     <Compile Include="RequestViewModel.cs" />
     <Compile Include="RequestModel.cs" />
     <Compile Include="ResponseBodyOutput.cs" />
-    <Compile Include="ResponseViewModel.cs" />
+    <Compile Include="ResponseModel.cs" />
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
