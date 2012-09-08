@@ -65,6 +65,7 @@
             this.pnlResponseStatusAndTime = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlResponseStatus = new System.Windows.Forms.Panel();
+            this.lnkResponseStatusInfo = new System.Windows.Forms.LinkLabel();
             this.lblResponseStatusValue = new System.Windows.Forms.Label();
             this.lblResponseStatus = new System.Windows.Forms.Label();
             this.pnlResponseTime = new System.Windows.Forms.Panel();
@@ -84,7 +85,6 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.lnkResponseStatusInfo = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -604,6 +604,19 @@
             this.pnlResponseStatus.Size = new System.Drawing.Size(220, 27);
             this.pnlResponseStatus.TabIndex = 0;
             // 
+            // lnkResponseStatusInfo
+            // 
+            this.lnkResponseStatusInfo.AutoSize = true;
+            this.lnkResponseStatusInfo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lnkResponseStatusInfo.Location = new System.Drawing.Point(52, 0);
+            this.lnkResponseStatusInfo.Name = "lnkResponseStatusInfo";
+            this.lnkResponseStatusInfo.Size = new System.Drawing.Size(16, 17);
+            this.lnkResponseStatusInfo.TabIndex = 2;
+            this.lnkResponseStatusInfo.TabStop = true;
+            this.lnkResponseStatusInfo.Text = "?";
+            this.lnkResponseStatusInfo.Visible = false;
+            this.lnkResponseStatusInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkResponseStatusInfo_LinkClicked);
+            // 
             // lblResponseStatusValue
             // 
             this.lblResponseStatusValue.AutoSize = true;
@@ -754,19 +767,6 @@
             // 
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
-            // 
-            // lnkResponseStatusInfo
-            // 
-            this.lnkResponseStatusInfo.AutoSize = true;
-            this.lnkResponseStatusInfo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lnkResponseStatusInfo.Location = new System.Drawing.Point(52, 0);
-            this.lnkResponseStatusInfo.Name = "lnkResponseStatusInfo";
-            this.lnkResponseStatusInfo.Size = new System.Drawing.Size(16, 17);
-            this.lnkResponseStatusInfo.TabIndex = 2;
-            this.lnkResponseStatusInfo.TabStop = true;
-            this.lnkResponseStatusInfo.Text = "?";
-            this.lnkResponseStatusInfo.Visible = false;
-            this.lnkResponseStatusInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkResponseStatusInfo_LinkClicked);
             // 
             // MainForm
             // 

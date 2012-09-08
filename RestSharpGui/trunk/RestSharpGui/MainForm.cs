@@ -21,7 +21,18 @@ namespace Swensen.RestSharpGui
     {
         WebBrowser wbResponseBody;
 
-        private string lastOpenedRequestFile = null;
+        private string lastOpenedRequestFileName = null;
+        private string lastOpenedRequestShortFileName {
+            get {
+                if (String.IsNullOrEmpty(lastOpenedRequestFileName))
+                    return null;
+                else {
+                    var parts = lastOpenedRequestFileName.Split(Path.DirectorySeparatorChar);
+                    return parts[parts.Length - 1];
+                }
+            }
+        }
+
         private bool isLastOpenedRequestFileDirty = false;
 
         private ResponseViewModel lastResponseViewModel;
@@ -253,7 +264,7 @@ namespace Swensen.RestSharpGui
 
         private void save(string fileName) {
             if (fileName == null) {
-                requestSaveFileDialog.FileName = null;
+                requestSaveFileDialog.FileName = lastOpenedRequestShortFileName;
                 setUpFileDialogs();
                 if (requestSaveFileDialog.ShowDialog() == DialogResult.OK) {
                     fileName = requestSaveFileDialog.FileName;
@@ -274,13 +285,13 @@ namespace Swensen.RestSharpGui
         }
 
         private void updateLastOpenedRequestFile(string fileName) {
-            this.lastOpenedRequestFile = fileName;
+            this.lastOpenedRequestFileName = fileName;
             this.isLastOpenedRequestFileDirty = false;
             this.Text = fileName + " - RestSharp GUI";
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-            save(lastOpenedRequestFile);
+            save(lastOpenedRequestFileName);
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -393,13 +404,13 @@ namespace Swensen.RestSharpGui
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             if (this.isLastOpenedRequestFileDirty) {
-                var msg = String.IsNullOrWhiteSpace(lastOpenedRequestFile) ? 
+                var msg = String.IsNullOrWhiteSpace(lastOpenedRequestFileName) ? 
                             "Save changes to new request?" : 
-                            String.Format("Save changes to {0}?", lastOpenedRequestFile);
+                            String.Format("Save changes to {0}?", lastOpenedRequestFileName);
 
                 var result = showYesNoCancel("Save Changes", msg);
                 if (result == DialogResult.Yes) {
-                    save(lastOpenedRequestFile);
+                    save(lastOpenedRequestFileName);
                 } else if (result == DialogResult.Cancel) {
                     e.Cancel = true;
                     return;
