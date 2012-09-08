@@ -85,6 +85,7 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.lnkCancelRequest = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -594,6 +595,7 @@
             // 
             // pnlResponseStatus
             // 
+            this.pnlResponseStatus.Controls.Add(this.lnkCancelRequest);
             this.pnlResponseStatus.Controls.Add(this.lnkResponseStatusInfo);
             this.pnlResponseStatus.Controls.Add(this.lblResponseStatusValue);
             this.pnlResponseStatus.Controls.Add(this.lblResponseStatus);
@@ -768,6 +770,19 @@
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
             // 
+            // lnkCancelRequest
+            // 
+            this.lnkCancelRequest.AutoSize = true;
+            this.lnkCancelRequest.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lnkCancelRequest.Location = new System.Drawing.Point(68, 0);
+            this.lnkCancelRequest.Name = "lnkCancelRequest";
+            this.lnkCancelRequest.Size = new System.Drawing.Size(51, 17);
+            this.lnkCancelRequest.TabIndex = 3;
+            this.lnkCancelRequest.TabStop = true;
+            this.lnkCancelRequest.Text = "Cancel";
+            this.lnkCancelRequest.Visible = false;
+            this.lnkCancelRequest.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCancelRequest_LinkClicked);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -880,6 +895,7 @@
         private System.Windows.Forms.RichTextBox rtResponseText;
         private System.Windows.Forms.Panel pnlResponseContent;
         private System.Windows.Forms.LinkLabel lnkResponseStatusInfo;
+        private System.Windows.Forms.LinkLabel lnkCancelRequest;
 
     }
 }

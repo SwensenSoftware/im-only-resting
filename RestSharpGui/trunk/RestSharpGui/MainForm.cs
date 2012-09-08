@@ -256,6 +256,7 @@ namespace Swensen.RestSharpGui
 
             lblResponseStatusValue.Text = responseVm.Status;
             lnkResponseStatusInfo.Visible = !String.IsNullOrWhiteSpace(responseVm.ErrorMessage);
+            lnkCancelRequest.Visible = responseVm.Status == ResponseViewModel.Loading.Status;
 
             txtResponseHeaders.Text = responseVm.Headers;
             lblResponseTimeValue.Text = responseVm.ElapsedTime;
@@ -496,6 +497,10 @@ namespace Swensen.RestSharpGui
 
         private void lnkResponseStatusInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             showError("Response Error", lastResponseViewModel.ErrorMessage);
+        }
+
+        private void lnkCancelRequest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            cancelAsyncRequest();
         }
     }
 }
