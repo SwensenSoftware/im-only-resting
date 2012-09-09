@@ -31,11 +31,11 @@
             this.splitterMain = new System.Windows.Forms.SplitContainer();
             this.grpRequest = new System.Windows.Forms.GroupBox();
             this.grpBody = new System.Windows.Forms.GroupBox();
-            this.txtRequestBody = new System.Windows.Forms.TextBox();
+            this.txtRequestBody = new Swensen.RestSharpGui.StandardTextBox();
             this.pnlTopHalfOfRequest = new System.Windows.Forms.Panel();
             this.pnlRequestMethodAndHeaders = new System.Windows.Forms.Panel();
             this.grpHeaders = new System.Windows.Forms.GroupBox();
-            this.txtRequestHeaders = new System.Windows.Forms.TextBox();
+            this.txtRequestHeaders = new Swensen.RestSharpGui.StandardTextBox();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
             this.rbHttpPatch = new System.Windows.Forms.RadioButton();
             this.rbHttpHead = new System.Windows.Forms.RadioButton();
@@ -46,7 +46,7 @@
             this.rbHttpPost = new System.Windows.Forms.RadioButton();
             this.pnlRequestUrlAndButtons = new System.Windows.Forms.Panel();
             this.pnlUrl = new System.Windows.Forms.Panel();
-            this.txtUrl = new System.Windows.Forms.TextBox();
+            this.txtUrl = new Swensen.RestSharpGui.StandardTextBox();
             this.lblUrl = new System.Windows.Forms.Label();
             this.btnRequestButtons = new System.Windows.Forms.Panel();
             this.btnClearRequest = new System.Windows.Forms.Button();
@@ -179,7 +179,6 @@
             this.txtRequestBody.WordWrap = false;
             this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
             this.txtRequestBody.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
-            this.txtRequestBody.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtRequestBody_MouseDown);
             // 
             // pnlTopHalfOfRequest
             // 
@@ -232,7 +231,6 @@
             this.txtRequestHeaders.WordWrap = false;
             this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
             this.txtRequestHeaders.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
-            this.txtRequestHeaders.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtRequestHeaders_MouseDown);
             // 
             // grpHttpMethod
             // 
@@ -851,19 +849,19 @@
         private System.Windows.Forms.Panel pnlTopHalfOfRequest;
         private System.Windows.Forms.Panel pnlRequestMethodAndHeaders;
         private System.Windows.Forms.GroupBox grpHeaders;
-        private System.Windows.Forms.TextBox txtRequestHeaders;
+        private StandardTextBox txtRequestHeaders;
         private System.Windows.Forms.GroupBox grpHttpMethod;
         private System.Windows.Forms.RadioButton rbHttpGet;
         private System.Windows.Forms.RadioButton rbHttpPost;
         private System.Windows.Forms.Panel pnlRequestUrlAndButtons;
         private System.Windows.Forms.Panel pnlUrl;
-        private System.Windows.Forms.TextBox txtUrl;
+        private StandardTextBox txtUrl;
         private System.Windows.Forms.Label lblUrl;
         private System.Windows.Forms.Panel btnRequestButtons;
         private System.Windows.Forms.Button btnClearRequest;
         private System.Windows.Forms.Button btnSubmitRequest;
         private System.Windows.Forms.GroupBox grpBody;
-        private System.Windows.Forms.TextBox txtRequestBody;
+        private StandardTextBox txtRequestBody;
         private System.Windows.Forms.RadioButton rbHttpDelete;
         private System.Windows.Forms.RadioButton rbHttpOptions;
         private System.Windows.Forms.RadioButton rbHttpPut;

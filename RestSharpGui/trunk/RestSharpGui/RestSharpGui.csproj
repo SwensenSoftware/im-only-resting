@@ -84,6 +84,9 @@
     <Compile Include="ResponseBodyOutput.cs" />
     <Compile Include="ResponseModel.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="StandardTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
