@@ -48,7 +48,8 @@ namespace Swensen.RestSharpGui {
 
         public string AssemblyVersion {
             get {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                return String.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
             }
         }
 
@@ -98,6 +99,10 @@ namespace Swensen.RestSharpGui {
 
         private void linkDescription_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             System.Diagnostics.Process.Start(linkDescription.Text);
+        }
+
+        private void AboutBox_Load(object sender, EventArgs e) {
+
         }
     }
 }
