@@ -59,8 +59,13 @@ namespace Swensen.RestSharpGui
         }
 
         private void MainForm_Load(object sender, EventArgs e)
-        {                                                          
+        {                           
             try {
+                //txtRequestBody.ContextMenuStrip = new ContextMenuStrip();
+                //txtRequestBody.ContextMenu = new ContextMenu();
+                //txtRequestHeaders.ContextMenuStrip = new ContextMenuStrip();
+                //txtRequestHeaders.ContextMenu = new ContextMenu();
+
                 rebuildWebBrowser();
                 bindResponseBodyOutputs();
                 bindHttpMethods();
@@ -492,6 +497,59 @@ namespace Swensen.RestSharpGui
 
         private void lnkCancelRequest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             cancelAsyncRequest();
+        }
+
+        private void txtRequestBody_MouseDown(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) {
+                var cm = buildStandardTextBoxContextMenu(txtRequestBody);
+                cm.MenuItems.Add("-");
+
+                Action<TextBox, HttpMediaTypeCategory> format = (tb, hmtc) => {
+                    if (tb.SelectionLength > 0)
+                        tb.SelectedText = HttpContentType.GetPrettyPrintedContent(hmtc, tb.SelectedText);
+                    else
+                        tb.Text = HttpContentType.GetPrettyPrintedContent(hmtc, tb.Text);
+                };
+
+                cm.MenuItems.Add(new MenuItem("Format XML", (s, ea) => format(txtRequestBody, HttpMediaTypeCategory.Xml)));
+                cm.MenuItems.Add(new MenuItem("Format JSON", (s, ea) => format(txtRequestBody, HttpMediaTypeCategory.Json)));
+                txtRequestBody.ContextMenu = cm;
+            }
+        }
+
+        private void txtRequestHeaders_MouseDown(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) {                                                                                               
+                txtRequestHeaders.ContextMenu = buildStandardTextBoxContextMenu(txtRequestHeaders);
+            }
+        }
+
+        private ContextMenu buildStandardTextBoxContextMenu(TextBox tb) {
+            var cm = new ContextMenu(); 
+            cm.MenuItems.Add(new MenuItem("Undo", (s, ea) => tb.Undo()));
+            cm.MenuItems.Add(new MenuItem("-"));
+            {
+                var cut = new MenuItem("Cut", (s, ea) => tb.Cut());
+                cut.Enabled = tb.SelectionLength > 0;
+                cm.MenuItems.Add(cut);
+            }
+            {
+                var copy = new MenuItem("Copy", (s, ea) => tb.Copy());
+                copy.Enabled = tb.SelectionLength > 0;
+                cm.MenuItems.Add(copy);
+            }
+            cm.MenuItems.Add(new MenuItem("Paste", (s, ea) => tb.Paste()));
+            {
+                var delete = new MenuItem("Delete", (s, ea) => tb.SelectedText = "");
+                delete.Enabled = tb.SelectionLength > 0;
+                cm.MenuItems.Add(delete);
+            }
+            cm.MenuItems.Add(new MenuItem("-"));
+            {
+                var selectAll = new MenuItem("Select All", (s, ea) => tb.SelectAll());
+                selectAll.Enabled = tb.TextLength > 0 && tb.TextLength != tb.SelectionLength;
+                cm.MenuItems.Add(selectAll);
+            }
+            return cm;
         }
     }
 }

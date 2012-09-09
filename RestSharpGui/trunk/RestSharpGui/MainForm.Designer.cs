@@ -179,6 +179,7 @@
             this.txtRequestBody.WordWrap = false;
             this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
             this.txtRequestBody.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            this.txtRequestBody.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtRequestBody_MouseDown);
             // 
             // pnlTopHalfOfRequest
             // 
@@ -231,6 +232,7 @@
             this.txtRequestHeaders.WordWrap = false;
             this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
             this.txtRequestHeaders.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            this.txtRequestHeaders.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtRequestHeaders_MouseDown);
             // 
             // grpHttpMethod
             // 
