@@ -51,8 +51,11 @@ namespace Swensen.RestSharpGui {
         protected override void OnMouseDown(MouseEventArgs e) {
             if (e.Button == System.Windows.Forms.MouseButtons.Right) {
                 this.Focus();
-                if (this.SelectionLength == 0) {
-                    this.SelectionStart = this.GetCharIndexFromPosition(e.Location);
+                var charIndex = this.GetCharIndexFromPosition(e.Location);
+                if (this.SelectionLength == 0) { //no selected text
+                    this.SelectionStart = charIndex;
+                } else if(charIndex < this.SelectionStart || charIndex > (this.SelectionStart + this.SelectionLength)) { // user clicks outside of selected text
+                    this.Select(charIndex, 0);
                 }
                 miCut.Enabled = this.SelectionLength > 0;
                 miCopy.Enabled = this.SelectionLength > 0;
