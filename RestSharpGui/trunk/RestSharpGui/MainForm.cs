@@ -395,7 +395,7 @@ namespace Swensen.RestSharpGui
             exportResponseBodyToolStripMenuItem.Enabled = !(lastResponseModel.ContentBytes == null || lastResponseModel.ContentBytes.Length == 0);
         }
 
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
             persistGuiSettings();
             using(var options = new OptionsDialog()) {
                 if(DialogResult.OK == options.ShowDialog(this))
