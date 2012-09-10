@@ -496,8 +496,18 @@ namespace Swensen.RestSharpGui
                     tb.Text = HttpContentType.GetPrettyPrintedContent(hmtc, tb.Text);
             };
 
-            cm.MenuItems.Add(new MenuItem("Format XML", (s, ea) => format(txtRequestBody, HttpMediaTypeCategory.Xml)));
-            cm.MenuItems.Add(new MenuItem("Format JSON", (s, ea) => format(txtRequestBody, HttpMediaTypeCategory.Json)));
+            {
+                var miFx = new MenuItem("Format XML", (s, ea) => format(txtRequestBody, HttpMediaTypeCategory.Xml));
+                miFx.Shortcut = Shortcut.CtrlShiftX;
+                miFx.ShowShortcut = true;
+                cm.MenuItems.Add(miFx);
+            } 
+            {
+                var miFj = new MenuItem("Format JSON", (s, ea) => format(txtRequestBody, HttpMediaTypeCategory.Json));
+                miFj.Shortcut = Shortcut.CtrlShiftJ;
+                miFj.ShowShortcut = true;
+                cm.MenuItems.Add(miFj);
+            }
         }
     }
 }
