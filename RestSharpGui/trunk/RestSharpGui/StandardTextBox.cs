@@ -12,9 +12,6 @@ namespace Swensen.RestSharpGui {
         MenuItem miDelete;
         MenuItem miSelectAll;
 
-        [DllImport("user32.dll")]
-        public static extern bool SetCaretPos(int x, int y);
-
         public StandardTextBox() : base() {
             initContextMenu();    
         }
@@ -41,11 +38,6 @@ namespace Swensen.RestSharpGui {
                 this.miSelectAll = new MenuItem("Select All", (s, ea) => this.SelectAll());
                 cm.MenuItems.Add(miSelectAll);
             }
-        }
-
-        private MenuItem findMenuItemByText(string text) {
-            var cm = this.ContextMenu;
-            return cm.MenuItems.Cast<MenuItem>().FirstOrDefault(mi => mi.Text == text);
         }
 
         protected override void OnMouseDown(MouseEventArgs e) {
