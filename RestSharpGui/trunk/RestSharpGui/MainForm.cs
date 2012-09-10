@@ -478,15 +478,6 @@ namespace Swensen.RestSharpGui
             Settings.Default.Save();
         }
 
-        //http://schotime.net/blog/index.php/2008/03/12/select-all-ctrla-for-textbox/
-        private void txt_KeyDown(object sender, KeyEventArgs e) {
-            if (e.Control && (e.KeyCode == System.Windows.Forms.Keys.A)) {
-                (sender as TextBox).SelectAll();
-                e.SuppressKeyPress = true;
-                e.Handled = true;
-            }
-        }
-
         private void lnkResponseStatusInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             showError("Response Error", lastResponseModel.ErrorMessage);
         }
