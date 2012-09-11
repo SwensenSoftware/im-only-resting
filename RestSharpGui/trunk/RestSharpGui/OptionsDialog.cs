@@ -18,7 +18,7 @@ namespace Swensen.RestSharpGui {
 
         private void frmOptionsDialog_Load(object sender, EventArgs e) {
             this.pgridOptions.PropertyValueChanged += new PropertyValueChangedEventHandler(pgridOptions_PropertyValueChanged);
-            pgridOptions.SelectedObject = Settings.Default;
+            pgridOptions.SelectedObject = new SettingsViewModel(Settings.Default);
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
@@ -35,48 +35,11 @@ namespace Swensen.RestSharpGui {
 
         //todo this validation is adhoc, get plugged in with TypeConverters etc.
         void pgridOptions_PropertyValueChanged(object s, PropertyValueChangedEventArgs e) {
-            var settings = Settings.Default;
-            switch(e.ChangedItem.PropertyDescriptor.Name) {
-                case "SplitterDistancePercent": {
-                    var value = (ushort)e.ChangedItem.Value;
-                    if (value > 100) {
-                        showPropertyValidationError(string.Format("SplitterDistancePercent must be between 0 and 100 inclusive but was {0}", value));
-                        settings.SplitterDistancePercent = (ushort)e.OldValue; //so user can see it in background, wait to change till after dialog shown
-                        goto Cancel;
-                    }
-                    return;
-                }
-                case "DefaultRequestFilePath": {
-                    var value = (string)e.ChangedItem.Value;
-                    if (!String.IsNullOrWhiteSpace(value) && !File.Exists(value)) {
-                        showPropertyValidationError(string.Format("DefaultRequestFilePath specified file does not exist"));
-                        settings.DefaultRequestFilePath = (string)e.OldValue;
-                        goto Cancel;
-                    }
-                    return;
-                }
-                case "SaveRequestFileDialogFolder": {
-                    var value = (string)e.ChangedItem.Value;
-                    if (!String.IsNullOrWhiteSpace(value) && !Directory.Exists(value)) {
-                        showPropertyValidationError(string.Format("SaveRequestFileDialogFolder specified directory does not exist"));
-                        settings.SaveRequestFileDialogFolder = (string)e.OldValue;
-                        goto Cancel;
-                    }
-                    return;
-                }
-                case "ExportResponseFileDialogFolder": {
-                    var value = (string)e.ChangedItem.Value;
-                    if (!String.IsNullOrWhiteSpace(value) && !Directory.Exists(value)) {
-                        showPropertyValidationError(string.Format("ExportResponseFileDialogFolder specified directory does not exist"));
-                        settings.ExportResponseFileDialogFolder = (string)e.OldValue;
-                        goto Cancel;
-                    }
-                    return;
-                }
-                default: return;
-            }
+            var vm = pgridOptions.SelectedObject as SettingsViewModel;
 
-            Cancel: {
+            var lastValidationError = vm.DequeueLastValidationError();
+            if(e.ChangedItem.PropertyDescriptor.Name == lastValidationError.Item1) {
+                showPropertyValidationError(lastValidationError.Item2);
                 pgridOptions.Refresh();
             }
         }

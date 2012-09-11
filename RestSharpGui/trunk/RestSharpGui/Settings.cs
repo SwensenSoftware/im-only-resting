@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.g
 
 namespace Swensen.RestSharpGui.Properties {
     
@@ -29,20 +28,5 @@ namespace Swensen.RestSharpGui.Properties {
         private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
             // Add code to handle the SettingsSaving event here.
         }
-
-        public SettingsViewModel ToViewModel() {
-            return new SettingsViewModel() {
-                DefaultRequestContentType = this.DefaultRequestContentType,
-                DefaultRequestFilePath = this.DefaultRequestFilePath,
-                ExportResponseFileDialogFolder = this.ExportResponseFileDialogFolder,
-                ProxyServer = this.ProxyServer,
-                SaveRequestFileDialogFolder = this.SaveRequestFileDialogFolder
-            };
-        }
-
-
-        //public List<string> TryUpdateFromViewModel(SettingsViewModel vm) {
-
-        //}
     }
 }
