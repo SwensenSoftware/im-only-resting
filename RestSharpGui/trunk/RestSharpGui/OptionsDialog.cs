@@ -39,13 +39,13 @@ namespace Swensen.RestSharpGui {
 
             var lastValidationError = vm.DequeueLastValidationError();
             if(e.ChangedItem.PropertyDescriptor.Name == lastValidationError.Item1) {
-                showPropertyValidationError(lastValidationError.Item2);
+                showPropertyValidationWarning(lastValidationError.Item2);
                 pgridOptions.Refresh();
             }
         }
 
-        private void showPropertyValidationError(string msg) {
-            MessageBox.Show(this, msg, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        private void showPropertyValidationWarning(string msg) {
+            MessageBox.Show(this, msg, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

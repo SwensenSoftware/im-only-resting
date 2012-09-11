@@ -6,6 +6,9 @@ using RestSharp;
 using System.Net;
 
 namespace Swensen.RestSharpGui {
+    /// <summary>
+    /// A light wrapper around our underlying http client.
+    /// </summary>
     public class HttpClient {
         private readonly string defaultRequestContentType;
         private readonly string proxyServer;

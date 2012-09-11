@@ -9,11 +9,18 @@ using TidyManaged;
 using System.IO;
 
 namespace Swensen.RestSharpGui {
+    /// <summary>
+    /// Broad categories of http media types that we know how to do special processing for (i.e. pretty printing, or choosing correct file extension).
+    /// </summary>
     public enum HttpMediaTypeCategory {
         Xml, Html, Json, Text, Application, Other
     }
                  
     //http://www.w3.org/TR/html4/types.html#h-6.7
+    /// <summary>
+    /// An immutable wrapper around our underlying content type representation which provides specialized processing for various processing
+    /// like pretty printing and choosing correct file extensions.
+    /// </summary>
     public class HttpContentType {
         private readonly ContentType ct;
         

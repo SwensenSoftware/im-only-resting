@@ -224,7 +224,7 @@ namespace Swensen.RestSharpGui
             RequestModel requestModel = null;
             var validationErrors = RequestModel.TryCreate(requestVm, out requestModel);
             if (validationErrors.Count > 0)
-                showError("Request Validation Errors", String.Join(Environment.NewLine, validationErrors));
+                showWarning("Request Validation Errors", String.Join(Environment.NewLine, validationErrors));
             else {
                 cancelAsyncRequest();
                 //clear response view and show loading message status
@@ -336,7 +336,7 @@ namespace Swensen.RestSharpGui
             try {
                 requestVm = RequestViewModel.Open(fileName);
             } catch {
-                showError("File Open Error", "Error opening request file");
+                showWarning("File Open Error", "Error opening request file");
                 return;
             }
             bind(ResponseModel.Empty); // clear the response.
@@ -364,6 +364,14 @@ namespace Swensen.RestSharpGui
 
         private void showError(string title, string text) {
             MessageBox.Show(this, text, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void showWarning(string title, string text) {
+            MessageBox.Show(this, text, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void showInfo(string title, string text) {
+            MessageBox.Show(this, text, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private DialogResult showChallenge(string title, string text) {
@@ -479,7 +487,7 @@ namespace Swensen.RestSharpGui
         }
 
         private void lnkResponseStatusInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            showError("Response Error", lastResponseModel.ErrorMessage);
+            showInfo("Response Error", lastResponseModel.ErrorMessage);
         }
 
         private void lnkCancelRequest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
