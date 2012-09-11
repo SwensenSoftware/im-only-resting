@@ -84,6 +84,7 @@
     <Compile Include="ResponseBodyOutput.cs" />
     <Compile Include="ResponseModel.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="SettingsViewModel.cs" />
     <Compile Include="StandardTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
