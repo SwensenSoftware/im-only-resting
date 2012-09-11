@@ -1,5 +1,5 @@
 ﻿namespace Swensen.RestSharpGui {
-    partial class OptionsDialog {
+    partial class SettingsDialog {
         /// <summary>
         /// Required designer variable.
         /// </summary>

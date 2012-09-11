@@ -400,7 +400,7 @@ namespace Swensen.RestSharpGui
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
             persistGuiSettings();
-            using(var options = new OptionsDialog()) {
+            using(var options = new SettingsDialog()) {
                 options.ShowDialog(this);
                 //at the moment, we don't have any runtime settings here to update.
                 //if(DialogResult.OK == options.ShowDialog(this))

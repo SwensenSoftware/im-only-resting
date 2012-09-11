@@ -11,8 +11,8 @@ using Swensen.RestSharpGui.Properties;
 using System.IO;
 
 namespace Swensen.RestSharpGui {
-    public partial class OptionsDialog : Form {
-        public OptionsDialog() {
+    public partial class SettingsDialog : Form {
+        public SettingsDialog() {
             InitializeComponent();
         }
 
