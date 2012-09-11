@@ -65,8 +65,7 @@ namespace Swensen.RestSharpGui
                 rebuildWebBrowser();
                 bindResponseBodyOutputs();
                 bindHttpMethods();
-                bindRuntimeSettings();
-                bindStartupSettings();
+                bindSettings();
                 setUpFileDialogs();
                 ActiveControl = txtUrl;
             } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
@@ -75,19 +74,16 @@ namespace Swensen.RestSharpGui
             }
         }
 
-        private void bindRuntimeSettings() {
+        private void bindSettings() {
             var settings = Settings.Default;
 
             this.Width = settings.FormWidth;
             this.Height = settings.FormHeight;
-            
+
             splitterMain.Orientation = Settings.Default.SplitterOrientation;
             updateSplitterDistance(); //must come after width and height and orientation updates
             rbGrpResponseBodyOutputs.First(x => (ResponseBodyOutput)x.Tag == Settings.Default.ResponseBodyOutput).Checked = true;
-        }
 
-        private void bindStartupSettings() {
-            var settings = Settings.Default;
             if (!String.IsNullOrWhiteSpace(settings.DefaultRequestFilePath))
                 openRequestFile(settings.DefaultRequestFilePath);
         }
@@ -98,7 +94,6 @@ namespace Swensen.RestSharpGui
                 this.Text = "*" + this.Text;
         }
 
-        //todo: persist directory restore upon app start.
         private void setUpFileDialogs() {
             var initialSavedRequestsDir = Settings.Default.SaveRequestFileDialogFolder;
             Directory.CreateDirectory(initialSavedRequestsDir);
@@ -406,8 +401,10 @@ namespace Swensen.RestSharpGui
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
             persistGuiSettings();
             using(var options = new OptionsDialog()) {
-                if(DialogResult.OK == options.ShowDialog(this))
-                    bindRuntimeSettings();
+                options.ShowDialog(this);
+                //at the moment, we don't have any runtime settings here to update.
+                //if(DialogResult.OK == options.ShowDialog(this))
+                //    bindRuntimeSettings();
             }
         }
 
