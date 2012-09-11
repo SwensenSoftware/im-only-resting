@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Swensen.RestSharpGui.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Swensen.RestSharpGui.Forms.Core.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="SplitterOrientation" Type="System.Windows.Forms.Orientation" Scope="User">
@@ -26,8 +26,8 @@
     <Setting Name="ExportResponseFileDialogFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ResponseBodyOutput" Type="Swensen.RestSharpGui.ResponseBodyOutput" Scope="User">
-      <Value Profile="(Default)">Raw</Value>
+    <Setting Name="ResponseBodyOutput" Type="Swensen.RestSharpGui.Core.ResponseBodyOutput" Scope="User">
+      <Value Profile="(Default)">Rendered</Value>
     </Setting>
     <Setting Name="DefaultRequestContentType" Type="System.String" Scope="User">
       <Value Profile="(Default)">application/octet-stream</Value>

@@ -121,7 +121,7 @@ namespace Swensen.RestSharpGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Raw")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Rendered")]
         public global::Swensen.RestSharpGui.Core.ResponseBodyOutput ResponseBodyOutput {
             get {
                 return ((global::Swensen.RestSharpGui.Core.ResponseBodyOutput)(this["ResponseBodyOutput"]));
