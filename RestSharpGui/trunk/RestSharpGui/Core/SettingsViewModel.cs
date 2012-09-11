@@ -8,7 +8,7 @@ using System.IO;
 using System.Windows.Forms.Design;
 using System.Drawing.Design;
 
-namespace Swensen.RestSharpGui {
+namespace Swensen.RestSharpGui.Core {
 
     //possible attributes
     //[Category("Test")]

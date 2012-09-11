@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace Swensen.RestSharpGui {
+namespace Swensen.RestSharpGui.Forms {
     public class StandardTextBox : TextBox {
         MenuItem miCut;
         MenuItem miCopy;

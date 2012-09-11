@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Swensen.RestSharpGui
+namespace Swensen.RestSharpGui.Forms
 {
     static class Program
     {

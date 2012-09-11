@@ -1,4 +1,4 @@
-﻿namespace Swensen.RestSharpGui
+﻿namespace Swensen.RestSharpGui.Forms
 {
 	partial class AboutBox
 	{

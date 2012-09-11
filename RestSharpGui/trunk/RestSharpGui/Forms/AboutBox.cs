@@ -21,7 +21,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace Swensen.RestSharpGui {
+namespace Swensen.RestSharpGui.Forms {
     partial class AboutBox : Form {
         public AboutBox() {
             InitializeComponent();

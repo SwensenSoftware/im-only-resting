@@ -5,7 +5,7 @@ using System.Text;
 using RestSharp;
 using System.Net;
 
-namespace Swensen.RestSharpGui {
+namespace Swensen.RestSharpGui.Core {
     /// <summary>
     /// A light wrapper around our underlying http client.
     /// </summary>
