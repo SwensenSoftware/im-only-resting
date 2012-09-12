@@ -35,7 +35,7 @@
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnSave);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(0, 209);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 315);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(875, 35);
             this.pnlButtons.TabIndex = 0;
@@ -73,23 +73,23 @@
             this.pgridOptions.Location = new System.Drawing.Point(0, 0);
             this.pgridOptions.Name = "pgridOptions";
             this.pgridOptions.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.pgridOptions.Size = new System.Drawing.Size(875, 209);
+            this.pgridOptions.Size = new System.Drawing.Size(875, 315);
             this.pgridOptions.TabIndex = 1;
             this.pgridOptions.ToolbarVisible = false;
             // 
-            // OptionsDialog
+            // SettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 244);
+            this.ClientSize = new System.Drawing.Size(875, 350);
             this.ControlBox = false;
             this.Controls.Add(this.pgridOptions);
             this.Controls.Add(this.pnlButtons);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "OptionsDialog";
+            this.Name = "SettingsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Options";
+            this.Text = "Settings";
             this.Load += new System.EventHandler(this.frmOptionsDialog_Load);
             this.pnlButtons.ResumeLayout(false);
             this.pnlButtons.PerformLayout();
