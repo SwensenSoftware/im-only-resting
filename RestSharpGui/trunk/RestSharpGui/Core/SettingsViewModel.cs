@@ -7,6 +7,7 @@ using Swensen.RestSharpGui.Properties;
 using System.IO;
 using System.Windows.Forms.Design;
 using System.Drawing.Design;
+using System.Net.Mime;
 
 namespace Swensen.RestSharpGui.Core {
 
@@ -72,7 +73,18 @@ namespace Swensen.RestSharpGui.Core {
         [Description("The default request Content-Type used when none is otherwise explicitly specified.")]
         public string DefaultRequestContentType {
             get { return settings.DefaultRequestContentType; }
-            set { settings.DefaultRequestContentType = (value ?? "").Trim(); }
+            set {
+                if (String.IsNullOrWhiteSpace(value))
+                    settings.DefaultRequestContentType = "";
+                else {
+                    try {
+                        var ct = new ContentType(value);
+                        settings.DefaultRequestContentType = ct.ToString();
+                    } catch {
+                        lastValidationError = Tuple.Create("DefaultRequestContentType", "Content-Type is invalid");    
+                    }
+                }
+            }
         }
 
         [Category("Request")]
