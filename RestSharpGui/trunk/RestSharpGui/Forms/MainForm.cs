@@ -306,7 +306,7 @@ namespace Swensen.HyperSmith.Forms
         private void updateLastOpenedRequestFile(string fileName) {
             this.lastOpenedRequestFileName = fileName;
             this.isLastOpenedRequestFileDirty = false;
-            this.Text = fileName + " - RestSharp GUI";
+            this.Text = fileName + " - HyperSmith";
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
