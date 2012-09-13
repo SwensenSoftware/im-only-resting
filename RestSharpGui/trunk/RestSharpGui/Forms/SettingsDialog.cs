@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
-using Swensen.RestSharpGui.Core;
-using Swensen.RestSharpGui.Properties;
+using Swensen.HyperSmith.Core;
+using Swensen.HyperSmith.Properties;
 using System.IO;
 
-namespace Swensen.RestSharpGui.Forms {
+namespace Swensen.HyperSmith.Forms {
     public partial class SettingsDialog : Form {
         public SettingsDialog() {
             InitializeComponent();

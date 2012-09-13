@@ -23,7 +23,7 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 using TidyManaged;
 
-namespace Swensen.RestSharpGui.Core {
+namespace Swensen.HyperSmith.Core {
     public class ResponseModel {
         public HttpContentType ContentType { get; private set;}
 

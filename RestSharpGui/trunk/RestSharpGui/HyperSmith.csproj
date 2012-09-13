@@ -8,7 +8,7 @@
     <ProjectGuid>{B859DACC-2D94-46FC-973C-17EF37A5F64F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Swensen.RestSharpGui</RootNamespace>
+    <RootNamespace>Swensen.HyperSmith</RootNamespace>
     <AssemblyName>RestSharpGui</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>

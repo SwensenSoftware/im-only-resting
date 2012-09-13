@@ -1,4 +1,4 @@
-﻿namespace Swensen.RestSharpGui.Core {
+﻿namespace Swensen.HyperSmith.Core {
     public enum ResponseBodyOutput {
         Raw, Pretty, Rendered
     }

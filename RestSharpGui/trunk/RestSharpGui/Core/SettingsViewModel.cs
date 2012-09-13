@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
-using Swensen.RestSharpGui.Properties;
+using Swensen.HyperSmith.Properties;
 using System.IO;
 using System.Windows.Forms.Design;
 using System.Drawing.Design;
 using System.Net.Mime;
 
-namespace Swensen.RestSharpGui.Core {
+namespace Swensen.HyperSmith.Core {
 
     //possible attributes
     //[Category("Test")]

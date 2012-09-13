@@ -22,7 +22,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Swensen.RestSharpGui.Core {
+namespace Swensen.HyperSmith.Core {
     public class RequestViewModel {
         public string Url { get; set; }
         public Method Method { get; set; }

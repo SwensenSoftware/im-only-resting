@@ -21,7 +21,7 @@ using System.Net;
 using RestSharp;
 using System.Text.RegularExpressions;
 
-namespace Swensen.RestSharpGui.Core {
+namespace Swensen.HyperSmith.Core {
     public class RequestModel {
         public Uri Url { get; private set;}
         public Method Method { get; private set; }

@@ -9,13 +9,13 @@ using System.Windows.Forms;
 using RestSharp;
 using System.Xml.Linq;
 using System.IO;
-using Swensen.RestSharpGui.Core;
-using Swensen.RestSharpGui.Properties;
+using Swensen.HyperSmith.Core;
+using Swensen.HyperSmith.Properties;
 
 //examples response types:
 //xml: http://www.w3schools.com/xml/note.asp
 //json: http://api.geonames.org/postalCodeLookupJSON?postalcode=6600&country=AT&username=demo
-namespace Swensen.RestSharpGui.Forms
+namespace Swensen.HyperSmith.Forms
 {
     public partial class MainForm : Form
     {

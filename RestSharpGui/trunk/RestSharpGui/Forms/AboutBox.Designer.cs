@@ -1,4 +1,4 @@
-﻿namespace Swensen.RestSharpGui.Forms
+﻿namespace Swensen.HyperSmith.Forms
 {
 	partial class AboutBox
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Swensen.RestSharpGui.Properties {
+namespace Swensen.HyperSmith.Properties {
     
     
     // This class allows you to handle specific events on the settings class:

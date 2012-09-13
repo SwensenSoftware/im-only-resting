@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Swensen.RestSharpGui.Properties {
+namespace Swensen.HyperSmith.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

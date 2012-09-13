@@ -1,4 +1,4 @@
-﻿namespace Swensen.RestSharpGui.Forms
+﻿namespace Swensen.HyperSmith.Forms
 {
     partial class MainForm
     {
@@ -31,11 +31,11 @@
             this.splitterMain = new System.Windows.Forms.SplitContainer();
             this.grpRequest = new System.Windows.Forms.GroupBox();
             this.grpBody = new System.Windows.Forms.GroupBox();
-            this.txtRequestBody = new Swensen.RestSharpGui.Forms.StandardTextBox();
+            this.txtRequestBody = new Swensen.HyperSmith.Forms.StandardTextBox();
             this.pnlTopHalfOfRequest = new System.Windows.Forms.Panel();
             this.pnlRequestMethodAndHeaders = new System.Windows.Forms.Panel();
             this.grpHeaders = new System.Windows.Forms.GroupBox();
-            this.txtRequestHeaders = new Swensen.RestSharpGui.Forms.StandardTextBox();
+            this.txtRequestHeaders = new Swensen.HyperSmith.Forms.StandardTextBox();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
             this.rbHttpPatch = new System.Windows.Forms.RadioButton();
             this.rbHttpHead = new System.Windows.Forms.RadioButton();
@@ -46,7 +46,7 @@
             this.rbHttpPost = new System.Windows.Forms.RadioButton();
             this.pnlRequestUrlAndButtons = new System.Windows.Forms.Panel();
             this.pnlUrl = new System.Windows.Forms.Panel();
-            this.txtUrl = new Swensen.RestSharpGui.Forms.StandardTextBox();
+            this.txtUrl = new Swensen.HyperSmith.Forms.StandardTextBox();
             this.lblUrl = new System.Windows.Forms.Label();
             this.btnRequestButtons = new System.Windows.Forms.Panel();
             this.btnClearRequest = new System.Windows.Forms.Button();
