@@ -122,9 +122,9 @@ namespace Swensen.HyperSmith.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Rendered")]
-        public global::Swensen.RestSharpGui.Core.ResponseBodyOutput ResponseBodyOutput {
+        public global::Swensen.HyperSmith.Core.ResponseBodyOutput ResponseBodyOutput {
             get {
-                return ((global::Swensen.RestSharpGui.Core.ResponseBodyOutput)(this["ResponseBodyOutput"]));
+                return ((global::Swensen.HyperSmith.Core.ResponseBodyOutput)(this["ResponseBodyOutput"]));
             }
             set {
                 this["ResponseBodyOutput"] = value;
