@@ -141,7 +141,7 @@ namespace Swensen.RestSharpGui.Core {
         }
 
         /// <summary>
-        /// Creates the temporary file and returns its name.
+        /// Creates the temporary file with the given extension and returns its full path.
         /// </summary>
         /// <param name="contentBytes"></param>
         /// <returns></returns>
