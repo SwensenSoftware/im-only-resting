@@ -75,7 +75,7 @@
             // 
             this.pgridOptions.DocCommentDescription.Location = new System.Drawing.Point(3, 20);
             this.pgridOptions.DocCommentDescription.Name = "";
-            this.pgridOptions.DocCommentDescription.Size = new System.Drawing.Size(599, 35);
+            this.pgridOptions.DocCommentDescription.Size = new System.Drawing.Size(735, 35);
             this.pgridOptions.DocCommentDescription.TabIndex = 1;
             this.pgridOptions.DocCommentImage = null;
             // 
@@ -84,7 +84,7 @@
             this.pgridOptions.DocCommentTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold);
             this.pgridOptions.DocCommentTitle.Location = new System.Drawing.Point(3, 3);
             this.pgridOptions.DocCommentTitle.Name = "";
-            this.pgridOptions.DocCommentTitle.Size = new System.Drawing.Size(599, 17);
+            this.pgridOptions.DocCommentTitle.Size = new System.Drawing.Size(735, 17);
             this.pgridOptions.DocCommentTitle.TabIndex = 0;
             this.pgridOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgridOptions.Location = new System.Drawing.Point(0, 0);
@@ -107,14 +107,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(741, 304);
-            this.ControlBox = false;
             this.Controls.Add(this.pgridOptions);
             this.Controls.Add(this.pnlButtons);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsDialog_FormClosing);
             this.Load += new System.EventHandler(this.frmOptionsDialog_Load);
             this.pnlButtons.ResumeLayout(false);
             this.pnlButtons.PerformLayout();

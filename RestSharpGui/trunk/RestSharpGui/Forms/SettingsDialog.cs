@@ -30,9 +30,8 @@ namespace Swensen.RestSharpGui.Forms {
         }
 
         private void btnCancel_Click(object sender, EventArgs e) {
-            Settings.Default.Reload();
             this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            this.Close(); //n.b. we call Settings.Default.Reload(); in the FormClosing event
         }
 
         //todo this validation is adhoc, get plugged in with TypeConverters etc.
@@ -48,6 +47,11 @@ namespace Swensen.RestSharpGui.Forms {
 
         private void showPropertyValidationWarning(string msg) {
             MessageBox.Show(this, msg, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void SettingsDialog_FormClosing(object sender, FormClosingEventArgs e) {
+            if(e.CloseReason == CloseReason.UserClosing && this.DialogResult != System.Windows.Forms.DialogResult.OK)
+                Settings.Default.Reload();
         }
     }
 }
