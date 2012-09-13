@@ -20,6 +20,7 @@ namespace Swensen.RestSharpGui.Forms {
         private void frmOptionsDialog_Load(object sender, EventArgs e) {
             this.pgridOptions.PropertyValueChanged += new PropertyValueChangedEventHandler(pgridOptions_PropertyValueChanged);
             pgridOptions.SelectedObject = new SettingsViewModel(Settings.Default);
+            pgridOptions.AutoSizeProperties = true;
         }
 
         private void btnSave_Click(object sender, EventArgs e) {

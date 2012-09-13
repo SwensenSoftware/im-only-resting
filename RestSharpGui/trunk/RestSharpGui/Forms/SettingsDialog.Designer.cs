@@ -23,10 +23,11 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.pgridOptions = new System.Windows.Forms.PropertyGrid();
+            this.pgridOptions = new PropertyGridEx.PropertyGridEx();
             this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -35,9 +36,9 @@
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnSave);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(0, 315);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 269);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(875, 35);
+            this.pnlButtons.Size = new System.Drawing.Size(741, 35);
             this.pnlButtons.TabIndex = 0;
             // 
             // btnCancel
@@ -45,7 +46,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.AutoSize = true;
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCancel.Location = new System.Drawing.Point(811, 3);
+            this.btnCancel.Location = new System.Drawing.Point(677, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(61, 27);
             this.btnCancel.TabIndex = 1;
@@ -58,7 +59,7 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.AutoSize = true;
             this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSave.Location = new System.Drawing.Point(755, 3);
+            this.btnSave.Location = new System.Drawing.Point(621, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(50, 27);
             this.btnSave.TabIndex = 0;
@@ -69,19 +70,43 @@
             // pgridOptions
             // 
             this.pgridOptions.CommandsVisibleIfAvailable = false;
+            // 
+            // 
+            // 
+            this.pgridOptions.DocCommentDescription.Location = new System.Drawing.Point(3, 20);
+            this.pgridOptions.DocCommentDescription.Name = "";
+            this.pgridOptions.DocCommentDescription.Size = new System.Drawing.Size(599, 35);
+            this.pgridOptions.DocCommentDescription.TabIndex = 1;
+            this.pgridOptions.DocCommentImage = null;
+            // 
+            // 
+            // 
+            this.pgridOptions.DocCommentTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold);
+            this.pgridOptions.DocCommentTitle.Location = new System.Drawing.Point(3, 3);
+            this.pgridOptions.DocCommentTitle.Name = "";
+            this.pgridOptions.DocCommentTitle.Size = new System.Drawing.Size(599, 17);
+            this.pgridOptions.DocCommentTitle.TabIndex = 0;
             this.pgridOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgridOptions.Location = new System.Drawing.Point(0, 0);
             this.pgridOptions.Name = "pgridOptions";
             this.pgridOptions.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.pgridOptions.Size = new System.Drawing.Size(875, 315);
+            this.pgridOptions.Size = new System.Drawing.Size(741, 269);
             this.pgridOptions.TabIndex = 1;
             this.pgridOptions.ToolbarVisible = false;
+            // 
+            // 
+            // 
+            this.pgridOptions.ToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.pgridOptions.ToolStrip.Name = "";
+            this.pgridOptions.ToolStrip.Size = new System.Drawing.Size(875, 25);
+            this.pgridOptions.ToolStrip.TabIndex = 1;
+            this.pgridOptions.ToolStrip.Visible = false;
             // 
             // SettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 350);
+            this.ClientSize = new System.Drawing.Size(741, 304);
             this.ControlBox = false;
             this.Controls.Add(this.pgridOptions);
             this.Controls.Add(this.pnlButtons);
@@ -102,6 +127,6 @@
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.PropertyGrid pgridOptions;
+        private PropertyGridEx.PropertyGridEx pgridOptions;
     }
 }
