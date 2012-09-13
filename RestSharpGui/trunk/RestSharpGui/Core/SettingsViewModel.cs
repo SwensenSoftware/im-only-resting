@@ -49,7 +49,7 @@ namespace Swensen.RestSharpGui.Core {
                 if (!String.IsNullOrWhiteSpace(value) && !Directory.Exists(value))
                     lastValidationError = Tuple.Create("SaveRequestFileDialogFolder", "Specified directory does not exist");
                 else
-                    settings.SaveRequestFileDialogFolder = value; 
+                    settings.SaveRequestFileDialogFolder = (value ?? "").Trim(); 
             }
         }
 
@@ -63,7 +63,7 @@ namespace Swensen.RestSharpGui.Core {
                 if (!String.IsNullOrWhiteSpace(value) && !File.Exists(value))
                     lastValidationError = Tuple.Create("DefaultRequestFilePath", "Specified file does not exist");
                 else
-                    settings.DefaultRequestFilePath = value;
+                    settings.DefaultRequestFilePath = (value ?? "").Trim();
             }
         }
 
@@ -72,7 +72,7 @@ namespace Swensen.RestSharpGui.Core {
         [Description("The default request Content-Type used when none is otherwise explicitly specified.")]
         public string DefaultRequestContentType {
             get { return settings.DefaultRequestContentType; }
-            set { settings.DefaultRequestContentType = value; }
+            set { settings.DefaultRequestContentType = (value ?? "").Trim(); }
         }
 
         [Category("Request")]
@@ -80,7 +80,15 @@ namespace Swensen.RestSharpGui.Core {
         [Description("Proxy server used by requests. If blank, no proxy server is used.")]
         public string ProxyServer {
             get { return settings.ProxyServer; }
-            set { settings.ProxyServer = value; }
+            set {
+                Uri url = null;
+                if(String.IsNullOrWhiteSpace(value))
+                    settings.ProxyServer = "";
+                else if (Uri.TryCreate(value, UriKind.Absolute, out url))
+                    settings.ProxyServer = url.ToString();
+                else
+                    lastValidationError = Tuple.Create("ProxyServer", "The given URL is invalid");
+            }
         }
 
         [Category("Response")]
@@ -93,7 +101,7 @@ namespace Swensen.RestSharpGui.Core {
                 if (!String.IsNullOrWhiteSpace(value) && !Directory.Exists(value))
                     lastValidationError = Tuple.Create("ExportResponseFileDialogFolder", "Specified directory does not exist");
                 else
-                    settings.ExportResponseFileDialogFolder = value;
+                    settings.ExportResponseFileDialogFolder = (value ?? "").Trim();
             }
         }
     }
