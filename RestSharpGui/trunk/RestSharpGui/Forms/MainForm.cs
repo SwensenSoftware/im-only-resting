@@ -476,10 +476,13 @@ namespace Swensen.RestSharpGui.Forms
 
         private void splitterMain_DoubleClick(object sender, EventArgs e) {
             persistGuiSettings();
-
+            
             Settings.Default.SplitterOrientation = splitterMain.Orientation == Orientation.Vertical ? Orientation.Horizontal : Orientation.Vertical;
-            splitterMain.Orientation = Settings.Default.SplitterOrientation;
-            updateSplitterDistance();
+
+            this.SuspendDrawing(() => {
+                splitterMain.Orientation = Settings.Default.SplitterOrientation;
+                updateSplitterDistance();
+            });
 
             Settings.Default.Save();
         }

@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Core\HttpClient.cs" />
     <Compile Include="Core\HttpContentType.cs" />
+    <Compile Include="Forms\ControlHelpers.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
