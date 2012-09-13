@@ -27,7 +27,7 @@
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.pgridOptions = new PropertyGridEx.PropertyGridEx();
+            this.pgridOptions = new Swensen.HyperSmith.Forms.PropertyGridEx();
             this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,6 +126,6 @@
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private PropertyGridEx.PropertyGridEx pgridOptions;
+        private Swensen.HyperSmith.Forms.PropertyGridEx pgridOptions;
     }
 }

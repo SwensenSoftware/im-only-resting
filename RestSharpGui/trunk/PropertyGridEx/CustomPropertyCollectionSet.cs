@@ -1,4 +1,4 @@
-namespace PropertyGridEx
+namespace Swensen.HyperSmith.Forms
 {
     using System;
     using System.Collections;

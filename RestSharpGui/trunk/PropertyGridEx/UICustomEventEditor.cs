@@ -9,7 +9,7 @@ using System.Drawing.Design;
 using System.Windows.Forms;
 
 
-namespace PropertyGridEx
+namespace Swensen.HyperSmith.Forms
 {
 	public class UICustomEventEditor : System.Drawing.Design.UITypeEditor
 	{				
