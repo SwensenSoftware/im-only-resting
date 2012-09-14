@@ -68,7 +68,7 @@ namespace Swensen.HyperSmith.Forms
                 bindHttpMethods();
                 bindSettings();
                 setUpFileDialogs();
-                ActiveControl = txtUrl;
+                ActiveControl = cbRequestUrl;
             } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
                 showError("Error", "Unknown error, shutting down: " + Environment.NewLine + Environment.NewLine + ex.ToString());
                 this.Close();
@@ -196,7 +196,7 @@ namespace Swensen.HyperSmith.Forms
             //build the request view
             var checkedHttpMethod = rbGrpHttpMethods.Where(x => x.Checked).First();
             return new RequestViewModel() {
-                Url = txtUrl.Text,
+                Url = cbRequestUrl.Text,
                 Method = (Method)checkedHttpMethod.Tag,
                 Headers = txtRequestHeaders.Lines.ToArray(),
                 Body = txtRequestBody.Text
@@ -233,10 +233,18 @@ namespace Swensen.HyperSmith.Forms
                         this.requestAsyncHandle = null;
                         //bind the response view
                         bind(responseModel);
+                        addRequestResponseHistoryItem(requestVm, responseModel);                        
                         grpResponse.Update();
                     });
                 });
             }
+        }
+
+        private void addRequestResponseHistoryItem(RequestViewModel requestVm, ResponseModel responseModel) {
+            cbRequestUrl.Items.Insert(0, new RequestResponseHistoryItem() { request = requestVm, response = responseModel });
+            //don't exceed 10 items
+            if (cbRequestUrl.Items.Count == 11)
+                cbRequestUrl.Items.RemoveAt(10);
         }
 
         private void bind(ResponseModel responseVm) {
@@ -253,7 +261,7 @@ namespace Swensen.HyperSmith.Forms
         }
 
         private void bind(RequestViewModel requestVm) {
-            txtUrl.Text = requestVm.Url;
+            cbRequestUrl.Text = requestVm.Url;
             
             var method = requestVm.Method;
             rbGrpHttpMethods.First(x => ((Method) x.Tag) == method).Checked = true;
@@ -376,10 +384,6 @@ namespace Swensen.HyperSmith.Forms
 
         private DialogResult showYesNoCancel(string title, string text) {
             return MessageBox.Show(this, text, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-        }
-
-        private void txtUrl_TextChanged(object sender, EventArgs e) {
-            setIsLastOpenedRequestFileDirtyToTrue();
         }
 
         private void txtRequestBody_TextChanged(object sender, EventArgs e) {
@@ -517,6 +521,23 @@ namespace Swensen.HyperSmith.Forms
                 miFj.ShowShortcut = true;
                 cm.MenuItems.Add(miFj);
             }
+        }
+
+        private void cbRequestUrl_SelectionChangeCommitted(object sender, EventArgs e) {
+            var historyItem = cbRequestUrl.SelectedItem as RequestResponseHistoryItem;
+            if (historyItem != null) {
+                bind(historyItem.request);
+                bind(historyItem.response);
+                //have to invoke async or text won't get set.
+                cbRequestUrl.BeginInvoke((MethodInvoker) delegate {
+                    cbRequestUrl.Text = historyItem.request.Url;
+                    cbRequestUrl.SelectAll();
+                });
+            }
+        }
+
+        private void cbRequestUrl_TextUpdate(object sender, EventArgs e) {
+            setIsLastOpenedRequestFileDirtyToTrue();
         }
     }
 }

@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\RequestResponseHistoryItem.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

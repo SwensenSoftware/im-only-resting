@@ -46,7 +46,6 @@
             this.rbHttpPost = new System.Windows.Forms.RadioButton();
             this.pnlRequestUrlAndButtons = new System.Windows.Forms.Panel();
             this.pnlUrl = new System.Windows.Forms.Panel();
-            this.txtUrl = new Swensen.HyperSmith.Forms.StandardTextBox();
             this.lblUrl = new System.Windows.Forms.Label();
             this.btnRequestButtons = new System.Windows.Forms.Panel();
             this.btnClearRequest = new System.Windows.Forms.Button();
@@ -86,6 +85,7 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.cbRequestUrl = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -345,7 +345,7 @@
             // pnlUrl
             // 
             this.pnlUrl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlUrl.Controls.Add(this.txtUrl);
+            this.pnlUrl.Controls.Add(this.cbRequestUrl);
             this.pnlUrl.Controls.Add(this.lblUrl);
             this.pnlUrl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlUrl.Location = new System.Drawing.Point(0, 0);
@@ -354,17 +354,6 @@
             this.pnlUrl.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.pnlUrl.Size = new System.Drawing.Size(348, 41);
             this.pnlUrl.TabIndex = 6;
-            // 
-            // txtUrl
-            // 
-            this.txtUrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUrl.Location = new System.Drawing.Point(38, 7);
-            this.txtUrl.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(302, 22);
-            this.txtUrl.TabIndex = 0;
-            this.txtUrl.WordWrap = false;
-            this.txtUrl.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
             // 
             // lblUrl
             // 
@@ -785,6 +774,17 @@
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
             // 
+            // cbRequestUrl
+            // 
+            this.cbRequestUrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbRequestUrl.FormattingEnabled = true;
+            this.cbRequestUrl.Location = new System.Drawing.Point(38, 7);
+            this.cbRequestUrl.Name = "cbRequestUrl";
+            this.cbRequestUrl.Size = new System.Drawing.Size(302, 24);
+            this.cbRequestUrl.TabIndex = 1;
+            this.cbRequestUrl.SelectionChangeCommitted += new System.EventHandler(this.cbRequestUrl_SelectionChangeCommitted);
+            this.cbRequestUrl.TextUpdate += new System.EventHandler(this.cbRequestUrl_TextUpdate);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -857,7 +857,6 @@
         private System.Windows.Forms.RadioButton rbHttpPost;
         private System.Windows.Forms.Panel pnlRequestUrlAndButtons;
         private System.Windows.Forms.Panel pnlUrl;
-        private StandardTextBox txtUrl;
         private System.Windows.Forms.Label lblUrl;
         private System.Windows.Forms.Panel btnRequestButtons;
         private System.Windows.Forms.Button btnClearRequest;
@@ -898,6 +897,7 @@
         private System.Windows.Forms.Panel pnlResponseContent;
         private System.Windows.Forms.LinkLabel lnkResponseStatusInfo;
         private System.Windows.Forms.LinkLabel lnkCancelRequest;
+        private System.Windows.Forms.ComboBox cbRequestUrl;
 
     }
 }

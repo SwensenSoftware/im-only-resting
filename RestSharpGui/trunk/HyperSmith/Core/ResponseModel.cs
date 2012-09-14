@@ -47,8 +47,11 @@ namespace Swensen.HyperSmith.Core {
                           string.Format("{0} {1}", (int)response.StatusCode, response.StatusDescription) :
                           response.ResponseStatus.ToString();
 
-            if (start != null && end != null)
+            if (start != null && end != null) {
+                Start = start;
+                End = end;
                 ElapsedTime = (end - start).Milliseconds + " ms";
+            }
 
             this.Content = response.Content;
             this.ContentBytes = response.RawBytes;
@@ -70,6 +73,8 @@ namespace Swensen.HyperSmith.Core {
 
         public string ErrorMessage { get; private set; }
 
+        public DateTime Start { get; private set; }
+        public DateTime End { get; private set; }
         public string ElapsedTime { get; private set; }
 
         public string Status { get; private set; }
