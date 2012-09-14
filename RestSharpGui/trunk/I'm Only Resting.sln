@@ -8,14 +8,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9507BF
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ior.Forms.PropertyGridEx", "PropertyGridEx\Ior.Forms.PropertyGridEx.csproj", "{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AD36E669-B965-4D46-B1C3-28FDDB983EE5}"
 	ProjectSection(SolutionItems) = preProject
 		NOTICE = NOTICE
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ior", "HyperSmith\Ior.csproj", "{B859DACC-2D94-46FC-973C-17EF37A5F64F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ior.Forms.PropertyGridEx", "Ior.Forms.PropertyGridEx\Ior.Forms.PropertyGridEx.csproj", "{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ior", "Ior\Ior.csproj", "{B859DACC-2D94-46FC-973C-17EF37A5F64F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
