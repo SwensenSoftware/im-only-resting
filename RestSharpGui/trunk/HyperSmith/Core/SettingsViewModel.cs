@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
-using Swensen.HyperSmith.Properties;
+using Swensen.Ior.Properties;
 using System.IO;
 using System.Windows.Forms.Design;
 using System.Drawing.Design;
 using System.Net.Mime;
 
-namespace Swensen.HyperSmith.Core {
+namespace Swensen.Ior.Core {
 
     //possible attributes
     //[Category("Test")]

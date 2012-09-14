@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Swensen.HyperSmith.Properties {
+namespace Swensen.Ior.Properties {
     
     
     // This class allows you to handle specific events on the settings class:

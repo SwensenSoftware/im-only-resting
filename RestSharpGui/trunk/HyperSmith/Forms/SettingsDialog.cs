@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
-using Swensen.HyperSmith.Core;
-using Swensen.HyperSmith.Properties;
+using Swensen.Ior.Core;
+using Swensen.Ior.Properties;
 using System.IO;
 
-namespace Swensen.HyperSmith.Forms {
+namespace Swensen.Ior.Forms {
     public partial class SettingsDialog : Form {
         public SettingsDialog() {
             InitializeComponent();

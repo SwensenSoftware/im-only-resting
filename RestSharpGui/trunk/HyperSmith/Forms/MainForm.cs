@@ -9,13 +9,13 @@ using System.Windows.Forms;
 using RestSharp;
 using System.Xml.Linq;
 using System.IO;
-using Swensen.HyperSmith.Core;
-using Swensen.HyperSmith.Properties;
+using Swensen.Ior.Core;
+using Swensen.Ior.Properties;
 
 //examples response types:
 //xml: http://www.w3schools.com/xml/note.asp
 //json: http://api.geonames.org/postalCodeLookupJSON?postalcode=6600&country=AT&username=demo
-namespace Swensen.HyperSmith.Forms
+namespace Swensen.Ior.Forms
 {
     public partial class MainForm : Form
     {
@@ -314,7 +314,7 @@ namespace Swensen.HyperSmith.Forms
         private void updateLastOpenedRequestFile(string fileName) {
             this.lastOpenedRequestFileName = fileName;
             this.isLastOpenedRequestFileDirty = false;
-            this.Text = fileName + " - HyperSmith";
+            this.Text = fileName + " - I'm Only Resting";
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {

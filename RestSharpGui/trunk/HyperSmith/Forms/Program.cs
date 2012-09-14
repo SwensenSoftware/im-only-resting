@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Swensen.HyperSmith.Forms
+namespace Swensen.Ior.Forms
 {
     static class Program
     {

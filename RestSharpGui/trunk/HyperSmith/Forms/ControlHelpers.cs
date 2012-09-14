@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace Swensen.HyperSmith.Forms {
+namespace Swensen.Ior.Forms {
 
     //credit to Adam Robinson (http://stackoverflow.com/users/82187/adam-robinson) for the SendMessage, ResumeDrawing, and SuspendDrawing (non-lambda) methods: http://stackoverflow.com/a/778133/236255
     public static class ControlHelpers {

@@ -5,7 +5,7 @@ using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using System;
 
-namespace Swensen.HyperSmith.Forms
+namespace Swensen.Ior.Forms
 {
 	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]public partial class PropertyGridEx : System.Windows.Forms.PropertyGrid
 	{

@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace Swensen.HyperSmith.Forms {
+namespace Swensen.Ior.Forms {
     public class StandardTextBox : TextBox {
         MenuItem miCut;
         MenuItem miCopy;

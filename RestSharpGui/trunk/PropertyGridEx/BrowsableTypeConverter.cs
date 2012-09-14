@@ -1,4 +1,4 @@
-namespace Swensen.HyperSmith.Forms
+namespace Swensen.Ior.Forms
 {
     using System;
     using System.ComponentModel;

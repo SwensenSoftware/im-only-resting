@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Swensen.HyperSmith.Core {
+namespace Swensen.Ior.Core {
     public class RequestResponseHistoryItem {
         public RequestViewModel request { get; set; }
         public ResponseModel response { get; set; }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HyperSmith")]
+[assembly: AssemblyTitle("I'm Only Resting")]
 [assembly: AssemblyDescription("http://stackoverflow.com/users/236255/stephen-swensen")] //put project url here to tshow in about page.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HyperSmith")]
+[assembly: AssemblyProduct("I'm Only Resting")]
 [assembly: AssemblyCopyright("Copyright © Stephen Swensen 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

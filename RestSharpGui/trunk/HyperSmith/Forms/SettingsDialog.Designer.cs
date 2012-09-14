@@ -1,4 +1,4 @@
-﻿namespace Swensen.HyperSmith.Forms {
+﻿namespace Swensen.Ior.Forms {
     partial class SettingsDialog {
         /// <summary>
         /// Required designer variable.
@@ -27,7 +27,7 @@
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.pgridOptions = new Swensen.HyperSmith.Forms.PropertyGridEx();
+            this.pgridOptions = new Swensen.Ior.Forms.PropertyGridEx();
             this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,6 +126,6 @@
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private Swensen.HyperSmith.Forms.PropertyGridEx pgridOptions;
+        private Swensen.Ior.Forms.PropertyGridEx pgridOptions;
     }
 }

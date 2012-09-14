@@ -1,4 +1,4 @@
-namespace Swensen.HyperSmith.Forms
+namespace Swensen.Ior.Forms
 {
     using Microsoft.VisualBasic;
     using System;

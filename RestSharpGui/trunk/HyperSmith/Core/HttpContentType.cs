@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using TidyManaged;
 using System.IO;
 
-namespace Swensen.HyperSmith.Core {
+namespace Swensen.Ior.Core {
     /// <summary>
     /// Broad categories of http media types that we know how to do special processing for (i.e. pretty printing, or choosing correct file extension).
     /// </summary>

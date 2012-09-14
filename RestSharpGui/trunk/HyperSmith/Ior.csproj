@@ -8,7 +8,7 @@
     <ProjectGuid>{B859DACC-2D94-46FC-973C-17EF37A5F64F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Swensen.HyperSmith</RootNamespace>
+    <RootNamespace>Swensen.Ior</RootNamespace>
     <AssemblyName>RestSharpGui</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
@@ -133,9 +133,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx.csproj">
+    <ProjectReference Include="..\PropertyGridEx\Ior.Forms.PropertyGridEx.csproj">
       <Project>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</Project>
-      <Name>PropertyGridEx</Name>
+      <Name>Ior.Forms.PropertyGridEx</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
