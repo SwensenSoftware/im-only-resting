@@ -17,8 +17,11 @@ copy Ior\bin\Release\TidyManaged.dll staging
 
 REM zip staging files
 cd staging
-7z a -tzip ..\builds\im-only-resting-%versionNumber%.zip *
+"..\tools\7z\7za.exe" a -tzip "..\builds\im-only-resting-%versionNumber%.zip" *
 cd ..
+
+REM extract build
+"tools\7z\7za.exe" e "builds\im-only-resting-%versionNumber%.zip" -o"builds\im-only-resting-%versionNumber%"
 
 REM clean up
 rd /q /s staging
