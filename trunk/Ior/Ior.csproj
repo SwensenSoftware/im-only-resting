@@ -124,7 +124,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="TODO.docx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\lib\libtidy.dll">
