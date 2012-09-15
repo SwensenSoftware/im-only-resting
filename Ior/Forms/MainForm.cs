@@ -62,12 +62,7 @@ namespace Swensen.Ior.Forms
         private void MainForm_Load(object sender, EventArgs e)
         {                           
             try {
-                //http://stackoverflow.com/questions/621265/can-i-control-the-location-of-net-user-settings-to-avoid-losing-settings-on-app/1928041#1928041
-                if (Settings.Default.CallUpgrade) {
-                    Settings.Default.Upgrade();
-                    Settings.Default.CallUpgrade = false;
-                }
-
+                Settings.Default.UpgradeAndSaveIfNeeded();
                 initTxtRequestBody();
                 rebuildWebBrowser();
                 bindResponseBodyOutputs();

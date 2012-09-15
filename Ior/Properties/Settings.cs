@@ -12,13 +12,30 @@ namespace Swensen.Ior.Properties {
     public sealed partial class Settings {
         
         public Settings() {
-            if(string.IsNullOrWhiteSpace(this.SaveRequestFileDialogFolder))
-                this.SaveRequestFileDialogFolder = 
+            SetupCalculatedDefaultSettings();
+        }
+
+        protected void SetupCalculatedDefaultSettings() {
+            if (string.IsNullOrWhiteSpace(this.SaveRequestFileDialogFolder))
+                this.SaveRequestFileDialogFolder =
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Saved Requests";
 
             if (string.IsNullOrWhiteSpace(this.ExportResponseFileDialogFolder))
                 this.ExportResponseFileDialogFolder =
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Exported Responses";
+        }
+
+        public override void Upgrade() {
+            base.Upgrade();
+            SetupCalculatedDefaultSettings();
+        }
+
+        public void UpgradeAndSaveIfNeeded() {
+            if (this.CallUpgrade) {
+                this.Upgrade();
+                this.CallUpgrade = false;
+                this.Save();
+            }
         }
         
         private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
