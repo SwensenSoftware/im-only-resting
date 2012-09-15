@@ -1,0 +1,7 @@
+RestSharp
+Copyright 2012 Stephen Swensen
+
+This software links to JSON.NET, Copyright (c) 2007 James Newton-King, http://json.codeplex.com/license (MIT license)
+This software links to HTML Tidy, Copyright (c) 1998-2008 World Wide Web Consortium, http://tidy.sourceforge.net/#license (MIT-like license)
+This software links to RestSharp, Copyright (c)  John Sheehan, RestSharp Community, https://github.com/restsharp/RestSharp/blob/master/LICENSE.txt (Apache License and Apache License 2.0)
+This software includes source code from Danilo Corallo's PropertyGridEx, http://www.codeproject.com/Articles/13630/Add-Custom-Properties-to-a-PropertyGrid (Code Project Open License)

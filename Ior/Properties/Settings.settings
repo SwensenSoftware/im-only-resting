@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Swensen.Ior.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SplitterOrientation" Type="System.Windows.Forms.Orientation" Scope="User">
+      <Value Profile="(Default)">Vertical</Value>
+    </Setting>
+    <Setting Name="SplitterDistancePercent" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="FormWidth" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">1450</Value>
+    </Setting>
+    <Setting Name="FormHeight" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">690</Value>
+    </Setting>
+    <Setting Name="ProxyServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultRequestFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SaveRequestFileDialogFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ExportResponseFileDialogFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ResponseBodyOutput" Type="Swensen.Ior.Core.ResponseBodyOutput" Scope="User">
+      <Value Profile="(Default)">Rendered</Value>
+    </Setting>
+    <Setting Name="DefaultRequestContentType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">application/octet-stream</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
