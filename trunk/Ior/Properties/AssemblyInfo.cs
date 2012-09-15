@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("I'm Only Resting")]
-[assembly: AssemblyDescription("http://stackoverflow.com/users/236255/stephen-swensen")] //put project url here to tshow in about page.
+[assembly: AssemblyDescription("http://code.google.com/p/im-only-resting/")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("I'm Only Resting")]
