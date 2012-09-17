@@ -15,7 +15,7 @@ namespace Swensen.Ior.Properties {
             SetupCalculatedDefaultSettings();
         }
 
-        protected void SetupCalculatedDefaultSettings() {
+        private void SetupCalculatedDefaultSettings() {
             if (string.IsNullOrWhiteSpace(this.SaveRequestFileDialogFolder))
                 this.SaveRequestFileDialogFolder =
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Saved Requests";
@@ -25,14 +25,10 @@ namespace Swensen.Ior.Properties {
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Exported Responses";
         }
 
-        public override void Upgrade() {
-            base.Upgrade();
-            SetupCalculatedDefaultSettings();
-        }
-
         public void UpgradeAndSaveIfNeeded() {
             if (this.CallUpgrade) {
                 this.Upgrade();
+                this.SetupCalculatedDefaultSettings();
                 this.CallUpgrade = false;
                 this.Save();
             }
