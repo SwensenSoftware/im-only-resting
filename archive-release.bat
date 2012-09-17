@@ -3,6 +3,7 @@ set /p versionNumber=
 REM clean up
 del builds\im-only-resting-%versionNumber%.zip
 rd /q /s builds\im-only-resting-%versionNumber%
+rd /q /s builds\im-only-resting
 
 REM preparing staging dir
 mkdir staging
@@ -22,6 +23,7 @@ cd ..
 
 REM extract build
 "tools\7z\7za.exe" e "builds\im-only-resting-%versionNumber%.zip" -o"builds\im-only-resting-%versionNumber%"
+"tools\7z\7za.exe" e "builds\im-only-resting-%versionNumber%.zip" -o"builds\im-only-resting"
 
 REM clean up
 rd /q /s staging
