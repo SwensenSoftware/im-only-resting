@@ -312,13 +312,17 @@ namespace Swensen.Ior.Forms
             }
         }
 
+        private static string getFileDirectoryName(string fileName) {
+            return String.IsNullOrWhiteSpace(fileName) ? "" : new FileInfo(fileName).DirectoryName;
+        }
+
         private void save(string fileName) {
             if (fileName == null) {
                 requestSaveFileDialog.FileName = lastOpenedRequestShortFileName;
                 setUpFileDialogs();
                 if (requestSaveFileDialog.ShowDialog() == DialogResult.OK) {
                     fileName = requestSaveFileDialog.FileName;
-                    Settings.Default.SaveRequestFileDialogFolder = requestOpenFileDialog.InitialDirectory;
+                    Settings.Default.SaveRequestFileDialogFolder = getFileDirectoryName(fileName);
                 } else {
                     return;
                 }
@@ -354,7 +358,7 @@ namespace Swensen.Ior.Forms
             if (requestOpenFileDialog.ShowDialog() == DialogResult.OK) {
                 var fileName = requestOpenFileDialog.FileName;
                 openRequestFile(fileName);
-                Settings.Default.SaveRequestFileDialogFolder = requestOpenFileDialog.InitialDirectory;
+                Settings.Default.SaveRequestFileDialogFolder = getFileDirectoryName(fileName);
             }
         }
 
