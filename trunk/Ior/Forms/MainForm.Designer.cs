@@ -31,11 +31,9 @@
             this.splitterMain = new System.Windows.Forms.SplitContainer();
             this.grpRequest = new System.Windows.Forms.GroupBox();
             this.grpBody = new System.Windows.Forms.GroupBox();
-            this.txtRequestBody = new Swensen.Ior.Forms.StandardTextBox();
             this.pnlTopHalfOfRequest = new System.Windows.Forms.Panel();
             this.pnlRequestMethodAndHeaders = new System.Windows.Forms.Panel();
             this.grpHeaders = new System.Windows.Forms.GroupBox();
-            this.txtRequestHeaders = new Swensen.Ior.Forms.StandardTextBox();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
             this.rbHttpPatch = new System.Windows.Forms.RadioButton();
             this.rbHttpHead = new System.Windows.Forms.RadioButton();
@@ -46,7 +44,6 @@
             this.rbHttpPost = new System.Windows.Forms.RadioButton();
             this.pnlRequestUrlAndButtons = new System.Windows.Forms.Panel();
             this.pnlUrl = new System.Windows.Forms.Panel();
-            this.txtRequestUrl = new Swensen.Ior.Forms.StandardTextBox();
             this.lblUrl = new System.Windows.Forms.Label();
             this.btnRequestButtons = new System.Windows.Forms.Panel();
             this.btnClearRequest = new System.Windows.Forms.Button();
@@ -86,6 +83,9 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.txtRequestBody = new Swensen.Ior.Forms.StandardTextBox();
+            this.txtRequestHeaders = new Swensen.Ior.Forms.StandardTextBox();
+            this.txtRequestUrl = new Swensen.Ior.Forms.StandardTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -163,22 +163,6 @@
             this.grpBody.TabStop = false;
             this.grpBody.Text = "Body";
             // 
-            // txtRequestBody
-            // 
-            this.txtRequestBody.AcceptsReturn = true;
-            this.txtRequestBody.AcceptsTab = true;
-            this.txtRequestBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRequestBody.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRequestBody.Location = new System.Drawing.Point(4, 19);
-            this.txtRequestBody.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRequestBody.Multiline = true;
-            this.txtRequestBody.Name = "txtRequestBody";
-            this.txtRequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtRequestBody.Size = new System.Drawing.Size(464, 369);
-            this.txtRequestBody.TabIndex = 7;
-            this.txtRequestBody.WordWrap = false;
-            this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
-            // 
             // pnlTopHalfOfRequest
             // 
             this.pnlTopHalfOfRequest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -214,21 +198,6 @@
             this.grpHeaders.TabIndex = 6;
             this.grpHeaders.TabStop = false;
             this.grpHeaders.Text = "Headers";
-            // 
-            // txtRequestHeaders
-            // 
-            this.txtRequestHeaders.AcceptsReturn = true;
-            this.txtRequestHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRequestHeaders.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRequestHeaders.Location = new System.Drawing.Point(4, 19);
-            this.txtRequestHeaders.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRequestHeaders.Multiline = true;
-            this.txtRequestHeaders.Name = "txtRequestHeaders";
-            this.txtRequestHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtRequestHeaders.Size = new System.Drawing.Size(289, 130);
-            this.txtRequestHeaders.TabIndex = 6;
-            this.txtRequestHeaders.WordWrap = false;
-            this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
             // 
             // grpHttpMethod
             // 
@@ -354,17 +323,6 @@
             this.pnlUrl.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.pnlUrl.Size = new System.Drawing.Size(347, 41);
             this.pnlUrl.TabIndex = 6;
-            // 
-            // txtRequestUrl
-            // 
-            this.txtRequestUrl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtRequestUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
-            this.txtRequestUrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRequestUrl.Location = new System.Drawing.Point(38, 7);
-            this.txtRequestUrl.Name = "txtRequestUrl";
-            this.txtRequestUrl.Size = new System.Drawing.Size(301, 22);
-            this.txtRequestUrl.TabIndex = 1;
-            this.txtRequestUrl.TextChanged += new System.EventHandler(this.txtRequestUrl_TextChanged);
             // 
             // lblUrl
             // 
@@ -784,6 +742,47 @@
             // 
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
+            // 
+            // txtRequestBody
+            // 
+            this.txtRequestBody.AcceptsReturn = true;
+            this.txtRequestBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestBody.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRequestBody.Location = new System.Drawing.Point(4, 19);
+            this.txtRequestBody.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRequestBody.Multiline = true;
+            this.txtRequestBody.Name = "txtRequestBody";
+            this.txtRequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtRequestBody.Size = new System.Drawing.Size(464, 369);
+            this.txtRequestBody.TabIndex = 7;
+            this.txtRequestBody.WordWrap = false;
+            this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
+            // 
+            // txtRequestHeaders
+            // 
+            this.txtRequestHeaders.AcceptsReturn = true;
+            this.txtRequestHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestHeaders.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRequestHeaders.Location = new System.Drawing.Point(4, 19);
+            this.txtRequestHeaders.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRequestHeaders.Multiline = true;
+            this.txtRequestHeaders.Name = "txtRequestHeaders";
+            this.txtRequestHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtRequestHeaders.Size = new System.Drawing.Size(289, 130);
+            this.txtRequestHeaders.TabIndex = 6;
+            this.txtRequestHeaders.WordWrap = false;
+            this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
+            // 
+            // txtRequestUrl
+            // 
+            this.txtRequestUrl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtRequestUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
+            this.txtRequestUrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestUrl.Location = new System.Drawing.Point(38, 7);
+            this.txtRequestUrl.Name = "txtRequestUrl";
+            this.txtRequestUrl.Size = new System.Drawing.Size(301, 22);
+            this.txtRequestUrl.TabIndex = 1;
+            this.txtRequestUrl.TextChanged += new System.EventHandler(this.txtRequestUrl_TextChanged);
             // 
             // MainForm
             // 
