@@ -246,8 +246,10 @@ namespace Swensen.Ior.Forms
         private void addRequestResponseHistoryItem(RequestViewModel requestVm, ResponseModel responseModel) {
             requestResponseHistoryList.Insert(0, new RequestResponseHistoryItem() { request = requestVm, response = responseModel });
             var max = 10;
-            if (requestResponseHistoryList.Count == max + 1)
-                requestResponseHistoryList.RemoveAt(10);
+            if (requestResponseHistoryList.Count > max) {
+                for(var i = max; i < requestResponseHistoryList.Count; i++)
+                    requestResponseHistoryList.RemoveAt(i);
+            }
         }
 
         private void bind(ResponseModel responseVm) {
