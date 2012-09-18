@@ -132,6 +132,7 @@
             this.splitterMain.SplitterDistance = 488;
             this.splitterMain.SplitterWidth = 11;
             this.splitterMain.TabIndex = 3;
+            this.splitterMain.TabStop = false;
             this.splitterMain.DoubleClick += new System.EventHandler(this.splitterMain_DoubleClick);
             // 
             // grpRequest
@@ -397,7 +398,7 @@
             this.tcResponse.Name = "tcResponse";
             this.tcResponse.SelectedIndex = 0;
             this.tcResponse.Size = new System.Drawing.Size(453, 555);
-            this.tcResponse.TabIndex = 6;
+            this.tcResponse.TabIndex = 12;
             // 
             // tpResponseText
             // 
@@ -434,7 +435,7 @@
             this.rtResponseText.ReadOnly = true;
             this.rtResponseText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
             this.rtResponseText.Size = new System.Drawing.Size(429, 460);
-            this.rtResponseText.TabIndex = 13;
+            this.rtResponseText.TabIndex = 14;
             this.rtResponseText.Text = "";
             this.rtResponseText.WordWrap = false;
             this.rtResponseText.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtResponseText_LinkClicked);
@@ -451,7 +452,7 @@
             this.grpResponseBodyOutput.Name = "grpResponseBodyOutput";
             this.grpResponseBodyOutput.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpResponseBodyOutput.Size = new System.Drawing.Size(437, 50);
-            this.grpResponseBodyOutput.TabIndex = 11;
+            this.grpResponseBodyOutput.TabIndex = 13;
             this.grpResponseBodyOutput.TabStop = false;
             this.grpResponseBodyOutput.Text = "Output";
             // 
@@ -462,7 +463,7 @@
             this.rbResponseBodyOutputBrowser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rbResponseBodyOutputBrowser.Name = "rbResponseBodyOutputBrowser";
             this.rbResponseBodyOutputBrowser.Size = new System.Drawing.Size(92, 21);
-            this.rbResponseBodyOutputBrowser.TabIndex = 2;
+            this.rbResponseBodyOutputBrowser.TabIndex = 13;
             this.rbResponseBodyOutputBrowser.TabStop = true;
             this.rbResponseBodyOutputBrowser.Text = "Rendered";
             this.rbResponseBodyOutputBrowser.UseVisualStyleBackColor = true;
@@ -474,7 +475,7 @@
             this.rbResponseBodyOutputPretty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rbResponseBodyOutputPretty.Name = "rbResponseBodyOutputPretty";
             this.rbResponseBodyOutputPretty.Size = new System.Drawing.Size(66, 21);
-            this.rbResponseBodyOutputPretty.TabIndex = 1;
+            this.rbResponseBodyOutputPretty.TabIndex = 13;
             this.rbResponseBodyOutputPretty.TabStop = true;
             this.rbResponseBodyOutputPretty.Text = "Pretty";
             this.rbResponseBodyOutputPretty.UseVisualStyleBackColor = true;
@@ -487,7 +488,7 @@
             this.rbResponseBodyOutputRaw.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rbResponseBodyOutputRaw.Name = "rbResponseBodyOutputRaw";
             this.rbResponseBodyOutputRaw.Size = new System.Drawing.Size(56, 21);
-            this.rbResponseBodyOutputRaw.TabIndex = 0;
+            this.rbResponseBodyOutputRaw.TabIndex = 13;
             this.rbResponseBodyOutputRaw.TabStop = true;
             this.rbResponseBodyOutputRaw.Text = "Raw";
             this.rbResponseBodyOutputRaw.UseVisualStyleBackColor = true;
@@ -516,7 +517,7 @@
             this.txtResponseHeaders.ReadOnly = true;
             this.txtResponseHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtResponseHeaders.Size = new System.Drawing.Size(437, 518);
-            this.txtResponseHeaders.TabIndex = 11;
+            this.txtResponseHeaders.TabIndex = 14;
             this.txtResponseHeaders.WordWrap = false;
             // 
             // pnlResponseStatusAndTime
@@ -569,7 +570,7 @@
             this.lnkCancelRequest.Location = new System.Drawing.Point(68, 0);
             this.lnkCancelRequest.Name = "lnkCancelRequest";
             this.lnkCancelRequest.Size = new System.Drawing.Size(51, 17);
-            this.lnkCancelRequest.TabIndex = 3;
+            this.lnkCancelRequest.TabIndex = 11;
             this.lnkCancelRequest.TabStop = true;
             this.lnkCancelRequest.Text = "Cancel";
             this.lnkCancelRequest.Visible = false;
@@ -582,7 +583,7 @@
             this.lnkResponseStatusInfo.Location = new System.Drawing.Point(52, 0);
             this.lnkResponseStatusInfo.Name = "lnkResponseStatusInfo";
             this.lnkResponseStatusInfo.Size = new System.Drawing.Size(16, 17);
-            this.lnkResponseStatusInfo.TabIndex = 2;
+            this.lnkResponseStatusInfo.TabIndex = 10;
             this.lnkResponseStatusInfo.TabStop = true;
             this.lnkResponseStatusInfo.Text = "?";
             this.lnkResponseStatusInfo.Visible = false;
