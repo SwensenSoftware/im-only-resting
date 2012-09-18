@@ -244,11 +244,29 @@ namespace Swensen.Ior.Forms
         }
 
         private void addRequestResponseHistoryItem(RequestViewModel requestVm, ResponseModel responseModel) {
+            //update the model
             requestResponseHistoryList.Insert(0, new RequestResponseHistoryItem() { request = requestVm, response = responseModel });
             var max = 15;
             if (requestResponseHistoryList.Count > max) {
-                for(var i = max; i < requestResponseHistoryList.Count; i++)
+                for (var i = max; i < requestResponseHistoryList.Count; i++)
                     requestResponseHistoryList.RemoveAt(i);
+            }
+
+            //update the view
+            snapshotsToolStripMenuItem.DropDownItems.Clear();
+            if (requestResponseHistoryList.Count > 0) {
+                snapshotsToolStripMenuItem.Enabled = true;
+                foreach (var historyItem in requestResponseHistoryList) {
+                    var mi = snapshotsToolStripMenuItem.DropDownItems.Add(historyItem.request.Url.ToString());
+                    mi.ToolTipText = historyItem.response.Start.ToString() + " - Status: " + historyItem.response.Status;
+                    var freshHistoryItemPointer = historyItem; //otherwise the closure captures the single historyItem pointer, which always ends up being the last item
+                    mi.Click += (sender, e) => {
+                        bind(freshHistoryItemPointer);
+                    };
+                }
+            }
+            else {
+                snapshotsToolStripMenuItem.Enabled = false;
             }
         }
 
