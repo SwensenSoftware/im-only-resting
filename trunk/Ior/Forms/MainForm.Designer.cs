@@ -46,7 +46,7 @@
             this.rbHttpPost = new System.Windows.Forms.RadioButton();
             this.pnlRequestUrlAndButtons = new System.Windows.Forms.Panel();
             this.pnlUrl = new System.Windows.Forms.Panel();
-            this.cbRequestUrl = new System.Windows.Forms.ComboBox();
+            this.txtRequestUrl = new Swensen.Ior.Forms.StandardTextBox();
             this.lblUrl = new System.Windows.Forms.Label();
             this.btnRequestButtons = new System.Windows.Forms.Panel();
             this.btnClearRequest = new System.Windows.Forms.Button();
@@ -345,7 +345,7 @@
             // pnlUrl
             // 
             this.pnlUrl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlUrl.Controls.Add(this.cbRequestUrl);
+            this.pnlUrl.Controls.Add(this.txtRequestUrl);
             this.pnlUrl.Controls.Add(this.lblUrl);
             this.pnlUrl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlUrl.Location = new System.Drawing.Point(0, 0);
@@ -355,17 +355,16 @@
             this.pnlUrl.Size = new System.Drawing.Size(347, 41);
             this.pnlUrl.TabIndex = 6;
             // 
-            // cbRequestUrl
+            // txtRequestUrl
             // 
-            this.cbRequestUrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbRequestUrl.FormattingEnabled = true;
-            this.cbRequestUrl.Location = new System.Drawing.Point(38, 7);
-            this.cbRequestUrl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbRequestUrl.Name = "cbRequestUrl";
-            this.cbRequestUrl.Size = new System.Drawing.Size(301, 24);
-            this.cbRequestUrl.TabIndex = 1;
-            this.cbRequestUrl.SelectionChangeCommitted += new System.EventHandler(this.cbRequestUrl_SelectionChangeCommitted);
-            this.cbRequestUrl.TextUpdate += new System.EventHandler(this.cbRequestUrl_TextUpdate);
+            this.txtRequestUrl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtRequestUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
+            this.txtRequestUrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestUrl.Location = new System.Drawing.Point(38, 7);
+            this.txtRequestUrl.Name = "txtRequestUrl";
+            this.txtRequestUrl.Size = new System.Drawing.Size(301, 22);
+            this.txtRequestUrl.TabIndex = 1;
+            this.txtRequestUrl.TextChanged += new System.EventHandler(this.txtRequestUrl_TextChanged);
             // 
             // lblUrl
             // 
@@ -898,7 +897,7 @@
         private System.Windows.Forms.Panel pnlResponseContent;
         private System.Windows.Forms.LinkLabel lnkResponseStatusInfo;
         private System.Windows.Forms.LinkLabel lnkCancelRequest;
-        private System.Windows.Forms.ComboBox cbRequestUrl;
+        private StandardTextBox txtRequestUrl;
 
     }
 }
