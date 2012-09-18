@@ -54,6 +54,8 @@ namespace Swensen.Ior.Forms
         /// </summary>
         private RestRequestAsyncHandle requestAsyncHandle = null;
 
+        private List<RequestResponseHistoryItem> requestResponseHistoryList = new List<RequestResponseHistoryItem>();
+
         public MainForm()
         {
             InitializeComponent();
@@ -69,7 +71,7 @@ namespace Swensen.Ior.Forms
                 bindHttpMethods();
                 bindSettings();
                 setUpFileDialogs();
-                ActiveControl = cbRequestUrl;
+                ActiveControl = txtRequestUrl;
             } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
                 showError("Error", "Unknown error, shutting down: " + Environment.NewLine + Environment.NewLine + ex.ToString());
                 this.Close();
@@ -197,7 +199,7 @@ namespace Swensen.Ior.Forms
             //build the request view
             var checkedHttpMethod = rbGrpHttpMethods.Where(x => x.Checked).First();
             return new RequestViewModel() {
-                Url = cbRequestUrl.Text,
+                Url = txtRequestUrl.Text,
                 Method = (Method)checkedHttpMethod.Tag,
                 Headers = txtRequestHeaders.Lines.ToArray(),
                 Body = txtRequestBody.Text
@@ -242,10 +244,10 @@ namespace Swensen.Ior.Forms
         }
 
         private void addRequestResponseHistoryItem(RequestViewModel requestVm, ResponseModel responseModel) {
-            cbRequestUrl.Items.Insert(0, new RequestResponseHistoryItem() { request = requestVm, response = responseModel });
-            //don't exceed 10 items
-            if (cbRequestUrl.Items.Count == 11)
-                cbRequestUrl.Items.RemoveAt(10);
+            requestResponseHistoryList.Insert(0, new RequestResponseHistoryItem() { request = requestVm, response = responseModel });
+            var max = 10;
+            if (requestResponseHistoryList.Count == max + 1)
+                requestResponseHistoryList.RemoveAt(10);
         }
 
         private void bind(ResponseModel responseVm) {
@@ -262,7 +264,7 @@ namespace Swensen.Ior.Forms
         }
 
         private void bind(RequestViewModel requestVm) {
-            cbRequestUrl.Text = requestVm.Url;
+            txtRequestUrl.Text = requestVm.Url;
             
             var method = requestVm.Method;
             rbGrpHttpMethods.First(x => ((Method) x.Tag) == method).Checked = true;
@@ -524,20 +526,15 @@ namespace Swensen.Ior.Forms
             }
         }
 
-        private void cbRequestUrl_SelectionChangeCommitted(object sender, EventArgs e) {
-            var historyItem = cbRequestUrl.SelectedItem as RequestResponseHistoryItem;
+        private void bind(RequestResponseHistoryItem historyItem) {
             if (historyItem != null) {
                 bind(historyItem.request);
                 bind(historyItem.response);
-                //have to invoke async or text won't get set.
-                cbRequestUrl.BeginInvoke((MethodInvoker) delegate {
-                    cbRequestUrl.Text = historyItem.request.Url;
-                    cbRequestUrl.SelectAll();
-                });
+                txtRequestUrl.Text = historyItem.request.Url;
             }
         }
 
-        private void cbRequestUrl_TextUpdate(object sender, EventArgs e) {
+        private void txtRequestUrl_TextChanged(object sender, EventArgs e) {
             setIsLastOpenedRequestFileDirtyToTrue();
         }
     }
