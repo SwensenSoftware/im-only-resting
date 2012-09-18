@@ -83,11 +83,11 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.snapshotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtRequestBody = new Swensen.Ior.Forms.StandardTextBox();
             this.txtRequestHeaders = new Swensen.Ior.Forms.StandardTextBox();
             this.txtRequestUrl = new Swensen.Ior.Forms.StandardTextBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.snapshotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -735,18 +735,30 @@
             // 
             // requestSaveFileDialog
             // 
-            this.requestSaveFileDialog.Filter = "Request XML files|*.xml|All files|*.*";
+            this.requestSaveFileDialog.Filter = "Request files|*.ior|All files|*.*";
             this.requestSaveFileDialog.RestoreDirectory = true;
             // 
             // requestOpenFileDialog
             // 
-            this.requestOpenFileDialog.Filter = "Request XML files|*.xml|All files|*.*";
+            this.requestOpenFileDialog.Filter = "Request files|*.ior|All files|*.*";
             this.requestOpenFileDialog.RestoreDirectory = true;
             // 
             // responseBodySaveFileDialog
             // 
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(232, 6);
+            // 
+            // snapshotsToolStripMenuItem
+            // 
+            this.snapshotsToolStripMenuItem.Enabled = false;
+            this.snapshotsToolStripMenuItem.Name = "snapshotsToolStripMenuItem";
+            this.snapshotsToolStripMenuItem.Size = new System.Drawing.Size(235, 24);
+            this.snapshotsToolStripMenuItem.Text = "Snapshots";
             // 
             // txtRequestBody
             // 
@@ -788,18 +800,6 @@
             this.txtRequestUrl.Size = new System.Drawing.Size(301, 22);
             this.txtRequestUrl.TabIndex = 1;
             this.txtRequestUrl.TextChanged += new System.EventHandler(this.txtRequestUrl_TextChanged);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(232, 6);
-            // 
-            // snapshotsToolStripMenuItem
-            // 
-            this.snapshotsToolStripMenuItem.Enabled = false;
-            this.snapshotsToolStripMenuItem.Name = "snapshotsToolStripMenuItem";
-            this.snapshotsToolStripMenuItem.Size = new System.Drawing.Size(235, 24);
-            this.snapshotsToolStripMenuItem.Text = "Snapshots";
             // 
             // MainForm
             // 
