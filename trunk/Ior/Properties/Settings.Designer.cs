@@ -154,5 +154,17 @@ namespace Swensen.Ior.Properties {
                 this["CallUpgrade"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public ushort MaxSnapshots {
+            get {
+                return ((ushort)(this["MaxSnapshots"]));
+            }
+            set {
+                this["MaxSnapshots"] = value;
+            }
+        }
     }
 }
