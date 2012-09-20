@@ -300,17 +300,13 @@ namespace Swensen.Ior.Forms
             }
         }
 
-        private static string getFileDirectoryName(string fileName) {
-            return fileName.IsBlank() ? "" : new FileInfo(fileName).DirectoryName;
-        }
-
         private void save(string fileName) {
             if (fileName == null) {
                 requestSaveFileDialog.FileName = FilePathFormatter.Format(lastOpenedRequestFilePath, FilePathFormat.Short);
                 setUpFileDialogs();
                 if (requestSaveFileDialog.ShowDialog() == DialogResult.OK) {
                     fileName = requestSaveFileDialog.FileName;
-                    Settings.Default.SaveRequestFileDialogFolder = getFileDirectoryName(fileName);
+                    Settings.Default.SaveRequestFileDialogFolder = FilePathFormatter.Format(fileName, FilePathFormat.FullDir);
                 } else {
                     return;
                 }
@@ -329,7 +325,7 @@ namespace Swensen.Ior.Forms
         private void updateLastOpenedRequestFile(string fileName) {
             this.lastOpenedRequestFilePath = fileName;
             this.isLastOpenedRequestFileDirty = false;
-            this.Text = fileName + " - I'm Only Resting";
+            this.Text = FilePathFormatter.Format(fileName, FilePathFormat.ShortFileFullDir) + " - I'm Only Resting";
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -346,7 +342,7 @@ namespace Swensen.Ior.Forms
             if (requestOpenFileDialog.ShowDialog() == DialogResult.OK) {
                 var fileName = requestOpenFileDialog.FileName;
                 openRequestFile(fileName);
-                Settings.Default.SaveRequestFileDialogFolder = getFileDirectoryName(fileName);
+                Settings.Default.SaveRequestFileDialogFolder = FilePathFormatter.Format(fileName, FilePathFormat.FullDir);
             }
         }
 
