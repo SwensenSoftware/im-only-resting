@@ -25,20 +25,7 @@ namespace Swensen.Ior.Forms
         /// </summary>
         WebBrowser wbResponseBody;
 
-        private string lastOpenedRequestFileName = null;
-        /// <summary>
-        /// The derived "short" lastOpenedRequestFileName (i.e. the file name without the path).
-        /// </summary>
-        private string lastOpenedRequestShortFileName {
-            get {
-                if (String.IsNullOrEmpty(lastOpenedRequestFileName))
-                    return null;
-                else {
-                    var parts = lastOpenedRequestFileName.Split(Path.DirectorySeparatorChar);
-                    return parts[parts.Length - 1];
-                }
-            }
-        }
+        private string lastOpenedRequestFilePath = null;
 
         /// <summary>
         /// Track whether there have been any modifications to the request since opening a request file.
@@ -319,7 +306,7 @@ namespace Swensen.Ior.Forms
 
         private void save(string fileName) {
             if (fileName == null) {
-                requestSaveFileDialog.FileName = lastOpenedRequestShortFileName;
+                requestSaveFileDialog.FileName = FilePathFormatter.Format(lastOpenedRequestFilePath, FilePathFormat.Short);
                 setUpFileDialogs();
                 if (requestSaveFileDialog.ShowDialog() == DialogResult.OK) {
                     fileName = requestSaveFileDialog.FileName;
@@ -340,13 +327,13 @@ namespace Swensen.Ior.Forms
         }
 
         private void updateLastOpenedRequestFile(string fileName) {
-            this.lastOpenedRequestFileName = fileName;
+            this.lastOpenedRequestFilePath = fileName;
             this.isLastOpenedRequestFileDirty = false;
             this.Text = fileName + " - I'm Only Resting";
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-            save(lastOpenedRequestFileName);
+            save(lastOpenedRequestFilePath);
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -465,13 +452,13 @@ namespace Swensen.Ior.Forms
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             if (this.isLastOpenedRequestFileDirty) {
-                var msg = lastOpenedRequestFileName.IsBlank() ? 
+                var msg = lastOpenedRequestFilePath.IsBlank() ? 
                             "Save changes to new request?" : 
-                            String.Format("Save changes to {0}?", lastOpenedRequestFileName);
+                            String.Format("Save changes to {0}?", lastOpenedRequestFilePath);
 
                 var result = showYesNoCancel("Save Changes", msg);
                 if (result == DialogResult.Yes) {
-                    save(lastOpenedRequestFileName);
+                    save(lastOpenedRequestFilePath);
                 } else if (result == DialogResult.Cancel) {
                     e.Cancel = true;
                     return;
