@@ -136,6 +136,10 @@
       <Project>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</Project>
       <Name>Ior.Forms.PropertyGridEx</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{937C9CDB-4994-41F8-9219-50A63E6248A6}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using RestSharp;
 using System.Xml.Linq;
 using System.IO;
+using Swensen.Utils;
 using Swensen.Ior.Core;
 using Swensen.Ior.Properties;
 
@@ -54,7 +55,7 @@ namespace Swensen.Ior.Forms
         /// </summary>
         private RestRequestAsyncHandle requestAsyncHandle = null;
 
-        private List<RequestResponseHistoryItem> requestResponseHistoryList = new List<RequestResponseHistoryItem>();
+        private HistoryList<RequestResponseHistoryItem> snapshots;
 
         public MainForm()
         {
@@ -90,6 +91,8 @@ namespace Swensen.Ior.Forms
 
             if (!String.IsNullOrWhiteSpace(settings.DefaultRequestFilePath))
                 openRequestFile(settings.DefaultRequestFilePath);
+
+            snapshots = new HistoryList<RequestResponseHistoryItem>(Settings.Default.MaxSnapshots);
         }
 
         private void setIsLastOpenedRequestFileDirtyToTrue() {
@@ -245,17 +248,17 @@ namespace Swensen.Ior.Forms
 
         private void addRequestResponseHistoryItem(RequestViewModel requestVm, ResponseModel responseModel) {
             //update the model
-            requestResponseHistoryList.Insert(0, new RequestResponseHistoryItem() { request = requestVm, response = responseModel });
-            var max = Settings.Default.MaxSnapshots;
-            if (requestResponseHistoryList.Count > max) {
-                requestResponseHistoryList = requestResponseHistoryList.Take(max).ToList();
-            }
+            snapshots.Add(new RequestResponseHistoryItem() { request = requestVm, response = responseModel });
 
             //update the view
+            bindSnapshots();
+        }
+
+        private void bindSnapshots() {
             snapshotsToolStripMenuItem.DropDownItems.Clear();
-            if (requestResponseHistoryList.Count > 0) {
+            if (snapshots.Count > 0) {
                 snapshotsToolStripMenuItem.Enabled = true;
-                foreach (var historyItem in requestResponseHistoryList) {
+                foreach (var historyItem in snapshots) {
                     var mi = snapshotsToolStripMenuItem.DropDownItems.Add(historyItem.request.Url.ToString());
                     mi.ToolTipText = historyItem.response.Start.ToString() + " - Status: " + historyItem.response.Status;
                     var freshHistoryItemPointer = historyItem; //otherwise the closure captures the single historyItem pointer, which always ends up being the last item
@@ -263,8 +266,7 @@ namespace Swensen.Ior.Forms
                         bind(freshHistoryItemPointer);
                     };
                 }
-            }
-            else {
+            } else {
                 snapshotsToolStripMenuItem.Enabled = false;
             }
         }
@@ -432,10 +434,10 @@ namespace Swensen.Ior.Forms
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
             persistGuiSettings();
             using(var options = new SettingsDialog()) {
-                options.ShowDialog(this);
-                //at the moment, we don't have any runtime settings here to update.
-                //if(DialogResult.OK == options.ShowDialog(this))
-                //    bindRuntimeSettings();
+                if (DialogResult.OK == options.ShowDialog(this)) {
+                    snapshots.MaxHistory = Settings.Default.MaxSnapshots;
+                    bindSnapshots();
+                }
             }
         }
 
