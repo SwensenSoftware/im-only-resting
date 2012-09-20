@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace Swensen.Ior.Core {
-    public class RequestResponseHistoryItem {
+    public class RequestResponseSnapshot {
         public RequestViewModel request { get; set; }
         public ResponseModel response { get; set; }
 

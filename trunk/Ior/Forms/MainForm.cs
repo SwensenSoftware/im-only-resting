@@ -42,7 +42,7 @@ namespace Swensen.Ior.Forms
         /// </summary>
         private RestRequestAsyncHandle requestAsyncHandle = null;
 
-        private HistoryList<RequestResponseHistoryItem> snapshots;
+        private HistoryList<RequestResponseSnapshot> snapshots;
 
         public MainForm()
         {
@@ -79,7 +79,7 @@ namespace Swensen.Ior.Forms
             if (!settings.DefaultRequestFilePath.IsBlank())
                 openRequestFile(settings.DefaultRequestFilePath);
 
-            snapshots = new HistoryList<RequestResponseHistoryItem>(Settings.Default.MaxSnapshots);
+            snapshots = new HistoryList<RequestResponseSnapshot>(Settings.Default.MaxSnapshots);
         }
 
         private void setIsLastOpenedRequestFileDirtyToTrue() {
@@ -226,16 +226,16 @@ namespace Swensen.Ior.Forms
                         this.requestAsyncHandle = null;
                         //bind the response view
                         bind(responseModel);
-                        addRequestResponseHistoryItem(requestVm, responseModel);                        
+                        addRequestResponseSnapshot(requestVm, responseModel);                        
                         grpResponse.Update();
                     });
                 });
             }
         }
 
-        private void addRequestResponseHistoryItem(RequestViewModel requestVm, ResponseModel responseModel) {
+        private void addRequestResponseSnapshot(RequestViewModel requestVm, ResponseModel responseModel) {
             //update the model
-            snapshots.Add(new RequestResponseHistoryItem() { request = requestVm, response = responseModel });
+            snapshots.Add(new RequestResponseSnapshot() { request = requestVm, response = responseModel });
 
             //update the view
             bindSnapshots();
@@ -245,12 +245,12 @@ namespace Swensen.Ior.Forms
             snapshotsToolStripMenuItem.DropDownItems.Clear();
             if (snapshots.Count > 0) {
                 snapshotsToolStripMenuItem.Enabled = true;
-                foreach (var historyItem in snapshots) {
-                    var mi = snapshotsToolStripMenuItem.DropDownItems.Add(historyItem.request.Url.ToString());
-                    mi.ToolTipText = historyItem.response.Start.ToString() + " - Status: " + historyItem.response.Status;
-                    var freshHistoryItemPointer = historyItem; //otherwise the closure captures the single historyItem pointer, which always ends up being the last item
+                foreach (var snapshot in snapshots) {
+                    var mi = snapshotsToolStripMenuItem.DropDownItems.Add(snapshot.request.Url.ToString());
+                    mi.ToolTipText = snapshot.response.Start.ToString() + " - Status: " + snapshot.response.Status;
+                    var freshSnapshotPointer = snapshot; //otherwise the closure captures the single snapshot pointer, which always ends up being the last item
                     mi.Click += (sender, e) => {
-                        bind(freshHistoryItemPointer);
+                        bind(freshSnapshotPointer);
                     };
                 }
             } else {
@@ -534,11 +534,11 @@ namespace Swensen.Ior.Forms
             }
         }
 
-        private void bind(RequestResponseHistoryItem historyItem) {
-            if (historyItem != null) {
-                bind(historyItem.request);
-                bind(historyItem.response);
-                txtRequestUrl.Text = historyItem.request.Url;
+        private void bind(RequestResponseSnapshot snapshot) {
+            if (snapshot != null) {
+                bind(snapshot.request);
+                bind(snapshot.response);
+                txtRequestUrl.Text = snapshot.request.Url;
             }
         }
 
