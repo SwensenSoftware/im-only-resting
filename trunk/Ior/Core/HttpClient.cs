@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using RestSharp;
 using System.Net;
+using Swensen.Utils;
 
 namespace Swensen.Ior.Core {
     /// <summary>
@@ -20,7 +21,7 @@ namespace Swensen.Ior.Core {
 
         public RestRequestAsyncHandle ExecuteAsync(RequestModel requestModel, Action<ResponseModel> callback) {
             var client = new RestClient();
-            if (!String.IsNullOrWhiteSpace(proxyServer))
+            if (!proxyServer.IsBlank())
                 client.Proxy = new WebProxy(proxyServer, false); //make second arg a config option.
 
             var restRequest = requestModel.ToRestRequest(defaultRequestContentType);

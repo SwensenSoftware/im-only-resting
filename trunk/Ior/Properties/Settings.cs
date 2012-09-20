@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Swensen.Utils;
 
 namespace Swensen.Ior.Properties {
     
@@ -16,11 +17,11 @@ namespace Swensen.Ior.Properties {
         }
 
         private void SetupCalculatedDefaultSettings() {
-            if (string.IsNullOrWhiteSpace(this.SaveRequestFileDialogFolder))
+            if (this.SaveRequestFileDialogFolder.IsBlank())
                 this.SaveRequestFileDialogFolder =
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Saved Requests";
 
-            if (string.IsNullOrWhiteSpace(this.ExportResponseFileDialogFolder))
+            if (this.ExportResponseFileDialogFolder.IsBlank())
                 this.ExportResponseFileDialogFolder =
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "Http Exported Responses";
         }

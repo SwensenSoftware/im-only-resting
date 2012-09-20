@@ -89,7 +89,7 @@ namespace Swensen.Ior.Forms
             updateSplitterDistance(); //must come after width and height and orientation updates
             rbGrpResponseBodyOutputs.First(x => (ResponseBodyOutput)x.Tag == Settings.Default.ResponseBodyOutput).Checked = true;
 
-            if (!String.IsNullOrWhiteSpace(settings.DefaultRequestFilePath))
+            if (!settings.DefaultRequestFilePath.IsBlank())
                 openRequestFile(settings.DefaultRequestFilePath);
 
             snapshots = new HistoryList<RequestResponseHistoryItem>(Settings.Default.MaxSnapshots);
@@ -275,7 +275,7 @@ namespace Swensen.Ior.Forms
             this.lastResponseModel = responseVm;
 
             lblResponseStatusValue.Text = responseVm.Status;
-            lnkResponseStatusInfo.Visible = !String.IsNullOrWhiteSpace(responseVm.ErrorMessage);
+            lnkResponseStatusInfo.Visible = !responseVm.ErrorMessage.IsBlank();
             lnkCancelRequest.Visible = responseVm.Status == ResponseModel.Loading.Status;
 
             txtResponseHeaders.Text = responseVm.Headers;
@@ -314,7 +314,7 @@ namespace Swensen.Ior.Forms
         }
 
         private static string getFileDirectoryName(string fileName) {
-            return String.IsNullOrWhiteSpace(fileName) ? "" : new FileInfo(fileName).DirectoryName;
+            return fileName.IsBlank() ? "" : new FileInfo(fileName).DirectoryName;
         }
 
         private void save(string fileName) {
@@ -381,7 +381,7 @@ namespace Swensen.Ior.Forms
             
             //set filter based on inferred content type
             string filter = "All files|*.*";
-            if (!String.IsNullOrWhiteSpace(lastResponseModel.ContentFileExtension)) {
+            if (!lastResponseModel.ContentFileExtension.IsBlank()) {
                 string ctExt = lastResponseModel.ContentFileExtension;
                 filter = string.Format("{0}|*.{0}|{1}", ctExt, filter);
             }
@@ -465,7 +465,7 @@ namespace Swensen.Ior.Forms
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             if (this.isLastOpenedRequestFileDirty) {
-                var msg = String.IsNullOrWhiteSpace(lastOpenedRequestFileName) ? 
+                var msg = lastOpenedRequestFileName.IsBlank() ? 
                             "Save changes to new request?" : 
                             String.Format("Save changes to {0}?", lastOpenedRequestFileName);
 
