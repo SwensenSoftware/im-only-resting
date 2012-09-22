@@ -17,6 +17,7 @@ copy Ior\bin\Release\RestSharp.dll staging
 copy Ior\bin\Release\TidyManaged.dll staging
 copy Ior\bin\Release\Utils.dll staging
 copy Ior\bin\Release\NLog.config staging
+copy Ior\bin\Release\NLog.dll staging
 
 REM zip staging files
 cd staging
