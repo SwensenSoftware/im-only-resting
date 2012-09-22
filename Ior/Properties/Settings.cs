@@ -1,16 +1,16 @@
 ﻿using System;
 using System.IO;
 using Swensen.Utils;
+using NLog;
 
 namespace Swensen.Ior.Properties {
-    
-    
     // This class allows you to handle specific events on the settings class:
     //  The SettingChanging event is raised before a setting's value is changed.
     //  The PropertyChanged event is raised after a setting's value is changed.
     //  The SettingsLoaded event is raised after the setting values are loaded.
     //  The SettingsSaving event is raised before the setting values are saved.
     public sealed partial class Settings {
+        private static Logger log = LogManager.GetCurrentClassLogger();
         
         public Settings() {
             SetupCalculatedDefaultSettings();
@@ -28,6 +28,7 @@ namespace Swensen.Ior.Properties {
 
         public void UpgradeAndSaveIfNeeded() {
             if (this.CallUpgrade) {
+                log.Info("Upgrading user settings");
                 this.Upgrade();
                 this.SetupCalculatedDefaultSettings();
                 this.CallUpgrade = false;
