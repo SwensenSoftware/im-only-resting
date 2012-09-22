@@ -12,6 +12,7 @@ using System.IO;
 using Swensen.Utils;
 using Swensen.Ior.Core;
 using Swensen.Ior.Properties;
+using NLog;
 
 //examples response types:
 //xml: http://www.w3schools.com/xml/note.asp
@@ -20,6 +21,8 @@ namespace Swensen.Ior.Forms
 {
     public partial class MainForm : Form
     {
+        private static Logger log = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// We dynamically create and add a webbrowser object each time due to quirky behavior otherwise (only works first Navigate in some cases).
         /// </summary>
@@ -61,6 +64,7 @@ namespace Swensen.Ior.Forms
                 setUpFileDialogs();
                 ActiveControl = txtRequestUrl;
             } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
+                log.FatalException("Exception in main, shutting down", ex);
                 showError("Error", "Unknown error, shutting down: " + Environment.NewLine + Environment.NewLine + ex.ToString());
                 this.Close();
             }
