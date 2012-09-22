@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsDialog));
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -109,6 +110,7 @@
             this.ClientSize = new System.Drawing.Size(741, 304);
             this.Controls.Add(this.pgridOptions);
             this.Controls.Add(this.pnlButtons);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "SettingsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
