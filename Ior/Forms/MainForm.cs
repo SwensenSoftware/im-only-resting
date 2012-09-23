@@ -55,7 +55,6 @@ namespace Swensen.Ior.Forms
         private void MainForm_Load(object sender, EventArgs e)
         {                           
             try {
-                log.Info("App starting");
                 Settings.Default.UpgradeAndSaveIfNeeded();
                 initTxtRequestBody();
                 rebuildWebBrowser();
@@ -470,7 +469,6 @@ namespace Swensen.Ior.Forms
             try {
                 persistGuiSettings();
             } catch { }
-            log.Info("App shutting down");
         }
 
         //hack!
