@@ -17,20 +17,36 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using NLog;
 
 namespace Swensen.Ior.Forms
 {
     static class Program
     {
+        private static Logger log = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            log.Info("App starting");
+            
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+        }
+
+        static void Application_ApplicationExit(object sender, EventArgs e) {
+            log.Info("App shutting down");
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
+            log.FatalException(String.Format("Unhandled AppDomain exception, IsTerminating={0}", e.IsTerminating), (Exception) e.ExceptionObject);
         }
     }
 }
