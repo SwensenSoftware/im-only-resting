@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitterMain = new System.Windows.Forms.SplitContainer();
             this.grpRequest = new System.Windows.Forms.GroupBox();
             this.grpBody = new System.Windows.Forms.GroupBox();
@@ -810,7 +809,6 @@
             this.ClientSize = new System.Drawing.Size(968, 645);
             this.Controls.Add(this.splitterMain);
             this.Controls.Add(this.mainMenuStrip);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenuStrip;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
