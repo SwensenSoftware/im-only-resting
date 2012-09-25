@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using NLog;
+using System.Reflection;
+using System.Drawing;
 
 namespace Swensen.Ior.Forms
 {
@@ -32,6 +34,10 @@ namespace Swensen.Ior.Forms
         static void Main()
         {
             log.Info("App starting");
+
+            //set default form icon to project exe icon
+            var defaultIcon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            typeof(Form).GetField("defaultIcon", BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, defaultIcon);
             
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
