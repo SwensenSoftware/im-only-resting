@@ -73,8 +73,10 @@ namespace Swensen.Ior.Forms
         private void bindSettings() {
             var settings = Settings.Default;
 
+            log.Debug("binding form size to settings with height={0}, width={1}...", settings.FormWidth, settings.FormHeight);
             this.Width = settings.FormWidth;
             this.Height = settings.FormHeight;
+            log.Debug("form size is now bound with height={0}, width={1}", this.Width, this.Height);
 
             splitterMain.Orientation = Settings.Default.SplitterOrientation;
             updateSplitterDistance(); //must come after width and height and orientation updates
@@ -430,6 +432,7 @@ namespace Swensen.Ior.Forms
 
         private void updateSplitterDistance() {
             var pct = (Settings.Default.SplitterDistancePercent / 100.0);
+            log.Debug("updating splitter distance with percent={0}, orientation={3}, and ClientSize dimensions={1},{2}", pct, this.ClientSize.Width, this.ClientSize.Height, splitterMain.Orientation);
             splitterMain.SplitterDistance =
                 (int)Math.Round(pct * (splitterMain.Orientation == Orientation.Vertical ? this.ClientSize.Width : this.ClientSize.Height));
         }
