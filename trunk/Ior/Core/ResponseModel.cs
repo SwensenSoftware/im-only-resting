@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using RestSharp;
+using System.Net.Http;
 using System.Net;
 using System.Xml.Linq;
 using Newtonsoft.Json;
@@ -25,27 +25,29 @@ using TidyManaged;
 
 namespace Swensen.Ior.Core {
     public class ResponseModel {
-        public HttpContentType ContentType { get; private set;}
+        public IorContentType ContentType { get; private set;}
 
         /// <summary>
         /// Create an empty ResponseModel with ResponseStatus set to a loading message.
         /// </summary>
         public ResponseModel(string status="") {
             this.Status = status;
-            this.ContentType = new HttpContentType();
+            this.ContentType = new IorContentType();
             initLazyFields();
         }
 
         /// <summary>
         /// Create a ResponseModel populated from an IRestResonse
         /// </summary>
-        public ResponseModel(IRestResponse response, DateTime start, DateTime end) {
+        public ResponseModel(HttpResponseMessage response, DateTime start, DateTime end) {
             if (response == null)
                 throw new ArgumentNullException("response");
 
-            this.Status = response.ResponseStatus == RestSharp.ResponseStatus.Completed ?
-                          string.Format("{0} {1}", (int)response.StatusCode, response.StatusDescription) :
-                          response.ResponseStatus.ToString();
+                                 
+            //response.ReasonPhrase
+            //response.StatusCode
+
+            this.Status = string.Format("{0} {1}", (int)response.StatusCode, response.ReasonPhrase);
 
             if (start != null && end != null) {
                 Start = start;
@@ -53,22 +55,30 @@ namespace Swensen.Ior.Core {
                 ElapsedTime = (end - start).Milliseconds + " ms";
             }
 
-            this.Content = response.Content;
-            this.ContentBytes = response.RawBytes;
+            var readContentBytesTask = response.Content.ReadAsByteArrayAsync();
+            readContentBytesTask.Wait();
+            this.ContentBytes = readContentBytesTask.Result;
 
-            this.ContentType = new HttpContentType(response.ContentType);
+            var readContentStringTask = response.Content.ReadAsStringAsync();
+            readContentStringTask.Wait();
+            this.Content = readContentStringTask.Result;
 
-            this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Name + ": " + p.Value));
+            //note: not sure why response headers is String -> IEnumerable<String> map instead of just String -> String
+            var contentType = response.Headers.FirstOrDefault(x => x.Key.ToUpper() == "CONTENT-TYPE").Value.FirstOrDefault();
+            this.ContentType = new IorContentType(contentType);
 
-            this.ErrorMessage = response.ErrorMessage;
+            this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Key + ": " + p.Value.FirstOrDefault()));
+
+            //todo: either get rid of this (left over from RestSharp), or make some good use of it (i.e. exception messages).
+            this.ErrorMessage = null;// response.ErrorMessage;
 
             initLazyFields();            
         }
 
         private void initLazyFields() {
-            this.prettyPrintedContent = new Lazy<string>(() => HttpContentType.GetPrettyPrintedContent(this.ContentType.MediaTypeCategory, this.Content));
-            this.contentFileExtension = new Lazy<string>(() => HttpContentType.GetFileExtension(this.ContentType.MediaTypeCategory, this.ContentType.MediaType));
-            this.temporaryFile = new Lazy<string>(() => HttpContentType.GetTemporaryFile(this.ContentBytes, this.ContentFileExtension));
+            this.prettyPrintedContent = new Lazy<string>(() => IorContentType.GetPrettyPrintedContent(this.ContentType.MediaTypeCategory, this.Content));
+            this.contentFileExtension = new Lazy<string>(() => IorContentType.GetFileExtension(this.ContentType.MediaTypeCategory, this.ContentType.MediaType));
+            this.temporaryFile = new Lazy<string>(() => IorContentType.GetTemporaryFile(this.ContentBytes, this.ContentFileExtension));
         }
 
         public string ErrorMessage { get; private set; }

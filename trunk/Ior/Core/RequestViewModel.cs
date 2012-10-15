@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using RestSharp;
+using System.Net.Http;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -25,7 +25,7 @@ using System.Xml.Serialization;
 namespace Swensen.Ior.Core {
     public class RequestViewModel {
         public string Url { get; set; }
-        public Method Method { get; set; }
+        public HttpMethod Method { get; set; }
         public string[] Headers { get; set; }
         public string Body { get; set; }
 
