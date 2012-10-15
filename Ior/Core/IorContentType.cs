@@ -12,7 +12,7 @@ namespace Swensen.Ior.Core {
     /// <summary>
     /// Broad categories of http media types that we know how to do special processing for (i.e. pretty printing, or choosing correct file extension).
     /// </summary>
-    public enum HttpMediaTypeCategory {
+    public enum IorMediaTypeCategory {
         Xml, Html, Json, Text, Application, Other
     }
                  
@@ -21,16 +21,16 @@ namespace Swensen.Ior.Core {
     /// An immutable wrapper around our underlying content type representation which provides specialized processing for various processing
     /// like pretty printing and choosing correct file extensions.
     /// </summary>
-    public class HttpContentType {
+    public class IorContentType {
         private readonly ContentType ct;
         
         public readonly string MediaType;
 
-        public readonly HttpMediaTypeCategory MediaTypeCategory;
+        public readonly IorMediaTypeCategory MediaTypeCategory;
 
-        public HttpContentType() : this("application/octet-stream") { }
+        public IorContentType() : this("application/octet-stream") { }
 
-        public HttpContentType(string contentType) {
+        public IorContentType(string contentType) {
             try {
                 contentType = contentType.Split(',')[0]; //though illegal, we've since comma separated content-types
                 this.ct = new ContentType(contentType);
@@ -42,33 +42,33 @@ namespace Swensen.Ior.Core {
             this.MediaTypeCategory = GetMediaTypeCategory(this.MediaType);
         }
 
-        public static HttpMediaTypeCategory GetMediaTypeCategory(string mt) { 
+        public static IorMediaTypeCategory GetMediaTypeCategory(string mt) { 
             if (mt == "text/html" || mt == "application/xhtml+xml")
-                return HttpMediaTypeCategory.Html;
+                return IorMediaTypeCategory.Html;
 
             if (mt == "text/xml" || mt == "application/xml" || mt.EndsWith("+xml")) //+xml catch all must come after Html
-                return HttpMediaTypeCategory.Xml;
+                return IorMediaTypeCategory.Xml;
 
             if (mt == "text/json" || mt == "application/json")
-                return HttpMediaTypeCategory.Json;
+                return IorMediaTypeCategory.Json;
 
             if (mt == "text/plain")
-                return HttpMediaTypeCategory.Text;
+                return IorMediaTypeCategory.Text;
 
             if (mt.StartsWith("image/") || mt.StartsWith("video/") || mt.StartsWith("audio/"))
-                return HttpMediaTypeCategory.Application;
+                return IorMediaTypeCategory.Application;
 
-            return HttpMediaTypeCategory.Other;
+            return IorMediaTypeCategory.Other;
         }
 
         /// <summary>
         /// If contentType is an xml content type, then try to pretty print the rawContent. If that fails or otherwise, just return the rawContent
         /// </summary>
-        public static string GetPrettyPrintedContent(HttpMediaTypeCategory mtc, string content) {
+        public static string GetPrettyPrintedContent(IorMediaTypeCategory mtc, string content) {
             //see http://stackoverflow.com/a/2965701/236255 for list of xml content types (credit to http://stackoverflow.com/users/18936/bobince)
             try {
                 switch (mtc) {
-                    case HttpMediaTypeCategory.Xml: {
+                    case IorMediaTypeCategory.Xml: {
                             var doc = XDocument.Parse(content);
                             var xml = doc.ToString();
                             if (doc.Declaration != null)
@@ -76,11 +76,11 @@ namespace Swensen.Ior.Core {
                             else
                                 return xml;
                         }
-                    case HttpMediaTypeCategory.Json: {
+                    case IorMediaTypeCategory.Json: {
                             dynamic parsedJson = JsonConvert.DeserializeObject(content);
                             return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
                         }
-                    case HttpMediaTypeCategory.Html: {
+                    case IorMediaTypeCategory.Html: {
                             //need to convert to utf16-little endian stream and set Document input/output encoding since Document.FromString screws up encoding.
                             var stream = new System.IO.MemoryStream(Encoding.Unicode.GetBytes(content));
                             using (var doc = Document.FromStream(stream)) {
@@ -117,13 +117,13 @@ namespace Swensen.Ior.Core {
             }
         }
 
-        public static string GetFileExtension(HttpMediaTypeCategory mtc, string mt) {
+        public static string GetFileExtension(IorMediaTypeCategory mtc, string mt) {
             switch (mtc) {
-                case HttpMediaTypeCategory.Html: return "html";
-                case HttpMediaTypeCategory.Json: return "json";
-                case HttpMediaTypeCategory.Text: return "txt";
-                case HttpMediaTypeCategory.Xml: return "xml";
-                case HttpMediaTypeCategory.Application:
+                case IorMediaTypeCategory.Html: return "html";
+                case IorMediaTypeCategory.Json: return "json";
+                case IorMediaTypeCategory.Text: return "txt";
+                case IorMediaTypeCategory.Xml: return "xml";
+                case IorMediaTypeCategory.Application:
                     var parts = mt.Split('/');
                     return parts[1];
                 default:

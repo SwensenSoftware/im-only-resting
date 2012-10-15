@@ -37,7 +37,7 @@
             this.grpHeaders = new System.Windows.Forms.GroupBox();
             this.txtRequestHeaders = new Swensen.Ior.Forms.StandardTextBox();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
-            this.rbHttpPatch = new System.Windows.Forms.RadioButton();
+            this.rbHttpTrace = new System.Windows.Forms.RadioButton();
             this.rbHttpHead = new System.Windows.Forms.RadioButton();
             this.rbHttpDelete = new System.Windows.Forms.RadioButton();
             this.rbHttpOptions = new System.Windows.Forms.RadioButton();
@@ -235,7 +235,7 @@
             // grpHttpMethod
             // 
             this.grpHttpMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.grpHttpMethod.Controls.Add(this.rbHttpPatch);
+            this.grpHttpMethod.Controls.Add(this.rbHttpTrace);
             this.grpHttpMethod.Controls.Add(this.rbHttpHead);
             this.grpHttpMethod.Controls.Add(this.rbHttpDelete);
             this.grpHttpMethod.Controls.Add(this.rbHttpOptions);
@@ -252,17 +252,17 @@
             this.grpHttpMethod.TabStop = false;
             this.grpHttpMethod.Text = "Method";
             // 
-            // rbHttpPatch
+            // rbHttpTrace
             // 
-            this.rbHttpPatch.AutoSize = true;
-            this.rbHttpPatch.Location = new System.Drawing.Point(89, 23);
-            this.rbHttpPatch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rbHttpPatch.Name = "rbHttpPatch";
-            this.rbHttpPatch.Size = new System.Drawing.Size(65, 21);
-            this.rbHttpPatch.TabIndex = 7;
-            this.rbHttpPatch.TabStop = true;
-            this.rbHttpPatch.Text = "Patch";
-            this.rbHttpPatch.UseVisualStyleBackColor = true;
+            this.rbHttpTrace.AutoSize = true;
+            this.rbHttpTrace.Location = new System.Drawing.Point(89, 23);
+            this.rbHttpTrace.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rbHttpTrace.Name = "rbHttpTrace";
+            this.rbHttpTrace.Size = new System.Drawing.Size(66, 21);
+            this.rbHttpTrace.TabIndex = 7;
+            this.rbHttpTrace.TabStop = true;
+            this.rbHttpTrace.Text = "Trace";
+            this.rbHttpTrace.UseVisualStyleBackColor = true;
             // 
             // rbHttpHead
             // 
@@ -882,7 +882,7 @@
         private System.Windows.Forms.RadioButton rbHttpDelete;
         private System.Windows.Forms.RadioButton rbHttpOptions;
         private System.Windows.Forms.RadioButton rbHttpPut;
-        private System.Windows.Forms.RadioButton rbHttpPatch;
+        private System.Windows.Forms.RadioButton rbHttpTrace;
         private System.Windows.Forms.RadioButton rbHttpHead;
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;

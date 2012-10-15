@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using RestSharp;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Net.Http;
 using System.Xml.Linq;
 using System.IO;
 using Swensen.Utils;
@@ -43,7 +45,7 @@ namespace Swensen.Ior.Forms
         /// <summary>
         /// Handel on the currently executing async request, allows us to cancel. null if no currently executing request.
         /// </summary>
-        private RestRequestAsyncHandle requestAsyncHandle = null;
+        private CancellationTokenSource requestAsyncHandle = null;
 
         private HistoryList<RequestResponseSnapshot> snapshots;
 
@@ -108,13 +110,13 @@ namespace Swensen.Ior.Forms
         private IEnumerable<RadioButton> rbGrpHttpMethods { get { return grpHttpMethod.Controls.OfType<RadioButton>(); } }
 
         private void bindHttpMethods() {
-            rbHttpDelete.Tag = Method.DELETE;
-            rbHttpGet.Tag = Method.GET;
-            rbHttpHead.Tag = Method.HEAD;
-            rbHttpOptions.Tag = Method.OPTIONS;
-            rbHttpPatch.Tag = Method.PATCH;
-            rbHttpPost.Tag = Method.POST;
-            rbHttpPut.Tag = Method.PUT;
+            rbHttpDelete.Tag = HttpMethod.Delete;
+            rbHttpGet.Tag = HttpMethod.Get;
+            rbHttpHead.Tag = HttpMethod.Head;
+            rbHttpOptions.Tag = HttpMethod.Options;
+            rbHttpTrace.Tag = HttpMethod.Trace;
+            rbHttpPost.Tag = HttpMethod.Post;
+            rbHttpPut.Tag = HttpMethod.Put;
             
             foreach (var rb in rbGrpHttpMethods) {
                 rb.CheckedChanged += new EventHandler(rbGrpHttp_CheckedChanged);
@@ -166,8 +168,8 @@ namespace Swensen.Ior.Forms
                     wbResponseBody.Visible = true;
                     rtResponseText.Visible = false;
 
-                    if ((lastResponseModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Xml || 
-                        lastResponseModel.ContentType.MediaTypeCategory == HttpMediaTypeCategory.Application) && 
+                    if ((lastResponseModel.ContentType.MediaTypeCategory == IorMediaTypeCategory.Xml || 
+                        lastResponseModel.ContentType.MediaTypeCategory == IorMediaTypeCategory.Application) && 
                         lastResponseModel.ContentBytes != null && 
                         lastResponseModel.ContentBytes.Length > 0) {
                         var fullFileName = lastResponseModel.TemporaryFile;
@@ -177,11 +179,11 @@ namespace Swensen.Ior.Forms
                         HtmlDocument doc = wbResponseBody.Document.OpenNew(true);
 
                         switch (lastResponseModel.ContentType.MediaTypeCategory) {
-                            case HttpMediaTypeCategory.Html:
+                            case IorMediaTypeCategory.Html:
                                 doc.Write(lastResponseModel.Content);
                                 break;
                             default:
-                                doc.Write(String.Format("<html><body><pre>{0}</pre></body></html>", RestSharp.Extensions.StringExtensions.HtmlEncode(lastResponseModel.PrettyPrintedContent)));
+                                doc.Write(String.Format("<html><body><pre>{0}</pre></body></html>", System.Net.WebUtility.HtmlEncode(lastResponseModel.PrettyPrintedContent)));
                                 break;
                         }
                     }
@@ -196,7 +198,7 @@ namespace Swensen.Ior.Forms
             var checkedHttpMethod = rbGrpHttpMethods.Where(x => x.Checked).First();
             return new RequestViewModel() {
                 Url = txtRequestUrl.Text,
-                Method = (Method)checkedHttpMethod.Tag,
+                Method = (HttpMethod)checkedHttpMethod.Tag,
                 Headers = txtRequestHeaders.Lines.ToArray(),
                 Body = txtRequestBody.Text
             };
@@ -204,7 +206,7 @@ namespace Swensen.Ior.Forms
 
         private void cancelAsyncRequest() {
             if (requestAsyncHandle != null) {
-                requestAsyncHandle.Abort();
+                requestAsyncHandle.Cancel();
                 requestAsyncHandle = null;
                 bind(ResponseModel.Empty);
             }
@@ -226,7 +228,7 @@ namespace Swensen.Ior.Forms
                 bind(ResponseModel.Loading);
                 grpResponse.Update();
 
-                var client = new HttpClient(Settings.Default.DefaultRequestContentType, Settings.Default.ProxyServer);
+                var client = new IorClient(Settings.Default.DefaultRequestContentType, Settings.Default.ProxyServer);
                 this.requestAsyncHandle = client.ExecuteAsync(requestModel, responseModel => {
                     this.Invoke((MethodInvoker) delegate {
                         this.requestAsyncHandle = null;
@@ -281,7 +283,7 @@ namespace Swensen.Ior.Forms
             txtRequestUrl.Text = requestVm.Url;
             
             var method = requestVm.Method;
-            rbGrpHttpMethods.First(x => ((Method) x.Tag) == method).Checked = true;
+            rbGrpHttpMethods.First(x => ((HttpMethod) x.Tag) == method).Checked = true;
 
             txtRequestHeaders.Lines = (requestVm.Headers ?? new string[0]).ToArray();
             txtRequestBody.Text = requestVm.Body;
@@ -520,21 +522,21 @@ namespace Swensen.Ior.Forms
         private void initTxtRequestBody() {
             var cm = txtRequestBody.ContextMenu;
             cm.MenuItems.Add("-");
-            Action<TextBox, HttpMediaTypeCategory> format = (tb, hmtc) => {
+            Action<TextBox, IorMediaTypeCategory> format = (tb, hmtc) => {
                 if (tb.SelectionLength > 0)
-                    tb.SelectedText = HttpContentType.GetPrettyPrintedContent(hmtc, tb.SelectedText);
+                    tb.SelectedText = IorContentType.GetPrettyPrintedContent(hmtc, tb.SelectedText);
                 else
-                    tb.Text = HttpContentType.GetPrettyPrintedContent(hmtc, tb.Text);
+                    tb.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Text);
             };
 
             {
-                var miFx = new MenuItem("Format XML", (s, ea) => format(txtRequestBody, HttpMediaTypeCategory.Xml));
+                var miFx = new MenuItem("Format XML", (s, ea) => format(txtRequestBody, IorMediaTypeCategory.Xml));
                 miFx.Shortcut = Shortcut.CtrlShiftX;
                 miFx.ShowShortcut = true;
                 cm.MenuItems.Add(miFx);
             } 
             {
-                var miFj = new MenuItem("Format JSON", (s, ea) => format(txtRequestBody, HttpMediaTypeCategory.Json));
+                var miFj = new MenuItem("Format JSON", (s, ea) => format(txtRequestBody, IorMediaTypeCategory.Json));
                 miFj.Shortcut = Shortcut.CtrlShiftJ;
                 miFj.ShowShortcut = true;
                 cm.MenuItems.Add(miFj);
