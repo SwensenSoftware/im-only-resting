@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Swensen.Utils;
@@ -52,10 +53,12 @@ namespace Swensen.Ior.Core {
             readContentStringTask.Wait();
             this.Content = readContentStringTask.Result;
 
-            var contentType = response.Headers.FirstOrDefault(x => x.Key.ToUpper() == "CONTENT-TYPE").Value.Coalesce().Join(", ");
-            this.ContentType = new IorContentType(contentType);
+            var headers = response.Headers.Concat(response.Content.Headers);
 
-            this.Headers = response.Headers.Select(p => p.Key + ": " + p.Value.Coalesce().Join(", ")).Join(Environment.NewLine);
+            this.Headers = headers.Select(p => p.Key + ": " + p.Value.Coalesce().Join(", ")).Join(Environment.NewLine);
+
+            var contentType = headers.FirstOrDefault(x => x.Key.ToUpper() == "CONTENT-TYPE").Value.Coalesce().Join(", ");
+            this.ContentType = new IorContentType(contentType);
 
             //todo: either get rid of this (left over from RestSharp), or make some good use of it (i.e. exception messages).
             this.ErrorMessage = null;// response.ErrorMessage;
