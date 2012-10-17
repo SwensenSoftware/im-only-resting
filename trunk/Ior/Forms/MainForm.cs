@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Net.Http;
-using System.Xml.Linq;
 using System.IO;
 using Swensen.Utils;
 using Swensen.Ior.Core;
@@ -23,7 +17,7 @@ namespace Swensen.Ior.Forms
 {
     public partial class MainForm : Form
     {
-        private static Logger log = LogManager.GetCurrentClassLogger();
+        private static readonly Logger log = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// We dynamically create and add a webbrowser object each time due to quirky behavior otherwise (only works first Navigate in some cases).

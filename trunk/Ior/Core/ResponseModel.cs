@@ -14,14 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Net.Http;
-using System.Net;
-using System.Xml.Linq;
-using Newtonsoft.Json;
-using TidyManaged;
+using Swensen.Utils;
 
 namespace Swensen.Ior.Core {
     public class ResponseModel {
@@ -43,17 +38,11 @@ namespace Swensen.Ior.Core {
             if (response == null)
                 throw new ArgumentNullException("response");
 
-                                 
-            //response.ReasonPhrase
-            //response.StatusCode
-
             this.Status = string.Format("{0} {1}", (int)response.StatusCode, response.ReasonPhrase);
 
-            if (start != null && end != null) {
-                Start = start;
-                End = end;
-                ElapsedTime = (end - start).Milliseconds + " ms";
-            }
+            Start = start;
+            End = end;
+            ElapsedTime = (end - start).Milliseconds + " ms";
 
             var readContentBytesTask = response.Content.ReadAsByteArrayAsync();
             readContentBytesTask.Wait();
@@ -63,11 +52,10 @@ namespace Swensen.Ior.Core {
             readContentStringTask.Wait();
             this.Content = readContentStringTask.Result;
 
-            //note: not sure why response headers is String -> IEnumerable<String> map instead of just String -> String
-            var contentType = response.Headers.FirstOrDefault(x => x.Key.ToUpper() == "CONTENT-TYPE").Value.FirstOrDefault();
+            var contentType = response.Headers.FirstOrDefault(x => x.Key.ToUpper() == "CONTENT-TYPE").Value.Coalesce().Join(", ");
             this.ContentType = new IorContentType(contentType);
 
-            this.Headers = String.Join(Environment.NewLine, response.Headers.Select(p => p.Key + ": " + p.Value.FirstOrDefault()));
+            this.Headers = response.Headers.Select(p => p.Key + ": " + p.Value.Coalesce().Join(", ")).Join(Environment.NewLine);
 
             //todo: either get rid of this (left over from RestSharp), or make some good use of it (i.e. exception messages).
             this.ErrorMessage = null;// response.ErrorMessage;

@@ -27,10 +27,15 @@ namespace Swensen.Ior.Core {
         public Uri Url { get; private set;}
         public HttpMethod Method { get; private set; }
         public Dictionary<string, string> Headers { get; private set; }
+        public IEnumerable<KeyValuePair<string, string>> NonContentTypeHeaders {
+            get {
+                return Headers.Where(x => x.Key.ToUpper() != "CONTENT-TYPE");
+            }
+        }
         public string Body { get; private set; }
 
         public static List<string> TryCreate(RequestViewModel vm, out RequestModel requestModel) {
-            List<string> validationErrors = new List<string>();
+            var validationErrors = new List<string>();
 
             Uri url = null;
             if(vm.Url.IsBlank())
