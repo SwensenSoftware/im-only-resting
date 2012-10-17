@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="FilePathFormatter.cs" />
     <Compile Include="HistoryList.cs" />
+    <Compile Include="IEnumerableUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringUtils.cs" />
   </ItemGroup>

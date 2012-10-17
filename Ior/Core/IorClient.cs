@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Net.Http;
 using System.Net;
 using Swensen.Utils;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Swensen.Ior.Core {
     /// <summary>
@@ -31,16 +27,20 @@ namespace Swensen.Ior.Core {
             }
 
             var client = new HttpClient(handler);
-            var request = new HttpRequestMessage();
+            var request = new HttpRequestMessage {
+                RequestUri = requestModel.Url, 
+                Method = requestModel.Method
+            };
 
-            request.RequestUri = requestModel.Url;
-            request.Method = requestModel.Method;
-
-            foreach (var header in requestModel.Headers)
+            foreach (var header in requestModel.NonContentTypeHeaders)
                 request.Headers.Add(header.Key, header.Value);
 
-            var content = new StringContent(requestModel.Body);
-            content.Headers.Add("Content-Type", requestModel.GetContentType(defaultRequestContentType));
+            if (requestModel.Method != HttpMethod.Get) {
+                var content = new StringContent(requestModel.Body);
+                content.Headers.Remove("Content-Type");
+                content.Headers.Add("Content-Type", requestModel.GetContentType(defaultRequestContentType));
+                request.Content = content;
+            }
 
             var start = DateTime.Now;
 
