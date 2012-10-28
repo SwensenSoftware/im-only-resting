@@ -223,15 +223,15 @@ namespace Swensen.Ior.Forms
                 grpResponse.Update();
 
                 var client = new IorClient(Settings.Default.DefaultRequestContentType, Settings.Default.ProxyServer);
-                this.requestAsyncHandle = client.ExecuteAsync(requestModel, responseModel => {
+                this.requestAsyncHandle = client.ExecuteAsync(requestModel, responseModel =>
                     this.Invoke((MethodInvoker) delegate {
                         this.requestAsyncHandle = null;
                         //bind the response view
                         bind(responseModel);
                         addRequestResponseSnapshot(requestVm, responseModel);                        
                         grpResponse.Update();
-                    });
-                });
+                    })
+                );
             }
         }
 
