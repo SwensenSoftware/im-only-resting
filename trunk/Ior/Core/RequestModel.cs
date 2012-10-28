@@ -15,8 +15,10 @@ limitations under the License.
 */
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Net;
 using System.Net.Http;
@@ -66,13 +68,13 @@ namespace Swensen.Ior.Core {
                         validationErrors.Add("Invalid header line (duplicate key): " + line);
                     else {
                         if (key.ToUpper() == "CONTENT-TYPE") { //or other content type headers? split out?
-                            //var hh = (HttpContentHeaders)Activator.CreateInstance(typeof(HttpContentHeaders), true);
-                            //try {
-                            //    hh.Add(key, value.Split(',').Select(x => x.Trim()));
+                            var hh = (HttpContentHeaders)Activator.CreateInstance(typeof(HttpContentHeaders), BindingFlags.Instance | System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.NonPublic, null, new[] { (object) (Func<long?>)(() => (long?) null) }, CultureInfo.CurrentCulture);
+                            try {
+                                hh.Add(key, value.Split(',').Select(x => x.Trim()));
                                 headers.Add(key, value);
-                            //} catch (Exception e) {
-                            //    validationErrors.Add(string.Format("Invalid header line ({0}): {1}", e.Message, line));
-                            //}
+                            } catch (Exception e) {
+                                validationErrors.Add(string.Format("Invalid header line ({0}): {1}", e.Message, line));
+                            }
                         } else {
                             var hh = (HttpRequestHeaders)Activator.CreateInstance(typeof(HttpRequestHeaders), true);
                             try {
