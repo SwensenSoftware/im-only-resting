@@ -13,10 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using System.Net.Http;
 using System.IO;
 using System.Xml;
@@ -30,8 +27,7 @@ namespace Swensen.Ior.Core {
         public string Body { get; set; }
 
         public void Save(string fileName) {
-            var ws = new XmlWriterSettings();
-            ws.NewLineHandling = NewLineHandling.Entitize;
+            var ws = new XmlWriterSettings {NewLineHandling = NewLineHandling.Entitize};
 
             using (var file = File.Create(fileName))
             using (var writer = XmlWriter.Create(file, ws)) {
