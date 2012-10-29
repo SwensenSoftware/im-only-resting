@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Net.Http;
@@ -214,9 +215,16 @@ namespace Swensen.Ior.Forms
             //attempt to build the request model from the request view: if we fail, show an error messages, else continue and make the request.
             RequestModel requestModel = null;
             var validationErrors = RequestModel.TryCreate(requestVm, out requestModel);
-            if (validationErrors.Count > 0)
+            if (validationErrors.Count > 0) {
+                //add bullets if more than one
+                if (validationErrors.Count > 1) {
+                    var buffer = new byte[] { 149 };
+                    string bullet = Encoding.GetEncoding(1252).GetString(buffer);
+                    validationErrors = validationErrors.Select(x => bullet + " " + x).ToList();
+                }
+
                 showWarning("Request Validation Errors", String.Join(Environment.NewLine, validationErrors));
-            else {
+            } else {
                 cancelAsyncRequest();
                 //clear response view and show loading message status
                 bind(ResponseModel.Loading);
@@ -224,11 +232,11 @@ namespace Swensen.Ior.Forms
 
                 var client = new IorClient(Settings.Default.DefaultRequestContentType, Settings.Default.ProxyServer);
                 this.requestAsyncHandle = client.ExecuteAsync(requestModel, responseModel =>
-                    this.Invoke((MethodInvoker) delegate {
+                    this.Invoke((MethodInvoker)delegate {
                         this.requestAsyncHandle = null;
                         //bind the response view
                         bind(responseModel);
-                        addRequestResponseSnapshot(requestVm, responseModel);                        
+                        addRequestResponseSnapshot(requestVm, responseModel);
                         grpResponse.Update();
                     })
                 );
