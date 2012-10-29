@@ -63,7 +63,7 @@ namespace Swensen.Ior.Core {
                     if (key.IsBlank() || value.IsBlank())
                         validationErrors.Add("Invalid header line (key or value is blank): " + line);
                     else if (requestHeaders.ContainsKey(key) || contentHeaders.ContainsKey(key))
-                        validationErrors.Add("Invalid header line (duplicate key): " + line);
+                        validationErrors.Add("Invalid header line (duplicate key, comma-separate multiple values for one key): " + line);
                     else {
                         var values = value.Split(',').Select(x => x.Trim()).ToList().AsReadOnly();
                         //some ugliness to leverage system.net.http request and content header validation
