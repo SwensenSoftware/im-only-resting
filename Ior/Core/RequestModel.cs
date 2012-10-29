@@ -67,22 +67,22 @@ namespace Swensen.Ior.Core {
                     else if (headers.ContainsKey(key))
                         validationErrors.Add("Invalid header line (duplicate key): " + line);
                     else {
-                        if (key.ToUpper() == "CONTENT-TYPE") { //or other content type headers? split out?
-                            var hh = (HttpContentHeaders)Activator.CreateInstance(typeof(HttpContentHeaders), BindingFlags.Instance | System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.NonPublic, null, new[] { (object) (Func<long?>)(() => (long?) null) }, CultureInfo.CurrentCulture);
+                        var values = value.Split(',').Select(x => x.Trim()).ToList().AsReadOnly();
+                        //some ugliness to leverage system.net.http request and content header validation
+                        var hrh = (HttpRequestHeaders)Activator.CreateInstance(typeof(HttpRequestHeaders), true);
+                        try {
+                            hrh.Add(key, values);
+                            headers.Add(key, value);
+                        } catch (InvalidOperationException) { //i.e. header belongs in content headers
+                            var hch = (HttpContentHeaders)Activator.CreateInstance(typeof(HttpContentHeaders), BindingFlags.Instance | BindingFlags.CreateInstance | BindingFlags.NonPublic, null, new[] { (object)(Func<long?>)(() => (long?)null) }, CultureInfo.CurrentCulture);
                             try {
-                                hh.Add(key, value.Split(',').Select(x => x.Trim()));
+                                hch.Add(key, values);
                                 headers.Add(key, value);
                             } catch (Exception e) {
                                 validationErrors.Add(string.Format("Invalid header line ({0}): {1}", e.Message, line));
                             }
-                        } else {
-                            var hh = (HttpRequestHeaders)Activator.CreateInstance(typeof(HttpRequestHeaders), true);
-                            try {
-                                hh.Add(key, value.Split(',').Select(x => x.Trim()));
-                                headers.Add(key, value);
-                            } catch (Exception e) {
-                                validationErrors.Add(string.Format("Invalid header line ({0}): {1}", e.Message, line));
-                            }
+                        } catch (Exception e) {
+                            validationErrors.Add(string.Format("Invalid header line ({0}): {1}", e.Message, line));
                         }
                     }
                 }
