@@ -33,13 +33,25 @@ namespace Swensen.Ior.Core {
                 Method = requestModel.Method
             };
 
-            foreach (var header in requestModel.NonContentTypeHeaders)
+            foreach (var header in requestModel.RequestHeaders)
                 request.Headers.Add(header.Key, header.Value);
 
             if (requestModel.Method != HttpMethod.Get) {
                 var content = new StringContent(requestModel.Body);
+                foreach (var header in requestModel.ContentHeaders) {
+                    content.Headers.Remove(header.Key);
+                    if (header.Key.ToUpper() != "CONTENT-TYPE")
+                        request.Headers.Add(header.Key, header.Value);
+                }
+
+                //default content-type: http://mattryall.net/blog/2008/03/default-content-type
                 content.Headers.Remove("Content-Type");
-                content.Headers.Add("Content-Type", requestModel.GetContentType(defaultRequestContentType));
+                string ct;
+                requestModel.ContentHeaders.TryGetValue("Content-Type", out ct);
+                ct = ct.IsBlank() ? defaultRequestContentType : ct; //then try settings supplied
+                ct = ct.IsBlank() ? "application/octet-stream" : ct; // then try w3 spec default
+                content.Headers.Add("Content-Type", ct);
+                
                 request.Content = content;
             }
 
