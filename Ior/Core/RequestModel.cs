@@ -29,12 +29,9 @@ namespace Swensen.Ior.Core {
     public class RequestModel {
         public Uri Url { get; private set;}
         public HttpMethod Method { get; private set; }
-        public Dictionary<string, string> Headers { get; private set; }
-        public IEnumerable<KeyValuePair<string, string>> NonContentTypeHeaders {
-            get {
-                return Headers.Where(x => x.Key.ToUpper() != "CONTENT-TYPE");
-            }
-        }
+        public Dictionary<string, string> RequestHeaders { get; private set; }
+        public Dictionary<string, string> ContentHeaders { get; private set; }
+
         public string Body { get; private set; }
 
         public static List<string> TryCreate(RequestViewModel vm, out RequestModel requestModel) {
@@ -50,7 +47,8 @@ namespace Swensen.Ior.Core {
                     validationErrors.Add("Request URL is invalid");    
             }
 
-            var headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var requestHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var contentHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             foreach (var line in vm.Headers) {
                 if (line.IsBlank())
                     continue; //allow empty lines
@@ -64,20 +62,20 @@ namespace Swensen.Ior.Core {
                     var value = match.Groups[2].Value.Trim();
                     if (key.IsBlank() || value.IsBlank())
                         validationErrors.Add("Invalid header line (key or value is blank): " + line);
-                    else if (headers.ContainsKey(key))
+                    else if (requestHeaders.ContainsKey(key) || contentHeaders.ContainsKey(key))
                         validationErrors.Add("Invalid header line (duplicate key): " + line);
                     else {
                         var values = value.Split(',').Select(x => x.Trim()).ToList().AsReadOnly();
                         //some ugliness to leverage system.net.http request and content header validation
-                        var hrh = (HttpRequestHeaders)Activator.CreateInstance(typeof(HttpRequestHeaders), true);
+                        var hrhValidator = (HttpRequestHeaders)Activator.CreateInstance(typeof(HttpRequestHeaders), true);
                         try {
-                            hrh.Add(key, values);
-                            headers.Add(key, value);
+                            hrhValidator.Add(key, value);
+                            requestHeaders.Add(key, value);
                         } catch (InvalidOperationException) { //i.e. header belongs in content headers
-                            var hch = (HttpContentHeaders)Activator.CreateInstance(typeof(HttpContentHeaders), BindingFlags.Instance | BindingFlags.CreateInstance | BindingFlags.NonPublic, null, new[] { (object)(Func<long?>)(() => (long?)null) }, CultureInfo.CurrentCulture);
+                            var hchValidator = (HttpContentHeaders)Activator.CreateInstance(typeof(HttpContentHeaders), BindingFlags.Instance | BindingFlags.CreateInstance | BindingFlags.NonPublic, null, new[] { (object)(Func<long?>)(() => (long?)null) }, CultureInfo.CurrentCulture);
                             try {
-                                hch.Add(key, values);
-                                headers.Add(key, value);
+                                hchValidator.Add(key, value);
+                                contentHeaders.Add(key, value);
                             } catch (Exception e) {
                                 validationErrors.Add(string.Format("Invalid header line ({0}): {1}", e.Message, line));
                             }
@@ -94,20 +92,13 @@ namespace Swensen.Ior.Core {
                 requestModel = new RequestModel() {
                     Url = url,
                     Method = vm.Method,
-                    Headers = headers,
+                    RequestHeaders = requestHeaders,
+                    ContentHeaders = contentHeaders,
                     Body = vm.Body
                 };
             }
 
             return validationErrors;                
-        }
-
-        public String GetContentType(String defaultRequestContentType) {
-            //default content-type: http://mattryall.net/blog/2008/03/default-content-type
-            var ct = Headers.FirstOrDefault(header => header.Key.ToUpper() == "CONTENT-TYPE").Value; //first try user supplied
-            ct = ct.IsBlank() ? defaultRequestContentType : ct; //then try settings supplied
-            ct = ct.IsBlank() ? "application/octet-stream" : ct; // then try w3 spec default
-            return ct;
         }
     }
 }
