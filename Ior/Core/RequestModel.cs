@@ -53,7 +53,7 @@ namespace Swensen.Ior.Core {
                 if (line.IsBlank())
                     continue; //allow empty lines
 
-                var match = Regex.Match(line, @"^([^\:]+)\:(.+)$", RegexOptions.Compiled);
+                var match = Regex.Match(line, @"^([^\:]+)\:([^\:]+)$", RegexOptions.Compiled);
                 if (!match.Success)
                     validationErrors.Add("Invalid header line (format incorrect): " + line);
                 else {
@@ -65,7 +65,7 @@ namespace Swensen.Ior.Core {
                     else if (requestHeaders.ContainsKey(key) || contentHeaders.ContainsKey(key))
                         validationErrors.Add("Invalid header line (duplicate key, comma-separate multiple values for one key): " + line);
                     else {
-                        var values = value.Split(',').Select(x => x.Trim()).ToList().AsReadOnly();
+                        //var values = value.Split(',').Select(x => x.Trim()).ToList().AsReadOnly();
                         //some ugliness to leverage system.net.http request and content header validation
                         var hrhValidator = (HttpRequestHeaders)Activator.CreateInstance(typeof(HttpRequestHeaders), true);
                         try {
