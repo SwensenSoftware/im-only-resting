@@ -40,7 +40,7 @@ namespace Swensen.Ior.Core {
                 var content = new StringContent(requestModel.Body);
                 foreach (var header in requestModel.ContentHeaders) {
                     content.Headers.Remove(header.Key);
-                    if (header.Key.ToUpper() != "CONTENT-TYPE")
+                    if (!String.Equals(header.Key, "content-type", StringComparison.OrdinalIgnoreCase))
                         request.Headers.Add(header.Key, header.Value);
                 }
 

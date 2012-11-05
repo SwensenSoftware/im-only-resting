@@ -139,19 +139,5 @@ namespace Swensen.Ior.Core {
                     }
             }
         }
-
-        /// <summary>
-        /// Creates the temporary file with the given extension and returns its full path.
-        /// </summary>
-        /// <param name="contentBytes"></param>
-        /// <param name="extension"> </param>
-        /// <returns></returns>
-        public static string GetTemporaryFile(byte[] contentBytes, string extension) {
-            var path = Path.GetTempPath();
-            var fileName = Guid.NewGuid().ToString() + "." + extension;
-            var fullFileName = Path.Combine(path, fileName);
-            File.WriteAllBytes(fullFileName, contentBytes);
-            return fullFileName;
-        }
     }                                                                        
 }

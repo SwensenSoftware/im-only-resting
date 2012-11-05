@@ -57,7 +57,7 @@ namespace Swensen.Ior.Core {
 
             this.Headers = headers.Select(p => p.Key + ": " + p.Value.Coalesce().Join(", ")).Join(Environment.NewLine);
 
-            var contentType = headers.FirstOrDefault(x => x.Key.ToUpper() == "CONTENT-TYPE").Value.Coalesce().Join(", ");
+            var contentType = headers.FirstOrDefault(x => String.Equals(x.Key, "content-type", StringComparison.OrdinalIgnoreCase)).Value.Coalesce().Join(", ");
             this.ContentType = new IorContentType(contentType);
 
             //todo: either get rid of this (left over from RestSharp), or make some good use of it (i.e. exception messages).
@@ -69,7 +69,7 @@ namespace Swensen.Ior.Core {
         private void initLazyFields() {
             this.prettyPrintedContent = new Lazy<string>(() => IorContentType.GetPrettyPrintedContent(this.ContentType.MediaTypeCategory, this.Content));
             this.contentFileExtension = new Lazy<string>(() => IorContentType.GetFileExtension(this.ContentType.MediaTypeCategory, this.ContentType.MediaType));
-            this.temporaryFile = new Lazy<string>(() => IorContentType.GetTemporaryFile(this.ContentBytes, this.ContentFileExtension));
+            this.temporaryFile = new Lazy<string>(() => FileUtils.CreateTempFile(this.ContentBytes, this.ContentFileExtension));
         }
 
         public string ErrorMessage { get; private set; }

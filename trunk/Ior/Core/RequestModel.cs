@@ -91,7 +91,7 @@ namespace Swensen.Ior.Core {
             else {
                 requestModel = new RequestModel() {
                     Url = url,
-                    Method = vm.Method,
+                    Method = new HttpMethod(vm.Method),
                     RequestHeaders = requestHeaders,
                     ContentHeaders = contentHeaders,
                     Body = vm.Body

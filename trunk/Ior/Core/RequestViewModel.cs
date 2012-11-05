@@ -22,7 +22,7 @@ using System.Xml.Serialization;
 namespace Swensen.Ior.Core {
     public class RequestViewModel {
         public string Url { get; set; }
-        public HttpMethod Method { get; set; }
+        public string Method { get; set; }
         public string[] Headers { get; set; }
         public string Body { get; set; }
 
@@ -36,10 +36,9 @@ namespace Swensen.Ior.Core {
             }
         }
 
-        public static RequestViewModel Open(string fileName) {
-            var rs = new XmlReaderSettings();
-            rs.IgnoreWhitespace = false;
-            
+        public static RequestViewModel Load(string fileName) {
+            var rs = new XmlReaderSettings {IgnoreWhitespace = false};
+
             using (var file = File.Open(fileName, FileMode.Open))
             using (var reader = XmlReader.Create(file, rs)) {
                 var serializer = new XmlSerializer(typeof(RequestViewModel));
