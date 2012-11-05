@@ -193,7 +193,7 @@ namespace Swensen.Ior.Forms
             var checkedHttpMethod = rbGrpHttpMethods.First(x => x.Checked);
             return new RequestViewModel() {
                 Url = txtRequestUrl.Text,
-                Method = (HttpMethod)checkedHttpMethod.Tag,
+                Method = ((HttpMethod)checkedHttpMethod.Tag).Method,
                 Headers = txtRequestHeaders.Lines.ToArray(),
                 Body = txtRequestBody.Text
             };
@@ -284,7 +284,7 @@ namespace Swensen.Ior.Forms
             txtRequestUrl.Text = requestVm.Url;
             
             var method = requestVm.Method;
-            rbGrpHttpMethods.First(x => ((HttpMethod) x.Tag) == method).Checked = true;
+            rbGrpHttpMethods.First(x => ((HttpMethod) x.Tag).Method == method).Checked = true;
 
             txtRequestHeaders.Lines = (requestVm.Headers ?? new string[0]).ToArray();
             txtRequestBody.Text = requestVm.Body;
@@ -358,7 +358,7 @@ namespace Swensen.Ior.Forms
         private void openRequestFile(string fileName) {
             RequestViewModel requestVm;
             try {
-                requestVm = RequestViewModel.Open(fileName);
+                requestVm = RequestViewModel.Load(fileName);
             } catch {
                 showWarning("File Open Error", "Error opening request file");
                 return;
