@@ -190,7 +190,7 @@ namespace Swensen.Ior.Forms
 
         private RequestViewModel buildRequestViewModel() {
             //build the request view
-            var checkedHttpMethod = rbGrpHttpMethods.Where(x => x.Checked).First();
+            var checkedHttpMethod = rbGrpHttpMethods.First(x => x.Checked);
             return new RequestViewModel() {
                 Url = txtRequestUrl.Text,
                 Method = (HttpMethod)checkedHttpMethod.Tag,
@@ -216,6 +216,7 @@ namespace Swensen.Ior.Forms
             RequestModel requestModel = null;
             var validationErrors = RequestModel.TryCreate(requestVm, out requestModel);
             if (validationErrors.Count > 0) {
+                //todo: move this to common dialog functionality
                 //add bullets if more than one
                 if (validationErrors.Count > 1) {
                     var buffer = new byte[] { 149 };
@@ -259,9 +260,7 @@ namespace Swensen.Ior.Forms
                     var mi = snapshotsToolStripMenuItem.DropDownItems.Add(snapshot.request.Url.ToString());
                     mi.ToolTipText = snapshot.response.Start.ToString() + " - Status: " + snapshot.response.Status;
                     var freshSnapshotPointer = snapshot; //otherwise the closure captures the single snapshot pointer, which always ends up being the last item
-                    mi.Click += (sender, e) => {
-                        bind(freshSnapshotPointer);
-                    };
+                    mi.Click += (sender, e) => bind(freshSnapshotPointer);
                 }
             } else {
                 snapshotsToolStripMenuItem.Enabled = false;
