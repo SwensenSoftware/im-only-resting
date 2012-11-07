@@ -45,5 +45,18 @@ namespace Tests.IorTests {
             IorContentType.GetMediaTypeCategory("application/octet-stream").Should().Be(IorMediaTypeCategory.Other);
         }
 
+        [Test]
+        public void get_file_ext() {
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Xml, "text/xml").Should().Be("xml");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Html, "text/html").Should().Be("html");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Json, "text/json").Should().Be("json");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Text, "text/plain").Should().Be("txt");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Application, "image/jpg").Should().Be("jpg");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "text/csv").Should().Be("csv");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "text/css").Should().Be("css");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "application/javascript").Should().Be("js");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "application/python").Should().Be("");
+        }
+
     }
 }
