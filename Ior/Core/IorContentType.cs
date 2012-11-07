@@ -82,7 +82,7 @@ namespace Swensen.Ior.Core {
                         }
                     case IorMediaTypeCategory.Html: {
                             //need to convert to utf16-little endian stream and set Document input/output encoding since Document.FromString screws up encoding.
-                            var stream = new System.IO.MemoryStream(Encoding.Unicode.GetBytes(content));
+                            var stream = new MemoryStream(Encoding.Unicode.GetBytes(content));
                             using (var doc = Document.FromStream(stream)) {
                                 doc.InputCharacterEncoding = EncodingType.Utf16LittleEndian;
                                 doc.OutputCharacterEncoding = EncodingType.Utf16LittleEndian;

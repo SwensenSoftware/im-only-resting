@@ -157,7 +157,7 @@
   <ItemGroup>
     <Content Include="..\lib\libtidy.dll">
       <Link>libtidy.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
