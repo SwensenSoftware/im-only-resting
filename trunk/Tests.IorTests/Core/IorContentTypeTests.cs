@@ -58,5 +58,54 @@ namespace Tests.IorTests {
             IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "application/python").Should().Be("");
         }
 
+        [Test]
+        public void pretty_print_xml_no_doctype() {
+            var input = "<root><hello>world</hello></root>";
+            var output = IorContentType.GetPrettyPrintedContent(IorMediaTypeCategory.Xml, input);
+            output.Should().Be("<root>\r\n  <hello>world</hello>\r\n</root>");
+        }
+
+        [Test]
+        public void pretty_print_xml_with_doctype() {
+            var input = "<?xml version=\"1.0\"?><root><hello>world</hello></root>";
+            var output = IorContentType.GetPrettyPrintedContent(IorMediaTypeCategory.Xml, input);
+            output.Should().Be("<?xml version=\"1.0\"?>\r\n<root>\r\n  <hello>world</hello>\r\n</root>");
+        }
+
+        [Test]
+        public void pretty_print_xml_malformed_forgives() {
+            var input = "<root><hello>world</h></root>";
+            var output = IorContentType.GetPrettyPrintedContent(IorMediaTypeCategory.Xml, input);
+            output.Should().Be(input);
+        }
+
+        [Test]
+        public void pretty_print_json() {
+            var input = "{ x: 23 }";
+            var output = IorContentType.GetPrettyPrintedContent(IorMediaTypeCategory.Json, input);
+            output.Should().Be("{\r\n  \"x\": 23\r\n}");
+        }
+
+        [Test]
+        public void pretty_print_json_malformed_forgives() {
+            var input = "{ x: 23 + 3 }";
+            var output = IorContentType.GetPrettyPrintedContent(IorMediaTypeCategory.Json, input);
+            output.Should().Be(input);
+        }
+
+        [Test]
+        public void pretty_print_html() {
+            var input = "<html><body>hello world</body></html>";
+            var output = IorContentType.GetPrettyPrintedContent(IorMediaTypeCategory.Html, input);
+            output.Should().Be("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">\r\n<html>\r\n    <head>\r\n        <title>\r\n        </title>\r\n    </head>\r\n    <body>\r\n        hello world\r\n    </body>\r\n</html>\r\n");
+        }
+
+        [Test]
+        public void pretty_print_other() {
+            var input = "hello world";
+            var output = IorContentType.GetPrettyPrintedContent(IorMediaTypeCategory.Text, input);
+            output.Should().Be(input);
+        }
+
     }
 }
