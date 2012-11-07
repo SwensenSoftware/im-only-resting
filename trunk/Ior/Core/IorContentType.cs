@@ -32,7 +32,7 @@ namespace Swensen.Ior.Core {
 
         public IorContentType(string contentType) {
             try {
-                contentType = contentType.Split(',')[0]; //though illegal, we've since comma separated content-types
+                contentType = contentType.Split(',')[0]; //though illegal, we've seen comma separated content-types in the wild
                 this.ct = new ContentType(contentType);
             } catch {
                 this.ct = new ContentType("application/octet-stream");
