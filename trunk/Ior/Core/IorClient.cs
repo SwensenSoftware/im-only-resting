@@ -1,7 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Net.Mime;
+using System.Text;
+using NLog;
 using Swensen.Utils;
 using System.Threading;
 
@@ -10,6 +14,8 @@ namespace Swensen.Ior.Core {
     /// A light wrapper around our underlying http client.
     /// </summary>
     public class IorClient {
+        private static readonly Logger log = LogManager.GetCurrentClassLogger();
+
         private readonly string defaultRequestContentType;
         private readonly string proxyServer;
 
@@ -37,21 +43,38 @@ namespace Swensen.Ior.Core {
                 request.Headers.Add(header.Key, header.Value);
 
             if (requestModel.Method != HttpMethod.Get) {
-                var content = new StringContent(requestModel.Body);
-                foreach (var header in requestModel.ContentHeaders) {
-                    content.Headers.Remove(header.Key);
-                    if (!String.Equals(header.Key, "content-type", StringComparison.OrdinalIgnoreCase))
-                        request.Headers.Add(header.Key, header.Value);
+                //default content-type: http://mattryall.net/blog/2008/03/default-content-type
+                string textCt;
+                requestModel.ContentHeaders.TryGetValue("Content-Type", out textCt);
+                textCt = textCt.IsBlank() ? defaultRequestContentType : textCt; //then try settings supplied
+                textCt = textCt.IsBlank() ? "application/octet-stream" : textCt; // then try w3 spec default
+
+                //get encoding
+                var ct = new ContentType(textCt);
+                var encoding = Encoding.GetEncoding("ISO-8859-1"); //w3 default
+                try {
+                    //todo: move to validation and have no fallback if INVALID charset is given
+                    encoding = Encoding.GetEncoding(ct.CharSet);
+                } catch {
+                    log.Warn("charset={0} not supported, falling back on {0}", ct.CharSet, encoding.WebName);
                 }
 
-                //default content-type: http://mattryall.net/blog/2008/03/default-content-type
-                content.Headers.Remove("Content-Type");
-                string ct;
-                requestModel.ContentHeaders.TryGetValue("Content-Type", out ct);
-                ct = ct.IsBlank() ? defaultRequestContentType : ct; //then try settings supplied
-                ct = ct.IsBlank() ? "application/octet-stream" : ct; // then try w3 spec default
-                content.Headers.Add("Content-Type", ct);
+                //write content w/ BOM
+                var memStream = new MemoryStream();
+                var bom = encoding.GetPreamble();
+                memStream.Write(bom, 0, bom.Length);
+                var contentBytes = encoding.GetBytes(requestModel.Body);
+                memStream.Write(contentBytes, 0, contentBytes.Length);
+                var content = new ByteArrayContent(memStream.ToArray());
                 
+                foreach (var header in requestModel.ContentHeaders) {
+                    content.Headers.Remove(header.Key); //remove defaults
+                    if (String.Equals(header.Key, "content-type", StringComparison.OrdinalIgnoreCase))
+                        content.Headers.Add(header.Key, textCt);
+                    else
+                        content.Headers.Add(header.Key, header.Value);
+                }
+
                 request.Content = content;
             }
 
