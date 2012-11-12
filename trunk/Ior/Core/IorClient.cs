@@ -59,17 +59,14 @@ namespace Swensen.Ior.Core {
                     log.Warn("charset={0} not supported, falling back on {0}", ct.CharSet, encoding.WebName);
                 }
 
-                //write content w/ BOM
-                var memStream = new MemoryStream();
-                var bom = encoding.GetPreamble();
-                memStream.Write(bom, 0, bom.Length);
-                var contentBytes = encoding.GetBytes(requestModel.Body);
-                memStream.Write(contentBytes, 0, contentBytes.Length);
-                var content = new ByteArrayContent(memStream.ToArray());
+                //write content w/ BOM  if needed
+
+                var contentBytes = GetEncodedBytes(requestModel.Body, encoding, ct.CharSet, false);
+                var content = new ByteArrayContent(contentBytes);
                 
                 foreach (var header in requestModel.ContentHeaders) {
                     content.Headers.Remove(header.Key); //remove defaults
-                    if (String.Equals(header.Key, "content-type", StringComparison.OrdinalIgnoreCase))
+                    if (String.Equals(header.Key, "content-type", StringComparison.OrdinalIgnoreCase)) //treat special w/ defaults, etc.
                         content.Headers.Add(header.Key, textCt);
                     else
                         content.Headers.Add(header.Key, header.Value);
@@ -93,5 +90,20 @@ namespace Swensen.Ior.Core {
             return ctokenSource;
         }
 
+        
+        //see for when to use a BOM ("preamble") http://www.w3.org/International/questions/qa-byte-order-mark
+        //and http://www.w3.org/TR/2010/WD-html-polyglot-20100624/#character-encoding
+        private static byte[] GetEncodedBytes(string content, Encoding encoding, string charset, bool includeUtf8Bom) {
+            //write content w/ BOM
+            var memStream = new MemoryStream();
+            var charsetUpper = charset.ToUpperInvariant(); //n.b. we use charset passedi n instead of encoding.WebName because e.g. UTF-16LE shows as UTF-16
+            if (!charsetUpper.ToUpperInvariant().EndsWith("LE") && !charsetUpper.EndsWith("BE") && !(charsetUpper == "UTF-8" && !includeUtf8Bom)) {
+                var bom = encoding.GetPreamble();
+                memStream.Write(bom, 0, bom.Length);
+            }
+            var contentBytes = encoding.GetBytes(content);
+            memStream.Write(contentBytes, 0, contentBytes.Length);
+            return memStream.ToArray();
+        }
     }
 }
