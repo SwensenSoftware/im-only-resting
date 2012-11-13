@@ -51,17 +51,8 @@ namespace Swensen.Ior.Core {
 
                 //get encoding
                 var ct = new ContentType(textCt);
-                var encoding = Encoding.GetEncoding("ISO-8859-1"); //w3 default
-                try {
-                    //todo: move to validation and have no fallback if INVALID charset is given
-                    encoding = Encoding.GetEncoding(ct.CharSet);
-                } catch {
-                    log.Warn("charset={0} not supported, falling back on {0}", ct.CharSet, encoding.WebName);
-                }
-
                 //write content w/ BOM  if needed
-
-                var contentBytes = GetEncodedBytes(requestModel.Body, encoding, ct.CharSet, false);
+                var contentBytes = GetEncodedBytes(requestModel.Body, ct.CharSet, false);
                 var content = new ByteArrayContent(contentBytes);
                 
                 foreach (var header in requestModel.ContentHeaders) {
@@ -90,17 +81,44 @@ namespace Swensen.Ior.Core {
             return ctokenSource;
         }
 
-        
+
+        //todo can we make this async and cancellable? (since could take a long time)
         //see for when to use a BOM ("preamble") http://www.w3.org/International/questions/qa-byte-order-mark
         //and http://www.w3.org/TR/2010/WD-html-polyglot-20100624/#character-encoding
-        private static byte[] GetEncodedBytes(string content, Encoding encoding, string charset, bool includeUtf8Bom) {
-            //write content w/ BOM
-            var memStream = new MemoryStream();
-            var charsetUpper = charset.ToUpperInvariant(); //n.b. we use charset passedi n instead of encoding.WebName because e.g. UTF-16LE shows as UTF-16
-            if (!charsetUpper.ToUpperInvariant().EndsWith("LE") && !charsetUpper.EndsWith("BE") && !(charsetUpper == "UTF-8" && !includeUtf8Bom)) {
-                var bom = encoding.GetPreamble();
-                memStream.Write(bom, 0, bom.Length);
+        //and http://www.w3.org/TR/html4/charset
+        public static byte[] GetEncodedBytes(string content, string charset, bool includeUtf8Bom) {
+            //n.b. .NET default utf-16 and utf-32 to utf-16le and utf-32le, but we want to default to be, per the spec
+            var charsetUpper = charset.ToUpperInvariant();
+            //n.b. 1. do not use bom if le or be is indicated, 2. do use bom if not indicated for utf-16 and utf-32, as be. 3. utf-8 bom is optional, use if user preference.
+            var bom = new byte[] {};
+            var encoding = Encoding.GetEncoding("ISO-8859-1"); //w3 default
+            try {
+                switch (charsetUpper) {
+                    case "UTF-8":
+                        encoding = Encoding.GetEncoding("UTF-8");
+                        if (includeUtf8Bom)
+                            bom = encoding.GetPreamble();
+                        break;
+                    case "UTF-16":
+                        encoding = Encoding.GetEncoding("UTF-16BE");
+                        bom = encoding.GetPreamble();
+                        break;
+                    case "UTF-32":
+                        encoding = Encoding.GetEncoding("UTF-32BE");
+                        bom = encoding.GetPreamble();
+                        break;
+                    default:
+                        //todo: move to validation and have no fallback if INVALID charset is given
+                        encoding = Encoding.GetEncoding(charset);
+                        //as of this writing, we don't believe boms should be emitted for any other encoding types.
+                        break;
+                }
+            } catch {
+                log.Warn("charset={0} not supported, falling back on {0}", charset, encoding.WebName);
             }
+
+            var memStream = new MemoryStream();
+            memStream.Write(bom, 0, bom.Length);
             var contentBytes = encoding.GetBytes(content);
             memStream.Write(contentBytes, 0, contentBytes.Length);
             return memStream.ToArray();
