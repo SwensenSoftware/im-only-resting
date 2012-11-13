@@ -89,6 +89,14 @@ namespace Swensen.Ior.Core {
         }
 
         [Category("Request")]
+        [DisplayName("Encode UTF-8 content with BOM")]
+        [Description("Indicates whether or not UTF-8 content should be encoded with the optional BOM.")]
+        public bool IncludeBomInUtf8RequestContent {
+            get { return settings.IncludeBomInUtf8RequestContent; }
+            set { settings.IncludeBomInUtf8RequestContent = value; }
+        }
+
+        [Category("Request")]
         [DisplayName("Proxy Server")]
         [Description("Proxy server used by requests. If blank, no proxy server is used.")]
         public string ProxyServer {
