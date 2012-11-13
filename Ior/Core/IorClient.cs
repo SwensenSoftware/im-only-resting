@@ -18,10 +18,12 @@ namespace Swensen.Ior.Core {
 
         private readonly string defaultRequestContentType;
         private readonly string proxyServer;
+        private readonly bool includeUtf8Bom;
 
-        public IorClient(string defaultRequestContentType, string proxyServer) {
+        public IorClient(string defaultRequestContentType, string proxyServer, bool includeUtf8Bom) {
             this.defaultRequestContentType = defaultRequestContentType;
             this.proxyServer = proxyServer;
+            this.includeUtf8Bom = includeUtf8Bom;
         }
 
         public CancellationTokenSource ExecuteAsync(RequestModel requestModel, Action<ResponseModel> callback) {
@@ -52,7 +54,7 @@ namespace Swensen.Ior.Core {
                 //get encoding
                 var ct = new ContentType(textCt);
                 //write content w/ BOM  if needed
-                var contentBytes = GetEncodedBytes(requestModel.Body, ct.CharSet, false);
+                var contentBytes = GetEncodedBytes(requestModel.Body, ct.CharSet, includeUtf8Bom);
                 var content = new ByteArrayContent(contentBytes);
                 
                 foreach (var header in requestModel.ContentHeaders) {
@@ -88,7 +90,7 @@ namespace Swensen.Ior.Core {
         //and http://www.w3.org/TR/html4/charset
         public static byte[] GetEncodedBytes(string content, string charset, bool includeUtf8Bom) {
             //n.b. .NET default utf-16 and utf-32 to utf-16le and utf-32le, but we want to default to be, per the spec
-            var charsetUpper = charset.ToUpperInvariant();
+            var charsetUpper = (charset ?? "").ToUpperInvariant();
             //n.b. 1. do not use bom if le or be is indicated, 2. do use bom if not indicated for utf-16 and utf-32, as be. 3. utf-8 bom is optional, use if user preference.
             var bom = new byte[] {};
             var encoding = Encoding.GetEncoding("ISO-8859-1"); //w3 default

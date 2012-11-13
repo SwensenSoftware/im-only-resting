@@ -38,5 +38,8 @@
     <Setting Name="MaxSnapshots" Type="System.UInt16" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
+    <Setting Name="IncludeBomInUtf8RequestContent" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
