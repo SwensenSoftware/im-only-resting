@@ -23,7 +23,7 @@ The Method panel allows the selection of the request HTTP method.
 
 === Headers ===
 
-The Headers text box allows the entry of request headers. A header is formatted as `<header name>: <header value>`. Multiple headers are specified by line separation. The same header may not be specified more than once (if the header has multiple values, that may indicated by a comma-separator. For example:
+The Headers text box allows the entry of request headers. A header is formatted as `<header name>: <header value>`. Multiple headers are specified by line separation. The same header may not be specified more than once (multiple header values should be indicated by a comma-separator on the same header line). For example:
 
 {{{
 accept: text/xml, text/html
