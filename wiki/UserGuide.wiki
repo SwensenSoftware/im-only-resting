@@ -58,6 +58,10 @@ The Body tab displays the response content. The Output panel provides options fo
     * HTML pretty-printing provided by [http://tidy.sourceforge.net/ HTML Tidy]
   * Rendered - content is rendered in an embedded IE browser instance. XML, HTML, and images are rendered using IE's rendering engine. JSON is rendered using JSON.NET pretty-printing embedded in an html pre tag. Other types of plain text are embedded in an html pre tag. IE's search feature is enabled.
 
+=== Headers ===
+
+The headers tab displays all of the response headers.
+
 = Settings =
 
 The `Settings` command displays a dialog box used for setting various configurable options of I'm Only Resting. It is a traditional Windows PropertyGrid which includes explanations for each setting when selected. Validation ensures that no invalid settings are set. Pressing the `Cancel` button exits the dialog without saving. Pressing the `Save` button saves the settings and applies them immediately if possible.
