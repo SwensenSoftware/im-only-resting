@@ -51,14 +51,12 @@ The Time label shows the length of time it took between submitting the request a
 === Body ===
 
 The Body tab displays the response content. The Output panel provides options for displaying the content:
-  * Raw - display the content as raw text
-  * Pretty - display the content as pretty text
-  ** XML - use .NET
-  ** JSON - use JSON.NET
-  ** HTML - use TidyHTML
-  * Rendered - displays the content rendered in an embedded instance of Internet Explorer.
-
- 
+  * Raw - content is displayed as plain text honoring the content-type charset
+    * Pretty - content is displayed as plain text honoring the content-type charset and additionally performs pretty-printing on XML, JSON, and HTML content-types.
+      * XML pretty-printing provided by the [http://msdn.microsoft.com/en-us/library/system.xml.linq.xdocument(v=vs.100).aspx .NET `XDocument` type]
+      * JSON pretty-printing provided by [http://json.codeplex.com/ Json.NET]
+      * HTML pretty-printing provided by [http://tidy.sourceforge.net/ HTML Tidy]
+    * Rendered - content is rendered in an embedded IE browser instance. XML, HTML, and images are rendered using IE's rendering engine. JSON is rendered using JSON.NET pretty-printing embedded in an html pre tag. Other types of plain text are embedded in an html pre tag. IE's search feature is enabled.
 
 = Settings =
 
