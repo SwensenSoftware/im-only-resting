@@ -9,4 +9,16 @@ I'm Only Resting is a feature-rich WinForms-based HTTP client.
 
 The character encoding used for content is determined by the content-type header's charset parameter. e.g. `content-type: text/plain; charset=utf-16le` indicates that the content should be encoded as utf-16 little endian with no bom.
 
-Encoding rules are driven by the following w3 resources: http://www.w3.org/International/questions/qa-byte-order-mark, http://www.w3.org/TR/2010/WD-html-polyglot-20100624/#character-encoding, and http://www.w3.org/TR/html4/charset.
+Encoding rules are driven by the following w3 resources: http://www.w3.org/International/questions/qa-byte-order-mark, http://www.w3.org/TR/2010/WD-html-polyglot-20100624/#character-encoding, and http://www.w3.org/TR/html4/charset. 
+
+We enumerate the rules here:
+  * if no charset is given, the default is ISO-8859-1 (ascii compatible 8-bit encoding)
+  * utf-8 - encodes the content as utf-8 with the optional BOM included if and only if the the "Encode UTF-8 content with BOM" setting is set to `true`
+  * utf-16 - encodes the content as utf-16 big endian with the BOM included
+  * utf-16be - encodes the content as utf-16 big endian with no BOM included
+  * utf-16le - encodes the content as utf-16 little endian with no BOM included
+  * utf-32 - encodes the content as utf-32 big endian with the BOM included
+  * utf-32be - encodes the content as utf-32 big endian with no BOM included
+  * utf-32le - encodes the content as utf-32 little endian with no BOM included
+  * other supported encodings do not include a BOM.
+  
