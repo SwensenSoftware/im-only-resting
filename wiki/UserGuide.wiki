@@ -26,9 +26,13 @@ The Method panel allows the selection of the request HTTP method.
 The Headers text box allows the entry of request headers. A header is formatted as `<header name>: <header value>`. Multiple headers are specified by line separation. The same header may not be specified more than once (if the header has multiple values, that may indicated by a comma-separator. For example:
 
 {{{
-    accept: text/xml, text/html
-    content-type: text/plain; charset=utf-8
+accept: text/xml, text/html
+content-type: text/plain; charset=utf-8
 }}}
+
+=== Body ===
+
+The HTTP content may be entered in the Body text box. The text box context-menu contains commands for formatting the content as XML (provided by .NET) or JSON (provided by JSON.NET), if possible (if the content is not well-formed, then no action is executed, but no error occurs either).
 
 === Buttons ===
 
