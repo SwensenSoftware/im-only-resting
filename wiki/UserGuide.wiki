@@ -13,7 +13,28 @@ The user interface consists of a menu-bar (with menu-items often referred to as 
 
 The request panel is used for constructing HTTP requests. Most of the features available have self-evident purposes.
 
-The `Submit` button submits the HTTP request asynchronously. The request may be canceled before the response is received by clicking the "cancel" link in the response panel status area. Note that clicking the `Submit` button will validate the URL, j 
+=== Url ===
+
+The Url textbox is used for entering the request URL.
+
+=== Method ===
+
+The Method panel allows the selection of the request HTTP method.
+
+=== Headers ===
+
+The Headers text box allows the entry of request headers. A header is formatted as `<header name>: <header value>`. Multiple headers are specified by line separation. The same header may not be specified more than once (if the header has multiple values, that may indicated by a comma-separator. For example:
+
+{{{
+    accept: text/xml, text/html
+    content-type: text/plain; charset=utf-8
+}}}
+
+=== Buttons ===
+
+The `Submit` button submits the HTTP request asynchronously. The request may be canceled before the response is received by clicking the "cancel" link in the response panel status area. Note that clicking the `Submit` button will validate the request URL and Headers, resulting in an error dialog enumerating the errors if any are detected.
+
+The `Clear` button will clear all form elements in the request panel.
 
 == Response Panel ==
 
