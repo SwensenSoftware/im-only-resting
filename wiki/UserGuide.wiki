@@ -5,6 +5,16 @@
 
 I'm Only Resting is a feature-rich WinForms-based HTTP client.
 
+= Persistence =
+
+There are several modes of request and response persistence.
+
+The `File -> Open`, `File -> Save...`, and `File -> Save As...` commands are used for opening and saving requests.  The default file dialog used by these commands may be set by the "Save Request File Dialog Folder" setting.
+
+The `File -> Export Response Body...` command is used for save the _raw_ content bytes of a response.  The default file dialog used by this command may be set by the "Export Response Body File Dialog Folder" setting.
+
+The `File -> Snapshots ->` contains a list of request and response snapshots which are taken every time a request is submitting and the response is received. Selecting one of these snapshots will repopulate the request and response views at the time the snapshot was taken. The maximum number of snapshots which are remembered is set by the "Max Snapshots" setting. Snapshots only last for the current running application instance.
+
 = Content Encoding =
 
 The character encoding used for content is determined by the content-type header's charset parameter. e.g. `content-type: text/plain; charset=utf-16le` indicates that the content should be encoded as utf-16 little endian with no bom.
