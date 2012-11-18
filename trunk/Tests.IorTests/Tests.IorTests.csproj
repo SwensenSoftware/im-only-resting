@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\IorClientTests.cs" />
     <Compile Include="Core\IorContentTypeTests.cs" />
     <Compile Include="Core\RequestModelTests.cs" />
     <Compile Include="Core\RequestViewModelTests.cs" />
