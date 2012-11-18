@@ -5,6 +5,18 @@
 
 I'm Only Resting is a feature-rich WinForms-based HTTP client.
 
+= User Interface =
+
+The user interface consists of a menu-bar (with menu-items often referred to as "commands" in this document) and a split-panel with one side containing the request interface and one side containing the response interface. Note that the split panel may toggle between horizontal and vertical orientation by double-clicking it.
+
+== Request Panel ==
+
+The request panel is used for constructing HTTP requests. Most of the features available have self-evident purposes.
+
+The `Submit` button submits the HTTP request asynchronously. The request may be canceled before the response is received by clicking the "cancel" link in the response panel status area. Note that clicking the `Submit` button will validate the URL, j 
+
+== Response Panel ==
+
 = Settings =
 
 The `Settings` command displays a dialog box used for setting various configurable options of I'm Only Resting. It is a traditional Windows PropertyGrid which includes explanations for each setting when selected. Validation ensures that no invalid settings are set. Pressing the `Cancel` button exits the dialog without saving. Pressing the `Save` button saves the settings and applies them immediately if possible.
