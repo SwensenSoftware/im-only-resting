@@ -1,0 +1,12 @@
+#summary user guide.
+#labels Featured
+
+= Introduction =
+
+I'm Only Resting is a feature-rich WinForms-based HTTP client.
+
+= Content Encoding =
+
+The character encoding used for content is determined by the content-type header's charset parameter. e.g. `content-type: text/plain; charset=utf-16le` indicates that the content should be encoded as utf-16 little endian with no bom.
+
+Encoding rules are driven by the following w3 resources: http://www.w3.org/International/questions/qa-byte-order-mark, http://www.w3.org/TR/2010/WD-html-polyglot-20100624/#character-encoding, and http://www.w3.org/TR/html4/charset.
