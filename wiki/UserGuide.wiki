@@ -42,6 +42,24 @@ The `Clear` button will clear all form elements in the request panel.
 
 == Response Panel ==
 
+=== Status and Time ===
+
+The Status label presents information about the status of the response. While the response is being executed, a "cancel" link is available for cancelling the request. When the response is received, the HTTP status code and message are displayed.
+
+The Time label shows the length of time it took between submitting the request and receiving the response.
+
+=== Body ===
+
+The Body tab displays the response content. The Output panel provides options for displaying the content:
+  * Raw - display the content as raw text
+  * Pretty - display the content as pretty text
+  ** XML - use .NET
+  ** JSON - use JSON.NET
+  ** HTML - use TidyHTML
+  * Rendered - displays the content rendered in an embedded instance of Internet Explorer.
+
+ 
+
 = Settings =
 
 The `Settings` command displays a dialog box used for setting various configurable options of I'm Only Resting. It is a traditional Windows PropertyGrid which includes explanations for each setting when selected. Validation ensures that no invalid settings are set. Pressing the `Cancel` button exits the dialog without saving. Pressing the `Save` button saves the settings and applies them immediately if possible.
