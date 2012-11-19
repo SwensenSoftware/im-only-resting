@@ -231,16 +231,25 @@ namespace Swensen.Ior.Forms
                 bind(ResponseModel.Loading);
                 grpResponse.Update();
 
-                var client = new IorClient(Settings.Default.DefaultRequestContentType, Settings.Default.ProxyServer, Settings.Default.IncludeBomInUtf8RequestContent);
-                this.requestAsyncHandle = client.ExecuteAsync(requestModel, responseModel =>
-                    this.Invoke((MethodInvoker)delegate {
-                        this.requestAsyncHandle = null;
-                        //bind the response view
-                        bind(responseModel);
-                        addRequestResponseSnapshot(requestVm, responseModel);
-                        grpResponse.Update();
-                    })
-                );
+                try {
+                    var client = new IorClient(Settings.Default.DefaultRequestContentType, Settings.Default.ProxyServer, Settings.Default.IncludeBomInUtf8RequestContent);
+                    this.requestAsyncHandle = client.ExecuteAsync(requestModel, responseModel =>
+                        this.Invoke((MethodInvoker)delegate {
+                            this.requestAsyncHandle = null;
+                            //bind the response view
+                            bind(responseModel);
+                            addRequestResponseSnapshot(requestVm, responseModel);
+                            grpResponse.Update();
+                        })
+                    );
+                } catch (Exception ex) {
+                    log.ErrorException("There was an error executing the request", ex);
+                    showError("Error", "There was an error executing the request: " + Environment.NewLine + Environment.NewLine + ex.ToString());
+
+                    //reset the response view (i.e. roll-back loading message")
+                    bind(ResponseModel.Empty);
+                    grpResponse.Update();
+                }
             }
         }
 
