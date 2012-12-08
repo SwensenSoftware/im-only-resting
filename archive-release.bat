@@ -18,6 +18,8 @@ copy Ior\bin\Release\TidyManaged.dll staging
 copy Ior\bin\Release\Utils.dll staging
 copy Ior\bin\Release\NLog.config staging
 copy Ior\bin\Release\NLog.dll staging
+copy Ior\bin\Release\System.Net.Http.dll staging
+copy Ior\bin\Release\System.Net.Http.WebRequest.dll staging
 
 REM zip staging files
 cd staging
