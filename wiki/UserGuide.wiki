@@ -66,6 +66,8 @@ The headers tab displays all of the response headers.
 
 The `Settings` command displays a dialog box used for setting various configurable options of I'm Only Resting. It is a traditional Windows PropertyGrid which includes explanations for each setting when selected. Validation ensures that no invalid settings are set. Pressing the `Cancel` button exits the dialog without saving. Pressing the `Save` button saves the settings and applies them immediately if possible.
 
+Settings are persisted in user local app data, and automatically upgraded with new versions of I'm Only Resting (as long as the new version is deployed to the same location as the previous version).
+
 = Persistence =
 
 There are several modes of request and response persistence.
