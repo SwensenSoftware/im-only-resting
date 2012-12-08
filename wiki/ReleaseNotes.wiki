@@ -1,0 +1,8 @@
+#summary List of enhancements and bug fixes for each release.
+#labels Featured
+
+= Release Notes =
+
+== v1.0.0, 12/8/12 ==
+
+Initial release.
