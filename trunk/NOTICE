@@ -1,7 +1,10 @@
-RestSharp
+I'm Only Resting
 Copyright 2012 Stephen Swensen
+
+The I'm Only Resting icon was designed by Priya Swensen
 
 This software links to JSON.NET, Copyright (c) 2007 James Newton-King, http://json.codeplex.com/license (MIT license)
 This software links to HTML Tidy, Copyright (c) 1998-2008 World Wide Web Consortium, http://tidy.sourceforge.net/#license (MIT-like license)
-This software links to RestSharp, Copyright (c)  John Sheehan, RestSharp Community, https://github.com/restsharp/RestSharp/blob/master/LICENSE.txt (Apache License and Apache License 2.0)
 This software includes source code from Danilo Corallo's PropertyGridEx, http://www.codeproject.com/Articles/13630/Add-Custom-Properties-to-a-PropertyGrid (Code Project Open License)
+This software links to NLog, Copyright (c) 2004-2011 Jaroslaw Kowalski, https://github.com/NLog/NLog/blob/master/LICENSE.txt (BSD license)
+This software links to Microsoft.Net.Http, Copyright (c) Microsoft, http://www.microsoft.com/web/webpi/eula/mvc_4_eula_enu.htm (non-standard Microsoft license, giving binary redistribution rights)
