@@ -74,10 +74,14 @@ namespace Swensen.Ior.Core {
             var ctoken = ctokenSource.Token;
             
             client.SendAsync(request,ctoken).ContinueWith(responseTask => {
-                var response = responseTask.Result;
-                var end = DateTime.Now;
-                var responseModel = new ResponseModel(response, start, end);
-                callback(responseModel);
+                if (responseTask.Status == System.Threading.Tasks.TaskStatus.RanToCompletion) {
+                    var response = responseTask.Result;
+                    var end = DateTime.Now;
+                    var responseModel = new ResponseModel(response, start, end);
+                    callback(responseModel);
+                } else {
+                    log.Info("responseTask did not run to completion, status={0}", responseTask.Status);
+                }
             });
 
             return ctokenSource;
