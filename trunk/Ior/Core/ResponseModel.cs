@@ -32,6 +32,12 @@ namespace Swensen.Ior.Core {
             initLazyFields();
         }
 
+        public ResponseModel(String errorMessage, DateTime start, DateTime end) {
+            ErrorMessage = errorMessage;
+            Start = start;
+            End = end;
+        }
+
         /// <summary>
         /// Create a ResponseModel populated from an IRestResonse
         /// </summary>
@@ -43,7 +49,6 @@ namespace Swensen.Ior.Core {
 
             Start = start;
             End = end;
-            ElapsedTime = (end - start).Milliseconds + " ms";
 
             var readContentBytesTask = response.Content.ReadAsByteArrayAsync();
             readContentBytesTask.Wait();
@@ -76,7 +81,7 @@ namespace Swensen.Ior.Core {
 
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
-        public string ElapsedTime { get; private set; }
+        public string ElapsedTime { get { return (End - Start).Milliseconds + " ms"; } }
 
         public string Status { get; private set; }
 

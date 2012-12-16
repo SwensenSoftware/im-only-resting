@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Text;
+using System.Threading.Tasks;
 using NLog;
 using Swensen.Utils;
 using System.Threading;
@@ -74,13 +75,36 @@ namespace Swensen.Ior.Core {
             var ctoken = ctokenSource.Token;
             
             client.SendAsync(request,ctoken).ContinueWith(responseTask => {
-                if (responseTask.Status == System.Threading.Tasks.TaskStatus.RanToCompletion) {
-                    var response = responseTask.Result;
-                    var end = DateTime.Now;
-                    var responseModel = new ResponseModel(response, start, end);
-                    callback(responseModel);
-                } else {
-                    log.Info("responseTask did not run to completion, status={0}", responseTask.Status);
+                var end = DateTime.Now;
+                switch (responseTask.Status) {
+                    case TaskStatus.RanToCompletion: {
+                        var response = responseTask.Result;
+                        var responseModel = new ResponseModel(response, start, end);
+                        callback(responseModel);
+                        break;
+                    }
+                    case TaskStatus.Canceled: {
+                        log.Info("request canceled by user");
+                        break;
+                    }
+                    case TaskStatus.Faulted: {
+                        var aggException = responseTask.Exception.Flatten();
+                        
+                        foreach (var exception in aggException.InnerExceptions)
+                            log.ErrorException("request terminated with an error", exception);
+
+                        string errMessage = String.Join(Environment.NewLine, aggException.InnerExceptions);
+                        var responseModel = new ResponseModel(errMessage, start, end);
+                        callback(responseModel);
+                        break;
+                    }
+                    default: {
+                        var errMessage = String.Format("The request terminated with an unexpected status={0}", responseTask.Status);
+                        log.Warn(errMessage);
+                        var responseModel = new ResponseModel(errMessage, start, end);
+                        callback(responseModel);
+                        break;
+                    }
                 }
             });
 
