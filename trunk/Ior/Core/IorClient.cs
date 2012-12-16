@@ -120,7 +120,7 @@ namespace Swensen.Ior.Core {
                         break;
                 }
             } catch {
-                log.Warn("charset={0} not supported, falling back on {0}", charset, encoding.WebName);
+                log.Warn("charset={0} not supported, falling back on {1}", charset, encoding.WebName);
             }
 
             var memStream = new MemoryStream();
