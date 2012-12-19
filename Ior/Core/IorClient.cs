@@ -27,6 +27,13 @@ namespace Swensen.Ior.Core {
             this.includeUtf8Bom = includeUtf8Bom;
         }
 
+        /// <summary>
+        /// Execute a request for the given requestModel asynchronously, executing the given callback upon completions
+        /// other than cancellations (gui updates for cancellation should be done at point of cancellation).
+        /// </summary>
+        /// <param name="requestModel"></param>
+        /// <param name="callback"></param>
+        /// <returns></returns>
         public CancellationTokenSource ExecuteAsync(RequestModel requestModel, Action<ResponseModel> callback) {
             //todo: add using statements for disposible objects
 
