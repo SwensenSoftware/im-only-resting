@@ -3,6 +3,13 @@
 
 = Release Notes =
 
+== v1.0.1, 1/10/13 ==
+
+A couple high-priority bug fixes.
+
+  * Issue 24: Handle TPL exceptions so that they don't cause fatal app exit
+  * Issue 25: Fatal exception app shutdown on NPE in request Task callback due to unresolved host when Browser render mode
+
 == v1.0.0, 12/8/12 ==
 
 Initial release.
