@@ -32,7 +32,7 @@ namespace Swensen.Ior.Core {
             initLazyFields();
         }
 
-        public ResponseModel(String errorMessage, DateTime start, DateTime end) {
+        public ResponseModel(String errorMessage, DateTime start, DateTime end) : this() {
             ErrorMessage = errorMessage;
             Start = start;
             End = end;
@@ -65,8 +65,7 @@ namespace Swensen.Ior.Core {
             var contentType = headers.FirstOrDefault(x => String.Equals(x.Key, "content-type", StringComparison.OrdinalIgnoreCase)).Value.Coalesce().Join(", ");
             this.ContentType = new IorContentType(contentType);
 
-            //todo: either get rid of this (left over from RestSharp), or make some good use of it (i.e. exception messages).
-            this.ErrorMessage = null;// response.ErrorMessage;
+            this.ErrorMessage = null;
 
             initLazyFields();            
         }
