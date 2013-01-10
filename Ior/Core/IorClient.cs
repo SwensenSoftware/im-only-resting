@@ -82,36 +82,41 @@ namespace Swensen.Ior.Core {
             var ctoken = ctokenSource.Token;
             
             client.SendAsync(request,ctoken).ContinueWith(responseTask => {
-                var end = DateTime.Now;
-                switch (responseTask.Status) {
-                    case TaskStatus.RanToCompletion: {
-                        var response = responseTask.Result;
-                        var responseModel = new ResponseModel(response, start, end);
-                        callback(responseModel);
-                        break;
-                    }
-                    case TaskStatus.Canceled: {
-                        log.Info("request canceled by user");
-                        break;
-                    }
-                    case TaskStatus.Faulted: {
-                        var aggException = responseTask.Exception.Flatten();
-                        
-                        foreach (var exception in aggException.InnerExceptions)
-                            log.ErrorException("request terminated with an error", exception);
+                try {
+                    var end = DateTime.Now;
+                    switch (responseTask.Status) {
+                        case TaskStatus.RanToCompletion: {
+                                var response = responseTask.Result;
+                                var responseModel = new ResponseModel(response, start, end);
+                                callback(responseModel);
+                                break;
+                            }
+                        case TaskStatus.Canceled: {
+                                log.Info("request canceled by user");
+                                break;
+                            }
+                        case TaskStatus.Faulted: {
+                                var aggException = responseTask.Exception.Flatten();
 
-                        string errMessage = String.Join(Environment.NewLine, aggException.InnerExceptions);
-                        var responseModel = new ResponseModel(errMessage, start, end);
-                        callback(responseModel);
-                        break;
+                                foreach (var exception in aggException.InnerExceptions)
+                                    log.ErrorException("request terminated with an error", exception);
+
+                                string errMessage = String.Join(Environment.NewLine, aggException.InnerExceptions);
+                                var responseModel = new ResponseModel(errMessage, start, end);
+                                callback(responseModel);
+                                break;
+                            }
+                        default: {
+                                var errMessage = String.Format("The request terminated with an unexpected status={0}", responseTask.Status);
+                                log.Warn(errMessage);
+                                var responseModel = new ResponseModel(errMessage, start, end);
+                                callback(responseModel);
+                                break;
+                            }
                     }
-                    default: {
-                        var errMessage = String.Format("The request terminated with an unexpected status={0}", responseTask.Status);
-                        log.Warn(errMessage);
-                        var responseModel = new ResponseModel(errMessage, start, end);
-                        callback(responseModel);
-                        break;
-                    }
+                } catch(Exception ex) {
+                    log.ErrorException("exception raised in request continuation, application will proceed in a corrupt state until Task is disposed, at which point the application will shut down with a fatal exception", ex);
+                    throw;
                 }
             });
 
