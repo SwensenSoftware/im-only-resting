@@ -536,7 +536,11 @@ namespace Swensen.Ior.Forms
 
             txtRequestBody.NativeInterface.SetUseTabs(false); //use spaces for tabs
             txtRequestBody.NativeInterface.SetTabWidth(4);
+
+            txtRequestBody.FindReplace.Window.FormBorderStyle = FormBorderStyle.FixedDialog; //so we can actually see the text title
+            txtRequestBody.FindReplace.Window.Text = "Find / Replace - Request Body";
             
+
             //note: style 32 is default style
 
             /*ns.StyleSetFore(1, ScintillaNET.Utilities.ColorToRgb(Color.Black));
