@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -530,13 +531,26 @@ namespace Swensen.Ior.Forms
         }
 
         private void initTxtRequestBody() {
-            var cm = txtRequestBody.ContextMenu;
+            txtRequestBody.ConfigurationManager.Language = "js";
+            txtRequestBody.ConfigurationManager.Configure();
+
+            //txtRequestBody.Font = new Font(FontFamily.GenericMonospace, 12);
+            
+            var ns = txtRequestBody.NativeInterface;
+            ns.SetUseTabs(false); //use spaces for tabs
+            ns.SetTabWidth(4);
+
+            //style 32 is default style
+
+            /*ns.StyleSetFore(1, ScintillaNET.Utilities.ColorToRgb(Color.Black));
+            ns.StyleSetFont(1, "Monospace");
+            ns.StyleSetSize(1, 12);
+            ns.setst*/
+            
+            /*var cm = txtRequestBody.ContextMenu;
             cm.MenuItems.Add("-");
-            Action<TextBox, IorMediaTypeCategory> format = (tb, hmtc) => {
-                if (tb.SelectionLength > 0)
-                    tb.SelectedText = IorContentType.GetPrettyPrintedContent(hmtc, tb.SelectedText);
-                else
-                    tb.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Text);
+            Action<ScintillaNET.Scintilla, IorMediaTypeCategory> format = (tb, hmtc) => {
+                tb.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Text);
             };
 
             {
@@ -550,7 +564,7 @@ namespace Swensen.Ior.Forms
                 miFj.Shortcut = Shortcut.CtrlShiftJ;
                 miFj.ShowShortcut = true;
                 cm.MenuItems.Add(miFj);
-            }
+            }*/
         }
 
         private void bind(RequestResponseSnapshot snapshot) {
