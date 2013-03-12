@@ -13,7 +13,7 @@ namespace Swensen.Ior.Core {
     /// Broad categories of http media types that we know how to do special processing for (i.e. pretty printing, or choosing correct file extension).
     /// </summary>
     public enum IorMediaTypeCategory {
-        Xml, Html, Json, Text, Application, Other
+        Xml, Html, Json, Javascript, Text, Application, Other
     }
                  
     //http://www.w3.org/TR/html4/types.html#h-6.7
@@ -52,6 +52,9 @@ namespace Swensen.Ior.Core {
             if (mt == "text/json" || mt == "application/json")
                 return IorMediaTypeCategory.Json;
 
+            if (mt == "text/javascript" || mt == "application/javascript" || mt == "application/x-javascript")
+                return IorMediaTypeCategory.Javascript;
+
             if (mt == "text/plain")
                 return IorMediaTypeCategory.Text;
 
@@ -76,6 +79,7 @@ namespace Swensen.Ior.Core {
                             else
                                 return xml;
                         }
+                    case IorMediaTypeCategory.Javascript: //some APIs incorrectly use e.g. text/javascript when actual content-type is JSON
                     case IorMediaTypeCategory.Json: {
                             dynamic parsedJson = JsonConvert.DeserializeObject(content);
                             return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
