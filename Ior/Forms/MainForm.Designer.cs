@@ -31,7 +31,6 @@
             this.splitterMain = new System.Windows.Forms.SplitContainer();
             this.grpRequest = new System.Windows.Forms.GroupBox();
             this.grpBody = new System.Windows.Forms.GroupBox();
-            this.txtRequestBody = new Swensen.Ior.Forms.StandardTextBox();
             this.pnlTopHalfOfRequest = new System.Windows.Forms.Panel();
             this.pnlRequestMethodAndHeaders = new System.Windows.Forms.Panel();
             this.grpHeaders = new System.Windows.Forms.GroupBox();
@@ -88,6 +87,7 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.txtRequestBody = new ScintillaNET.Scintilla();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -112,6 +112,7 @@
             this.pnlResponseStatus.SuspendLayout();
             this.pnlResponseTime.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequestBody)).BeginInit();
             this.SuspendLayout();
             // 
             // splitterMain
@@ -165,21 +166,6 @@
             this.grpBody.TabIndex = 10;
             this.grpBody.TabStop = false;
             this.grpBody.Text = "Body";
-            // 
-            // txtRequestBody
-            // 
-            this.txtRequestBody.AcceptsReturn = true;
-            this.txtRequestBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRequestBody.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRequestBody.Location = new System.Drawing.Point(4, 19);
-            this.txtRequestBody.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRequestBody.Multiline = true;
-            this.txtRequestBody.Name = "txtRequestBody";
-            this.txtRequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtRequestBody.Size = new System.Drawing.Size(464, 369);
-            this.txtRequestBody.TabIndex = 7;
-            this.txtRequestBody.WordWrap = false;
-            this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
             // 
             // pnlTopHalfOfRequest
             // 
@@ -801,6 +787,23 @@
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
             // 
+            // txtRequestBody
+            // 
+            this.txtRequestBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestBody.Location = new System.Drawing.Point(4, 19);
+            this.txtRequestBody.Name = "txtRequestBody";
+            this.txtRequestBody.Size = new System.Drawing.Size(464, 369);
+            this.txtRequestBody.Styles.BraceBad.Size = 7F;
+            this.txtRequestBody.Styles.BraceLight.Size = 7F;
+            this.txtRequestBody.Styles.ControlChar.Size = 7F;
+            this.txtRequestBody.Styles.Default.BackColor = System.Drawing.SystemColors.Window;
+            this.txtRequestBody.Styles.Default.Size = 7F;
+            this.txtRequestBody.Styles.IndentGuide.Size = 7F;
+            this.txtRequestBody.Styles.LastPredefined.Size = 7F;
+            this.txtRequestBody.Styles.LineNumber.Size = 7F;
+            this.txtRequestBody.Styles.Max.Size = 7F;
+            this.txtRequestBody.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -821,7 +824,6 @@
             this.splitterMain.ResumeLayout(false);
             this.grpRequest.ResumeLayout(false);
             this.grpBody.ResumeLayout(false);
-            this.grpBody.PerformLayout();
             this.pnlTopHalfOfRequest.ResumeLayout(false);
             this.pnlRequestMethodAndHeaders.ResumeLayout(false);
             this.grpHeaders.ResumeLayout(false);
@@ -849,6 +851,7 @@
             this.pnlResponseTime.PerformLayout();
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequestBody)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -878,7 +881,6 @@
         private System.Windows.Forms.Button btnClearRequest;
         private System.Windows.Forms.Button btnSubmitRequest;
         private System.Windows.Forms.GroupBox grpBody;
-        private StandardTextBox txtRequestBody;
         private System.Windows.Forms.RadioButton rbHttpDelete;
         private System.Windows.Forms.RadioButton rbHttpOptions;
         private System.Windows.Forms.RadioButton rbHttpPut;
@@ -916,6 +918,7 @@
         private StandardTextBox txtRequestUrl;
         private System.Windows.Forms.ToolStripMenuItem snapshotsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private ScintillaNET.Scintilla txtRequestBody;
 
     }
 }
