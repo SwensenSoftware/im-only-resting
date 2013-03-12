@@ -294,7 +294,7 @@ namespace Swensen.Ior.Forms
             txtRequestUrl.Text = requestVm.Url;
             
             var method = requestVm.Method;
-            rbGrpHttpMethods.First(x => ((HttpMethod) x.Tag).Method == method).Checked = true;
+            (rbGrpHttpMethods.FirstOrDefault(x => ((HttpMethod) x.Tag).Method == method) ?? rbHttpGet).Checked = true;
 
             txtRequestHeaders.Lines = (requestVm.Headers ?? new string[0]).ToArray();
             txtRequestBody.Text = requestVm.Body;
@@ -534,23 +534,23 @@ namespace Swensen.Ior.Forms
             txtRequestBody.ConfigurationManager.Language = "js";
             txtRequestBody.ConfigurationManager.Configure();
 
-            //txtRequestBody.Font = new Font(FontFamily.GenericMonospace, 12);
+            txtRequestBody.NativeInterface.SetUseTabs(false); //use spaces for tabs
+            txtRequestBody.NativeInterface.SetTabWidth(4);
             
-            var ns = txtRequestBody.NativeInterface;
-            ns.SetUseTabs(false); //use spaces for tabs
-            ns.SetTabWidth(4);
-
-            //style 32 is default style
+            //note: style 32 is default style
 
             /*ns.StyleSetFore(1, ScintillaNET.Utilities.ColorToRgb(Color.Black));
             ns.StyleSetFont(1, "Monospace");
             ns.StyleSetSize(1, 12);
             ns.setst*/
-            
-            /*var cm = txtRequestBody.ContextMenu;
+
+            var cm = txtRequestBody.ContextMenu;
             cm.MenuItems.Add("-");
             Action<ScintillaNET.Scintilla, IorMediaTypeCategory> format = (tb, hmtc) => {
-                tb.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Text);
+                if (tb.Selection.Length > 0)
+                    tb.Selection.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Selection.Text);
+                else
+                    tb.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Text);
             };
 
             {
@@ -564,7 +564,7 @@ namespace Swensen.Ior.Forms
                 miFj.Shortcut = Shortcut.CtrlShiftJ;
                 miFj.ShowShortcut = true;
                 cm.MenuItems.Add(miFj);
-            }*/
+            }
         }
 
         private void bind(RequestResponseSnapshot snapshot) {
