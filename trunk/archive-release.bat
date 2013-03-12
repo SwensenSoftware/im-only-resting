@@ -20,6 +20,10 @@ copy Ior\bin\Release\NLog.config staging
 copy Ior\bin\Release\NLog.dll staging
 copy Ior\bin\Release\System.Net.Http.dll staging
 copy Ior\bin\Release\System.Net.Http.WebRequest.dll staging
+copy Ior\bin\Release\SciLexer.dll staging
+copy Ior\bin\Release\SciLexer64.dll staging
+copy Ior\bin\Release\ScintillaNET.dll staging
+
 
 REM zip staging files
 cd staging
