@@ -45,15 +45,7 @@ namespace Swensen.Ior.Forms {
         }
 
         protected override void OnMouseDown(MouseEventArgs e) {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right) {
-                //this.Focus();
-                /*var charIndex = this.GetCharIndexFromPosition(e.Location);
-                if (this.SelectionLength == 0) { //no selected text
-                    this.SelectionStart = charIndex;
-                } else if(charIndex < this.Selection.Start || charIndex > (this.Selection.Start + this.Selection.Length)) { // user clicks outside of selected text
-                    this.NativeInterface.GotoLine(1);
-                    //this.Select(charIndex, 0);
-                }*/
+            if (e.Button == MouseButtons.Right) {
                 miUndo.Enabled = this.UndoRedo.CanUndo;
                 miRedo.Enabled = this.UndoRedo.CanRedo;
                 miCut.Enabled = this.Clipboard.CanCut;
@@ -64,15 +56,5 @@ namespace Swensen.Ior.Forms {
             else
                 base.OnMouseDown(e);
         }
-
-        /*//credit to Schotime, see http://schotime.net/blog/index.php/2008/03/12/select-all-ctrla-for-textbox/
-        protected override void OnKeyDown(KeyEventArgs e) {
-            base.OnKeyDown(e);
-            if (e.Control && (e.KeyCode == System.Windows.Forms.Keys.A)) {
-                this.NativeInterface.SelectAll();
-                e.SuppressKeyPress = true;
-                e.Handled = true;
-            }
-        }*/
     }
 }
