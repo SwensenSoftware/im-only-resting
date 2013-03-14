@@ -540,7 +540,7 @@ namespace Swensen.Ior.Forms
             txtRequestBody.FindReplace.Window.FormBorderStyle = FormBorderStyle.FixedDialog; //so we can actually see the text title
             txtRequestBody.FindReplace.Window.Text = "Find / Replace - Request Body";
 
-            txtRequestBody.Margins[0].Width = 20; //show line numbers
+            txtRequestBody.ShowLineNumbers = false;
             
 
             //note: style 32 is default style
