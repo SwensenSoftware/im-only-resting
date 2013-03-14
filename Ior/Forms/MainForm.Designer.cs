@@ -35,7 +35,7 @@
             this.pnlTopHalfOfRequest = new System.Windows.Forms.Panel();
             this.pnlRequestMethodAndHeaders = new System.Windows.Forms.Panel();
             this.grpHeaders = new System.Windows.Forms.GroupBox();
-            this.txtRequestHeaders = new Swensen.Ior.Forms.StandardTextBox();
+            this.txtRequestHeaders = new Swensen.Ior.Forms.IorScintilla();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
             this.rbHttpTrace = new System.Windows.Forms.RadioButton();
             this.rbHttpHead = new System.Windows.Forms.RadioButton();
@@ -98,6 +98,7 @@
             this.pnlTopHalfOfRequest.SuspendLayout();
             this.pnlRequestMethodAndHeaders.SuspendLayout();
             this.grpHeaders.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequestHeaders)).BeginInit();
             this.grpHttpMethod.SuspendLayout();
             this.pnlRequestUrlAndButtons.SuspendLayout();
             this.pnlUrl.SuspendLayout();
@@ -183,6 +184,7 @@
             this.txtRequestBody.Styles.LineNumber.Size = 7F;
             this.txtRequestBody.Styles.Max.Size = 7F;
             this.txtRequestBody.TabIndex = 0;
+            this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
             // 
             // pnlTopHalfOfRequest
             // 
@@ -222,17 +224,13 @@
             // 
             // txtRequestHeaders
             // 
-            this.txtRequestHeaders.AcceptsReturn = true;
             this.txtRequestHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtRequestHeaders.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRequestHeaders.Location = new System.Drawing.Point(4, 19);
             this.txtRequestHeaders.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRequestHeaders.Multiline = true;
             this.txtRequestHeaders.Name = "txtRequestHeaders";
-            this.txtRequestHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtRequestHeaders.Size = new System.Drawing.Size(289, 130);
             this.txtRequestHeaders.TabIndex = 6;
-            this.txtRequestHeaders.WordWrap = false;
             this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
             // 
             // grpHttpMethod
@@ -828,7 +826,7 @@
             this.pnlTopHalfOfRequest.ResumeLayout(false);
             this.pnlRequestMethodAndHeaders.ResumeLayout(false);
             this.grpHeaders.ResumeLayout(false);
-            this.grpHeaders.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequestHeaders)).EndInit();
             this.grpHttpMethod.ResumeLayout(false);
             this.grpHttpMethod.PerformLayout();
             this.pnlRequestUrlAndButtons.ResumeLayout(false);
@@ -870,7 +868,7 @@
         private System.Windows.Forms.Panel pnlTopHalfOfRequest;
         private System.Windows.Forms.Panel pnlRequestMethodAndHeaders;
         private System.Windows.Forms.GroupBox grpHeaders;
-        private StandardTextBox txtRequestHeaders;
+        private IorScintilla txtRequestHeaders;
         private System.Windows.Forms.GroupBox grpHttpMethod;
         private System.Windows.Forms.RadioButton rbHttpGet;
         private System.Windows.Forms.RadioButton rbHttpPost;
