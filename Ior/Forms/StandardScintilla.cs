@@ -71,5 +71,17 @@ namespace Swensen.Ior.Forms {
             } else
                 return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        /// <summary>
+        /// Indicates whether or not the margins are side enough for line numbers to show (20 for true, else false).
+        /// </summary>
+        public bool ShowLineNumbers {
+            get {
+                return this.Margins[0].Width == 20;
+            }
+            set {
+                this.Margins[0].Width = value ? 20 : 0;
+            }
+        }
     }
 }
