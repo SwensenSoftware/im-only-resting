@@ -56,5 +56,20 @@ namespace Swensen.Ior.Forms {
             else
                 base.OnMouseDown(e);
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            var form = this.FindForm();
+            if (keyData == (Keys.Control | Keys.Tab)) {
+                form.SelectNextControl(this, true, true, true, true);
+                return true;
+            } else if (keyData == (Keys.Control | Keys.Shift | Keys.Tab)) {
+                form.SelectNextControl(this, false, true, true, true);
+                return true;
+            } else if (keyData == (Keys.Control | Keys.Enter)) {
+                form.AcceptButton.PerformClick();
+                return true;
+            } else
+                return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }
