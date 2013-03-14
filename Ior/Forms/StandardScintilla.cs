@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Swensen.Ior.Forms {
     public class StandardScintilla : ScintillaNET.Scintilla {
@@ -72,17 +73,31 @@ namespace Swensen.Ior.Forms {
                 return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        public void ShowLineNumbers() {
-            this.Margins[0].Width = 20;
-        }
-
-        public void HideLineNumbers() {
-            this.Margins[0].Width = 0;
-        }
-
         public void DisableReplace() {
             this.Commands.RemoveBinding(Keys.H, Keys.Control);
             ((TabControl)this.FindReplace.Window.Controls.Find("tabAll", true)[0]).TabPages.RemoveAt(1);
+        }
+
+        //scintilla does not allow programmatic write when set to readonly.
+        public void SuspendReadonly(Action act) {
+            if (this.IsReadOnly) {
+                try {
+                    this.IsReadOnly = false;
+                    act();
+                } finally {
+                    this.IsReadOnly = true;
+                }
+            } else
+                act();
+        }
+
+        public override string Text {
+            get {
+                return base.Text;
+            }
+            set {
+                SuspendReadonly(() => base.Text = value);
+            }
         }
     }
 }
