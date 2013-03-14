@@ -10,7 +10,7 @@ namespace Swensen.Ior.Forms {
         MenuItem miSelectAll;
 
         public StandardScintilla() : base() {
-            initContextMenu();    
+            initContextMenu();
         }
 
         private void initContextMenu() {

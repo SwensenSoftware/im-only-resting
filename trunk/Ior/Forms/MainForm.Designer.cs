@@ -31,7 +31,7 @@
             this.splitterMain = new System.Windows.Forms.SplitContainer();
             this.grpRequest = new System.Windows.Forms.GroupBox();
             this.grpBody = new System.Windows.Forms.GroupBox();
-            this.txtRequestBody = new Swensen.Ior.Forms.StandardScintilla();
+            this.txtRequestBody = new Swensen.Ior.Forms.IorScintilla();
             this.pnlTopHalfOfRequest = new System.Windows.Forms.Panel();
             this.pnlRequestMethodAndHeaders = new System.Windows.Forms.Panel();
             this.grpHeaders = new System.Windows.Forms.GroupBox();
@@ -918,7 +918,7 @@
         private StandardTextBox txtRequestUrl;
         private System.Windows.Forms.ToolStripMenuItem snapshotsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private StandardScintilla txtRequestBody;
+        private IorScintilla txtRequestBody;
 
     }
 }
