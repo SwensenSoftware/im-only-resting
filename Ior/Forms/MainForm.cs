@@ -531,17 +531,7 @@ namespace Swensen.Ior.Forms
         }
 
         private void initTxtRequestBody() {
-            txtRequestBody.ConfigurationManager.Language = "js";
-            txtRequestBody.ConfigurationManager.Configure();
-
-            txtRequestBody.NativeInterface.SetUseTabs(false); //use spaces for tabs
-            txtRequestBody.NativeInterface.SetTabWidth(2);
-
-            txtRequestBody.FindReplace.Window.FormBorderStyle = FormBorderStyle.FixedDialog; //so we can actually see the text title
             txtRequestBody.FindReplace.Window.Text = "Find / Replace - Request Body";
-
-            txtRequestBody.ShowLineNumbers();
-            
 
             //note: style 32 is default style
 
