@@ -54,7 +54,14 @@ namespace Swensen.Ior.Forms
         {                           
             try {
                 Settings.Default.UpgradeAndSaveIfNeeded();
+                
                 txtRequestHeaders.FindReplace.Window.Text = "Find / Replace - Request Headers";
+                txtRequestHeaders.Margins[0].Width = 12;
+                
+                txtResponseText.FindReplace.Window.Text = "Find - Response Text";
+                txtResponseText.DisableReplace();
+                txtResponseText.Margins[0].Width = 32;
+
                 initTxtRequestBody();
                 rebuildWebBrowser();
                 bindResponseBodyOutputs();
@@ -151,19 +158,26 @@ namespace Swensen.Ior.Forms
         private void updateResponseBodyOutput() {
             switch (Settings.Default.ResponseBodyOutput) {
                 case ResponseBodyOutput.Raw:
-                    rtResponseText.Visible = true;
+                    txtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
-                    rtResponseText.Text = lastResponseModel.Content;
+                    txtResponseText.Text = lastResponseModel.Content;
                     break;
                 case ResponseBodyOutput.Pretty:
-                    rtResponseText.Visible = true;
+                    txtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
-                    rtResponseText.Text = lastResponseModel.PrettyPrintedContent;
+                    txtResponseText.Text = lastResponseModel.PrettyPrintedContent;
+                    var mtc = lastResponseModel.ContentType.MediaTypeCategory;
+                    txtResponseText.ConfigurationManager.Language =
+                        mtc == IorMediaTypeCategory.Html ? "html" :
+                        mtc == IorMediaTypeCategory.Xml ? "xml" :
+                        (mtc == IorMediaTypeCategory.Json || mtc == IorMediaTypeCategory.Javascript) ? "js" :
+                        "";
+                    txtResponseText.ConfigurationManager.Configure();
                     break;
                 case ResponseBodyOutput.Rendered:
                     rebuildWebBrowser();
                     wbResponseBody.Visible = true;
-                    rtResponseText.Visible = false;
+                    txtResponseText.Visible = false;
 
                     if ((lastResponseModel.ContentType.MediaTypeCategory == IorMediaTypeCategory.Xml || 
                         lastResponseModel.ContentType.MediaTypeCategory == IorMediaTypeCategory.Application) && 
@@ -425,9 +439,10 @@ namespace Swensen.Ior.Forms
             setIsLastOpenedRequestFileDirtyToTrue();
         }
 
-        private void rtResponseText_LinkClicked(object sender, LinkClickedEventArgs e) {
-            System.Diagnostics.Process.Start(e.LinkText);
-        }
+        //scintilla does not support link clicked event
+        //private void txtResponseText_LinkClicked(object sender, LinkClickedEventArgs e) {
+        //    System.Diagnostics.Process.Start(e.LinkText);
+        //}
 
         private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
             saveToolStripMenuItem.Enabled = this.isLastOpenedRequestFileDirty;
@@ -533,6 +548,7 @@ namespace Swensen.Ior.Forms
 
         private void initTxtRequestBody() {
             txtRequestBody.FindReplace.Window.Text = "Find / Replace - Request Body";
+            txtRequestBody.Margins[0].Width = 22;
 
             //note: style 32 is default style
 

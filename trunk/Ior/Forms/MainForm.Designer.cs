@@ -55,7 +55,7 @@
             this.tcResponse = new System.Windows.Forms.TabControl();
             this.tpResponseText = new System.Windows.Forms.TabPage();
             this.pnlResponseContent = new System.Windows.Forms.Panel();
-            this.rtResponseText = new System.Windows.Forms.RichTextBox();
+            this.txtResponseText = new Swensen.Ior.Forms.IorScintilla();
             this.grpResponseBodyOutput = new System.Windows.Forms.GroupBox();
             this.rbResponseBodyOutputBrowser = new System.Windows.Forms.RadioButton();
             this.rbResponseBodyOutputPretty = new System.Windows.Forms.RadioButton();
@@ -107,6 +107,7 @@
             this.tcResponse.SuspendLayout();
             this.tpResponseText.SuspendLayout();
             this.pnlResponseContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtResponseText)).BeginInit();
             this.grpResponseBodyOutput.SuspendLayout();
             this.tpResponseHeaders.SuspendLayout();
             this.pnlResponseStatusAndTime.SuspendLayout();
@@ -459,7 +460,7 @@
             // 
             // pnlResponseContent
             // 
-            this.pnlResponseContent.Controls.Add(this.rtResponseText);
+            this.pnlResponseContent.Controls.Add(this.txtResponseText);
             this.pnlResponseContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlResponseContent.Location = new System.Drawing.Point(4, 54);
             this.pnlResponseContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -468,21 +469,17 @@
             this.pnlResponseContent.Size = new System.Drawing.Size(437, 468);
             this.pnlResponseContent.TabIndex = 15;
             // 
-            // rtResponseText
+            // txtResponseText
             // 
-            this.rtResponseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtResponseText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtResponseText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtResponseText.Location = new System.Drawing.Point(4, 4);
-            this.rtResponseText.Margin = new System.Windows.Forms.Padding(4);
-            this.rtResponseText.Name = "rtResponseText";
-            this.rtResponseText.ReadOnly = true;
-            this.rtResponseText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.rtResponseText.Size = new System.Drawing.Size(429, 460);
-            this.rtResponseText.TabIndex = 14;
-            this.rtResponseText.Text = "";
-            this.rtResponseText.WordWrap = false;
-            this.rtResponseText.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtResponseText_LinkClicked);
+            this.txtResponseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtResponseText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtResponseText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResponseText.IsReadOnly = true;
+            this.txtResponseText.Location = new System.Drawing.Point(4, 4);
+            this.txtResponseText.Margin = new System.Windows.Forms.Padding(4);
+            this.txtResponseText.Name = "txtResponseText";
+            this.txtResponseText.Size = new System.Drawing.Size(429, 460);
+            this.txtResponseText.TabIndex = 14;
             // 
             // grpResponseBodyOutput
             // 
@@ -838,6 +835,7 @@
             this.tcResponse.ResumeLayout(false);
             this.tpResponseText.ResumeLayout(false);
             this.pnlResponseContent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtResponseText)).EndInit();
             this.grpResponseBodyOutput.ResumeLayout(false);
             this.grpResponseBodyOutput.PerformLayout();
             this.tpResponseHeaders.ResumeLayout(false);
@@ -909,7 +907,7 @@
         private System.Windows.Forms.RadioButton rbResponseBodyOutputBrowser;
         private System.Windows.Forms.RadioButton rbResponseBodyOutputPretty;
         private System.Windows.Forms.RadioButton rbResponseBodyOutputRaw;
-        private System.Windows.Forms.RichTextBox rtResponseText;
+        private Swensen.Ior.Forms.IorScintilla txtResponseText;
         private System.Windows.Forms.Panel pnlResponseContent;
         private System.Windows.Forms.LinkLabel lnkResponseStatusInfo;
         private System.Windows.Forms.LinkLabel lnkCancelRequest;
