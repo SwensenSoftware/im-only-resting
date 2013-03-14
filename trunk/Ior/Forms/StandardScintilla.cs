@@ -72,16 +72,17 @@ namespace Swensen.Ior.Forms {
                 return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        /// <summary>
-        /// Indicates whether or not the margins are side enough for line numbers to show (20 for true, else false).
-        /// </summary>
-        public bool ShowLineNumbers {
-            get {
-                return this.Margins[0].Width == 20;
-            }
-            set {
-                this.Margins[0].Width = value ? 20 : 0;
-            }
+        public void ShowLineNumbers() {
+            this.Margins[0].Width = 20;
+        }
+
+        public void HideLineNumbers() {
+            this.Margins[0].Width = 0;
+        }
+
+        public void DisableReplace() {
+            this.Commands.RemoveBinding(Keys.H, Keys.Control);
+            ((TabControl)this.FindReplace.Window.Controls.Find("tabAll", true)[0]).TabPages.RemoveAt(1);
         }
     }
 }
