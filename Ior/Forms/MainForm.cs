@@ -210,7 +210,7 @@ namespace Swensen.Ior.Forms
             return new RequestViewModel() {
                 Url = txtRequestUrl.Text,
                 Method = ((HttpMethod)checkedHttpMethod.Tag).Method,
-                Headers = txtRequestHeaders.Text.Split(new [] {txtRequestHeaders.EndOfLine.ToString()}, StringSplitOptions.RemoveEmptyEntries),
+                Headers = txtRequestHeaders.Text.Split(new [] {txtRequestHeaders.EndOfLine.EolString}, StringSplitOptions.RemoveEmptyEntries),
                 Body = txtRequestBody.Text
             };
         }
@@ -311,7 +311,7 @@ namespace Swensen.Ior.Forms
             var method = requestVm.Method;
             (rbGrpHttpMethods.FirstOrDefault(x => ((HttpMethod) x.Tag).Method == method) ?? rbHttpGet).Checked = true;
 
-            txtRequestHeaders.Text = (requestVm.Headers ?? new string[0]).Join(txtRequestHeaders.EndOfLine.ToString());
+            txtRequestHeaders.Text = (requestVm.Headers ?? new string[0]).Join(txtRequestHeaders.EndOfLine.EolString);
             txtRequestBody.Text = requestVm.Body;
         }
 
