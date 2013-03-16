@@ -3,6 +3,8 @@
 
 = Release Notes =
 
+== v1.1.0, 3/15/13 ==
+
 Improved text editing and rendering using Scintilla.
 
   * Issue 2: Implement greater under/redo on request text boxes
