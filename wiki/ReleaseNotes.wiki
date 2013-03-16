@@ -3,6 +3,14 @@
 
 = Release Notes =
 
+Improved text editing and rendering using Scintilla.
+
+  * Issue 2: Implement greater under/redo on request text boxes
+  * Issue 27: Attempt to pretty print response data with text/javascript content-type header as json
+  * Issue 29: Regression: Clear button throws exception
+  * Issue 32: Implement Scintilla as rich text editor for text editing and rendering
+
+
 == v1.0.1, 1/10/13 ==
 
 A couple high-priority bug fixes.
