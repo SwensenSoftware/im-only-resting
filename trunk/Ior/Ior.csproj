@@ -84,9 +84,6 @@
     <Compile Include="Core\IorClient.cs" />
     <Compile Include="Core\IorContentType.cs" />
     <Compile Include="Forms\ControlHelpers.cs" />
-    <Compile Include="Forms\IorScintilla.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Forms\StandardScintilla.cs">
       <SubType>Component</SubType>
     </Compile>

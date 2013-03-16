@@ -12,6 +12,14 @@ namespace Swensen.Ior.Forms {
 
         public StandardScintilla() : base() {
             initContextMenu();
+
+            this.NativeInterface.SetUseTabs(false); //use spaces for tabs
+            this.NativeInterface.SetTabWidth(2);
+
+            this.FindReplace.Window.FormBorderStyle = FormBorderStyle.FixedDialog; //so we can actually see the text title
+
+            this.ConfigurationManager.Language = "js"; //not a bad default language
+            this.ConfigurationManager.Configure();
         }
 
         private void initContextMenu() {

@@ -31,11 +31,11 @@
             this.splitterMain = new System.Windows.Forms.SplitContainer();
             this.grpRequest = new System.Windows.Forms.GroupBox();
             this.grpBody = new System.Windows.Forms.GroupBox();
-            this.txtRequestBody = new Swensen.Ior.Forms.IorScintilla();
+            this.txtRequestBody = new Swensen.Ior.Forms.StandardScintilla();
             this.pnlTopHalfOfRequest = new System.Windows.Forms.Panel();
             this.pnlRequestMethodAndHeaders = new System.Windows.Forms.Panel();
             this.grpHeaders = new System.Windows.Forms.GroupBox();
-            this.txtRequestHeaders = new Swensen.Ior.Forms.IorScintilla();
+            this.txtRequestHeaders = new Swensen.Ior.Forms.StandardScintilla();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
             this.rbHttpTrace = new System.Windows.Forms.RadioButton();
             this.rbHttpHead = new System.Windows.Forms.RadioButton();
@@ -55,7 +55,7 @@
             this.tcResponse = new System.Windows.Forms.TabControl();
             this.tpResponseText = new System.Windows.Forms.TabPage();
             this.pnlResponseContent = new System.Windows.Forms.Panel();
-            this.txtResponseText = new Swensen.Ior.Forms.IorScintilla();
+            this.txtResponseText = new Swensen.Ior.Forms.StandardScintilla();
             this.grpResponseBodyOutput = new System.Windows.Forms.GroupBox();
             this.rbResponseBodyOutputBrowser = new System.Windows.Forms.RadioButton();
             this.rbResponseBodyOutputPretty = new System.Windows.Forms.RadioButton();
@@ -866,7 +866,7 @@
         private System.Windows.Forms.Panel pnlTopHalfOfRequest;
         private System.Windows.Forms.Panel pnlRequestMethodAndHeaders;
         private System.Windows.Forms.GroupBox grpHeaders;
-        private IorScintilla txtRequestHeaders;
+        private StandardScintilla txtRequestHeaders;
         private System.Windows.Forms.GroupBox grpHttpMethod;
         private System.Windows.Forms.RadioButton rbHttpGet;
         private System.Windows.Forms.RadioButton rbHttpPost;
@@ -907,14 +907,14 @@
         private System.Windows.Forms.RadioButton rbResponseBodyOutputBrowser;
         private System.Windows.Forms.RadioButton rbResponseBodyOutputPretty;
         private System.Windows.Forms.RadioButton rbResponseBodyOutputRaw;
-        private Swensen.Ior.Forms.IorScintilla txtResponseText;
+        private Swensen.Ior.Forms.StandardScintilla txtResponseText;
         private System.Windows.Forms.Panel pnlResponseContent;
         private System.Windows.Forms.LinkLabel lnkResponseStatusInfo;
         private System.Windows.Forms.LinkLabel lnkCancelRequest;
         private StandardTextBox txtRequestUrl;
         private System.Windows.Forms.ToolStripMenuItem snapshotsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private IorScintilla txtRequestBody;
+        private StandardScintilla txtRequestBody;
 
     }
 }
