@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Net.Mime;
@@ -72,47 +73,56 @@ namespace Swensen.Ior.Core {
             try {
                 switch (mtc) {
                     case IorMediaTypeCategory.Xml: {
-                            var doc = XDocument.Parse(content);
-                            var xml = doc.ToString();
-                            if (doc.Declaration != null)
-                                return doc.Declaration.ToString() + Environment.NewLine + xml;
-                            else
-                                return xml;
-                        }
+                        var doc = XDocument.Parse(content);
+                        var xml = doc.ToString();
+                        if (doc.Declaration != null)
+                            return doc.Declaration.ToString() + Environment.NewLine + xml;
+                        else
+                            return xml;
+                    }
                     case IorMediaTypeCategory.Javascript: //some APIs incorrectly use e.g. text/javascript when actual content-type is JSON
                     case IorMediaTypeCategory.Json: {
-                            dynamic parsedJson = JsonConvert.DeserializeObject(content);
-                            return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                        dynamic parsedJson = JsonConvert.DeserializeObject(content);
+
+                        var jsonSerializer = new JsonSerializer();
+                        var stringWriter = new StringWriter(new StringBuilder(256), CultureInfo.InvariantCulture);
+                        using (var jsonTextWriter = new JsonTextWriter(stringWriter)) {
+                            jsonTextWriter.Indentation = 2;
+                            jsonTextWriter.IndentChar = ' ';
+                            jsonTextWriter.Formatting = Formatting.Indented;
+                            jsonSerializer.Serialize(jsonTextWriter, parsedJson);
                         }
+                        return stringWriter.ToString();
+                    }
                     case IorMediaTypeCategory.Html: {
-                            //need to convert to utf16-little endian stream and set Document input/output encoding since Document.FromString screws up encoding.
-                            var stream = new MemoryStream(Encoding.Unicode.GetBytes(content));
-                            using (var doc = Document.FromStream(stream)) {
-                                doc.InputCharacterEncoding = EncodingType.Utf16LittleEndian;
-                                doc.OutputCharacterEncoding = EncodingType.Utf16LittleEndian;
-                                doc.ShowWarnings = false;
-                                doc.Quiet = true;
-                                doc.OutputXhtml = false;
-                                doc.OutputXml = false;
-                                doc.OutputHtml = false;
-                                doc.IndentBlockElements = AutoBool.Yes;
-                                doc.IndentSpaces = 4;
-                                doc.IndentAttributes = false;
-                                //doc.IndentCdata = true;
-                                doc.AddVerticalSpace = true;
-                                doc.AddTidyMetaElement = false;
-                                doc.WrapAt = 120;
+                        //need to convert to utf16-little endian stream and set Document input/output encoding since Document.FromString screws up encoding.
+                        var stream = new MemoryStream(Encoding.Unicode.GetBytes(content));
+                        using (var doc = Document.FromStream(stream)) {
+                            doc.InputCharacterEncoding = EncodingType.Utf16LittleEndian;
+                            doc.OutputCharacterEncoding = EncodingType.Utf16LittleEndian;
+                            doc.ShowWarnings = false;
+                            doc.Quiet = true;
+                            doc.OutputXhtml = false;
+                            doc.OutputXml = false;
+                            doc.OutputHtml = false;
+                            doc.IndentBlockElements = AutoBool.Yes;
+                            doc.IndentSpaces = 2;
+                            doc.IndentAttributes = false;
+                            //doc.IndentCdata = true;
+                            doc.AddVerticalSpace = true;
+                            doc.AddTidyMetaElement = false;
+                            doc.WrapAt = 120;
 
-                                doc.MergeDivs = AutoBool.No;
-                                doc.MergeSpans = AutoBool.No;
-                                doc.JoinStyles = false;
-                                doc.ForceOutput = true;
-                                doc.CleanAndRepair();
+                            doc.MergeDivs = AutoBool.No;
+                            doc.MergeSpans = AutoBool.No;
+                            doc.JoinStyles = false;
+                            doc.ForceOutput = true;
+                            doc.CleanAndRepair();
 
-                                string output = doc.Save();
-                                return output;
-                            }
+                            string output = doc.Save();
+                            return output;
                         }
+                    }
                     default:
                         return content;
                 }
