@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Swensen.Ior.Forms {
@@ -10,6 +11,11 @@ namespace Swensen.Ior.Forms {
         MenuItem miDelete;
         MenuItem miSelectAll;
 
+        /// <summary>
+        /// TextChanged is too chatty and buggy, use this event instead.
+        /// </summary>
+        [Category("Standard Scintilla")]
+        [Description("Occurs when text has been inserted into or removed from the document.")]
         public event EventHandler TextInsertedOrDeleted;
 
         protected virtual void OnTextInsertedOrDeleted(ScintillaNET.TextModifiedEventArgs e) {
