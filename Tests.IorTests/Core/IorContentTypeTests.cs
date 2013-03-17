@@ -97,7 +97,7 @@ namespace Tests.IorTests {
         public void pretty_print_html() {
             var input = "<html><body>hello world</body></html>";
             var output = IorContentType.GetPrettyPrintedContent(IorMediaTypeCategory.Html, input);
-            output.Should().Be("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">\r\n<html>\r\n    <head>\r\n        <title>\r\n        </title>\r\n    </head>\r\n    <body>\r\n        hello world\r\n    </body>\r\n</html>\r\n");
+            output.Should().Be("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">\r\n<html>\r\n  <head>\r\n    <title>\r\n    </title>\r\n  </head>\r\n  <body>\r\n    hello world\r\n  </body>\r\n</html>\r\n");
         }
 
         [Test]
