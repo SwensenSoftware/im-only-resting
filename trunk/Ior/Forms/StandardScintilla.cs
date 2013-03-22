@@ -26,8 +26,12 @@ namespace Swensen.Ior.Forms {
         public StandardScintilla() : base() {
             initContextMenu();
 
-            this.NativeInterface.SetUseTabs(false); //use spaces for tabs
-            this.NativeInterface.SetTabWidth(2);
+            this.Indentation.IndentWidth = 2;
+            this.Indentation.TabWidth = 2;
+            this.Indentation.UseTabs = false;
+            //this.Indentation.ShowGuides = true;
+            //this.Indentation.BackspaceUnindents = true;
+            //this.Indentation.SmartIndentType = ScintillaNET.SmartIndent.
 
             this.FindReplace.Window.FormBorderStyle = FormBorderStyle.FixedDialog; //so we can actually see the text title
 
