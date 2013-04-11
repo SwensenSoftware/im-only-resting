@@ -1,16 +1,19 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9507BF54-C5F1-4314-BD6F-462F2CD503EC}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AD36E669-B965-4D46-B1C3-28FDDB983EE5}"
 	ProjectSection(SolutionItems) = preProject
 		archive-release.bat = archive-release.bat
+		build.bat = build.bat
+		build.fsx = build.fsx
 		LICENSE = LICENSE
 		NOTICE = NOTICE
 	EndProjectSection
