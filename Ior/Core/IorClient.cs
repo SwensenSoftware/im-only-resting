@@ -20,11 +20,13 @@ namespace Swensen.Ior.Core {
         private readonly string defaultRequestContentType;
         private readonly string proxyServer;
         private readonly bool includeUtf8Bom;
+        private readonly bool followRedirects;
 
-        public IorClient(string defaultRequestContentType, string proxyServer, bool includeUtf8Bom) {
+        public IorClient(string defaultRequestContentType, string proxyServer, bool includeUtf8Bom, bool followRedirects) {
             this.defaultRequestContentType = defaultRequestContentType;
             this.proxyServer = proxyServer;
             this.includeUtf8Bom = includeUtf8Bom;
+            this.followRedirects = followRedirects;
         }
 
         /// <summary>
@@ -37,7 +39,10 @@ namespace Swensen.Ior.Core {
         public CancellationTokenSource ExecuteAsync(RequestModel requestModel, Action<ResponseModel> callback) {
             //todo: add using statements for disposible objects
 
-            var handler = new HttpClientHandler();
+            var handler = new HttpClientHandler {
+                AllowAutoRedirect = followRedirects
+            };
+
             if (!proxyServer.IsBlank()) {
                 handler.Proxy = new WebProxy(proxyServer, false); //make second arg a config option.
                 handler.UseProxy = true;

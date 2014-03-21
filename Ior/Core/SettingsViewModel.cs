@@ -97,6 +97,14 @@ namespace Swensen.Ior.Core {
         }
 
         [Category("Request")]
+        [DisplayName("Follow Redirects")]
+        [Description("Indicates whether or not redirects should be followed.")]
+        public bool FollowRedirects {
+            get { return settings.FollowRedirects; }
+            set { settings.FollowRedirects = value; }
+        }
+
+        [Category("Request")]
         [DisplayName("Proxy Server")]
         [Description("Proxy server used by requests. If blank, no proxy server is used.")]
         public string ProxyServer {
