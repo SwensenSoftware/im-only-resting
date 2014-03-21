@@ -24,7 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsDialog));
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -37,7 +36,7 @@
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnSave);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(0, 269);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 335);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(741, 35);
             this.pnlButtons.TabIndex = 0;
@@ -91,7 +90,7 @@
             this.pgridOptions.Location = new System.Drawing.Point(0, 0);
             this.pgridOptions.Name = "pgridOptions";
             this.pgridOptions.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.pgridOptions.Size = new System.Drawing.Size(741, 269);
+            this.pgridOptions.Size = new System.Drawing.Size(741, 335);
             this.pgridOptions.TabIndex = 1;
             this.pgridOptions.ToolbarVisible = false;
             // 
@@ -107,10 +106,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 304);
+            this.ClientSize = new System.Drawing.Size(741, 370);
             this.Controls.Add(this.pgridOptions);
             this.Controls.Add(this.pnlButtons);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "SettingsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
