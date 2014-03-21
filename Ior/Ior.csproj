@@ -37,9 +37,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SlowCheetahTargets Condition=" '$(SlowCheetahTargets)'=='' ">$(LOCALAPPDATA)\Microsoft\MSBuild\SlowCheetah\v1\SlowCheetah.Transforms.targets</SlowCheetahTargets>
-  </PropertyGroup>
-  <PropertyGroup>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
@@ -145,19 +142,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="logo.ico" />
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <TransformOnBuild>true</TransformOnBuild>
+    <Content Include="NLog.config" />
+    <Content Include="NLog.Debug.config">
+      <DependentUpon>NLog.config</DependentUpon>
     </Content>
-    <None Include="NLog.Debug.config">
+    <Content Include="NLog.Release.config">
       <DependentUpon>NLog.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="NLog.Release.config">
-      <DependentUpon>NLog.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
+    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -184,7 +175,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -192,4 +182,16 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
+  <Target Name="AfterCompile" Condition="exists('NLog.$(Configuration).config')">
+      <!-- Generate transformed NLog.config in the intermediate directory -->
+      <TransformXml Source="NLog.config" Destination="$(IntermediateOutputPath)NLog.config" Transform="NLog.$(Configuration).config" />
+      <!-- Force build process to use the transformed configuration file from now on. -->
+      <ItemGroup>
+          <AppConfigWithTargetPath Remove="NLog.config" />
+          <AppConfigWithTargetPath Include="$(IntermediateOutputPath)NLog.config">
+              <TargetPath>NLog.config</TargetPath>
+          </AppConfigWithTargetPath>
+      </ItemGroup>
+  </Target>
 </Project>
