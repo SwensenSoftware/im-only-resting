@@ -1,4 +1,4 @@
-#summary User guide.
+#summary User guide including installation instructions.
 #labels Featured
 
 = Introduction =
