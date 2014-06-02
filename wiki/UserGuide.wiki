@@ -5,6 +5,10 @@
 
 I'm Only Resting is a feature-rich WinForms-based HTTP client.
 
+= Installation =
+
+Extract archive to any location and run im-only-resting.exe (tip: if you have a previous version installed, extract to the same location to keep your settings). Requires .NET 4.0 or above.
+
 = User Interface =
 
 The user interface consists of a menu-bar (with menu-items often referred to as "commands" in this document) and a split-panel with one side containing the request interface and one side containing the response interface. Note that the split panel may toggle between horizontal and vertical orientation by double-clicking it.
