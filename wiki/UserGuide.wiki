@@ -7,7 +7,7 @@ I'm Only Resting is a feature-rich WinForms-based HTTP client.
 
 = Installation =
 
-Extract archive to any location and run im-only-resting.exe (tip: if you have a previous version installed, extract to the same location to keep your settings). Requires .NET 4.0 or above.
+Extract zip from the [https://code.google.com/p/im-only-resting/wiki/Downloads?tm=2 Downloads] page to any location and run im-only-resting.exe (tip: if you have a previous version installed, extract to the same location to keep your settings). Requires .NET 4.0 or above.
 
 = User Interface =
 
