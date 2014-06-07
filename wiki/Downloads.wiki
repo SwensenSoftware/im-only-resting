@@ -2,4 +2,4 @@
 
 As of 2014, Google Code no longer offers download hosting.
 
-Downloads are now hosted by [http://www.swensensoftware.com Swensen Software] at http://www.swensensoftware.com/im-only-resting/downloads.
+[http://www.swensensoftware.com/im-only-resting, Downloads are now hosted by Swensen Software].
