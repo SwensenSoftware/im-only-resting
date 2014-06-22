@@ -70,7 +70,7 @@ namespace Swensen.Ior.Forms
                 setUpFileDialogs();
                 ActiveControl = txtRequestUrl;
             } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
-                log.FatalException("Exception in main, shutting down", ex);
+                log.Fatal("Exception in main, shutting down", ex);
                 showError("Error", "Unknown error, shutting down: " + Environment.NewLine + Environment.NewLine + ex.ToString());
                 this.Close();
             }
@@ -259,7 +259,7 @@ namespace Swensen.Ior.Forms
                         })
                     );
                 } catch (Exception ex) {
-                    log.ErrorException("There was an error executing the request", ex);
+                    log.Error("There was an error executing the request", ex);
                     showError("Error", "There was an error executing the request: " + Environment.NewLine + Environment.NewLine + ex.ToString());
 
                     //reset the response view (i.e. roll-back loading message")

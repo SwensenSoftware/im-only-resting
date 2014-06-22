@@ -57,7 +57,7 @@ namespace Swensen.Ior.Forms
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
-            log.FatalException(String.Format("Unhandled AppDomain exception, IsTerminating={0}", e.IsTerminating), (Exception) e.ExceptionObject);
+            log.Fatal(String.Format("Unhandled AppDomain exception, IsTerminating={0}", e.IsTerminating), (Exception) e.ExceptionObject);
         }
 
 
