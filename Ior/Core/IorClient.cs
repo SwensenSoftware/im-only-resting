@@ -38,9 +38,11 @@ namespace Swensen.Ior.Core {
         /// <returns></returns>
         public CancellationTokenSource ExecuteAsync(RequestModel requestModel, Action<ResponseModel> callback) {
             //todo: add using statements for disposible objects
+            var hasCookies = requestModel.RequestHeaders.ContainsKey("cookie");
 
             var handler = new HttpClientHandler {
-                AllowAutoRedirect = followRedirects
+                AllowAutoRedirect = followRedirects,
+                UseCookies = hasCookies
             };
 
             if (!proxyServer.IsBlank()) {
@@ -56,6 +58,12 @@ namespace Swensen.Ior.Core {
 
             foreach (var header in requestModel.RequestHeaders)
                 request.Headers.Add(header.Key, header.Value);
+
+            if (hasCookies) {
+                foreach (var ch in requestModel.RequestHeaders) {
+                    handler.CookieContainer.Add(requestModel.Url, new Cookie(ch.Key, ch.Value));
+                }
+            }
 
             if (requestModel.Method != HttpMethod.Get) {
                 //default content-type: http://mattryall.net/blog/2008/03/default-content-type
