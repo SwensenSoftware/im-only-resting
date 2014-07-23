@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 using TidyManaged;
 using System.IO;
+using NLog;
 
 namespace Swensen.Ior.Core {
     /// <summary>
@@ -23,6 +24,8 @@ namespace Swensen.Ior.Core {
     /// like pretty printing and choosing correct file extensions.
     /// </summary>
     public class IorContentType {
+        private static Logger log = LogManager.GetCurrentClassLogger();
+
         private readonly ContentType ct;
         
         public readonly string MediaType;
@@ -126,7 +129,8 @@ namespace Swensen.Ior.Core {
                     default:
                         return content;
                 }
-            } catch {
+            } catch (Exception ex) {
+                log.Warn("Failed content conversion", ex);       
                 return content;
             }
         }
