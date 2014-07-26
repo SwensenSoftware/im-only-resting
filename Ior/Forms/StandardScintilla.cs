@@ -11,18 +11,6 @@ namespace Swensen.Ior.Forms {
         MenuItem miDelete;
         MenuItem miSelectAll;
 
-        /// <summary>
-        /// TextChanged is too chatty and buggy, use this event instead.
-        /// </summary>
-        [Category("Standard Scintilla")]
-        [Description("Occurs when text has been inserted into or removed from the document.")]
-        public event EventHandler TextInsertedOrDeleted;
-
-        protected virtual void OnTextInsertedOrDeleted(ScintillaNET.TextModifiedEventArgs e) {
-            EventHandler handler = TextInsertedOrDeleted;
-            if (handler != null) handler(this, e);
-        }
-
         public StandardScintilla() : base() {
             initContextMenu();
 
@@ -37,16 +25,6 @@ namespace Swensen.Ior.Forms {
 
             this.ConfigurationManager.Language = "js"; //not a bad default language
             this.ConfigurationManager.Configure();
-        }
-
-        protected override void OnTextDeleted(ScintillaNET.TextModifiedEventArgs e) {
-            base.OnTextDeleted(e);
-            OnTextInsertedOrDeleted(e);
-        }
-
-        protected override void OnTextInserted(ScintillaNET.TextModifiedEventArgs e) {
-            base.OnTextInserted(e);
-            OnTextInsertedOrDeleted(e);
         }
 
         private void initContextMenu() {
@@ -134,7 +112,5 @@ namespace Swensen.Ior.Forms {
                 SuspendReadonly(() => base.Text = value);
             }
         }
-
-
     }
 }

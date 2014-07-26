@@ -431,11 +431,11 @@ namespace Swensen.Ior.Forms
             return MessageBox.Show(this, text, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
         }
 
-        private void txtRequestBody_TextInsertedOrDeleted(object sender, EventArgs e) {
+        private void txtRequestBody_TextChanged(object sender, EventArgs e) {
             setIsLastOpenedRequestFileDirtyToTrue();
         }
 
-        private void txtRequestHeaders_TextInsertedOrDeleted(object sender, EventArgs e) {
+        private void txtRequestHeaders_TextChanged(object sender, EventArgs e) {
             setIsLastOpenedRequestFileDirtyToTrue();
         }
 
