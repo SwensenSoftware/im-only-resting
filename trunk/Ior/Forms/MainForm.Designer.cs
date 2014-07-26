@@ -185,7 +185,7 @@
             this.txtRequestBody.Styles.LineNumber.Size = 7F;
             this.txtRequestBody.Styles.Max.Size = 7F;
             this.txtRequestBody.TabIndex = 0;
-            this.txtRequestBody.TextInsertedOrDeleted += new System.EventHandler(this.txtRequestBody_TextInsertedOrDeleted);
+            this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
             // 
             // pnlTopHalfOfRequest
             // 
@@ -232,7 +232,7 @@
             this.txtRequestHeaders.Name = "txtRequestHeaders";
             this.txtRequestHeaders.Size = new System.Drawing.Size(289, 130);
             this.txtRequestHeaders.TabIndex = 6;
-            this.txtRequestHeaders.TextInsertedOrDeleted += new System.EventHandler(this.txtRequestHeaders_TextInsertedOrDeleted);
+            this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
             // 
             // grpHttpMethod
             // 
