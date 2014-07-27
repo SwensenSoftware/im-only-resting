@@ -14,7 +14,7 @@ namespace Swensen.Ior.Forms
 {
     public partial class LogViewer : Form
     {
-        private List<LogLineModel> logLines = new List<LogLineModel>();
+        private List<LogMessageModel> logMessages = new List<LogMessageModel>();
         private string logFilePath = String.Format("logs{0}log.txt", Path.DirectorySeparatorChar);
 
         public LogViewer()
@@ -25,21 +25,13 @@ namespace Swensen.Ior.Forms
         private void LogViewer_Load(object sender, EventArgs e)
         {
             readLogLines();
-            writeLogLines();
-            txtLogViewer.Scrolling.ScrollToLine(txtLogViewer.Lines.Count-1);
+            renderLogMessages();
+            //txtLogViewer.Scrolling.ScrollToLine(txtLogViewer.Lines.Count-1);
         }
 
         private void readLogLines() {
             try { 
-                //can't use File.ReadAllText since file is locked by NLog
-                using (var fileStream = new FileStream(logFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                using (var textReader = new StreamReader(fileStream, Encoding.UTF8))
-                {
-                    while (!textReader.EndOfStream) {
-                        var content = textReader.ReadLine();
-                        logLines.Add(new LogLineModel(content + Environment.NewLine));
-                    }
-                }
+                logMessages = LogMessageModel.ParseAllMessages(logFilePath);
             }
             catch {
                 MessageBox.Show(String.Format("Could not load {0}, the file may not exist", logFilePath), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -47,10 +39,13 @@ namespace Swensen.Ior.Forms
             }
         }
 
-        private void writeLogLines() {
+        /// <summary>
+        /// Render all log messages from newest to oldest.
+        /// </summary>
+        private void renderLogMessages() {
             txtLogViewer.SuspendReadonly(() => {
-                foreach(var ll in logLines) {
-                    txtLogViewer.AppendText(ll.Text);
+                foreach(var ll in logMessages) {
+                    txtLogViewer.InsertText(0, ll.Message);
                 }
             });
         }
