@@ -14,6 +14,7 @@ namespace Swensen.Ior.Forms
 {
     public partial class LogViewer : Form
     {
+        private static readonly Logger log = LogManager.GetCurrentClassLogger();
         private List<LogMessageModel> logMessages = new List<LogMessageModel>();
         private string logFilePath = String.Format("logs{0}log.txt", Path.DirectorySeparatorChar);
 
@@ -33,8 +34,9 @@ namespace Swensen.Ior.Forms
             try { 
                 logMessages = LogMessageModel.ParseAllMessages(logFilePath);
             }
-            catch {
+            catch (Exception ex) {
                 MessageBox.Show(String.Format("Could not load {0}, the file may not exist", logFilePath), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                log.Error(ex);
                 this.Close();
             }
         }
