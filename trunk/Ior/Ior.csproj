@@ -142,10 +142,6 @@
       <Link>SciLexer.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\lib\scintilla\SciLexer64.dll">
-      <Link>SciLexer64.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="..\lib\tidy\libtidy.dll">
       <Link>libtidy.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
