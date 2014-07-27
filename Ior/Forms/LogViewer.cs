@@ -25,6 +25,7 @@ namespace Swensen.Ior.Forms
 
         private void LogViewer_Load(object sender, EventArgs e)
         {
+            txtLogViewer.DisableReplace();
             readLogLines();
             renderLogMessages();
             //txtLogViewer.Scrolling.ScrollToLine(txtLogViewer.Lines.Count-1);
