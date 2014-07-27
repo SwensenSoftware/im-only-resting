@@ -21,7 +21,7 @@ namespace Swensen.Ior.Core
                 StringBuilder curBuilder = null;
                 LogMessageModel curMessage = null;
                 //commit current message, if any
-                Action commitMessage = () => {
+                Action commitCurMessage = () => {
                     if(curBuilder != null && curMessage != null)
                         curMessage.Message = curBuilder.ToString();
                 };
@@ -29,7 +29,7 @@ namespace Swensen.Ior.Core
                     var logLine = textReader.ReadLine();
                     var logLevel = parseLogLevel(logLine);
                     if (logLevel != null) { 
-                        commitMessage();
+                        commitCurMessage();
 
                         //start new message
                         curMessage = new LogMessageModel { Level = logLevel };
@@ -40,7 +40,7 @@ namespace Swensen.Ior.Core
                         curBuilder.AppendLine(logLine);
                     }
                 }
-                commitMessage();
+                commitCurMessage();
 
                 return logMessages;
             }
