@@ -26,6 +26,7 @@ namespace Swensen.Ior.Forms
         {
             readLogLines();
             writeLogLines();
+            txtLogViewer.Scrolling.ScrollToLine(txtLogViewer.Lines.Count-1);
         }
 
         private void readLogLines() {
@@ -49,7 +50,7 @@ namespace Swensen.Ior.Forms
         private void writeLogLines() {
             txtLogViewer.SuspendReadonly(() => {
                 foreach(var ll in logLines) {
-                    txtLogViewer.InsertText(0, ll.Text);
+                    txtLogViewer.AppendText(ll.Text);
                 }
             });
         }

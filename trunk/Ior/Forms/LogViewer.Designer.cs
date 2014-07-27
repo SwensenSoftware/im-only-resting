@@ -53,7 +53,7 @@
             this.txtLogViewer.Lexing.StreamCommentSufix = " */";
             this.txtLogViewer.Location = new System.Drawing.Point(0, 0);
             this.txtLogViewer.Name = "txtLogViewer";
-            this.txtLogViewer.Size = new System.Drawing.Size(622, 297);
+            this.txtLogViewer.Size = new System.Drawing.Size(800, 297);
             this.txtLogViewer.Styles.BraceBad.FontName = "Courier New";
             this.txtLogViewer.Styles.BraceBad.Size = 10F;
             this.txtLogViewer.Styles.BraceLight.Bold = true;
@@ -80,7 +80,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 297);
+            this.ClientSize = new System.Drawing.Size(800, 297);
             this.Controls.Add(this.txtLogViewer);
             this.Name = "LogViewer";
             this.Text = "LogViewer";
