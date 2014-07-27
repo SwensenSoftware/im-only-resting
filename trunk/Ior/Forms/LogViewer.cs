@@ -24,8 +24,12 @@ namespace Swensen.Ior.Forms
                 using (var fileStream = new FileStream(@"logs/log.txt", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 using (var textReader = new StreamReader(fileStream, Encoding.UTF8))
                 {
-                    var content = textReader.ReadToEnd();
-                    txtLogViewer.Text = content;
+                    txtLogViewer.SuspendReadonly(() => {
+                        while (!textReader.EndOfStream) {
+                            var content = textReader.ReadLine();
+                            txtLogViewer.InsertText(0, content + System.Environment.NewLine);
+                        }
+                    });
                 }
             }
             catch {
