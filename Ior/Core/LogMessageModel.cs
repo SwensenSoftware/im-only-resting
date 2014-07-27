@@ -46,23 +46,23 @@ namespace Swensen.Ior.Core
             }
         }
 
+        private static List<LogLevel> logLevelNames = new List<LogLevel> { 
+            LogLevel.Debug,
+            LogLevel.Error,
+            LogLevel.Fatal,
+            LogLevel.Info,
+            LogLevel.Trace,
+            LogLevel.Warn
+        };
+        private static String logLevelPattern = String.Join("|", logLevelNames);
+
+        private static Regex logLineRegex = new Regex(
+            @"\] \[(" + logLevelPattern + @")\] \{", 
+            RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant
+        );
+
         private static LogLevel parseLogLevel(string logLine) {
-            var logLevelNames = new List<LogLevel> { 
-                LogLevel.Debug,
-                LogLevel.Error,
-                LogLevel.Fatal,
-                LogLevel.Info,
-                LogLevel.Trace,
-                LogLevel.Warn
-            };
-
-            var logLevelPattern = String.Join("|", logLevelNames);
-            var match = Regex.Match(
-                logLine, 
-                @"\] \[(" + logLevelPattern + @")\] \{", 
-                RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant
-            );
-
+            var match = logLineRegex.Match(logLine);
             if(match.Success)
                 return LogLevel.FromString(match.Groups[1].Value);
             else
