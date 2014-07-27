@@ -104,5 +104,10 @@ namespace Swensen.Ior.Forms {
         private void AboutBox_Load(object sender, EventArgs e) {
 
         }
+
+        private void btnPayPal_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXSPTXDPECJ9L");
+        }
     }
 }
