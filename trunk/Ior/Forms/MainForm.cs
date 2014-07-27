@@ -591,5 +591,14 @@ namespace Swensen.Ior.Forms
         private void txtRequestUrl_TextChanged(object sender, EventArgs e) {
             setIsLastOpenedRequestFileDirtyToTrue();
         }
+
+        private void viewLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using(var box = new LogViewer())
+            {
+                box.StartPosition = FormStartPosition.CenterParent;
+                box.ShowDialog(this);
+            }
+        }
     }
 }

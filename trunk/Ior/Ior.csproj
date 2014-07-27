@@ -90,6 +90,12 @@
     <Compile Include="Core\IorClient.cs" />
     <Compile Include="Core\IorContentType.cs" />
     <Compile Include="Forms\ControlHelpers.cs" />
+    <Compile Include="Forms\LogViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LogViewer.Designer.cs">
+      <DependentUpon>LogViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StandardScintilla.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LogViewer.resx">
+      <DependentUpon>LogViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
