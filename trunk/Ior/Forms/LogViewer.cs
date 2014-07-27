@@ -49,8 +49,27 @@ namespace Swensen.Ior.Forms
             txtLogViewer.SuspendReadonly(() => {
                 foreach(var ll in logMessages) {
                     txtLogViewer.InsertText(0, ll.Message);
+                    var marker = txtLogViewer.Lines[0].AddMarker(ll.Level.Ordinal);
+                    marker.Marker.BackColor = getMarkerBackColor(ll.Level);
                 }
             });
+        }
+
+        private static Color getMarkerBackColor(LogLevel ll) {
+            if(ll == LogLevel.Fatal)
+                return Color.Red;
+            else if(ll == LogLevel.Error)
+                return Color.Orange;
+            else if(ll == LogLevel.Warn)
+                return Color.Yellow;
+            else if(ll == LogLevel.Info)
+                return Color.Blue;
+            else if (ll == LogLevel.Debug)
+                return Color.Gray;
+            else if (ll == LogLevel.Trace)
+                return Color.Black;
+            else
+                return Color.White;
         }
     }
 }
