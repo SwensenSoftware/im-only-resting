@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\LogLineModel.cs" />
     <Compile Include="Core\RequestResponseSnapshot.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
