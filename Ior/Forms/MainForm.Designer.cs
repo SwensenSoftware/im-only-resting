@@ -31,11 +31,9 @@
             this.splitterMain = new System.Windows.Forms.SplitContainer();
             this.grpRequest = new System.Windows.Forms.GroupBox();
             this.grpBody = new System.Windows.Forms.GroupBox();
-            this.txtRequestBody = new Swensen.Ior.Forms.StandardScintilla();
             this.pnlTopHalfOfRequest = new System.Windows.Forms.Panel();
             this.pnlRequestMethodAndHeaders = new System.Windows.Forms.Panel();
             this.grpHeaders = new System.Windows.Forms.GroupBox();
-            this.txtRequestHeaders = new Swensen.Ior.Forms.StandardScintilla();
             this.grpHttpMethod = new System.Windows.Forms.GroupBox();
             this.rbHttpTrace = new System.Windows.Forms.RadioButton();
             this.rbHttpHead = new System.Windows.Forms.RadioButton();
@@ -46,7 +44,6 @@
             this.rbHttpPost = new System.Windows.Forms.RadioButton();
             this.pnlRequestUrlAndButtons = new System.Windows.Forms.Panel();
             this.pnlUrl = new System.Windows.Forms.Panel();
-            this.txtRequestUrl = new Swensen.Ior.Forms.StandardTextBox();
             this.lblUrl = new System.Windows.Forms.Label();
             this.btnRequestButtons = new System.Windows.Forms.Panel();
             this.btnClearRequest = new System.Windows.Forms.Button();
@@ -55,7 +52,6 @@
             this.tcResponse = new System.Windows.Forms.TabControl();
             this.tpResponseText = new System.Windows.Forms.TabPage();
             this.pnlResponseContent = new System.Windows.Forms.Panel();
-            this.txtResponseText = new Swensen.Ior.Forms.StandardScintilla();
             this.grpResponseBodyOutput = new System.Windows.Forms.GroupBox();
             this.rbResponseBodyOutputBrowser = new System.Windows.Forms.RadioButton();
             this.rbResponseBodyOutputPretty = new System.Windows.Forms.RadioButton();
@@ -91,17 +87,19 @@
             this.requestSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.requestOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.txtRequestBody = new Swensen.Ior.Forms.StandardScintilla();
+            this.txtRequestHeaders = new Swensen.Ior.Forms.StandardScintilla();
+            this.txtRequestUrl = new Swensen.Ior.Forms.StandardTextBox();
+            this.txtResponseText = new Swensen.Ior.Forms.StandardScintilla();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
             this.splitterMain.SuspendLayout();
             this.grpRequest.SuspendLayout();
             this.grpBody.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRequestBody)).BeginInit();
             this.pnlTopHalfOfRequest.SuspendLayout();
             this.pnlRequestMethodAndHeaders.SuspendLayout();
             this.grpHeaders.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRequestHeaders)).BeginInit();
             this.grpHttpMethod.SuspendLayout();
             this.pnlRequestUrlAndButtons.SuspendLayout();
             this.pnlUrl.SuspendLayout();
@@ -110,7 +108,6 @@
             this.tcResponse.SuspendLayout();
             this.tpResponseText.SuspendLayout();
             this.pnlResponseContent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtResponseText)).BeginInit();
             this.grpResponseBodyOutput.SuspendLayout();
             this.tpResponseHeaders.SuspendLayout();
             this.pnlResponseStatusAndTime.SuspendLayout();
@@ -118,6 +115,9 @@
             this.pnlResponseStatus.SuspendLayout();
             this.pnlResponseTime.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequestBody)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequestHeaders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtResponseText)).BeginInit();
             this.SuspendLayout();
             // 
             // splitterMain
@@ -169,34 +169,6 @@
             this.grpBody.TabStop = false;
             this.grpBody.Text = "Body";
             // 
-            // txtRequestBody
-            // 
-            this.txtRequestBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRequestBody.Location = new System.Drawing.Point(3, 16);
-            this.txtRequestBody.Margin = new System.Windows.Forms.Padding(2);
-            this.txtRequestBody.Name = "txtRequestBody";
-            this.txtRequestBody.Size = new System.Drawing.Size(348, 298);
-            this.txtRequestBody.Styles.BraceBad.FontName = "Verdana\0\0\0\0";
-            this.txtRequestBody.Styles.BraceBad.Size = 7F;
-            this.txtRequestBody.Styles.BraceLight.FontName = "Verdana\0\0\0\0";
-            this.txtRequestBody.Styles.BraceLight.Size = 7F;
-            this.txtRequestBody.Styles.CallTip.FontName = "Segoe UI\0\0\0";
-            this.txtRequestBody.Styles.ControlChar.FontName = "Verdana\0\0\0\0";
-            this.txtRequestBody.Styles.ControlChar.Size = 7F;
-            this.txtRequestBody.Styles.Default.BackColor = System.Drawing.SystemColors.Window;
-            this.txtRequestBody.Styles.Default.FontName = "Verdana\0\0\0\0";
-            this.txtRequestBody.Styles.Default.Size = 7F;
-            this.txtRequestBody.Styles.IndentGuide.FontName = "Verdana\0\0\0\0";
-            this.txtRequestBody.Styles.IndentGuide.Size = 7F;
-            this.txtRequestBody.Styles.LastPredefined.FontName = "Verdana\0\0\0\0";
-            this.txtRequestBody.Styles.LastPredefined.Size = 7F;
-            this.txtRequestBody.Styles.LineNumber.FontName = "Verdana\0\0\0\0";
-            this.txtRequestBody.Styles.LineNumber.Size = 7F;
-            this.txtRequestBody.Styles.Max.FontName = "Verdana\0\0\0\0";
-            this.txtRequestBody.Styles.Max.Size = 7F;
-            this.txtRequestBody.TabIndex = 0;
-            this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
-            // 
             // pnlTopHalfOfRequest
             // 
             this.pnlTopHalfOfRequest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -230,25 +202,6 @@
             this.grpHeaders.TabIndex = 6;
             this.grpHeaders.TabStop = false;
             this.grpHeaders.Text = "Headers";
-            // 
-            // txtRequestHeaders
-            // 
-            this.txtRequestHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRequestHeaders.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRequestHeaders.Location = new System.Drawing.Point(3, 16);
-            this.txtRequestHeaders.Name = "txtRequestHeaders";
-            this.txtRequestHeaders.Size = new System.Drawing.Size(217, 106);
-            this.txtRequestHeaders.Styles.BraceBad.FontName = "Verdana\0";
-            this.txtRequestHeaders.Styles.BraceLight.FontName = "Verdana\0";
-            this.txtRequestHeaders.Styles.ControlChar.FontName = "Verdana\0";
-            this.txtRequestHeaders.Styles.Default.BackColor = System.Drawing.SystemColors.Window;
-            this.txtRequestHeaders.Styles.Default.FontName = "Verdana\0";
-            this.txtRequestHeaders.Styles.IndentGuide.FontName = "Verdana\0";
-            this.txtRequestHeaders.Styles.LastPredefined.FontName = "Verdana\0";
-            this.txtRequestHeaders.Styles.LineNumber.FontName = "Verdana\0";
-            this.txtRequestHeaders.Styles.Max.FontName = "Verdana\0";
-            this.txtRequestHeaders.TabIndex = 6;
-            this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
             // 
             // grpHttpMethod
             // 
@@ -367,18 +320,6 @@
             this.pnlUrl.Size = new System.Drawing.Size(260, 33);
             this.pnlUrl.TabIndex = 6;
             // 
-            // txtRequestUrl
-            // 
-            this.txtRequestUrl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtRequestUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
-            this.txtRequestUrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRequestUrl.Location = new System.Drawing.Point(29, 6);
-            this.txtRequestUrl.Margin = new System.Windows.Forms.Padding(2);
-            this.txtRequestUrl.Name = "txtRequestUrl";
-            this.txtRequestUrl.Size = new System.Drawing.Size(225, 20);
-            this.txtRequestUrl.TabIndex = 1;
-            this.txtRequestUrl.TextChanged += new System.EventHandler(this.txtRequestUrl_TextChanged);
-            // 
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
@@ -473,26 +414,6 @@
             this.pnlResponseContent.Padding = new System.Windows.Forms.Padding(3);
             this.pnlResponseContent.Size = new System.Drawing.Size(326, 377);
             this.pnlResponseContent.TabIndex = 15;
-            // 
-            // txtResponseText
-            // 
-            this.txtResponseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtResponseText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtResponseText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResponseText.IsReadOnly = true;
-            this.txtResponseText.Location = new System.Drawing.Point(3, 3);
-            this.txtResponseText.Name = "txtResponseText";
-            this.txtResponseText.Size = new System.Drawing.Size(320, 371);
-            this.txtResponseText.Styles.BraceBad.FontName = "Verdana\0";
-            this.txtResponseText.Styles.BraceLight.FontName = "Verdana\0";
-            this.txtResponseText.Styles.ControlChar.FontName = "Verdana\0";
-            this.txtResponseText.Styles.Default.BackColor = System.Drawing.SystemColors.Window;
-            this.txtResponseText.Styles.Default.FontName = "Verdana\0";
-            this.txtResponseText.Styles.IndentGuide.FontName = "Verdana\0";
-            this.txtResponseText.Styles.LastPredefined.FontName = "Verdana\0";
-            this.txtResponseText.Styles.LineNumber.FontName = "Verdana\0";
-            this.txtResponseText.Styles.Max.FontName = "Verdana\0";
-            this.txtResponseText.TabIndex = 14;
             // 
             // grpResponseBodyOutput
             // 
@@ -802,7 +723,7 @@
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Text = "&Help";
             // 
             // viewLogToolStripMenuItem
             // 
@@ -838,6 +759,85 @@
             this.responseBodySaveFileDialog.Filter = "All files|*.*";
             this.responseBodySaveFileDialog.RestoreDirectory = true;
             // 
+            // txtRequestBody
+            // 
+            this.txtRequestBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestBody.Location = new System.Drawing.Point(3, 16);
+            this.txtRequestBody.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRequestBody.Name = "txtRequestBody";
+            this.txtRequestBody.Size = new System.Drawing.Size(348, 298);
+            this.txtRequestBody.Styles.BraceBad.FontName = "Verdana\0\0\0\0";
+            this.txtRequestBody.Styles.BraceBad.Size = 7F;
+            this.txtRequestBody.Styles.BraceLight.FontName = "Verdana\0\0\0\0";
+            this.txtRequestBody.Styles.BraceLight.Size = 7F;
+            this.txtRequestBody.Styles.CallTip.FontName = "Segoe UI\0\0\0";
+            this.txtRequestBody.Styles.ControlChar.FontName = "Verdana\0\0\0\0";
+            this.txtRequestBody.Styles.ControlChar.Size = 7F;
+            this.txtRequestBody.Styles.Default.BackColor = System.Drawing.SystemColors.Window;
+            this.txtRequestBody.Styles.Default.FontName = "Verdana\0\0\0\0";
+            this.txtRequestBody.Styles.Default.Size = 7F;
+            this.txtRequestBody.Styles.IndentGuide.FontName = "Verdana\0\0\0\0";
+            this.txtRequestBody.Styles.IndentGuide.Size = 7F;
+            this.txtRequestBody.Styles.LastPredefined.FontName = "Verdana\0\0\0\0";
+            this.txtRequestBody.Styles.LastPredefined.Size = 7F;
+            this.txtRequestBody.Styles.LineNumber.FontName = "Verdana\0\0\0\0";
+            this.txtRequestBody.Styles.LineNumber.Size = 7F;
+            this.txtRequestBody.Styles.Max.FontName = "Verdana\0\0\0\0";
+            this.txtRequestBody.Styles.Max.Size = 7F;
+            this.txtRequestBody.TabIndex = 0;
+            this.txtRequestBody.TextChanged += new System.EventHandler(this.txtRequestBody_TextChanged);
+            // 
+            // txtRequestHeaders
+            // 
+            this.txtRequestHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestHeaders.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRequestHeaders.Location = new System.Drawing.Point(3, 16);
+            this.txtRequestHeaders.Name = "txtRequestHeaders";
+            this.txtRequestHeaders.Size = new System.Drawing.Size(217, 106);
+            this.txtRequestHeaders.Styles.BraceBad.FontName = "Verdana\0";
+            this.txtRequestHeaders.Styles.BraceLight.FontName = "Verdana\0";
+            this.txtRequestHeaders.Styles.ControlChar.FontName = "Verdana\0";
+            this.txtRequestHeaders.Styles.Default.BackColor = System.Drawing.SystemColors.Window;
+            this.txtRequestHeaders.Styles.Default.FontName = "Verdana\0";
+            this.txtRequestHeaders.Styles.IndentGuide.FontName = "Verdana\0";
+            this.txtRequestHeaders.Styles.LastPredefined.FontName = "Verdana\0";
+            this.txtRequestHeaders.Styles.LineNumber.FontName = "Verdana\0";
+            this.txtRequestHeaders.Styles.Max.FontName = "Verdana\0";
+            this.txtRequestHeaders.TabIndex = 6;
+            this.txtRequestHeaders.TextChanged += new System.EventHandler(this.txtRequestHeaders_TextChanged);
+            // 
+            // txtRequestUrl
+            // 
+            this.txtRequestUrl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtRequestUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
+            this.txtRequestUrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRequestUrl.Location = new System.Drawing.Point(29, 6);
+            this.txtRequestUrl.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRequestUrl.Name = "txtRequestUrl";
+            this.txtRequestUrl.Size = new System.Drawing.Size(225, 20);
+            this.txtRequestUrl.TabIndex = 1;
+            this.txtRequestUrl.TextChanged += new System.EventHandler(this.txtRequestUrl_TextChanged);
+            // 
+            // txtResponseText
+            // 
+            this.txtResponseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtResponseText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtResponseText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResponseText.IsReadOnly = true;
+            this.txtResponseText.Location = new System.Drawing.Point(3, 3);
+            this.txtResponseText.Name = "txtResponseText";
+            this.txtResponseText.Size = new System.Drawing.Size(320, 371);
+            this.txtResponseText.Styles.BraceBad.FontName = "Verdana\0";
+            this.txtResponseText.Styles.BraceLight.FontName = "Verdana\0";
+            this.txtResponseText.Styles.ControlChar.FontName = "Verdana\0";
+            this.txtResponseText.Styles.Default.BackColor = System.Drawing.SystemColors.Window;
+            this.txtResponseText.Styles.Default.FontName = "Verdana\0";
+            this.txtResponseText.Styles.IndentGuide.FontName = "Verdana\0";
+            this.txtResponseText.Styles.LastPredefined.FontName = "Verdana\0";
+            this.txtResponseText.Styles.LineNumber.FontName = "Verdana\0";
+            this.txtResponseText.Styles.Max.FontName = "Verdana\0";
+            this.txtResponseText.TabIndex = 14;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -857,11 +857,9 @@
             this.splitterMain.ResumeLayout(false);
             this.grpRequest.ResumeLayout(false);
             this.grpBody.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtRequestBody)).EndInit();
             this.pnlTopHalfOfRequest.ResumeLayout(false);
             this.pnlRequestMethodAndHeaders.ResumeLayout(false);
             this.grpHeaders.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtRequestHeaders)).EndInit();
             this.grpHttpMethod.ResumeLayout(false);
             this.grpHttpMethod.PerformLayout();
             this.pnlRequestUrlAndButtons.ResumeLayout(false);
@@ -873,7 +871,6 @@
             this.tcResponse.ResumeLayout(false);
             this.tpResponseText.ResumeLayout(false);
             this.pnlResponseContent.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtResponseText)).EndInit();
             this.grpResponseBodyOutput.ResumeLayout(false);
             this.grpResponseBodyOutput.PerformLayout();
             this.tpResponseHeaders.ResumeLayout(false);
@@ -886,6 +883,9 @@
             this.pnlResponseTime.PerformLayout();
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequestBody)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequestHeaders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtResponseText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
