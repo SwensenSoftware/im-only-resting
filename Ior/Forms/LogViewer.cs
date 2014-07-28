@@ -47,12 +47,33 @@ namespace Swensen.Ior.Forms
         /// </summary>
         private void renderLogMessages() {
             txtLogViewer.SuspendReadonly(() => {
-                foreach(var ll in logMessages) {
-                    txtLogViewer.InsertText(0, ll.Message);
-                    var marker = txtLogViewer.Lines[0].AddMarker(ll.Level.Ordinal);
-                    marker.Marker.BackColor = getMarkerBackColor(ll.Level);
+                txtLogViewer.Text = "";
+                foreach(var lm in logMessages) {
+                    if(!isCheckedLogLevel(lm.Level))
+                        continue;
+
+                    txtLogViewer.InsertText(0, lm.Message);
+                    var marker = txtLogViewer.Lines[0].AddMarker(lm.Level.Ordinal);
+                    marker.Marker.BackColor = getMarkerBackColor(lm.Level);
                 }
             });
+        }
+
+        private bool isCheckedLogLevel(LogLevel ll) {
+            if(ll == LogLevel.Fatal && cbFatal.Checked)
+                return true;
+            if(ll == LogLevel.Error && cbError.Checked)
+                return true;
+            if(ll == LogLevel.Warn && cbWarn.Checked)
+                return true;
+            if(ll == LogLevel.Info && cbInfo.Checked)
+                return true;
+            if(ll == LogLevel.Debug && cbDebug.Checked)
+                return true;
+            if(ll == LogLevel.Trace && cbTrace.Checked)
+                return true;
+            else
+                return false;
         }
 
         private static Color getMarkerBackColor(LogLevel ll) {
@@ -70,6 +91,11 @@ namespace Swensen.Ior.Forms
                 return Color.Black;
             else
                 return Color.White;
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            renderLogMessages();
         }
     }
 }
