@@ -8,6 +8,7 @@ namespace Swensen.Ior.Forms {
         MenuItem miRedo;
         MenuItem miCut;
         MenuItem miCopy;
+        MenuItem miPaste;
         MenuItem miDelete;
         MenuItem miSelectAll;
 
@@ -46,7 +47,10 @@ namespace Swensen.Ior.Forms {
                 this.miCopy = new MenuItem("Copy", (s, ea) => this.Clipboard.Copy());
                 cm.MenuItems.Add(miCopy);
             }
-            cm.MenuItems.Add(new MenuItem("Paste", (s, ea) => this.Clipboard.Paste()));
+            {
+                this.miPaste = new MenuItem("Paste", (s, ea) => this.Clipboard.Paste());
+                cm.MenuItems.Add(miPaste);
+            }
             {
                 this.miDelete = new MenuItem("Delete", (s, ea) => this.NativeInterface.ReplaceSel(""));
                 cm.MenuItems.Add(miDelete);
@@ -62,9 +66,10 @@ namespace Swensen.Ior.Forms {
             if (e.Button == MouseButtons.Right) {
                 miUndo.Enabled = this.UndoRedo.CanUndo;
                 miRedo.Enabled = this.UndoRedo.CanRedo;
-                miCut.Enabled = this.Clipboard.CanCut;
+                miCut.Enabled = !this.IsReadOnly && this.Clipboard.CanCut;
                 miCopy.Enabled = this.Clipboard.CanCopy;
-                miDelete.Enabled = this.Selection.Length > 0;
+                miPaste.Enabled = !this.IsReadOnly && this.Clipboard.CanPaste;
+                miDelete.Enabled = !this.IsReadOnly && this.Selection.Length > 0;
                 miSelectAll.Enabled = this.TextLength > 0 && this.TextLength != this.Selection.Length;
             }
             else
