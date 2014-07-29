@@ -300,7 +300,8 @@ namespace Swensen.Ior.Forms
             lnkCancelRequest.Visible = responseVm.Status == ResponseModel.Loading.Status;
 
             txtResponseHeaders.Text = responseVm.Headers;
-            lblResponseTimeValue.Text = responseVm.ElapsedTime;
+            var elapsedMs = responseVm.ElapsedMilliseconds;
+            lblResponseTimeValue.Text = elapsedMs == 0 ? "" : elapsedMs + " ms";
             
             updateResponseBodyOutput();
         }

@@ -80,7 +80,7 @@ namespace Swensen.Ior.Core {
 
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
-        public string ElapsedTime { get { return (End - Start).Milliseconds + " ms"; } }
+        public long ElapsedMilliseconds { get { return (End - Start).Milliseconds ; } }
 
         public string Status { get; private set; }
 
