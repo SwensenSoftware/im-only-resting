@@ -25,6 +25,9 @@ namespace Swensen.Ior.Forms {
     partial class AboutBox : Form {
         public AboutBox() {
             InitializeComponent();
+        }
+
+        private void AboutBox_Load(object sender, EventArgs e) {
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
@@ -99,10 +102,6 @@ namespace Swensen.Ior.Forms {
 
         private void linkDescription_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             System.Diagnostics.Process.Start(linkDescription.Text);
-        }
-
-        private void AboutBox_Load(object sender, EventArgs e) {
-
         }
 
         private void btnPayPal_Click(object sender, EventArgs e)
