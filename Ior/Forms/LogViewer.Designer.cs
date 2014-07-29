@@ -203,7 +203,7 @@
             this.Controls.Add(this.txtLogViewer);
             this.Controls.Add(this.filterPanel);
             this.Name = "LogViewer";
-            this.Text = "LogViewer";
+            this.Text = "Log Viewer";
             this.Load += new System.EventHandler(this.LogViewer_Load);
             this.filterPanel.ResumeLayout(false);
             this.filterPanel.PerformLayout();
