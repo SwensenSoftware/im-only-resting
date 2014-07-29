@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogViewer));
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.filterPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cbFatal = new System.Windows.Forms.CheckBox();
             this.cbError = new System.Windows.Forms.CheckBox();
@@ -39,26 +39,26 @@
             this.cbTrace = new System.Windows.Forms.CheckBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.txtLogViewer = new Swensen.Ior.Forms.StandardScintilla();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtLogViewer)).BeginInit();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // filterPanel
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.cbFatal);
-            this.flowLayoutPanel1.Controls.Add(this.cbError);
-            this.flowLayoutPanel1.Controls.Add(this.cbWarn);
-            this.flowLayoutPanel1.Controls.Add(this.cbInfo);
-            this.flowLayoutPanel1.Controls.Add(this.cbDebug);
-            this.flowLayoutPanel1.Controls.Add(this.cbTrace);
-            this.flowLayoutPanel1.Controls.Add(this.btnRefresh);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(800, 26);
-            this.flowLayoutPanel1.TabIndex = 3;
+            this.filterPanel.AutoSize = true;
+            this.filterPanel.Controls.Add(this.label1);
+            this.filterPanel.Controls.Add(this.cbFatal);
+            this.filterPanel.Controls.Add(this.cbError);
+            this.filterPanel.Controls.Add(this.cbWarn);
+            this.filterPanel.Controls.Add(this.cbInfo);
+            this.filterPanel.Controls.Add(this.cbDebug);
+            this.filterPanel.Controls.Add(this.cbTrace);
+            this.filterPanel.Controls.Add(this.btnRefresh);
+            this.filterPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.filterPanel.Location = new System.Drawing.Point(0, 0);
+            this.filterPanel.Name = "filterPanel";
+            this.filterPanel.Size = new System.Drawing.Size(800, 26);
+            this.filterPanel.TabIndex = 3;
             // 
             // label1
             // 
@@ -201,12 +201,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 297);
             this.Controls.Add(this.txtLogViewer);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.filterPanel);
             this.Name = "LogViewer";
             this.Text = "LogViewer";
             this.Load += new System.EventHandler(this.LogViewer_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.filterPanel.ResumeLayout(false);
+            this.filterPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtLogViewer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -215,7 +215,7 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel filterPanel;
         private StandardScintilla txtLogViewer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbFatal;

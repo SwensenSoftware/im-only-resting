@@ -25,5 +25,10 @@ namespace Swensen.Utils {
         public static IEnumerable<T> Force<T>(this IEnumerable<T> input) {
             return input.ToList().AsReadOnly().AsEnumerable();
         }
+
+        public static void Each<T>(this IEnumerable<T> input, Action<T> f) {
+            foreach(var x in input)
+                f(x);
+        }
     }
 }
