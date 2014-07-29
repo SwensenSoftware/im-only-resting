@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.IO;
 using NLog;
 using Swensen.Ior.Core;
+using Swensen.Ior.Properties;
+using Swensen.Utils;
 
 namespace Swensen.Ior.Forms
 {
@@ -25,10 +27,34 @@ namespace Swensen.Ior.Forms
 
         private void LogViewer_Load(object sender, EventArgs e)
         {
+            bindCbGroupLogLevels();
+            bindSettings();
             txtLogViewer.DisableReplace();
             readLogLines();
             renderLogMessages();
             //txtLogViewer.Scrolling.ScrollToLine(txtLogViewer.Lines.Count-1);
+        }
+
+        private IEnumerable<CheckBox> cbGrpLogLevels { get { return filterPanel.Controls.OfType<CheckBox>(); } }
+
+        private void bindCbGroupLogLevels() {
+            cbFatal.Tag = LogLevel.Fatal;
+            cbError.Tag = LogLevel.Error;
+            cbWarn.Tag = LogLevel.Warn;
+            cbInfo.Tag = LogLevel.Info;
+            cbDebug.Tag = LogLevel.Debug;
+            cbTrace.Tag = LogLevel.Trace;
+        }
+
+        private void bindSettings() {
+            var settings = Settings.Default;
+            cbGrpLogLevels.Each(cb => {
+                if(settings.LogViewerLevelFilter.Contains(cb.Tag.ToString()))
+                    cb.Checked = true;
+                else
+                    cb.Checked = false;
+
+            });
         }
 
         private void readLogLines() {
@@ -96,6 +122,9 @@ namespace Swensen.Ior.Forms
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             renderLogMessages();
+            var checkedLogLevels = cbGrpLogLevels.Where(cb => cb.Checked).Select(cb => cb.Tag.ToString()); 
+            Settings.Default.LogViewerLevelFilter = String.Join("|", checkedLogLevels);
+            Settings.Default.Save();
         }
     }
 }
