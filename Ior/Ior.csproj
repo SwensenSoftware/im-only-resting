@@ -113,6 +113,11 @@
       <DependentUpon>SettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Program.cs" />
+    <Compile Include="Properties\HistorySettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>HistorySettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\RequestViewModel.cs" />
     <Compile Include="Core\RequestModel.cs" />
@@ -123,6 +128,7 @@
     <Compile Include="Forms\StandardTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Properties\HistorySettings.cs" />
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -162,6 +168,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <TransformOnBuild>true</TransformOnBuild>
     </Content>
+    <None Include="Properties\HistorySettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>HistorySettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="NLog.Debug.config">
       <DependentUpon>NLog.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
