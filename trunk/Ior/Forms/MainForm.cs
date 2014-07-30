@@ -11,6 +11,8 @@ using Swensen.Utils;
 using Swensen.Ior.Core;
 using Swensen.Ior.Properties;
 using NLog;
+using System.Xml;
+using System.Xml.Serialization;
 
 //examples response types:
 //xml: http://www.w3schools.com/xml/note.asp
@@ -54,6 +56,7 @@ namespace Swensen.Ior.Forms
         {                           
             try {
                 Settings.Default.UpgradeAndSaveIfNeeded();
+                HistorySettings.Default.UpgradeAndSaveIfNeeded();
                 
                 txtRequestHeaders.FindReplace.Window.Text = "Find / Replace - Request Headers";
                 txtRequestHeaders.Margins[0].Width = 12;
@@ -67,12 +70,39 @@ namespace Swensen.Ior.Forms
                 bindResponseBodyOutputs();
                 bindHttpMethods();
                 bindSettings();
+                bindHistorySettings();
                 setUpFileDialogs();
                 ActiveControl = txtRequestUrl;
             } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
                 log.Fatal("Exception in main, shutting down", ex);
                 showError("Error", "Unknown error, shutting down: " + Environment.NewLine + Environment.NewLine + ex.ToString());
                 this.Close();
+            }
+        }
+
+        private void bindHistorySettings() {
+            try {
+                var rs = new XmlReaderSettings {IgnoreWhitespace = false};
+                var xml = HistorySettings.Default.HistoryList;
+                using (var stream = new MemoryStream(System.Text.Encoding.Unicode.GetBytes(xml))) 
+                using (var reader = XmlReader.Create(stream, rs)) { 
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<RequestViewModel>), new XmlRootAttribute("History"));
+                    var results = (List<RequestViewModel>)serializer.Deserialize(reader);
+                    results.Reverse<RequestViewModel>().Each(rvm => {
+                        var snapshot = new RequestResponseSnapshot {
+                            request = rvm,
+                            response = ResponseModel.Empty
+                        };
+                        snapshots.Add(snapshot);
+                    });
+                    bindSnapshots();
+                }
+            } catch(Exception ex) {
+                log.Error(ex);
+                var historySettings = Properties.HistorySettings.Default;
+                historySettings.HistoryList = "<History></History>";
+                historySettings.Save();
+                showError("Error - I'm Only Resting", "Error loading History due to possible data corruption. Your History has been cleared in order to ensure normal application function.");
             }
         }
 
@@ -483,6 +513,20 @@ namespace Swensen.Ior.Forms
             Settings.Default.Save();
         }
 
+        private void persistHistorySettings() {
+            var historySettings = Properties.HistorySettings.Default;
+            var rvms = snapshots.Select(snapshot => snapshot.request).ToList();
+            var ws = new XmlWriterSettings {NewLineHandling = NewLineHandling.Entitize};
+            using (var output = new StringWriter())
+            using (var writer = XmlWriter.Create(output, ws)) {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<RequestViewModel>), new XmlRootAttribute("History"));
+                serializer.Serialize(writer, rvms);
+                var xml = output.ToString();
+                historySettings.HistoryList = xml;
+                historySettings.Save();
+            }
+        }
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             if (this.isLastOpenedRequestFileDirty) {
                 var msg = lastOpenedRequestFilePath.IsBlank() ? 
@@ -498,10 +542,13 @@ namespace Swensen.Ior.Forms
                 } //else is No; follow through to the end
             }
 
-            //swallow
             try {
                 persistGuiSettings();
-            } catch { }
+                persistHistorySettings();
+            } catch(Exception ex) { 
+                log.Error(ex);
+                //intentional swallow, it is non-critical to persist settings
+            }
         }
 
         //hack!
