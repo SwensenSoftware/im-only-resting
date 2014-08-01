@@ -22,6 +22,7 @@ namespace Swensen.Ior.Forms
     public partial class MainForm : Form
     {
         private static readonly Logger log = LogManager.GetCurrentClassLogger();
+        private static Bitmap cameraIconAsBitmap = Properties.Resources.Camera.ToBitmap();
 
         /// <summary>
         /// We dynamically create and add a webbrowser object each time due to quirky behavior otherwise (only works first Navigate in some cases).
@@ -315,14 +316,26 @@ namespace Swensen.Ior.Forms
                     var mi = snapshotsToolStripMenuItem.DropDownItems.Add(snapshot.request.Url.ToString());
                     mi.ToolTipText = snapshot.response.Start.ToString() + " - Status: " + snapshot.response.Status;
                     if(snapshot.response != ResponseModel.Empty)
-                        mi.Image = Properties.Resources.Camera.ToBitmap();
+                        mi.Image = cameraIconAsBitmap;
 
                     var freshSnapshotPointer = snapshot; //otherwise the closure captures the single snapshot pointer, which always ends up being the last item
                     mi.Click += (sender, e) => bind(freshSnapshotPointer);
                 }
+                snapshotsToolStripMenuItem.DropDownItems.Add("-");
+                var miClear = snapshotsToolStripMenuItem.DropDownItems.Add("Clear");
+                miClear.Click += (sender, e) => clearSnapshots();
+
             } else {
                 snapshotsToolStripMenuItem.Enabled = false;
             }
+        }
+
+        private void clearSnapshots() {
+            var historySettings =  Properties.HistorySettings.Default;
+            historySettings.HistoryList = "<History></History>";
+            historySettings.Save();
+            snapshots.Clear();
+            bindSnapshots();
         }
 
         private void bind(ResponseModel responseVm) {

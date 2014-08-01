@@ -49,6 +49,10 @@ namespace Swensen.Utils {
             ensureMaxHistory();
         }
 
+        public void Clear() {
+            list.Clear();
+        }
+
         public int Count { get { return list.Count; } }
 
         public IEnumerator<T> GetEnumerator() {
