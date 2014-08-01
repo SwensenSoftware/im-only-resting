@@ -135,8 +135,8 @@ namespace Swensen.Ior.Core {
         }
 
         [Category("User Interface")]
-        [DisplayName("Max Snapshots")]
-        [Description("The maximum number of request / response snapshots to persist during the current session.")]
+        [DisplayName("Max History")]
+        [Description("The maximum request history and response snapshots to store.")]
         public ushort MaxSnapshots {
             get { return settings.MaxSnapshots; }
             set { settings.MaxSnapshots = value; }
