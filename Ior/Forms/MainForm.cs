@@ -314,6 +314,9 @@ namespace Swensen.Ior.Forms
                 foreach (var snapshot in snapshots) {
                     var mi = snapshotsToolStripMenuItem.DropDownItems.Add(snapshot.request.Url.ToString());
                     mi.ToolTipText = snapshot.response.Start.ToString() + " - Status: " + snapshot.response.Status;
+                    if(snapshot.response != ResponseModel.Empty)
+                        mi.Image = Properties.Resources.Camera.ToBitmap();
+
                     var freshSnapshotPointer = snapshot; //otherwise the closure captures the single snapshot pointer, which always ends up being the last item
                     mi.Click += (sender, e) => bind(freshSnapshotPointer);
                 }
