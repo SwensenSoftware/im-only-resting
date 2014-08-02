@@ -80,8 +80,6 @@ The `File -> Open`, `File -> Save...`, and `File -> Save As...` commands are use
 
 The `File -> Export Response Body...` command is used for save the _raw_ content bytes of a response.  The default file dialog used by this command may be set by the "Export Response Body File Dialog Folder" setting.
 
-The `File -> Snapshots ->` contains a list of request and response snapshots which are taken every time a request is submitting and the response is received. Selecting one of these snapshots will repopulate the request and response views at the time the snapshot was taken. The maximum number of snapshots which are remembered is set by the "Max Snapshots" setting. Snapshots only last for the current running application instance.
-
 = Content Encoding =
 
 The character encoding used for content is determined by the content-type header's charset parameter. e.g. `content-type: text/plain; charset=utf-16le` indicates that the content should be encoded as utf-16 little endian with no bom.
@@ -102,6 +100,8 @@ We enumerate the rules here:
 = History and Snapshots =
 
 Request history and response "snapshots" are captured after every request / response is submitted and received. These are accessed via the History menu item (which can be quickly opened with the ALT+H key combo). Whereas request history is persisted after an instance of the application is closed, corresponding response snapshots are only kept for the duration of a running application instance. Requests with response snapshots are indicated in the History menu by a camera icon.
+
+The Max History user setting can be used to control how much history is stored. The Clear menu item under the main History menu item may be used to clear all history.
 
 = Log Viewer =
 
