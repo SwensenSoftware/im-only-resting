@@ -99,3 +99,10 @@ We enumerate the rules here:
   * utf-32le - encodes the content as utf-32 little endian with no BOM included
   * other supported encodings do not include a BOM.
   
+= History and Snapshots =
+
+Request history and response "snapshots" are captured after every request / response is submitted and received. These are accessed via the History menu item (which can be quickly opened with the ALT+H key combo). Whereas request history is persisted after an instance of the application is closed, corresponding response snapshots are only kept for the duration of a running application instance. Requests with response snapshots are indicated in the History menu by a camera icon.
+
+= Log Viewer =
+
+Accessed via Tools -> Log Viewer, this feature offers a visual and interactive interface for inspecting the application log file (which is kept under <app location>\logs). This can be helpful for investing why the application might not have behaved in an expected way. For example, if you attempt to format the body of a request message as JSON and it fails, this may be able to tell you why it failed.
