@@ -3,6 +3,17 @@
 
 = Release Notes =
 
+== v1.2.0, 8/1/14 ==
+
+  * Issue 30: Pressing Clear button sets Response Time value to "0ms" - it should just set it to blank
+  * Issue 40: Enhancement: New Setting follow redirects
+  * Issue 41: New Feature: easier interface for re-running queries
+  * Issue 42: Cookie ignored in Headers
+  * Issue 44: Upgrade various 3rd party library dependencies
+  * Issue 45: Write content format failures to log file
+  * Issue 48: New Feature: visual log viewer
+  * Issue 49: New Feature: persistent History to compliment snapshots
+
 == v1.1.1, 3/21/13 ==
 
 This release fixes a regression issue from version 1.1.0 where a newly opened file is marked as modified.
