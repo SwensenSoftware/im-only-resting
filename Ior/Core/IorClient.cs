@@ -39,6 +39,9 @@ namespace Swensen.Ior.Core {
         public CancellationTokenSource ExecuteAsync(RequestModel requestModel, Action<ResponseModel> callback) {
             //todo: add using statements for disposible objects
             var hasCookies = requestModel.RequestHeaders.ContainsKey("cookie");
+            var hasExpect100ContinueHeader = 
+                requestModel.RequestHeaders.ContainsKey("expect") &&
+                requestModel.RequestHeaders["expect"].Equals("100-continue", StringComparison.OrdinalIgnoreCase);
 
             var handler = new HttpClientHandler {
                 AllowAutoRedirect = followRedirects,
@@ -58,6 +61,8 @@ namespace Swensen.Ior.Core {
 
             foreach (var header in requestModel.RequestHeaders)
                 request.Headers.Add(header.Key, header.Value);
+
+            request.Headers.ExpectContinue = hasExpect100ContinueHeader;
 
             if (hasCookies) {
                 foreach (var ch in requestModel.RequestHeaders) {
