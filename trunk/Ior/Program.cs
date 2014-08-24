@@ -20,7 +20,7 @@ using NLog;
 using System.Reflection;
 using System.Drawing;
 
-namespace Swensen.Ior.Forms
+namespace Swensen.Ior
 {
     static class Program
     {
@@ -44,7 +44,7 @@ namespace Swensen.Ior.Forms
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new Forms.MainForm());
         }
 
         //private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) {
@@ -59,7 +59,5 @@ namespace Swensen.Ior.Forms
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
             log.Fatal(String.Format("Unhandled AppDomain exception, IsTerminating={0}", e.IsTerminating), (Exception) e.ExceptionObject);
         }
-
-
     }
 }
