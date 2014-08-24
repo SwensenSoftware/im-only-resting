@@ -372,6 +372,11 @@ namespace Swensen.Ior.Forms
 
         private void btnClearRequest_Click(object sender, EventArgs e)
         {
+            if (isLastOpenedRequestFileDirty) {
+                if(DialogResult.No == showChallenge("Clear", "You have unsaved changes to the current request, are you sure you want to clear them?"))
+                    return;
+            }
+
             setIsLastOpenedRequestFileDirtyToTrue();
             bind(new RequestViewModel());
             bind(ResponseModel.Empty);
