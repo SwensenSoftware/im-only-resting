@@ -18,7 +18,7 @@ namespace Swensen.Ior.Forms
     {
         private static readonly Logger log = LogManager.GetCurrentClassLogger();
         private List<LogMessageModel> logMessages = new List<LogMessageModel>();
-        private string logFilePath = String.Format("logs{0}log.txt", Path.DirectorySeparatorChar);
+        private string logFilePath = String.Format("{1}{0}logs{0}log.txt", Path.DirectorySeparatorChar, AppDomain.CurrentDomain.BaseDirectory);
 
         public LogViewer()
         {

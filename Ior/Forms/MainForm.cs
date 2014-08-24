@@ -48,9 +48,15 @@ namespace Swensen.Ior.Forms
 
         private HistoryList<RequestResponseSnapshot> snapshots;
 
+        private string launchFilePath;
+
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        public MainForm(string launchFilePath) : this() { 
+            this.launchFilePath = launchFilePath;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -119,7 +125,9 @@ namespace Swensen.Ior.Forms
             updateSplitterDistance(); //must come after width and height and orientation updates
             rbGrpResponseBodyOutputs.First(x => (ResponseBodyOutput)x.Tag == Settings.Default.ResponseBodyOutput).Checked = true;
 
-            if (!settings.DefaultRequestFilePath.IsBlank())
+            if (!launchFilePath.IsBlank())
+                openRequestFile(launchFilePath);
+            else if (!settings.DefaultRequestFilePath.IsBlank())
                 openRequestFile(settings.DefaultRequestFilePath);
 
             snapshots = new HistoryList<RequestResponseSnapshot>(Settings.Default.MaxSnapshots);
@@ -431,7 +439,8 @@ namespace Swensen.Ior.Forms
             RequestViewModel requestVm;
             try {
                 requestVm = RequestViewModel.Load(fileName);
-            } catch {
+            } catch(Exception ex) {
+                log.Warn("Error opening request file", ex);
                 showWarning("File Open Error", "Error opening request file");
                 return;
             }
@@ -630,18 +639,15 @@ namespace Swensen.Ior.Forms
                     tb.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Text);
             };
 
-            {
-                var miFx = new MenuItem("Format XML", (s, ea) => format(txtRequestBody, IorMediaTypeCategory.Xml));
-                miFx.Shortcut = Shortcut.CtrlShiftX;
-                miFx.ShowShortcut = true;
-                cm.MenuItems.Add(miFx);
-            } 
-            {
-                var miFj = new MenuItem("Format JSON", (s, ea) => format(txtRequestBody, IorMediaTypeCategory.Json));
-                miFj.Shortcut = Shortcut.CtrlShiftJ;
-                miFj.ShowShortcut = true;
-                cm.MenuItems.Add(miFj);
-            }
+            var miFx = new MenuItem("Format XML", (s, ea) => format(txtRequestBody, IorMediaTypeCategory.Xml));
+            miFx.Shortcut = Shortcut.CtrlShiftX;
+            miFx.ShowShortcut = true;
+            cm.MenuItems.Add(miFx);
+
+            var miFj = new MenuItem("Format JSON", (s, ea) => format(txtRequestBody, IorMediaTypeCategory.Json));
+            miFj.Shortcut = Shortcut.CtrlShiftJ;
+            miFj.ShowShortcut = true;
+            cm.MenuItems.Add(miFj);
         }
 
         private void bind(RequestResponseSnapshot snapshot) {

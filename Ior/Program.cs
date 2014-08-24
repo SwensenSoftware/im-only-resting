@@ -33,6 +33,8 @@ namespace Swensen.Ior
         static void Main()
         {
             log.Info("App starting");
+            var args = Environment.GetCommandLineArgs(); 
+            var launchFilePath = args.Length >= 2 ? args[1] : null;
 
             //set default form icon to project exe icon
             var defaultIcon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
@@ -44,7 +46,7 @@ namespace Swensen.Ior
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.MainForm());
+            Application.Run(new Forms.MainForm(launchFilePath));
         }
 
         //private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) {
