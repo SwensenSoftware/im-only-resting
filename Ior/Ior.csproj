@@ -112,7 +112,7 @@
     <Compile Include="Forms\SettingsDialog.Designer.cs">
       <DependentUpon>SettingsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\HistorySettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
