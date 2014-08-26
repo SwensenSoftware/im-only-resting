@@ -49,6 +49,7 @@ namespace Swensen.Ior.Forms
         private HistoryList<RequestResponseSnapshot> snapshots;
 
         private string launchFilePath;
+        private readonly string programName = "I'm Only Resting";
 
         public MainForm()
         {
@@ -109,7 +110,7 @@ namespace Swensen.Ior.Forms
                 var historySettings = Properties.HistorySettings.Default;
                 historySettings.HistoryList = "<History></History>";
                 historySettings.Save();
-                showError("Error - I'm Only Resting", "Error loading History due to possible data corruption. Your History has been cleared in order to ensure normal application function.");
+                showError("Error - " + programName, "Error loading History due to possible data corruption. Your History has been cleared in order to ensure normal application function.");
             }
         }
 
@@ -370,18 +371,6 @@ namespace Swensen.Ior.Forms
             txtRequestBody.Text = requestVm.Body;
         }
 
-        private void btnClearRequest_Click(object sender, EventArgs e)
-        {
-            if (isLastOpenedRequestFileDirty) {
-                if(DialogResult.No == showChallenge("Clear", "You have unsaved changes to the current request, are you sure you want to clear them?"))
-                    return;
-            }
-
-            setIsLastOpenedRequestFileDirtyToTrue();
-            bind(new RequestViewModel());
-            bind(ResponseModel.Empty);
-        }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
@@ -419,7 +408,10 @@ namespace Swensen.Ior.Forms
         private void updateLastOpenedRequestFile(string fileName) {
             this.lastOpenedRequestFilePath = fileName;
             this.isLastOpenedRequestFileDirty = false;
-            this.Text = FilePathFormatter.Format(fileName, FilePathFormat.ShortFileFullDir) + " - I'm Only Resting";
+            this.Text = 
+                fileName == null ? 
+                programName :
+                FilePathFormatter.Format(fileName, FilePathFormat.ShortFileFullDir) + " - " + programName;
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -557,7 +549,12 @@ namespace Swensen.Ior.Forms
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+        /// <summary>
+        /// Prompt user for save if needed (i.e. user request operation which would
+        /// lose changes)
+        /// </summary>
+        /// <returns>false indicates user cancel</returns>
+        private bool promptForSaveIfNeeded() {
             if (this.isLastOpenedRequestFileDirty) {
                 var msg = lastOpenedRequestFilePath.IsBlank() ? 
                             "Save changes to new request?" : 
@@ -567,9 +564,16 @@ namespace Swensen.Ior.Forms
                 if (result == DialogResult.Yes) {
                     save(lastOpenedRequestFilePath);
                 } else if (result == DialogResult.Cancel) {
-                    e.Cancel = true;
-                    return;
+                    return false;
                 } //else is No; follow through to the end
+            }
+            return true;
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            if (!promptForSaveIfNeeded()) {
+                e.Cancel = true;
+                return;
             }
 
             try {
@@ -674,6 +678,23 @@ namespace Swensen.Ior.Forms
                 box.StartPosition = FormStartPosition.CenterParent;
                 box.ShowDialog(this);
             }
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e) {
+            if(!promptForSaveIfNeeded())
+                return;
+
+            bind(new RequestViewModel());
+            bind(ResponseModel.Empty);
+            updateLastOpenedRequestFile(null);
+        }
+
+        private void newWindowToolStripMenuItem_Click(object sender, EventArgs e) {
+            if(!promptForSaveIfNeeded())
+                return;
+
+            var appPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            System.Diagnostics.Process.Start(appPath);
         }
     }
 }
