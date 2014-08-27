@@ -51,16 +51,14 @@ namespace Swensen.Ior.Core {
                 if (line.IsBlank())
                     continue; //allow empty lines
 
-                var match = Regex.Match(line, @"^([^\:]+)\:([^\:]+)$", RegexOptions.Compiled);
+                var match = Regex.Match(line, @"^([0-9a-zA-Z-]+)\:(.*)$", RegexOptions.Compiled);
                 if (!match.Success)
                     validationErrors.Add("Invalid header line (format incorrect): " + line);
                 else {
 
                     var key = match.Groups[1].Value.Trim();
                     var value = match.Groups[2].Value.Trim();
-                    if (key.IsBlank() || value.IsBlank())
-                        validationErrors.Add("Invalid header line (key or value is blank): " + line);
-                    else if (requestHeaders.ContainsKey(key) || contentHeaders.ContainsKey(key))
+                    if (requestHeaders.ContainsKey(key) || contentHeaders.ContainsKey(key))
                         validationErrors.Add("Invalid header line (duplicate key, comma-separate multiple values for one key): " + line);
                     else {
                         //var values = value.Split(',').Select(x => x.Trim()).ToList().AsReadOnly();
