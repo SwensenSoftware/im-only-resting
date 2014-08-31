@@ -19,8 +19,8 @@ using System.Xml.Serialization;
 //json: http://api.geonames.org/postalCodeLookupJSON?postalcode=6600&country=AT&username=demo
 namespace Swensen.Ior.Forms
 {
-    public partial class MainForm : Form
-    {
+    public partial class MainForm : Form {
+        #region LOG_NOTIFICATIONS
         public delegate void MessageLoggedEventHandler(LogLevel level, string message);
         private static event MessageLoggedEventHandler MessageLogged;
 
@@ -68,6 +68,7 @@ namespace Swensen.Ior.Forms
                 lblLogNotifications.Visible = false;
             });
         }
+        #endregion
 
         private static readonly Logger log = LogManager.GetCurrentClassLogger();
         private static Bitmap cameraIconAsBitmap = Properties.Resources.Camera.ToBitmap();
@@ -316,6 +317,7 @@ namespace Swensen.Ior.Forms
         private void btnSubmitRequest_Click(object sender, EventArgs e)
         {
             resetLogStats();
+
             //build the request view
             var requestVm = buildRequestViewModel();
 
