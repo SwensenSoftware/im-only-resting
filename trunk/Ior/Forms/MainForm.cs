@@ -33,6 +33,9 @@ namespace Swensen.Ior.Forms
         private Dictionary<LogLevel, int> logStats = new Dictionary<LogLevel,int>();
 
         private void updateLogStats(LogLevel level) {
+            if(!this.IsHandleCreated)
+                return;
+
             lock (logStatsSyncRoot) {
                 if(logStats.ContainsKey(level))
                     logStats[level] = logStats[level] + 1;
@@ -40,7 +43,7 @@ namespace Swensen.Ior.Forms
                     logStats[level] = 1;
             }
 
-            this.Invoke((MethodInvoker) delegate {
+            MethodInvoker update = (MethodInvoker) delegate {
                 lock (logStatsSyncRoot) {
                     var labelText = 
                         logStats
@@ -50,7 +53,9 @@ namespace Swensen.Ior.Forms
                     lblLogNotifications.Text = labelText;
                     lblLogNotifications.Visible = true;
                 }
-            });
+            };
+
+            this.BeginInvoke(update);
         }
 
         private void resetLogStats() {
