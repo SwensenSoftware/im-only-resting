@@ -21,6 +21,45 @@ namespace Swensen.Ior.Forms
 {
     public partial class MainForm : Form
     {
+        public delegate void MessageLoggedEventHandler(LogLevel level, string message);
+        private static event MessageLoggedEventHandler MessageLogged;
+
+        public static void LogMessageNotification(string level, string message) {
+            if(MessageLogged != null)
+                MessageLogged(LogLevel.FromString(level), message);
+        }
+
+        private static readonly object logStatsSyncRoot = new object();
+        private Dictionary<LogLevel, int> logStats = new Dictionary<LogLevel,int>();
+
+        private void updateLogStats(LogLevel level) {
+            lock (logStatsSyncRoot) {
+                if(logStats.ContainsKey(level))
+                    logStats[level] = logStats[level] + 1;
+                else
+                    logStats[level] = 1;
+            }
+
+            this.Invoke((MethodInvoker) delegate {
+                lock (logStatsSyncRoot) {
+                    var labelText = logStats.Select(kvp => string.Format("{0}({1})", kvp.Key.ToString().ToLower(), kvp.Value)).Join(" ");
+                    lblLogNotifications.Text = labelText;
+                    lblLogNotifications.Visible = true;
+                }
+            });
+        }
+
+        private void resetLogStats() {
+            lock (logStatsSyncRoot) {
+                logStats.Clear();
+            }
+
+            this.Invoke((MethodInvoker) delegate {
+                lblLogNotifications.Text = "";
+                lblLogNotifications.Visible = false;
+            });
+        }
+
         private static readonly Logger log = LogManager.GetCurrentClassLogger();
         private static Bitmap cameraIconAsBitmap = Properties.Resources.Camera.ToBitmap();
 
@@ -63,6 +102,8 @@ namespace Swensen.Ior.Forms
         private void MainForm_Load(object sender, EventArgs e)
         {                           
             try {
+                MessageLogged += (level, message) => updateLogStats(level);
+
                 Settings.Default.UpgradeAndSaveIfNeeded();
                 HistorySettings.Default.UpgradeAndSaveIfNeeded();
                 
@@ -265,6 +306,7 @@ namespace Swensen.Ior.Forms
 
         private void btnSubmitRequest_Click(object sender, EventArgs e)
         {
+            resetLogStats();
             //build the request view
             var requestVm = buildRequestViewModel();
 
@@ -433,6 +475,7 @@ namespace Swensen.Ior.Forms
         }
 
         private void openRequestFile(string fileName) {
+            resetLogStats();
             RequestViewModel requestVm;
             try {
                 requestVm = RequestViewModel.Load(fileName);
@@ -648,12 +691,12 @@ namespace Swensen.Ior.Forms
                     tb.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Text);
             };
 
-            var miFx = new MenuItem("Format XML", (s, ea) => format(txtRequestBody, IorMediaTypeCategory.Xml));
+            var miFx = new MenuItem("Format XML", (s, ea) => { resetLogStats(); format(txtRequestBody, IorMediaTypeCategory.Xml); });
             miFx.Shortcut = Shortcut.CtrlShiftX;
             miFx.ShowShortcut = true;
             cm.MenuItems.Add(miFx);
 
-            var miFj = new MenuItem("Format JSON", (s, ea) => format(txtRequestBody, IorMediaTypeCategory.Json));
+            var miFj = new MenuItem("Format JSON", (s, ea) => { resetLogStats(); format(txtRequestBody, IorMediaTypeCategory.Json); });
             miFj.Shortcut = Shortcut.CtrlShiftJ;
             miFj.ShowShortcut = true;
             cm.MenuItems.Add(miFj);
@@ -684,6 +727,7 @@ namespace Swensen.Ior.Forms
             if(!promptForSaveIfNeeded())
                 return;
 
+            resetLogStats();
             bind(new RequestViewModel());
             bind(ResponseModel.Empty);
             updateLastOpenedRequestFile(null);
