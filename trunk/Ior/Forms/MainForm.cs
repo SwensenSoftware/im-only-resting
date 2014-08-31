@@ -714,13 +714,16 @@ namespace Swensen.Ior.Forms
             setIsLastOpenedRequestFileDirtyToTrue();
         }
 
-        private void viewLogToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void showLogViewer() {
             using(var box = new LogViewer())
             {
                 box.StartPosition = FormStartPosition.CenterParent;
                 box.ShowDialog(this);
             }
+        }
+
+        private void viewLogToolStripMenuItem_Click(object sender, EventArgs e) {
+            showLogViewer();
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -739,6 +742,11 @@ namespace Swensen.Ior.Forms
 
             var appPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             System.Diagnostics.Process.Start(appPath);
+        }
+
+        private void lblLogNotifications_Click(object sender, EventArgs e) {
+            resetLogStats();
+            showLogViewer();
         }
     }
 }
