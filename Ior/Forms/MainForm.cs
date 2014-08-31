@@ -42,7 +42,11 @@ namespace Swensen.Ior.Forms
 
             this.Invoke((MethodInvoker) delegate {
                 lock (logStatsSyncRoot) {
-                    var labelText = logStats.Select(kvp => string.Format("{0}({1})", kvp.Key.ToString().ToLower(), kvp.Value)).Join(" ");
+                    var labelText = 
+                        logStats
+                        .OrderByDescending(kvp => kvp.Key.Ordinal)
+                        .Select(kvp => string.Format("{0}({1})", kvp.Key.ToString().ToLower(), kvp.Value))
+                        .Join(" ");
                     lblLogNotifications.Text = labelText;
                     lblLogNotifications.Visible = true;
                 }
