@@ -159,7 +159,7 @@ namespace Tests.IorTests {
         public void TryCreate_multiple_errors() {
             var rvm = new RequestViewModel {
                 Body = "",
-                Headers = new string[] { "from : google@google.com", "From: johny", "From: suzy" },
+                Headers = new string[] { "From: johny", "suzy", "no space: there" },
                 Method = HttpMethod.Get.Method,
                 Url = "www.google.com"
             };
@@ -167,7 +167,7 @@ namespace Tests.IorTests {
             RequestModel rm = null;
             var errors = RequestModel.TryCreate(rvm, out rm);
 
-            errors.Should().HaveCount(2);
+            errors.Should().HaveCount(3);
         }
 
         [Test]
