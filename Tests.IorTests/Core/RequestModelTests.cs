@@ -77,7 +77,7 @@ namespace Tests.IorTests {
         }
 
         [Test]
-        public void TryCreate_invalid_header_line_format() {
+        public void TryCreate_valid_header_line_format_value_has_colon() {
             var rvm = new RequestViewModel {
                 Body = "",
                 Headers = new string[] { "invalid : format : header" },
@@ -88,15 +88,16 @@ namespace Tests.IorTests {
             RequestModel rm = null;
             var errors = RequestModel.TryCreate(rvm, out rm);
 
-            errors.Should().HaveCount(1);
-            errors[0].Should().StartWith("Invalid header line (format incorrect)");
+            errors.Should().HaveCount(0);
+            rm.RequestHeaders.First().Key.Should().Be("invalid");
+            rm.RequestHeaders.First().Value.Should().Be("format : header");
         }
 
         [Test]
-        public void TryCreate_invalid_header_line_value_blank() {
+        public void TryCreate_valid_header_line_value_blank() {
             var rvm = new RequestViewModel {
                 Body = "",
-                Headers = new string[] { "invalid : " },
+                Headers = new string[] { "invalid: " },
                 Method = HttpMethod.Get.Method,
                 Url = "www.google.com"
             };
@@ -104,15 +105,14 @@ namespace Tests.IorTests {
             RequestModel rm = null;
             var errors = RequestModel.TryCreate(rvm, out rm);
 
-            errors.Should().HaveCount(1);
-            errors[0].Should().StartWith("Invalid header line (key or value is blank)");
+            errors.Should().HaveCount(0);
         }
 
         [Test]
-        public void TryCreate_invalid_header_line_key_blank() {
+        public void TryCreate_valid_header_line_key_blank() {
             var rvm = new RequestViewModel {
                 Body = "",
-                Headers = new string[] { "invalid : " },
+                Headers = new string[] { "invalid: " },
                 Method = HttpMethod.Get.Method,
                 Url = "www.google.com"
             };
@@ -120,8 +120,7 @@ namespace Tests.IorTests {
             RequestModel rm = null;
             var errors = RequestModel.TryCreate(rvm, out rm);
 
-            errors.Should().HaveCount(1);
-            errors[0].Should().StartWith("Invalid header line (key or value is blank)");
+            errors.Should().HaveCount(0);
         }
 
         [Test]
@@ -160,7 +159,7 @@ namespace Tests.IorTests {
         public void TryCreate_multiple_errors() {
             var rvm = new RequestViewModel {
                 Body = "",
-                Headers = new string[] { "x : ", "From: johny" },
+                Headers = new string[] { "from : google@google.com", "From: johny", "From: suzy" },
                 Method = HttpMethod.Get.Method,
                 Url = "www.google.com"
             };

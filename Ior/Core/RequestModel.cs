@@ -51,7 +51,7 @@ namespace Swensen.Ior.Core {
                 if (line.IsBlank())
                     continue; //allow empty lines
 
-                var match = Regex.Match(line, @"^([0-9a-zA-Z-]+)\:(.*)$", RegexOptions.Compiled);
+                var match = Regex.Match(line, @"^([0-9a-zA-Z\-\s]+)\:(.*)$", RegexOptions.Compiled);
                 if (!match.Success)
                     validationErrors.Add("Invalid header line (format incorrect): " + line);
                 else {
