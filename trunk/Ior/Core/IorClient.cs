@@ -59,16 +59,14 @@ namespace Swensen.Ior.Core {
                 Method = requestModel.Method
             };
 
-            foreach (var header in requestModel.RequestHeaders)
-                request.Headers.Add(header.Key, header.Value);
+            foreach (var header in requestModel.RequestHeaders) {
+                if(header.Key.Equals("cookie", StringComparison.OrdinalIgnoreCase))
+                    handler.CookieContainer.SetCookies(requestModel.Url, header.Value.Replace("; ", ", "));
+                else
+                    request.Headers.Add(header.Key, header.Value);
+            }
 
             request.Headers.ExpectContinue = hasExpect100ContinueHeader;
-
-            if (hasCookies) {
-                foreach (var ch in requestModel.RequestHeaders) {
-                    handler.CookieContainer.Add(requestModel.Url, new Cookie(ch.Key, ch.Value));
-                }
-            }
 
             if (requestModel.Method != HttpMethod.Get) {
                 //default content-type: http://mattryall.net/blog/2008/03/default-content-type
