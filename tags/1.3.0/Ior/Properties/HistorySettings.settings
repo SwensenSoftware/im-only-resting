@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Swensen.Ior.Properties" GeneratedClassName="HistorySettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HistoryList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&lt;History&gt;&lt;/History&gt;</Value>
+    </Setting>
+    <Setting Name="CallUpgrade" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
