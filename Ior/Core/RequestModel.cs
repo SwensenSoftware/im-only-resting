@@ -60,7 +60,9 @@ namespace Swensen.Ior.Core {
                     var value = match.Groups[2].Value.Trim();
                     if (requestHeaders.ContainsKey(key) || contentHeaders.ContainsKey(key))
                         validationErrors.Add("Invalid header line (duplicate key, comma-separate multiple values for one key): " + line);
-                    else {
+                    else if (String.Equals(key, "authorization", StringComparison.OrdinalIgnoreCase) && !url.UserInfo.IsBlank()) {
+                        validationErrors.Add("Invalid header line (Authorization header cannot be specified when user information is given in the url): " + line);
+                    } else {
                         //var values = value.Split(',').Select(x => x.Trim()).ToList().AsReadOnly();
                         //some ugliness to leverage system.net.http request and content header validation
                         var hrhValidator = (HttpRequestHeaders)Activator.CreateInstance(typeof(HttpRequestHeaders), true);
