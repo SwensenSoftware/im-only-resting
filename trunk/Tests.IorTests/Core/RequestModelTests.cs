@@ -228,5 +228,51 @@ namespace Tests.IorTests {
             errors.Should().HaveCount(1);
             errors[0].Should().StartWith("Invalid header line (duplicate key, comma-separate multiple values for one key)");
         }
+
+        [Test]
+        public void TryCreate_invalid_userinfo_and_authorization_header_both_given() {
+            var rvm = new RequestViewModel {
+                Body = "",
+                Headers = new string[] { "Authorization: blabla" },
+                Method = HttpMethod.Get.Method,
+                Url = "john:smith@example.com"
+            };
+
+            RequestModel rm = null;
+            var errors = RequestModel.TryCreate(rvm, out rm);
+
+            errors.Should().HaveCount(1);
+            errors[0].Should().StartWith("Invalid header line (Authorization header cannot be specified when user information is given in the url)");
+        }
+
+        [Test]
+        public void TryCreate_valid_userinfo_given_and_authorization_header_not_given() {
+            var rvm = new RequestViewModel {
+                Body = "",
+                Headers = new string[] {},
+                Method = HttpMethod.Get.Method,
+                Url = "john:smith@example.com"
+            };
+
+            RequestModel rm = null;
+            var errors = RequestModel.TryCreate(rvm, out rm);
+
+            errors.Should().HaveCount(0);
+        }
+
+        [Test]
+        public void TryCreate_valid_userinfo_not_given_and_authorization_header_given() {
+            var rvm = new RequestViewModel {
+                Body = "",
+                Headers = new string[] { "Authorization: blabla"},
+                Method = HttpMethod.Get.Method,
+                Url = "example.com"
+            };
+
+            RequestModel rm = null;
+            var errors = RequestModel.TryCreate(rvm, out rm);
+
+            errors.Should().HaveCount(0);
+        }
     }
 }
