@@ -5,7 +5,7 @@
 
 == v1.3.0, 9/7/14 ==
 
-Various enhancements and bug fixes including support for file associations, basic authorization via url user info, status bar notifications, and a cookie header bug fix.
+Various enhancements and bug fixes including support for file associations, basic authorization via url user info, and status bar notifications.
 
   * Issue 15 Allow associating IOR request files with the app such that opening an IOR file launches it with the file open
   * Issue 22 Add status bar at bottom of form with error notifications
