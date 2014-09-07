@@ -5,6 +5,8 @@
 
 == v1.3.0, 9/7/14 ==
 
+Various enhancements and bug fixes including support for file associations, basic authorization via url user info, status bar notifications, and fixed cookie header formation.
+
   * Issue 15 Allow associating IOR request files with the app such that opening an IOR file launches it with the file open
   * Issue 22 Add status bar at bottom of form with error notifications
   * Issue 26 Add "New" and "New Window" File commands
@@ -14,7 +16,10 @@
   * Issue 51 Overly aggressive header value validation
   * Issue 52 Upgrade to NLog 3.1 which contains an important bug fix
   * Issue 53 Cookie header gets corrupted in actual request
+
 == v1.2.0, 8/1/14 ==
+
+A new Log Viewer, persistent History, and several other improvements. 
 
   * Issue 30: Pressing Clear button sets Response Time value to "0ms" - it should just set it to blank
   * Issue 40: Enhancement: New Setting follow redirects
