@@ -78,5 +78,13 @@ namespace Tests.IorTests {
             var expected = new byte[] { 0x65, 0x63, 0x68, 0x6F };
             actual.ShouldBeEquivalentTo(expected);
         }
+
+        [Test]
+        public void Base64EncodeUrlUserInfo_wikipedia_example_with_space() {
+            var url = new Uri("http://Aladdin:open sesame@example.com");
+            var actual = IorClient.Base64EncodeUrlUserInfo(url);
+            var expected = "QWxhZGRpbjpvcGVuIHNlc2FtZQ==";
+            actual.ShouldBeEquivalentTo(expected);
+        }
     }
 }
