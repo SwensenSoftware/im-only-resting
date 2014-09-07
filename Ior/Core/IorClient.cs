@@ -69,9 +69,7 @@ namespace Swensen.Ior.Core {
             request.Headers.ExpectContinue = hasExpect100ContinueHeader;
 
             if (!requestModel.Url.UserInfo.IsBlank()) {
-                var userInfoUnescaped = Uri.UnescapeDataString(requestModel.Url.UserInfo);
-                var userInfoBase64bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(userInfoUnescaped);
-                var userInfoBase64text = System.Convert.ToBase64String(userInfoBase64bytes);
+                var userInfoBase64text = Base64EncodeUrlUserInfo(requestModel.Url);
                 request.Headers.Authorization = new AuthenticationHeaderValue("Basic", userInfoBase64text);
             }
 
@@ -187,6 +185,18 @@ namespace Swensen.Ior.Core {
             var contentBytes = encoding.GetBytes(content);
             memStream.Write(contentBytes, 0, contentBytes.Length);
             return memStream.ToArray();
+        }
+
+        /// <summary>
+        /// Url decodes the Url.UserInfo then encodes it as base64 string from its ASCII bytes.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        public static string Base64EncodeUrlUserInfo(Uri uri) {
+            var userInfoUnescaped = Uri.UnescapeDataString(uri.UserInfo);
+            var userInfoBase64bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(userInfoUnescaped);
+            var userInfoBase64text = System.Convert.ToBase64String(userInfoBase64bytes);
+            return userInfoBase64text;
         }
     }
 }
