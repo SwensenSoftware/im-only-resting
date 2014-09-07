@@ -68,6 +68,13 @@ namespace Swensen.Ior.Core {
 
             request.Headers.ExpectContinue = hasExpect100ContinueHeader;
 
+            if (!requestModel.Url.UserInfo.IsBlank()) {
+                var userInfoUnescaped = Uri.UnescapeDataString(requestModel.Url.UserInfo);
+                var userInfoBase64bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(userInfoUnescaped);
+                var userInfoBase64text = System.Convert.ToBase64String(userInfoBase64bytes);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", userInfoBase64text);
+            }
+
             if (requestModel.Method != HttpMethod.Get) {
                 //default content-type: http://mattryall.net/blog/2008/03/default-content-type
                 string textCt;
