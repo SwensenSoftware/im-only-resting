@@ -19,7 +19,7 @@ The request panel is used for constructing HTTP requests. Most of the features a
 
 === Url ===
 
-The Url textbox is used for entering the request URL.
+The Url textbox is used for entering the request URL. If a protocol is not given, then http is assumed.
 
 === Method ===
 
