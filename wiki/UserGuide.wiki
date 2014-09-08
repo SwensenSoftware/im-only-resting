@@ -44,8 +44,6 @@ The HTTP content may be entered in the Body text box. The text box context-menu 
 
 The `Submit` button submits the HTTP request asynchronously. The request may be canceled before the response is received by clicking the "cancel" link in the response panel status area. Note that clicking the `Submit` button will validate the request URL and Headers, resulting in an error dialog enumerating the errors if any are detected.
 
-The `Clear` button will clear all form elements in the request panel.
-
 == Response Panel ==
 
 === Status and Time ===
