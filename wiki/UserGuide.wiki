@@ -106,3 +106,5 @@ The Max History user setting can be used to control how much history is stored. 
 = Log Viewer =
 
 Accessed via Tools -> Log Viewer, this feature offers a visual and interactive interface for inspecting the application log file (which is kept under <app location>\logs). This can be helpful for investing why the application might not have behaved in an expected way. For example, if you attempt to format the body of a request message as JSON and it fails, this may be able to tell you why it failed.
+
+Error and Warn level log message notifications may appear in the status bar at the bottom of application window. Clicking on these will open the Log Viewer for further inspection.
