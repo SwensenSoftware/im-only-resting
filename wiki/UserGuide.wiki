@@ -110,3 +110,13 @@ The Max History user setting can be used to control how much history is stored. 
 Accessed via Tools -> Log Viewer, this feature offers a visual and interactive interface for inspecting the application log file (which is kept under <app location>\logs). This can be helpful for investing why the application might not have behaved in an expected way. For example, if you attempt to format the body of a request message as JSON and it fails, this may be able to tell you why it failed.
 
 Error and Warn level log message notifications may appear in the status bar at the bottom of application window. Clicking on these will open the Log Viewer for further inspection.
+
+= Basic Authorization =
+
+Basic Authorization is a form of authorization which involves sending username and password information via the Authorization header. To learn more, see [http://en.wikipedia.org/wiki/Basic_access_authentication Basic Access Authentication].
+
+Currently, IOR does not support responding to 401 authorization challenges. However, it does provide two means for sending authorization information up front.
+
+The first method is to simply hand craft the Authorization header. The down side of this method is that it requires performing the base64 encoding outside of the editor.
+
+The second method is to enter the username and password info in the URL, e.g. http://username:password@example.com. IOR will perform the required base64 encoding and insert the Authorization header when it sees URLs formatted like this. While many HTTP clients such as web browsers support this URL syntax, the downside (and upside) is that the username and password are easily seen in plain text in the request URL.
