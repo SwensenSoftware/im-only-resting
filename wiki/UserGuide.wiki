@@ -76,9 +76,11 @@ Settings are persisted in user local app data, and automatically upgraded with n
 
 There are several modes of request and response persistence.
 
-The `File -> Open`, `File -> Save...`, and `File -> Save As...` commands are used for opening and saving requests.  The default file dialog path used by these commands may be set by the "Save Request File Dialog Folder" setting.
+The `File -> Open`, `File -> Save...`, and `File -> Save As...` commands are used for opening and saving requests as .ior files.  The default file dialog path used by these commands may be set by the "Save Request File Dialog Folder" setting.
 
 The `File -> Export Response Body...` command is used for save the _raw_ content bytes of a response.  The default file dialog path used by this command may be set by the "Export Response Body File Dialog Folder" setting.
+
+A default .ior request file may be specified in the application Settings. It is also possible to associate IOR with .ior files so that double-clicking on an .ior file starts IOR with it open.
 
 = Content Encoding =
 
