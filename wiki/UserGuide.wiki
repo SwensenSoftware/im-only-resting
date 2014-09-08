@@ -3,11 +3,11 @@
 
 = Introduction =
 
-I'm Only Resting is a feature-rich WinForms-based HTTP client.
+I'm Only Resting (IOR) is a feature-rich WinForms-based HTTP client that is well-suited for sending requests to REST APIs. 
 
 = Installation =
 
-Extract featured zip from the [https://code.google.com/p/im-only-resting/wiki/Downloads?tm=2 Downloads] page to any location and run im-only-resting.exe (tip: if you have a previous version installed, extract to the same location to keep your settings). Requires .NET 4.0 or above.
+Extract the featured release zip file from the [https://code.google.com/p/im-only-resting/wiki/Downloads?tm=2 Downloads] page to any location and run im-only-resting.exe (tip: if you have a previous version installed, extract to the same location to keep your settings). Requires .NET 4.0 or above (Windows only).
 
 = User Interface =
 
@@ -33,6 +33,8 @@ The Headers text box allows the entry of request headers. A header is formatted 
 accept: text/xml, text/html
 content-type: text/plain; charset=utf-8
 }}}
+
+Generally, IOR avoids inserting headers in the transmitted request that are not explicitly entered here. Exceptions are Connection: Keep-Alive and Content-Type headers (the Content-Type header is inserted when sending a request with a body, such as a POST, where the Content-Type is not otherwise explicitly entered. The default for the Content-Type header may be set in the Settings).
 
 === Body ===
 
