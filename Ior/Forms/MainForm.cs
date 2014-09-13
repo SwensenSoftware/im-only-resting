@@ -748,9 +748,6 @@ namespace Swensen.Ior.Forms
         }
 
         private void newWindowToolStripMenuItem_Click(object sender, EventArgs e) {
-            if(!promptForSaveIfNeeded())
-                return;
-
             var appPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             System.Diagnostics.Process.Start(appPath);
         }
