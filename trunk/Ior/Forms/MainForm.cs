@@ -624,6 +624,11 @@ namespace Swensen.Ior.Forms
             return true;
         }
 
+        private void persistAllSettings() {
+            persistGuiSettings();
+            persistHistorySettings();
+        }
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             if (!promptForSaveIfNeeded()) {
                 e.Cancel = true;
@@ -631,11 +636,9 @@ namespace Swensen.Ior.Forms
             }
 
             try {
-                persistGuiSettings();
-                persistHistorySettings();
+                persistAllSettings();
             } catch(Exception ex) { 
-                log.Error(ex);
-                //intentional swallow, it is non-critical to persist settings
+                log.Error(ex); //intentional swallow, it is non-critical to persist settings
             }
         }
 
@@ -748,6 +751,8 @@ namespace Swensen.Ior.Forms
         }
 
         private void newWindowToolStripMenuItem_Click(object sender, EventArgs e) {
+            persistAllSettings();
+
             var appPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             System.Diagnostics.Process.Start(appPath);
         }
