@@ -202,5 +202,17 @@ namespace Swensen.Ior.Properties {
                 this["LogViewerLevelFilter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IgnoreSSLValidationErrors {
+            get {
+                return ((bool)(this["IgnoreSSLValidationErrors"]));
+            }
+            set {
+                this["IgnoreSSLValidationErrors"] = value;
+            }
+        }
     }
 }

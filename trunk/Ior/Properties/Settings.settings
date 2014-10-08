@@ -47,5 +47,8 @@
     <Setting Name="LogViewerLevelFilter" Type="System.String" Scope="User">
       <Value Profile="(Default)">Fatal|Error|Warn</Value>
     </Setting>
+    <Setting Name="IgnoreSSLValidationErrors" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
