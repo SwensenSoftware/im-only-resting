@@ -191,7 +191,12 @@ namespace Swensen.Ior.Forms
             var settings = Settings.Default;
 
             if(settings.IgnoreSSLValidationErrors)
-                System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => {
+                    if (errors != System.Net.Security.SslPolicyErrors.None) {
+                        log.Warn("SSL Errors Detected ({0}).\nCertificate:\n{1}", errors, certificate);
+                    }
+                    return true;
+                };
             else
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = null;
 
