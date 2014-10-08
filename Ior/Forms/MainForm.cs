@@ -183,6 +183,18 @@ namespace Swensen.Ior.Forms
                 openRequestFile(settings.DefaultRequestFilePath);
 
             snapshots = new HistoryList<RequestResponseSnapshot>(Settings.Default.MaxSnapshots);
+
+            updateSSLValidationHandler();
+        }
+
+        private void updateSSLValidationHandler() {
+            var settings = Settings.Default;
+
+            if(settings.IgnoreSSLValidationErrors)
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
+            else
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = null;
+
         }
 
         private void setIsLastOpenedRequestFileDirtyToTrue() {
@@ -562,6 +574,7 @@ namespace Swensen.Ior.Forms
                 if (DialogResult.OK == options.ShowDialog(this)) {
                     snapshots.MaxHistory = Settings.Default.MaxSnapshots;
                     bindSnapshots();
+                    updateSSLValidationHandler();
                 }
             }
         }

@@ -120,6 +120,14 @@ namespace Swensen.Ior.Core {
             }
         }
 
+        [Category("Request")]
+        [DisplayName("Ignore SSL Errors")]
+        [Description("Indicates whether or not SSL validation errors should be ignored.")]
+        public bool IgnoreSSLValidationErrors {
+            get { return settings.IgnoreSSLValidationErrors; }
+            set { settings.IgnoreSSLValidationErrors = value; }
+        }
+
         [Category("Response")]
         [DisplayName("Export Response Body File Dialog Folder")]
         [Description("The default folder set for the Export Response Body file dialog. This location gets overwritten automatically whenever a request body is saved to a different location.")]
