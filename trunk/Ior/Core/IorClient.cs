@@ -208,9 +208,9 @@ namespace Swensen.Ior.Core {
         /// <returns></returns>
         public static string Base64EncodeUrlUserInfo(Uri uri) {
             var userInfoUnescaped = Uri.UnescapeDataString(uri.UserInfo);
-            var userInfoBase64bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(userInfoUnescaped);
-            var userInfoBase64text = System.Convert.ToBase64String(userInfoBase64bytes);
-            return userInfoBase64text;
+            var userInfoBase64Bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(userInfoUnescaped);
+            var userInfoBase64Text = System.Convert.ToBase64String(userInfoBase64Bytes);
+            return userInfoBase64Text;
         }
     }
 }
