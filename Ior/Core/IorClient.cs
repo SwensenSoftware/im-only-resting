@@ -83,8 +83,8 @@ namespace Swensen.Ior.Core {
             request.Headers.ExpectContinue = hasExpect100ContinueHeader;
 
             if (!requestModel.Url.UserInfo.IsBlank()) {
-                var userInfoBase64text = Base64EncodeUrlUserInfo(requestModel.Url);
-                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", userInfoBase64text);
+                var userInfoBase64Text = Base64EncodeUrlUserInfo(requestModel.Url);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", userInfoBase64Text);
             }
 
             if (requestModel.Method != HttpMethod.Get) {
