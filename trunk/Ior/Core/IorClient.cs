@@ -65,7 +65,7 @@ namespace Swensen.Ior.Core {
                             handler.AutomaticDecompression |= DecompressionMethods.Deflate;
                             break;
                         default:
-                            log.Warn("Accept-Encoding request header value '{0}' is not supported", enc);
+                            log.Warn("Automatic decompression of '{0}' content specified by the Accept-Encoding request header is not supported", enc);
                             break;
                     }
                 }
