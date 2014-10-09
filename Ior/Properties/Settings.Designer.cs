@@ -214,5 +214,17 @@ namespace Swensen.Ior.Properties {
                 this["IgnoreSslValidationErrors"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableAutomaticContentDecompression {
+            get {
+                return ((bool)(this["EnableAutomaticContentDecompression"]));
+            }
+            set {
+                this["EnableAutomaticContentDecompression"] = value;
+            }
+        }
     }
 }

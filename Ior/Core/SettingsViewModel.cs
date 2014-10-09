@@ -92,14 +92,6 @@ namespace Swensen.Ior.Core {
         }
 
         [Category("Request")]
-        [DisplayName("Follow Redirects")]
-        [Description("Indicates whether or not redirects should be followed.")]
-        public bool FollowRedirects {
-            get { return settings.FollowRedirects; }
-            set { settings.FollowRedirects = value; }
-        }
-
-        [Category("Request")]
         [DisplayName("Proxy Server")]
         [Description("Proxy server used by requests. If blank, no proxy server is used.")]
         public string ProxyServer {
@@ -115,14 +107,6 @@ namespace Swensen.Ior.Core {
             }
         }
 
-        [Category("Request")]
-        [DisplayName("Ignore SSL Validation Errors")]
-        [Description("Indicates whether or not SSL validation errors should be ignored.")]
-        public bool IgnoreSslValidationErrors {
-            get { return settings.IgnoreSslValidationErrors; }
-            set { settings.IgnoreSslValidationErrors = value; }
-        }
-
         [Category("Response")]
         [DisplayName("Export Response Body File Dialog Folder")]
         [Description("The default folder set for the Export Response Body file dialog. This location gets overwritten automatically whenever a request body is saved to a different location.")]
@@ -135,6 +119,30 @@ namespace Swensen.Ior.Core {
                 else
                     settings.ExportResponseFileDialogFolder = (value ?? "").Trim();
             }
+        }
+
+        [Category("Response")]
+        [DisplayName("Follow Redirects")]
+        [Description("Indicates whether or not redirects should be followed.")]
+        public bool FollowRedirects {
+            get { return settings.FollowRedirects; }
+            set { settings.FollowRedirects = value; }
+        }
+
+        [Category("Response")]
+        [DisplayName("Ignore SSL Validation Errors")]
+        [Description("Indicates whether or not SSL validation errors should be ignored.")]
+        public bool IgnoreSslValidationErrors {
+            get { return settings.IgnoreSslValidationErrors; }
+            set { settings.IgnoreSslValidationErrors = value; }
+        }
+
+        [Category("Response")]
+        [DisplayName("Enable Automatic Content Decompression")]
+        [Description("Indicates whether or not gzip and deflate compressed content should be automatically decompressed.")]
+        public bool EnableAutomaticContentDecompression {
+            get { return settings.EnableAutomaticContentDecompression; }
+            set { settings.EnableAutomaticContentDecompression = value; }
         }
 
         [Category("User Interface")]

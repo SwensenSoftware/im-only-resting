@@ -21,12 +21,14 @@ namespace Swensen.Ior.Core {
         private readonly string proxyServer;
         private readonly bool includeUtf8Bom;
         private readonly bool followRedirects;
+        private readonly bool enableAutomaticContentDecompression;
 
-        public IorClient(string defaultRequestContentType, string proxyServer, bool includeUtf8Bom, bool followRedirects) {
+        public IorClient(string defaultRequestContentType, string proxyServer, bool includeUtf8Bom, bool followRedirects, bool enableAutomaticContentDecompression) {
             this.defaultRequestContentType = defaultRequestContentType;
             this.proxyServer = proxyServer;
             this.includeUtf8Bom = includeUtf8Bom;
             this.followRedirects = followRedirects;
+            this.enableAutomaticContentDecompression = enableAutomaticContentDecompression;
         }
 
         /// <summary>
@@ -53,17 +55,19 @@ namespace Swensen.Ior.Core {
                 handler.UseProxy = true;
             }
 
-            foreach(var enc in requestModel.AcceptEncodings) {
-                switch (enc) {
-                    case "gzip":
-                        handler.AutomaticDecompression |= DecompressionMethods.GZip;
-                        break;
-                    case "deflate":
-                        handler.AutomaticDecompression |= DecompressionMethods.Deflate;
-                        break;
-                    default:
-                        log.Warn("Accept-Encoding request header value '{0}' is not supported", enc);
-                        break;
+            if (enableAutomaticContentDecompression) {
+                foreach (var enc in requestModel.AcceptEncodings) {
+                    switch (enc) {
+                        case "gzip":
+                            handler.AutomaticDecompression |= DecompressionMethods.GZip;
+                            break;
+                        case "deflate":
+                            handler.AutomaticDecompression |= DecompressionMethods.Deflate;
+                            break;
+                        default:
+                            log.Warn("Accept-Encoding request header value '{0}' is not supported", enc);
+                            break;
+                    }
                 }
             }
 
