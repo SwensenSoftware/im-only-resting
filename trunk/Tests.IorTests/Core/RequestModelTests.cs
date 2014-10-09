@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http;
-using System.Text;
 using NUnit.Framework;
 using Swensen.Ior.Core;
-using Swensen.Utils;
 using FluentAssertions;
 
 namespace Tests.IorTests {
@@ -273,6 +269,23 @@ namespace Tests.IorTests {
             var errors = RequestModel.TryCreate(rvm, out rm);
 
             errors.Should().HaveCount(0);
+        }
+
+        [Test]
+        public void TryCreate_accept_encoding() {
+            var rvm = new RequestViewModel {
+                Body = "",
+                Headers = new string[] { "accept-ENCODING: gzip, ,,deflate, deflate, john"},
+                Method = HttpMethod.Get.Method,
+                Url = "example.com"
+            };
+
+            RequestModel rm = null;
+            var errors = RequestModel.TryCreate(rvm, out rm);
+
+            errors.Should().HaveCount(0);
+            rm.AcceptEncodings.Should().HaveCount(3);
+            rm.AcceptEncodings.Should().Contain("gzip", "deflate", "john");
         }
     }
 }
