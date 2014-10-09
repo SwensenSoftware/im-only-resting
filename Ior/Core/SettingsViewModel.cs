@@ -12,11 +12,6 @@ using Swensen.Utils;
 
 namespace Swensen.Ior.Core {
 
-    //possible attributes
-    //[Category("Test")]
-    //[DisplayName("Test Property")]
-    //[Description("This is the description that shows up")]
-
     /// <summary>
     /// View model for Settings to bind to the property grid.
     /// </summary>
@@ -89,7 +84,7 @@ namespace Swensen.Ior.Core {
         }
 
         [Category("Request")]
-        [DisplayName("Encode UTF-8 content with BOM")]
+        [DisplayName("Encode UTF-8 Content with BOM")]
         [Description("Indicates whether or not UTF-8 content should be encoded with the optional BOM.")]
         public bool IncludeBomInUtf8RequestContent {
             get { return settings.IncludeBomInUtf8RequestContent; }
@@ -121,11 +116,11 @@ namespace Swensen.Ior.Core {
         }
 
         [Category("Request")]
-        [DisplayName("Ignore SSL Errors")]
+        [DisplayName("Ignore SSL Validation Errors")]
         [Description("Indicates whether or not SSL validation errors should be ignored.")]
-        public bool IgnoreSSLValidationErrors {
-            get { return settings.IgnoreSSLValidationErrors; }
-            set { settings.IgnoreSSLValidationErrors = value; }
+        public bool IgnoreSslValidationErrors {
+            get { return settings.IgnoreSslValidationErrors; }
+            set { settings.IgnoreSslValidationErrors = value; }
         }
 
         [Category("Response")]
