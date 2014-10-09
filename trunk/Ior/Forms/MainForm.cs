@@ -190,10 +190,10 @@ namespace Swensen.Ior.Forms
         private void updateSSLValidationHandler() {
             var settings = Settings.Default;
 
-            if(settings.IgnoreSSLValidationErrors)
+            if(settings.IgnoreSslValidationErrors)
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => {
                     if (errors != System.Net.Security.SslPolicyErrors.None) {
-                        log.Warn("SSL Errors Detected ({0}).\nCertificate:\n{1}", errors, certificate);
+                        log.Warn("SSL validations errors detected ({0}). Certificate:{1}{2}", errors, Environment.NewLine, certificate);
                     }
                     return true;
                 };

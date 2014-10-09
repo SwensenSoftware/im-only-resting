@@ -206,12 +206,12 @@ namespace Swensen.Ior.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IgnoreSSLValidationErrors {
+        public bool IgnoreSslValidationErrors {
             get {
-                return ((bool)(this["IgnoreSSLValidationErrors"]));
+                return ((bool)(this["IgnoreSslValidationErrors"]));
             }
             set {
-                this["IgnoreSSLValidationErrors"] = value;
+                this["IgnoreSslValidationErrors"] = value;
             }
         }
     }
