@@ -53,6 +53,20 @@ namespace Swensen.Ior.Core {
                 handler.UseProxy = true;
             }
 
+            foreach(var enc in requestModel.AcceptEncodings) {
+                switch (enc) {
+                    case "gzip":
+                        handler.AutomaticDecompression |= DecompressionMethods.GZip;
+                        break;
+                    case "deflate":
+                        handler.AutomaticDecompression |= DecompressionMethods.Deflate;
+                        break;
+                    default:
+                        log.Warn("Accept-Encoding request header value '{0}' is not supported", enc);
+                        break;
+                }
+            }
+
             var client = new HttpClient(handler);
             var request = new HttpRequestMessage {
                 RequestUri = requestModel.Url, 

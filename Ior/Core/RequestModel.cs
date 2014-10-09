@@ -29,6 +29,7 @@ namespace Swensen.Ior.Core {
         public HttpMethod Method { get; private set; }
         public Dictionary<string, string> RequestHeaders { get; private set; }
         public Dictionary<string, string> ContentHeaders { get; private set; }
+        public HashSet<string> AcceptEncodings {  get; private set;}
 
         public string Body { get; private set; }
 
@@ -47,6 +48,7 @@ namespace Swensen.Ior.Core {
 
             var requestHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             var contentHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var acceptEncodings = new HashSet<string>();
             foreach (var line in vm.Headers) {
                 if (line.IsBlank())
                     continue; //allow empty lines
@@ -69,6 +71,11 @@ namespace Swensen.Ior.Core {
                         try {
                             hrhValidator.Add(key, value);
                             requestHeaders.Add(key, value);
+                            if(key.Equals("accept-encoding", StringComparison.OrdinalIgnoreCase)) {
+                                var encodings = value.Split(',').Select(x => x.Trim().ToLower()).Where(x => x != "");
+                                foreach(var enc in encodings)
+                                    acceptEncodings.Add(enc);
+                            }
                         } catch (InvalidOperationException) { //i.e. header belongs in content headers
                             var hchValidator = (HttpContentHeaders)Activator.CreateInstance(typeof(HttpContentHeaders), BindingFlags.Instance | BindingFlags.CreateInstance | BindingFlags.NonPublic, null, new[] { (object)(Func<long?>)(() => (long?)null) }, CultureInfo.CurrentCulture);
                             try {
@@ -92,6 +99,7 @@ namespace Swensen.Ior.Core {
                     Method = new HttpMethod(vm.Method),
                     RequestHeaders = requestHeaders,
                     ContentHeaders = contentHeaders,
+                    AcceptEncodings = acceptEncodings,
                     Body = vm.Body
                 };
             }
