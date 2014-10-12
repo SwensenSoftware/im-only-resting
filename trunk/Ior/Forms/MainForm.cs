@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -78,6 +79,8 @@ namespace Swensen.Ior.Forms
         /// </summary>
         WebBrowser wbResponseBody;
 
+        ByteViewer bvResponseBody;
+
         private string lastOpenedRequestFilePath = null;
 
         /// <summary>
@@ -103,6 +106,12 @@ namespace Swensen.Ior.Forms
         public MainForm()
         {
             InitializeComponent();
+
+            bvResponseBody = new ByteViewer();
+            bvResponseBody.TabIndex = 14;
+            bvResponseBody.Dock = DockStyle.Fill;
+            bvResponseBody.Visible = false;
+            pnlResponseContent.Controls.Add(bvResponseBody);
         }
 
         public MainForm(string launchFilePath) : this() { 
@@ -175,7 +184,7 @@ namespace Swensen.Ior.Forms
 
             splitterMain.Orientation = Settings.Default.SplitterOrientation;
             updateSplitterDistance(); //must come after width and height and orientation updates
-            rbGrpResponseBodyOutputs.First(x => (ResponseBodyOutput)x.Tag == Settings.Default.ResponseBodyOutput).Checked = true;
+            (rbGrpResponseBodyOutputs.FirstOrDefault(x => (ResponseBodyOutput)x.Tag == Settings.Default.ResponseBodyOutput) ?? rbResponseBodyOutputPretty).Checked = true;
 
             if (!launchFilePath.IsBlank())
                 openRequestFile(launchFilePath);
@@ -245,7 +254,8 @@ namespace Swensen.Ior.Forms
         private IEnumerable<RadioButton> rbGrpResponseBodyOutputs { get { return grpResponseBodyOutput.Controls.OfType<RadioButton>(); } }
 
         private void bindResponseBodyOutputs() {
-            rbResponseBodyOutputRaw.Tag = ResponseBodyOutput.Raw;
+            rbResponseBodyOutputHex.Tag = ResponseBodyOutput.Hex;
+            rbResponseBodyOutputPlain.Tag = ResponseBodyOutput.Plain;
             rbResponseBodyOutputPretty.Tag = ResponseBodyOutput.Pretty;
             rbResponseBodyOutputBrowser.Tag = ResponseBodyOutput.Rendered;
 
@@ -265,14 +275,22 @@ namespace Swensen.Ior.Forms
 
         private void updateResponseBodyOutput() {
             switch (Settings.Default.ResponseBodyOutput) {
-                case ResponseBodyOutput.Raw:
+                case ResponseBodyOutput.Hex:
+                    txtResponseText.Visible = false;
+                    wbResponseBody.Visible = false;
+                    bvResponseBody.Visible = true;
+                    bvResponseBody.SetBytes(lastResponseModel.ContentBytes ?? new byte[0]);
+                    break;
+                case ResponseBodyOutput.Plain:
                     txtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
+                    bvResponseBody.Visible = false;
                     txtResponseText.Text = lastResponseModel.Content;
                     break;
                 case ResponseBodyOutput.Pretty:
                     txtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
+                    bvResponseBody.Visible = false;
                     txtResponseText.Text = lastResponseModel.PrettyPrintedContent;
                     var mtc = lastResponseModel.ContentType.MediaTypeCategory;
                     txtResponseText.ConfigurationManager.Language =
@@ -284,8 +302,9 @@ namespace Swensen.Ior.Forms
                     break;
                 case ResponseBodyOutput.Rendered:
                     rebuildWebBrowser();
-                    wbResponseBody.Visible = true;
                     txtResponseText.Visible = false;
+                    wbResponseBody.Visible = true;
+                    bvResponseBody.Visible = false;
 
                     if ((lastResponseModel.ContentType.MediaTypeCategory == IorMediaTypeCategory.Xml || 
                         lastResponseModel.ContentType.MediaTypeCategory == IorMediaTypeCategory.Application) && 
