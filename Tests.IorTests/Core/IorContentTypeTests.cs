@@ -37,7 +37,7 @@ namespace Tests.IorTests {
             IorContentType.GetMediaTypeCategory("text/json").Should().Be(IorMediaTypeCategory.Json);
             IorContentType.GetMediaTypeCategory("text/plain").Should().Be(IorMediaTypeCategory.Text);
             IorContentType.GetMediaTypeCategory("image/jpg").Should().Be(IorMediaTypeCategory.Application);
-            IorContentType.GetMediaTypeCategory("application/octet-stream").Should().Be(IorMediaTypeCategory.Other);
+            IorContentType.GetMediaTypeCategory("application/octet-stream").Should().Be(IorMediaTypeCategory.Application);
         }
 
         [Test]
@@ -55,7 +55,7 @@ namespace Tests.IorTests {
             IorContentType.GetFileExtension(IorMediaTypeCategory.Application, "application/zip", localhost).Should().Be("zip");
 
             var imgUri = new Uri("http://localhost/test.img");
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "application/octet-stream", imgUri).Should().Be("img");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Application, "application/octet-stream", imgUri).Should().Be("img");
         }
 
         [Test]
