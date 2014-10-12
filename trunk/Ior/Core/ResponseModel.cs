@@ -29,7 +29,7 @@ namespace Swensen.Ior.Core {
         public ResponseModel(string status="") {
             this.Status = status;
             this.ContentType = new IorContentType();
-            initLazyFields();
+            initLazyFields(new Uri("http://localhost"));
         }
 
         public ResponseModel(String errorMessage, DateTime start, DateTime end) : this() {
@@ -67,12 +67,12 @@ namespace Swensen.Ior.Core {
 
             this.ErrorMessage = null;
 
-            initLazyFields();            
+            initLazyFields(response.RequestMessage.RequestUri);            
         }
 
-        private void initLazyFields() {
+        private void initLazyFields(Uri requestUri) {
             this.prettyPrintedContent = new Lazy<string>(() => IorContentType.GetPrettyPrintedContent(this.ContentType.MediaTypeCategory, this.Content));
-            this.contentFileExtension = new Lazy<string>(() => IorContentType.GetFileExtension(this.ContentType.MediaTypeCategory, this.ContentType.MediaType));
+            this.contentFileExtension = new Lazy<string>(() => IorContentType.GetFileExtension(this.ContentType.MediaTypeCategory, this.ContentType.MediaType, requestUri));
             this.temporaryFile = new Lazy<string>(() => FileUtils.CreateTempFile(this.ContentBytes, this.ContentFileExtension));
         }
 
