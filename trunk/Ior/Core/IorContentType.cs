@@ -62,7 +62,7 @@ namespace Swensen.Ior.Core {
             if (mt == "text/plain")
                 return IorMediaTypeCategory.Text;
 
-            if (mt.StartsWith("image/") || mt.StartsWith("video/") || mt.StartsWith("audio/") || mt == "application/zip")
+            if (mt.StartsWith("image/") || mt.StartsWith("video/") || mt.StartsWith("audio/") || mt == "application/zip" || mt == "application/octet-stream")
                 return IorMediaTypeCategory.Application;
 
             return IorMediaTypeCategory.Other;
@@ -136,6 +136,13 @@ namespace Swensen.Ior.Core {
         }
 
         public static string GetFileExtension(IorMediaTypeCategory mtc, string mt, Uri requestUri) {
+            Func<string> getUriExtensionOrBlank = () => {
+                if(Path.HasExtension(requestUri.AbsolutePath))
+                    return Path.GetExtension(requestUri.AbsoluteUri).Substring(1);
+                else
+                    return "";
+            };
+
             switch (mtc) {
                 case IorMediaTypeCategory.Html: return "html";
                 case IorMediaTypeCategory.Json: return "json";
@@ -143,7 +150,10 @@ namespace Swensen.Ior.Core {
                 case IorMediaTypeCategory.Xml: return "xml";
                 case IorMediaTypeCategory.Application:
                     var parts = mt.Split('/');
-                    return parts[1];
+                    if(parts[1] == "octet-stream")
+                        return getUriExtensionOrBlank();
+                    else
+                        return parts[1];
                 default:
                     switch(mt) {
                         case "text/csv": return "csv";
@@ -154,10 +164,7 @@ namespace Swensen.Ior.Core {
                         case "application/x-javascript":
                             return "js";
                         default: 
-                            if(Path.HasExtension(requestUri.AbsolutePath))
-                                return Path.GetExtension(requestUri.AbsoluteUri).Substring(1);
-                            else
-                                return "";
+                            return getUriExtensionOrBlank();
                     }
             }
         }
