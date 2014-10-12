@@ -40,8 +40,7 @@ namespace Swensen.Ior.Core {
             if(vm.Url.IsBlank())
                 validationErrors.Add("Request URL may not be empty");
             else {
-                var knownProtocals = new[] { "http://", "https://", "ftp://", "ftps://", "file:///" };
-                var forgivingUrl = knownProtocals.Any(x => vm.Url.StartsWith(x)) ? vm.Url : "http://" + vm.Url;
+                var forgivingUrl = vm.Url.Contains("://") ? vm.Url : "http://" + vm.Url;
                 if(!Uri.TryCreate(forgivingUrl, UriKind.Absolute, out url))
                     validationErrors.Add("Request URL is invalid");    
             }

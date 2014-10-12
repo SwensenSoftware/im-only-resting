@@ -100,10 +100,13 @@ namespace Swensen.Ior.Core {
                 Uri url = null;
                 if(value.IsBlank())
                     settings.ProxyServer = "";
-                else if (Uri.TryCreate(value, UriKind.Absolute, out url))
-                    settings.ProxyServer = url.ToString();
-                else
-                    lastValidationError = Tuple.Create("ProxyServer", "The given URL is invalid");
+                else { 
+                    var forgivingUrl = value.Contains("://") ? value : "http://" + value;
+                    if (Uri.TryCreate(forgivingUrl, UriKind.Absolute, out url))
+                        settings.ProxyServer = url.ToString();
+                    else
+                        lastValidationError = Tuple.Create("ProxyServer", "The given URL is invalid");
+                }
             }
         }
 
