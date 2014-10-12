@@ -742,10 +742,22 @@ namespace Swensen.Ior.Forms
             var cm = txtRequestBody.ContextMenu;
             cm.MenuItems.Add("-");
             Action<ScintillaNET.Scintilla, IorMediaTypeCategory> format = (tb, hmtc) => {
-                if (tb.Selection.Length > 0)
-                    tb.Selection.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Selection.Text);
-                else
-                    tb.Text = IorContentType.GetPrettyPrintedContent(hmtc, tb.Text);
+                if (tb.Selection.Length > 0) {
+                    var original = tb.Selection.Text;
+                    var pretty = IorContentType.GetPrettyPrintedContent(hmtc, tb.Selection.Text);
+                    var startPos = tb.Selection.Start;
+                    if (original != pretty) { 
+                        tb.Selection.Text = pretty;
+                        tb.GoTo.Position(startPos);
+                    }
+                } else { 
+                    var original = tb.Text;
+                    var pretty = IorContentType.GetPrettyPrintedContent(hmtc, tb.Text);
+                    if (original != pretty) { 
+                        tb.Text = pretty;
+                        tb.GoTo.Position(0);
+                    }
+                }
             };
 
             var miFx = new MenuItem("Format XML", (s, ea) => { resetLogStats(); format(txtRequestBody, IorMediaTypeCategory.Xml); });
