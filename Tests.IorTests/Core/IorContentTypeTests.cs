@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Swensen.Ior.Core;
 using FluentAssertions;
 
@@ -41,15 +42,20 @@ namespace Tests.IorTests {
 
         [Test]
         public void get_file_ext() {
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Xml, "text/xml").Should().Be("xml");
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Html, "text/html").Should().Be("html");
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Json, "text/json").Should().Be("json");
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Text, "text/plain").Should().Be("txt");
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Application, "image/jpg").Should().Be("jpg");
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "text/csv").Should().Be("csv");
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "text/css").Should().Be("css");
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "application/javascript").Should().Be("js");
-            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "application/python").Should().Be("");
+            var localhost = new Uri("http://localhost");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Xml, "text/xml", localhost).Should().Be("xml");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Html, "text/html", localhost).Should().Be("html");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Json, "text/json", localhost).Should().Be("json");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Text, "text/plain", localhost).Should().Be("txt");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Application, "image/jpg", localhost).Should().Be("jpg");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "text/csv", localhost).Should().Be("csv");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "text/css", localhost).Should().Be("css");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "application/javascript", localhost).Should().Be("js");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "application/python", localhost).Should().Be("");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Application, "application/zip", localhost).Should().Be("zip");
+
+            var imgUri = new Uri("http://localhost/test.img");
+            IorContentType.GetFileExtension(IorMediaTypeCategory.Other, "application/octet-stream", imgUri).Should().Be("img");
         }
 
         [Test]
