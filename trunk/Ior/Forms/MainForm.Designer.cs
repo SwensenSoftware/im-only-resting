@@ -56,6 +56,7 @@
             this.pnlResponseContent = new System.Windows.Forms.Panel();
             this.txtResponseText = new Swensen.Ior.Forms.StandardScintilla();
             this.grpResponseBodyOutput = new System.Windows.Forms.GroupBox();
+            this.rbResponseBodyOutputHex = new System.Windows.Forms.RadioButton();
             this.rbResponseBodyOutputBrowser = new System.Windows.Forms.RadioButton();
             this.rbResponseBodyOutputPretty = new System.Windows.Forms.RadioButton();
             this.rbResponseBodyOutputPlain = new System.Windows.Forms.RadioButton();
@@ -94,7 +95,6 @@
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.lblLogNotifications = new System.Windows.Forms.ToolStripStatusLabel();
-            this.rbResponseBodyOutputHex = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -502,6 +502,17 @@
             this.grpResponseBodyOutput.TabStop = false;
             this.grpResponseBodyOutput.Text = "Output";
             // 
+            // rbResponseBodyOutputHex
+            // 
+            this.rbResponseBodyOutputHex.AutoSize = true;
+            this.rbResponseBodyOutputHex.Location = new System.Drawing.Point(3, 17);
+            this.rbResponseBodyOutputHex.Name = "rbResponseBodyOutputHex";
+            this.rbResponseBodyOutputHex.Size = new System.Drawing.Size(44, 17);
+            this.rbResponseBodyOutputHex.TabIndex = 14;
+            this.rbResponseBodyOutputHex.TabStop = true;
+            this.rbResponseBodyOutputHex.Text = "Hex";
+            this.rbResponseBodyOutputHex.UseVisualStyleBackColor = true;
+            // 
             // rbResponseBodyOutputBrowser
             // 
             this.rbResponseBodyOutputBrowser.AutoSize = true;
@@ -871,17 +882,6 @@
             this.lblLogNotifications.ToolTipText = "Show Log Viewer";
             this.lblLogNotifications.Visible = false;
             this.lblLogNotifications.Click += new System.EventHandler(this.lblLogNotifications_Click);
-            // 
-            // rbResponseBodyOutputHex
-            // 
-            this.rbResponseBodyOutputHex.AutoSize = true;
-            this.rbResponseBodyOutputHex.Location = new System.Drawing.Point(3, 17);
-            this.rbResponseBodyOutputHex.Name = "rbResponseBodyOutputHex";
-            this.rbResponseBodyOutputHex.Size = new System.Drawing.Size(44, 17);
-            this.rbResponseBodyOutputHex.TabIndex = 14;
-            this.rbResponseBodyOutputHex.TabStop = true;
-            this.rbResponseBodyOutputHex.Text = "Hex";
-            this.rbResponseBodyOutputHex.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

@@ -71,7 +71,7 @@ namespace Swensen.Ior.Core {
         }
 
         private void initLazyFields(Uri requestUri) {
-            this.prettyPrintedContent = new Lazy<string>(() => IorContentType.GetPrettyPrintedContent(this.ContentType.MediaTypeCategory, this.Content, this.ContentBytes));
+            this.prettyPrintedContent = new Lazy<string>(() => IorContentType.GetPrettyPrintedContent(this.ContentType.MediaTypeCategory, this.Content));
             this.contentFileExtension = new Lazy<string>(() => IorContentType.GetFileExtension(this.ContentType.MediaTypeCategory, this.ContentType.MediaType, requestUri));
             this.temporaryFile = new Lazy<string>(() => FileUtils.CreateTempFile(this.ContentBytes, this.ContentFileExtension));
         }

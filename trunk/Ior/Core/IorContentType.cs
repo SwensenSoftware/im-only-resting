@@ -71,7 +71,7 @@ namespace Swensen.Ior.Core {
         /// <summary>
         /// If contentType is an xml content type, then try to pretty print the rawContent. If that fails or otherwise, just return the rawContent
         /// </summary>
-        public static string GetPrettyPrintedContent(IorMediaTypeCategory mtc, string content, byte[] contentBytes=null) {
+        public static string GetPrettyPrintedContent(IorMediaTypeCategory mtc, string content) {
             //see http://stackoverflow.com/a/2965701/236255 for list of xml content types (credit to http://stackoverflow.com/users/18936/bobince)
             try {
                 switch (mtc) {
@@ -125,15 +125,6 @@ namespace Swensen.Ior.Core {
                             string output = doc.Save();
                             return output;
                         }
-                    }
-                    case IorMediaTypeCategory.Application: {
-                        if(contentBytes == null)
-                            return content;
-
-                        var hex = new StringBuilder(contentBytes.Length * 3);
-                        for (int i = 0; i < contentBytes.Length; i++)
-                            hex.Append(String.Format("{0:x2}{1}", contentBytes[i], (i+1) % 16 == 0 ? Environment.NewLine : ((i+1) % 8 == 0 ? "  " : " ")).ToUpper());
-                        return hex.ToString();
                     }
                     default:
                         return content;
