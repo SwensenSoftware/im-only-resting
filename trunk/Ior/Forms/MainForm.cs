@@ -542,7 +542,7 @@ namespace Swensen.Ior.Forms
             updateLastOpenedRequestFile(fileName);
         }
 
-        private void exportResponseBodyToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void resetResponseBodySaveFileDialog() {
             responseBodySaveFileDialog.FileName = null;
             
             //set filter based on inferred content type
@@ -553,9 +553,20 @@ namespace Swensen.Ior.Forms
             }
             responseBodySaveFileDialog.Filter = filter;
             responseBodySaveFileDialog.FilterIndex = 1;
-            
+        }
+
+        private void exportResponseBodyToolStripMenuItem_Click(object sender, EventArgs e) {
+            resetResponseBodySaveFileDialog();
             if (responseBodySaveFileDialog.ShowDialog() == DialogResult.OK) {
                 File.WriteAllBytes(responseBodySaveFileDialog.FileName, lastResponseModel.ContentBytes);
+                Settings.Default.ExportResponseFileDialogFolder = responseBodySaveFileDialog.InitialDirectory;
+            }
+        }
+
+        private void exportPrettyResponseBodyStripMenuItem_Click(object sender, EventArgs e) {
+            resetResponseBodySaveFileDialog();
+            if (responseBodySaveFileDialog.ShowDialog() == DialogResult.OK) {
+                File.WriteAllText(responseBodySaveFileDialog.FileName, lastResponseModel.PrettyPrintedContent);
                 Settings.Default.ExportResponseFileDialogFolder = responseBodySaveFileDialog.InitialDirectory;
             }
         }
@@ -595,7 +606,11 @@ namespace Swensen.Ior.Forms
 
         private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
             saveToolStripMenuItem.Enabled = this.isLastOpenedRequestFileDirty;
-            exportResponseBodyToolStripMenuItem.Enabled = !(lastResponseModel.ContentBytes == null || lastResponseModel.ContentBytes.Length == 0);
+
+            var hasResponseContent = !(lastResponseModel.ContentBytes == null || lastResponseModel.ContentBytes.Length == 0);
+            var isTextContent = lastResponseModel.ContentType.MediaTypeCategory != IorMediaTypeCategory.Application && lastResponseModel.ContentType.MediaTypeCategory != IorMediaTypeCategory.Other;
+            exportResponseBodyToolStripMenuItem.Enabled = hasResponseContent;
+            exportPrettyResponseBodyToolStripMenuItem.Enabled = hasResponseContent && isTextContent;
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
