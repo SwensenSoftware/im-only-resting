@@ -58,7 +58,7 @@
             this.grpResponseBodyOutput = new System.Windows.Forms.GroupBox();
             this.rbResponseBodyOutputBrowser = new System.Windows.Forms.RadioButton();
             this.rbResponseBodyOutputPretty = new System.Windows.Forms.RadioButton();
-            this.rbResponseBodyOutputRaw = new System.Windows.Forms.RadioButton();
+            this.rbResponseBodyOutputPlain = new System.Windows.Forms.RadioButton();
             this.tpResponseHeaders = new System.Windows.Forms.TabPage();
             this.txtResponseHeaders = new System.Windows.Forms.TextBox();
             this.pnlResponseStatusAndTime = new System.Windows.Forms.Panel();
@@ -94,6 +94,7 @@
             this.responseBodySaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.lblLogNotifications = new System.Windows.Forms.ToolStripStatusLabel();
+            this.rbResponseBodyOutputHex = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitterMain)).BeginInit();
             this.splitterMain.Panel1.SuspendLayout();
             this.splitterMain.Panel2.SuspendLayout();
@@ -487,9 +488,10 @@
             // grpResponseBodyOutput
             // 
             this.grpResponseBodyOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputHex);
             this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputBrowser);
             this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputPretty);
-            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputRaw);
+            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputPlain);
             this.grpResponseBodyOutput.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpResponseBodyOutput.Location = new System.Drawing.Point(3, 3);
             this.grpResponseBodyOutput.Margin = new System.Windows.Forms.Padding(2);
@@ -503,7 +505,7 @@
             // rbResponseBodyOutputBrowser
             // 
             this.rbResponseBodyOutputBrowser.AutoSize = true;
-            this.rbResponseBodyOutputBrowser.Location = new System.Drawing.Point(105, 17);
+            this.rbResponseBodyOutputBrowser.Location = new System.Drawing.Point(160, 17);
             this.rbResponseBodyOutputBrowser.Margin = new System.Windows.Forms.Padding(2);
             this.rbResponseBodyOutputBrowser.Name = "rbResponseBodyOutputBrowser";
             this.rbResponseBodyOutputBrowser.Size = new System.Drawing.Size(72, 17);
@@ -515,7 +517,7 @@
             // rbResponseBodyOutputPretty
             // 
             this.rbResponseBodyOutputPretty.AutoSize = true;
-            this.rbResponseBodyOutputPretty.Location = new System.Drawing.Point(51, 17);
+            this.rbResponseBodyOutputPretty.Location = new System.Drawing.Point(104, 17);
             this.rbResponseBodyOutputPretty.Margin = new System.Windows.Forms.Padding(2);
             this.rbResponseBodyOutputPretty.Name = "rbResponseBodyOutputPretty";
             this.rbResponseBodyOutputPretty.Size = new System.Drawing.Size(52, 17);
@@ -524,18 +526,18 @@
             this.rbResponseBodyOutputPretty.Text = "Pretty";
             this.rbResponseBodyOutputPretty.UseVisualStyleBackColor = true;
             // 
-            // rbResponseBodyOutputRaw
+            // rbResponseBodyOutputPlain
             // 
-            this.rbResponseBodyOutputRaw.AutoSize = true;
-            this.rbResponseBodyOutputRaw.Checked = true;
-            this.rbResponseBodyOutputRaw.Location = new System.Drawing.Point(4, 17);
-            this.rbResponseBodyOutputRaw.Margin = new System.Windows.Forms.Padding(2);
-            this.rbResponseBodyOutputRaw.Name = "rbResponseBodyOutputRaw";
-            this.rbResponseBodyOutputRaw.Size = new System.Drawing.Size(47, 17);
-            this.rbResponseBodyOutputRaw.TabIndex = 13;
-            this.rbResponseBodyOutputRaw.TabStop = true;
-            this.rbResponseBodyOutputRaw.Text = "Raw";
-            this.rbResponseBodyOutputRaw.UseVisualStyleBackColor = true;
+            this.rbResponseBodyOutputPlain.AutoSize = true;
+            this.rbResponseBodyOutputPlain.Checked = true;
+            this.rbResponseBodyOutputPlain.Location = new System.Drawing.Point(52, 17);
+            this.rbResponseBodyOutputPlain.Margin = new System.Windows.Forms.Padding(2);
+            this.rbResponseBodyOutputPlain.Name = "rbResponseBodyOutputPlain";
+            this.rbResponseBodyOutputPlain.Size = new System.Drawing.Size(48, 17);
+            this.rbResponseBodyOutputPlain.TabIndex = 13;
+            this.rbResponseBodyOutputPlain.TabStop = true;
+            this.rbResponseBodyOutputPlain.Text = "Plain";
+            this.rbResponseBodyOutputPlain.UseVisualStyleBackColor = true;
             // 
             // tpResponseHeaders
             // 
@@ -870,6 +872,17 @@
             this.lblLogNotifications.Visible = false;
             this.lblLogNotifications.Click += new System.EventHandler(this.lblLogNotifications_Click);
             // 
+            // rbResponseBodyOutputHex
+            // 
+            this.rbResponseBodyOutputHex.AutoSize = true;
+            this.rbResponseBodyOutputHex.Location = new System.Drawing.Point(3, 17);
+            this.rbResponseBodyOutputHex.Name = "rbResponseBodyOutputHex";
+            this.rbResponseBodyOutputHex.Size = new System.Drawing.Size(44, 17);
+            this.rbResponseBodyOutputHex.TabIndex = 14;
+            this.rbResponseBodyOutputHex.TabStop = true;
+            this.rbResponseBodyOutputHex.Text = "Hex";
+            this.rbResponseBodyOutputHex.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnSubmitRequest;
@@ -976,7 +989,7 @@
         private System.Windows.Forms.GroupBox grpResponseBodyOutput;
         private System.Windows.Forms.RadioButton rbResponseBodyOutputBrowser;
         private System.Windows.Forms.RadioButton rbResponseBodyOutputPretty;
-        private System.Windows.Forms.RadioButton rbResponseBodyOutputRaw;
+        private System.Windows.Forms.RadioButton rbResponseBodyOutputPlain;
         private Swensen.Ior.Forms.StandardScintilla txtResponseText;
         private System.Windows.Forms.Panel pnlResponseContent;
         private System.Windows.Forms.LinkLabel lnkResponseStatusInfo;
@@ -994,6 +1007,7 @@
         private System.Windows.Forms.ToolStripMenuItem newWindowToolStripMenuItem;
         private System.Windows.Forms.StatusStrip mainStatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel lblLogNotifications;
+        private System.Windows.Forms.RadioButton rbResponseBodyOutputHex;
 
     }
 }
