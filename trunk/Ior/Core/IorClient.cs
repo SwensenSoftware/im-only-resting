@@ -91,7 +91,7 @@ namespace Swensen.Ior.Core {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Basic", userInfoBase64Text);
             }
 
-            if (requestModel.Method != HttpMethod.Get) {
+            if (requestModel.Method != HttpMethod.Get && requestModel.Method != HttpMethod.Head && !requestModel.Body.IsBlank()) {
                 //default content-type: http://mattryall.net/blog/2008/03/default-content-type
                 string textCt;
                 requestModel.ContentHeaders.TryGetValue("Content-Type", out textCt);
