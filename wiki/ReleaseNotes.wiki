@@ -3,6 +3,19 @@
 
 = Release Notes =
 
+== v1.4.0, 10/17/14 ==
+
+  * Issue 21 Add an "Export Pretty Response Body..." File menu item
+  * Issue 57 Do not prompt for save when executing New Window action
+  * Issue 58 Persist settings and history just before executing the New Window action
+  * Issue 59 Add binary and or hex response body views for file content
+  * Issue 60 Detect zip and other binary file extension endings when exporting response body
+  * Issue 61 Add option to allow ignoring ssl validation errors
+  * Issue 62 Support gzip and deflate automatic decoding
+  * Issue 63 Scroll to x,0 on json or xml format
+  * Issue 64 Submitting HEAD verb causes error
+  * Issue 65 Bad response time numbers
+
 == v1.3.0, 9/7/14 ==
 
 Various enhancements and bug fixes including support for file associations, basic authorization via url user info, and status bar notifications.
