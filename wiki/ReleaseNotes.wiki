@@ -5,6 +5,8 @@
 
 == v1.4.0, 10/17/14 ==
 
+Fixes to New Window command, a new Hex response body viewer, and other features.
+
   * Issue 21 Add an "Export Pretty Response Body..." File menu item
   * Issue 57 Do not prompt for save when executing New Window action
   * Issue 58 Persist settings and history just before executing the New Window action
