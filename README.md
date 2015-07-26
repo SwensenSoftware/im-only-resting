@@ -1,3 +1,7 @@
+[User Guide](../../wiki/UserGuide) | [Downloads](http://www.swensensoftware.com/im-only-resting) | [Release Notes](../../wiki/ReleaseNotes) | [Issues](../../issues)
+
+---
+
 I'm Only Resting is a feature-rich WinForms-based HTTP client that makes building and managing HTTP requests easy and offers various smart response content rendering modes.
 
 ![https://im-only-resting.googlecode.com/svn/images/front-page-example.png](https://im-only-resting.googlecode.com/svn/images/front-page-example.png)
