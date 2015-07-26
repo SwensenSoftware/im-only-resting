@@ -25,9 +25,6 @@ Feature Overview
 
 ---
 
-
-&lt;wiki:gadget url="http://www.ohloh.net/p/711761/widgets/project\_factoids.xml" height="195" border="0" width="100%" /&gt;
-
 You are welcome to [Pay What You Want](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXSPTXDPECJ9L) for I'm Only Resting via PayPal.
 
 Copyright 2012-2014 [Swensen Software](http://www.swensensoftware.com)
