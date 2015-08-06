@@ -220,7 +220,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
+  <!--<UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v14.0\Web\Microsoft.Web.Publishing.Tasks.dll" />-->
   <Target Name="AfterCompile" Condition="exists('NLog.$(Configuration).config')">
     <!-- Generate transformed NLog.config in the intermediate directory -->
     <TransformXml Source="NLog.config" Destination="$(IntermediateOutputPath)NLog.config" Transform="NLog.$(Configuration).config" />
