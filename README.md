@@ -26,8 +26,8 @@ Feature Overview
   * Rich text editing and syntax highlighting provided by [ScintillaNET](http://scintillanet.codeplex.com/)
   * Interactive interface for inspecting log file
 
-
 ---
+[![build status](https://ci.appveyor.com/api/projects/status/eo4qpc6mmew39i6a?svg=true)](https://ci.appveyor.com/project/stephen-swensen/im-only-resting)
 
 You are welcome to [Pay What You Want](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXSPTXDPECJ9L) for I'm Only Resting via PayPal.
 
