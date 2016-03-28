@@ -52,7 +52,12 @@ namespace Swensen.Ior.Forms {
         public string AssemblyVersion {
             get {
                 var version = Assembly.GetExecutingAssembly().GetName().Version;
-                return String.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
+                //we use an odd revision number to indicate pre-release. we also translate revision number into incrementing alpha numbers
+                //so that revision {1,3,5,..} -> alpha {1,2,3}
+                if(version.Revision % 2 == 0)
+                    return String.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
+                else
+                    return String.Format("{0}.{1}.{2} (alpha {3})", version.Major, version.Minor, version.Build, (version.Revision + 1) / 2);
             }
         }
 
