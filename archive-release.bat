@@ -12,16 +12,15 @@ copy NOTICE staging
 copy Ior\bin\Release\im-only-resting.exe staging
 copy Ior\bin\Release\libtidy.dll staging
 copy Ior\bin\Release\Newtonsoft.Json.dll staging
-copy Ior\bin\Release\PropertyGridEx.dll staging
-copy Ior\bin\Release\TidyManaged.dll staging
-copy Ior\bin\Release\Utils.dll staging
 copy Ior\bin\Release\NLog.config staging
 copy Ior\bin\Release\NLog.dll staging
-copy Ior\bin\Release\System.Net.Http.dll staging
-copy Ior\bin\Release\System.Net.Http.WebRequest.dll staging
+copy Ior\bin\Release\PropertyGridEx.dll staging
+copy Ior\bin\Release\System.Net.Http.Extensions.dll staging
+copy Ior\bin\Release\System.Net.Http.Primitives.dll staging
 copy Ior\bin\Release\SciLexer.dll staging
-copy Ior\bin\Release\SciLexer64.dll staging
 copy Ior\bin\Release\ScintillaNET.dll staging
+copy Ior\bin\Release\Utils.dll staging
+copy Ior\bin\Release\TidyManaged.dll staging
 
 
 REM zip staging files
