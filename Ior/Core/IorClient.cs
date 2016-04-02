@@ -138,7 +138,7 @@ namespace Swensen.Ior.Core {
                                 var aggException = responseTask.Exception.Flatten();
 
                                 foreach (var exception in aggException.InnerExceptions)
-                                    log.Error("request terminated with an error", exception);
+                                    log.Error(exception, "request terminated with an error");
 
                                 string errMessage = String.Join(Environment.NewLine, aggException.InnerExceptions);
                                 var responseModel = new ResponseModel(errMessage, start, end);
@@ -154,7 +154,7 @@ namespace Swensen.Ior.Core {
                             }
                     }
                 } catch(Exception ex) {
-                    log.Error("exception raised in request continuation, application will proceed in a corrupt state until Task is disposed, at which point the application will shut down with a fatal exception", ex);
+                    log.Error(ex, "exception raised in request continuation, application will proceed in a corrupt state until Task is disposed, at which point the application will shut down with a fatal exception");
                     throw;
                 }
             });

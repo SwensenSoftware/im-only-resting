@@ -130,7 +130,7 @@ namespace Swensen.Ior.Core {
                         return content;
                 }
             } catch (Exception ex) {
-                log.Warn("Failed content conversion", ex);       
+                log.Warn(ex, "Failed content conversion");       
                 return content;
             }
         }

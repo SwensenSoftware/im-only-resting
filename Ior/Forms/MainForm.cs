@@ -142,7 +142,7 @@ namespace Swensen.Ior.Forms
                 setUpFileDialogs();
                 ActiveControl = txtRequestUrl;
             } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
-                log.Fatal("Exception in main, shutting down", ex);
+                log.Fatal(ex, "Exception in main, shutting down");
                 showError("Error", "Unknown error, shutting down: " + Environment.NewLine + Environment.NewLine + ex.ToString());
                 this.Close();
             }
@@ -394,7 +394,7 @@ namespace Swensen.Ior.Forms
                         })
                     );
                 } catch (Exception ex) {
-                    log.Error("There was an error executing the request", ex);
+                    log.Error(ex, "There was an error executing the request");
                     showError("Error", "There was an error executing the request: " + Environment.NewLine + Environment.NewLine + ex.ToString());
 
                     //reset the response view (i.e. roll-back loading message")
@@ -533,7 +533,7 @@ namespace Swensen.Ior.Forms
             try {
                 requestVm = RequestViewModel.Load(fileName);
             } catch(Exception ex) {
-                log.Warn("Error opening request file", ex);
+                log.Warn(ex, "Error opening request file");
                 showWarning("File Open Error", "Error opening request file");
                 return;
             }
