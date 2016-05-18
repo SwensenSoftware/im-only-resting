@@ -45,6 +45,9 @@ namespace Swensen.Ior.Core {
                     validationErrors.Add("Request URL is invalid");    
             }
 
+            if(vm.Method.IsBlank())
+                validationErrors.Add("Request Method may not be empty");
+
             var requestHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             var contentHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             var acceptEncodings = new HashSet<string>();

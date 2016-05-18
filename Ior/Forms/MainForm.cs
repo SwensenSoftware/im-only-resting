@@ -231,13 +231,13 @@ namespace Swensen.Ior.Forms
         private IEnumerable<RadioButton> rbGrpHttpMethods { get { return grpHttpMethod.Controls.OfType<RadioButton>(); } }
 
         private void bindHttpMethods() {
-            rbHttpDelete.Tag = HttpMethod.Delete;
-            rbHttpGet.Tag = HttpMethod.Get;
-            rbHttpHead.Tag = HttpMethod.Head;
-            rbHttpOptions.Tag = HttpMethod.Options;
-            rbHttpTrace.Tag = HttpMethod.Trace;
-            rbHttpPost.Tag = HttpMethod.Post;
-            rbHttpPut.Tag = HttpMethod.Put;
+            rbHttpDelete.Tag = "DELETE";
+            rbHttpGet.Tag = "GET";
+            rbHttpHead.Tag = "HEAD";
+            rbHttpPatch.Tag = "PATCH";
+            rbHttpOther.Tag = "";
+            rbHttpPost.Tag = "POST";
+            rbHttpPut.Tag = "PUT";
             
             foreach (var rb in rbGrpHttpMethods) {
                 rb.CheckedChanged += new EventHandler(rbGrpHttp_CheckedChanged);
@@ -336,7 +336,7 @@ namespace Swensen.Ior.Forms
             var checkedHttpMethod = rbGrpHttpMethods.First(x => x.Checked);
             return new RequestViewModel() {
                 Url = txtRequestUrl.Text,
-                Method = ((HttpMethod)checkedHttpMethod.Tag).Method,
+                Method = checkedHttpMethod == rbHttpOther ? txtHttpOther.Text : checkedHttpMethod.Tag as string,
                 Headers = txtRequestHeaders.Text.Split(new [] {txtRequestHeaders.EndOfLine.EolString}, StringSplitOptions.RemoveEmptyEntries),
                 Body = txtRequestBody.Text
             };
@@ -460,7 +460,13 @@ namespace Swensen.Ior.Forms
             txtRequestUrl.Text = requestVm.Url;
             
             var method = requestVm.Method;
-            (rbGrpHttpMethods.FirstOrDefault(x => ((HttpMethod) x.Tag).Method == method) ?? rbHttpGet).Checked = true;
+            (rbGrpHttpMethods.FirstOrDefault(x => (x.Tag as string) == method) 
+                ?? (method.IsBlank() ? rbHttpGet : rbHttpOther)).Checked = true;
+
+            if (rbHttpOther.Checked)
+                txtHttpOther.Text = method;
+            else
+                txtHttpOther.Text = "";
 
             txtRequestHeaders.Text = (requestVm.Headers ?? new string[0]).Join(txtRequestHeaders.EndOfLine.EolString);
             txtRequestBody.Text = requestVm.Body;
