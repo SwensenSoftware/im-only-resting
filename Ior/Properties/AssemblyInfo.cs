@@ -22,4 +22,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("42d77ebc-de54-4916-b931-de852d2bacff")]
 
 //use odd revision number (fourth position) to indicate pre-release
-[assembly: AssemblyVersion("2.0.0.1")]
+[assembly: AssemblyVersion("2.0.0.3")]
