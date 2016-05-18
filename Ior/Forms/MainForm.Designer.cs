@@ -130,7 +130,7 @@
             // splitterMain
             // 
             this.splitterMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitterMain.Location = new System.Drawing.Point(0, 44);
+            this.splitterMain.Location = new System.Drawing.Point(0, 46);
             this.splitterMain.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.splitterMain.Name = "splitterMain";
             // 
@@ -143,7 +143,7 @@
             // 
             this.splitterMain.Panel2.Controls.Add(this.grpResponse);
             this.splitterMain.Panel2.Padding = new System.Windows.Forms.Padding(6);
-            this.splitterMain.Size = new System.Drawing.Size(1452, 942);
+            this.splitterMain.Size = new System.Drawing.Size(1452, 940);
             this.splitterMain.SplitterDistance = 732;
             this.splitterMain.SplitterWidth = 16;
             this.splitterMain.TabIndex = 3;
@@ -160,7 +160,7 @@
             this.grpRequest.Margin = new System.Windows.Forms.Padding(8, 10, 8, 10);
             this.grpRequest.Name = "grpRequest";
             this.grpRequest.Padding = new System.Windows.Forms.Padding(6);
-            this.grpRequest.Size = new System.Drawing.Size(720, 930);
+            this.grpRequest.Size = new System.Drawing.Size(720, 928);
             this.grpRequest.TabIndex = 2;
             this.grpRequest.TabStop = false;
             this.grpRequest.Text = "Request";
@@ -174,7 +174,7 @@
             this.grpBody.Margin = new System.Windows.Forms.Padding(6);
             this.grpBody.Name = "grpBody";
             this.grpBody.Padding = new System.Windows.Forms.Padding(6);
-            this.grpBody.Size = new System.Drawing.Size(708, 590);
+            this.grpBody.Size = new System.Drawing.Size(708, 588);
             this.grpBody.TabIndex = 10;
             this.grpBody.TabStop = false;
             this.grpBody.Text = "Body";
@@ -384,7 +384,7 @@
             this.grpResponse.Margin = new System.Windows.Forms.Padding(8, 10, 8, 10);
             this.grpResponse.Name = "grpResponse";
             this.grpResponse.Padding = new System.Windows.Forms.Padding(6);
-            this.grpResponse.Size = new System.Drawing.Size(692, 930);
+            this.grpResponse.Size = new System.Drawing.Size(692, 928);
             this.grpResponse.TabIndex = 0;
             this.grpResponse.TabStop = false;
             this.grpResponse.Text = "Response";
@@ -398,7 +398,7 @@
             this.tcResponse.Margin = new System.Windows.Forms.Padding(6);
             this.tcResponse.Name = "tcResponse";
             this.tcResponse.SelectedIndex = 0;
-            this.tcResponse.Size = new System.Drawing.Size(680, 846);
+            this.tcResponse.Size = new System.Drawing.Size(680, 844);
             this.tcResponse.TabIndex = 12;
             // 
             // tpResponseText
@@ -410,7 +410,7 @@
             this.tpResponseText.Margin = new System.Windows.Forms.Padding(6);
             this.tpResponseText.Name = "tpResponseText";
             this.tpResponseText.Padding = new System.Windows.Forms.Padding(6);
-            this.tpResponseText.Size = new System.Drawing.Size(664, 799);
+            this.tpResponseText.Size = new System.Drawing.Size(664, 797);
             this.tpResponseText.TabIndex = 0;
             this.tpResponseText.Text = "Body";
             // 
@@ -422,7 +422,7 @@
             this.pnlResponseContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlResponseContent.Name = "pnlResponseContent";
             this.pnlResponseContent.Padding = new System.Windows.Forms.Padding(6);
-            this.pnlResponseContent.Size = new System.Drawing.Size(652, 708);
+            this.pnlResponseContent.Size = new System.Drawing.Size(652, 706);
             this.pnlResponseContent.TabIndex = 15;
             // 
             // grpResponseBodyOutput
@@ -644,7 +644,6 @@
             // 
             // mainMenuStrip
             // 
-            this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.snapshotsToolStripMenuItem,
@@ -654,7 +653,7 @@
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(8, 4, 0, 4);
             this.mainMenuStrip.ShowItemToolTips = true;
-            this.mainMenuStrip.Size = new System.Drawing.Size(1452, 44);
+            this.mainMenuStrip.Size = new System.Drawing.Size(1452, 46);
             this.mainMenuStrip.TabIndex = 4;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -672,7 +671,7 @@
             this.toolStripMenuItem3,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
             this.fileToolStripMenuItem.Text = "&File";
             this.fileToolStripMenuItem.DropDownOpening += new System.EventHandler(this.fileToolStripMenuItem_DropDownOpening);
             // 
@@ -752,7 +751,7 @@
             // 
             this.snapshotsToolStripMenuItem.Enabled = false;
             this.snapshotsToolStripMenuItem.Name = "snapshotsToolStripMenuItem";
-            this.snapshotsToolStripMenuItem.Size = new System.Drawing.Size(102, 36);
+            this.snapshotsToolStripMenuItem.Size = new System.Drawing.Size(102, 38);
             this.snapshotsToolStripMenuItem.Text = "&History";
             // 
             // toolsToolStripMenuItem
@@ -762,7 +761,7 @@
             this.toolStripMenuItem2,
             this.settingsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(82, 36);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(82, 38);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // logViewerToolStripMenuItem
@@ -789,7 +788,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(77, 36);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(77, 38);
             this.helpToolStripMenuItem.Text = "Hel&p";
             // 
             // aboutToolStripMenuItem
@@ -843,7 +842,7 @@
             this.txtRequestBody.Location = new System.Drawing.Point(6, 30);
             this.txtRequestBody.Margin = new System.Windows.Forms.Padding(4);
             this.txtRequestBody.Name = "txtRequestBody";
-            this.txtRequestBody.Size = new System.Drawing.Size(696, 554);
+            this.txtRequestBody.Size = new System.Drawing.Size(696, 552);
             this.txtRequestBody.Styles.BraceBad.FontName = "Verdana\0\0\0\0";
             this.txtRequestBody.Styles.BraceBad.Size = 7F;
             this.txtRequestBody.Styles.BraceLight.FontName = "Verdana\0\0\0\0";
@@ -913,7 +912,7 @@
             this.txtResponseText.Location = new System.Drawing.Point(6, 6);
             this.txtResponseText.Margin = new System.Windows.Forms.Padding(6);
             this.txtResponseText.Name = "txtResponseText";
-            this.txtResponseText.Size = new System.Drawing.Size(640, 696);
+            this.txtResponseText.Size = new System.Drawing.Size(640, 694);
             this.txtResponseText.Styles.BraceBad.FontName = "Verdana\0";
             this.txtResponseText.Styles.BraceLight.FontName = "Verdana\0";
             this.txtResponseText.Styles.ControlChar.FontName = "Verdana\0";
