@@ -53,7 +53,7 @@ namespace Swensen.Ior.Core {
             if (mt == "text/xml" || mt == "application/xml" || mt.EndsWith("+xml")) //+xml catch all must come after Html
                 return IorMediaTypeCategory.Xml;
 
-            if (mt == "text/json" || mt == "application/json")
+            if (mt == "text/json" || mt == "application/json" || mt.EndsWith("+json"))
                 return IorMediaTypeCategory.Json;
 
             if (mt == "text/javascript" || mt == "application/javascript" || mt == "application/x-javascript")
