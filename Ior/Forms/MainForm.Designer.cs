@@ -79,6 +79,7 @@
             this.exportResponseBodyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportPrettyResponseBodyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snapshotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -662,13 +663,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.newWindowToolStripMenuItem,
+            this.duplicateToolStripMenuItem,
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exportResponseBodyToolStripMenuItem,
             this.exportPrettyResponseBodyToolStripMenuItem,
-            this.toolStripMenuItem3,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
@@ -739,6 +740,12 @@
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(432, 6);
+            // duplicateToolStripMenuItem
+            // 
+            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.duplicateToolStripMenuItem.Text = "Copy to New Window";
+            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -1019,6 +1026,7 @@
         private System.Windows.Forms.SaveFileDialog requestSaveFileDialog;
         private System.Windows.Forms.OpenFileDialog requestOpenFileDialog;
         private System.Windows.Forms.ToolStripMenuItem exportResponseBodyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.SaveFileDialog responseBodySaveFileDialog;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
