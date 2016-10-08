@@ -47,7 +47,8 @@ namespace Swensen.Ior.Core {
 
             var handler = new HttpClientHandler {
                 AllowAutoRedirect = followRedirects,
-                UseCookies = hasCookies
+                UseCookies = hasCookies,
+				UseDefaultCredentials = true
             };
 
             if (!proxyServer.IsBlank()) {
