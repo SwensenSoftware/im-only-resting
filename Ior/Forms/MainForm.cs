@@ -141,6 +141,25 @@ namespace Swensen.Ior.Forms
                 bindHistorySettings();
                 setUpFileDialogs();
                 ActiveControl = txtRequestUrl;
+
+                // If clone request, do it
+                string[] args = Environment.GetCommandLineArgs();
+                
+                for (int aidx = 0; aidx < args.Length; aidx++)
+                {
+                    if (args[aidx].Equals("-clone"))
+                    {
+                        try
+                        {
+                            string fileName = args[aidx + 1];
+                            openRequestFileFromClone(fileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error processing clone request: " + ex.Message);
+                        }
+                    }
+                }
             } catch(Exception ex) { //n.b. exceptions swallowed during main load since gui message pump not started
                 log.Fatal(ex, "Exception in main, shutting down");
                 showError("Error", "Unknown error, shutting down: " + Environment.NewLine + Environment.NewLine + ex.ToString());
@@ -484,7 +503,7 @@ namespace Swensen.Ior.Forms
             }
         }
 
-        private void save(string fileName) {
+        private void save(string fileName, bool updateLastSaveFileName = true) {
             if (fileName == null) {
                 requestSaveFileDialog.FileName = FilePathFormatter.Format(lastOpenedRequestFilePath, FilePathFormat.Short);
                 setUpFileDialogs();
@@ -503,7 +522,9 @@ namespace Swensen.Ior.Forms
 
             var requestVm = buildRequestViewModel();
             requestVm.Save(fileName);
-            updateLastOpenedRequestFile(fileName);
+
+            if (updateLastSaveFileName )
+                updateLastOpenedRequestFile(fileName);
         }
 
         private void updateLastOpenedRequestFile(string fileName) {
@@ -540,7 +561,7 @@ namespace Swensen.Ior.Forms
                 requestVm = RequestViewModel.Load(fileName);
             } catch(Exception ex) {
                 log.Warn(ex, "Error opening request file");
-                showWarning("File Open Error", "Error opening request file");
+                showWarning("File Open Error", "Error opening request file: " + ex.Message + "\r\n" + ex.StackTrace);
                 return;
             }
             bind(ResponseModel.Empty); // clear the response.
@@ -836,6 +857,36 @@ namespace Swensen.Ior.Forms
         private void lblLogNotifications_Click(object sender, EventArgs e) {
             resetLogStats();
             showLogViewer();
+        }
+
+        private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            string tmpFile = Path.GetTempFileName();
+            save(tmpFile, false);
+
+            String args = String.Format("-clone {0}", tmpFile);
+
+            var info = new System.Diagnostics.ProcessStartInfo(Application.ExecutablePath, args);
+            System.Diagnostics.Process.Start(info);
+        }
+
+        private void openRequestFileFromClone(string fileName)
+        {
+            RequestViewModel requestVm;
+            try
+            {
+                requestVm = RequestViewModel.Load(fileName);
+            }
+            catch
+            {
+                showWarning("File Open Error", "Error opening request file");
+                return;
+            }
+            bind(ResponseModel.Empty); // clear the response.
+            bind(requestVm);
+
+            File.Delete(fileName);
         }
     }
 }
