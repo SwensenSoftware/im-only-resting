@@ -52,6 +52,9 @@
             this.tpResponseText = new System.Windows.Forms.TabPage();
             this.pnlResponseContent = new System.Windows.Forms.Panel();
             this.grpResponseBodyOutput = new System.Windows.Forms.GroupBox();
+            this.rbResponseBodyOutputRegex = new System.Windows.Forms.RadioButton();
+            this.txtRegex = new System.Windows.Forms.TextBox();
+            this.btnApplyRegex = new System.Windows.Forms.Button();
             this.rbResponseBodyOutputHex = new System.Windows.Forms.RadioButton();
             this.rbResponseBodyOutputBrowser = new System.Windows.Forms.RadioButton();
             this.rbResponseBodyOutputPretty = new System.Windows.Forms.RadioButton();
@@ -429,6 +432,9 @@
             // 
             this.grpResponseBodyOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputHex);
+            this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputRegex);
+            this.grpResponseBodyOutput.Controls.Add(this.txtRegex);
+            this.grpResponseBodyOutput.Controls.Add(this.btnApplyRegex);
             this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputBrowser);
             this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputPretty);
             this.grpResponseBodyOutput.Controls.Add(this.rbResponseBodyOutputPlain);
@@ -453,6 +459,44 @@
             this.rbResponseBodyOutputHex.TabStop = true;
             this.rbResponseBodyOutputHex.Text = "Hex";
             this.rbResponseBodyOutputHex.UseVisualStyleBackColor = true;
+            // 
+            // rbResponseBodyOutputRegex
+            // 
+            this.rbResponseBodyOutputRegex.AutoSize = true;
+            this.rbResponseBodyOutputRegex.Location = new System.Drawing.Point(470, 33);
+            this.rbResponseBodyOutputRegex.Margin = new System.Windows.Forms.Padding(6);
+            this.rbResponseBodyOutputRegex.Name = "rbResponseBodyOutputRegex";
+            this.rbResponseBodyOutputRegex.Size = new System.Drawing.Size(81, 29);
+            this.rbResponseBodyOutputRegex.TabIndex = 15;
+            this.rbResponseBodyOutputRegex.TabStop = true;
+            this.rbResponseBodyOutputRegex.Text = "Regex";
+            this.rbResponseBodyOutputRegex.UseVisualStyleBackColor = true;
+            // 
+            // txtRegex
+            // 
+            this.txtRegex.AutoSize = true;
+            this.txtRegex.Location = new System.Drawing.Point(584, 33);
+            this.txtRegex.Margin = new System.Windows.Forms.Padding(6);
+            this.txtRegex.Name = "txtRegex";
+            this.txtRegex.Size = new System.Drawing.Size(300, 29);
+            this.txtRegex.TabIndex = 15;
+            this.txtRegex.TabStop = true;
+            this.txtRegex.Visible = false;
+            this.txtRegex.Enter += new System.EventHandler(this.txtRegex_Enter);
+            this.txtRegex.Leave += new System.EventHandler(this.txtRegex_Leave);
+            // 
+            // btnApplyRegex
+            // 
+            this.btnApplyRegex.AutoSize = true;
+            this.btnApplyRegex.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnApplyRegex.Location = new System.Drawing.Point(895, 29);
+            this.btnApplyRegex.Margin = new System.Windows.Forms.Padding(6);
+            this.btnApplyRegex.Name = "btnApplyRegex";
+            this.btnApplyRegex.Size = new System.Drawing.Size(88, 35);
+            this.btnApplyRegex.TabIndex = 8;
+            this.btnApplyRegex.Text = "Apply";
+            this.btnApplyRegex.UseVisualStyleBackColor = true;
+            this.btnApplyRegex.Click += new System.EventHandler(this.btnApplyRegex_Click);
             // 
             // rbResponseBodyOutputBrowser
             // 
@@ -1050,6 +1094,9 @@
         private System.Windows.Forms.StatusStrip mainStatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel lblLogNotifications;
         private System.Windows.Forms.RadioButton rbResponseBodyOutputHex;
+        private System.Windows.Forms.RadioButton rbResponseBodyOutputRegex;
+        private System.Windows.Forms.TextBox txtRegex;
+        private System.Windows.Forms.Button btnApplyRegex;
         private System.Windows.Forms.ToolStripMenuItem exportPrettyResponseBodyToolStripMenuItem;
         private StandardTextBox txtHttpOther;
     }
