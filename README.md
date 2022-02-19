@@ -4,7 +4,7 @@
 
 I'm Only Resting is a feature-rich WinForms-based HTTP client that makes building and managing HTTP requests easy and offers various smart response content rendering modes.
 
-![screenshot](http://www.swensensoftware.com/static/im-only-resting/front-page-example.png)
+![screenshot](https://i.stack.imgur.com/ZVdQv.png)
 
 Feature Overview
   * Easy request management
