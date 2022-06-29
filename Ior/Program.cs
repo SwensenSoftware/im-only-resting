@@ -36,6 +36,9 @@ namespace Swensen.Ior
             var args = Environment.GetCommandLineArgs(); 
             var launchFilePath = args.Length >= 2 ? args[1] : null;
 
+            // If this is a "clone" request, we don't want to treat it as a normal file
+            if (launchFilePath != null && launchFilePath.ToLower().Equals("-clone")) launchFilePath = null;
+
             //set default form icon to project exe icon
             var defaultIcon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             typeof(Form).GetField("defaultIcon", BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, defaultIcon);
