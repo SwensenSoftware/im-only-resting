@@ -14,6 +14,7 @@ using Swensen.Ior.Properties;
 using NLog;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Text.RegularExpressions;
 
 //examples response types:
 //xml: http://www.w3schools.com/xml/note.asp
@@ -258,6 +259,7 @@ namespace Swensen.Ior.Forms
             rbResponseBodyOutputPlain.Tag = ResponseBodyOutput.Plain;
             rbResponseBodyOutputPretty.Tag = ResponseBodyOutput.Pretty;
             rbResponseBodyOutputBrowser.Tag = ResponseBodyOutput.Rendered;
+            rbResponseBodyOutputRegex.Tag = ResponseBodyOutput.Regex;
 
             foreach (var rb in rbGrpResponseBodyOutputs) {
                 rb.CheckedChanged += new EventHandler(rbGrpResponseBodyOutput_CheckedChanged);
@@ -279,18 +281,24 @@ namespace Swensen.Ior.Forms
                     txtResponseText.Visible = false;
                     wbResponseBody.Visible = false;
                     bvResponseBody.Visible = true;
+                    txtRegex.Visible = false;
+                    btnApplyRegex.Visible = false;
                     bvResponseBody.SetBytes(lastResponseModel.ContentBytes ?? new byte[0]);
                     break;
                 case ResponseBodyOutput.Plain:
                     txtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
                     bvResponseBody.Visible = false;
+                    txtRegex.Visible = false;
+                    btnApplyRegex.Visible = false;
                     txtResponseText.Text = lastResponseModel.Content;
                     break;
                 case ResponseBodyOutput.Pretty:
                     txtResponseText.Visible = true;
                     wbResponseBody.Visible = false;
                     bvResponseBody.Visible = false;
+                    txtRegex.Visible = false;
+                    btnApplyRegex.Visible = false;
                     txtResponseText.Text = lastResponseModel.PrettyPrintedContent;
                     var mtc = lastResponseModel.ContentType.MediaTypeCategory;
                     txtResponseText.ConfigurationManager.Language =
@@ -305,6 +313,8 @@ namespace Swensen.Ior.Forms
                     txtResponseText.Visible = false;
                     wbResponseBody.Visible = true;
                     bvResponseBody.Visible = false;
+                    txtRegex.Visible = false;
+                    btnApplyRegex.Visible = false;
 
                     if ((lastResponseModel.ContentType.MediaTypeCategory == IorMediaTypeCategory.Xml || 
                         lastResponseModel.ContentType.MediaTypeCategory == IorMediaTypeCategory.Application) && 
@@ -325,9 +335,41 @@ namespace Swensen.Ior.Forms
                                 break;
                         }
                     }
-
                     wbResponseBody.Refresh();
-                    break;                    
+                    break;   
+                case ResponseBodyOutput.Regex:
+                    txtResponseText.Visible = true;
+                    wbResponseBody.Visible = false;
+                    bvResponseBody.Visible = false;
+                    txtRegex.Visible = true;
+                    btnApplyRegex.Visible = true;
+                    
+                    String content = lastResponseModel.Content;
+                    String response = content;
+                    
+                    if (content != null && txtRegex.Text != "") {
+                        Regex rx = null; 
+                        
+                        try {
+                            rx = new Regex(txtRegex.Text);
+                        } catch {
+                            MessageBox.Show("Incorrect regex. Please enter correct Regex.");
+                        }
+                        
+                        if (rx != null) {
+                            MatchCollection matches = rx.Matches(content);
+                            response = "";
+                            
+                            foreach (Match match in matches)
+                            {
+                                response += match.Value + Environment.NewLine;
+                            }
+                        }
+                    }
+                    
+                    txtResponseText.Text = response;
+                    break;
+                    
             }
         }
 
@@ -348,6 +390,18 @@ namespace Swensen.Ior.Forms
                 requestAsyncHandle = null;
                 bind(ResponseModel.Empty);
             }
+        }
+        
+        private void txtRegex_Enter(object sender, EventArgs e) {
+            this.AcceptButton = btnApplyRegex;
+        }
+        
+        private void txtRegex_Leave(object sender, EventArgs e) {
+            this.AcceptButton = btnSubmitRequest;
+        }
+        
+        private void btnApplyRegex_Click(object sender, EventArgs e) {
+            updateResponseBodyOutput();
         }
 
         private void btnSubmitRequest_Click(object sender, EventArgs e)
@@ -603,6 +657,10 @@ namespace Swensen.Ior.Forms
 
         private void txtRequestHeaders_TextChanged(object sender, EventArgs e) {
             setIsLastOpenedRequestFileDirtyToTrue();
+        }
+        
+        private void txtRegex_TextChanged(object sender, EventArgs e) {
+            updateResponseBodyOutput();
         }
 
         //scintilla does not support link clicked event
